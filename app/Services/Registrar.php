@@ -1,6 +1,6 @@
-<?php namespace App\Services;
+<?php namespace SGlab\Services;
 
-use App\User;
+use SGlab\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace SGlab\Commands;
 
 abstract class Command {
 

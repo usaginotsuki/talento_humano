@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace SGlab\Events;
 
 abstract class Event {
 

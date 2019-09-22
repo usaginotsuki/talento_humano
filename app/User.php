@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace SGlab;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
