@@ -13,8 +13,7 @@
                 <th scope="col">HORAS ATENCION</th>
                 <th scope="col">FECHA INICIO</th>
                 <th scope="col">FECHA FIN</th>
-                <th></th>
-                <th></th>
+                <th>Acciones</th>
             </tr>
         </thead>
         @foreach ($periodos as $per)
@@ -25,6 +24,10 @@
             <td>{{$per -> PER_HORAS_ATENCION}}</td>
             <td>{{$per -> PER_FECHA_INICIO}}</td>
             <td>{{$per -> PER_FECHA_FIN}}</td>
+            <td>
+                <a href="{{url('periodo')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                <a href="{{url('periodo')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+            </td>
         </tbody>
         @endforeach
     </table>
