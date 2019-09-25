@@ -14,13 +14,8 @@ class PeriodoController extends Controller {
 	 */
 	public function index()
 	{
-<<<<<<< HEAD
-		$periodo = \SGlab\Periodo::All();
-		return view('periodo',compact('periodo'));
-=======
 		$periodos = \SGlab\Periodo::All();
 		return view('periodo.index', compact('periodos'));
->>>>>>> 92cad434dfbd053578d5795767ecb919d57f11d5
 	}
 
 	public function crear()
