@@ -28,13 +28,8 @@
             <td>{{$per -> PER_FECHA_INICIO}}</td>
             <td>{{$per -> PER_FECHA_FIN}}</td>
             <td>
-<<<<<<< HEAD
-                <a href="{{url('periodo')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                <a href="{{url('periodo/eliminar/'.$per->PER_CODIGO)}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
-=======
                 <a href="{{url('periodo/'.$per->PER_CODIGO.'/editar')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
                 <a href="{{url('periodo/'.$per->PER_CODIGO.'/eliminar')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
->>>>>>> 391c83f297fa6f9b73cb5177f68affdb9bbc88e5
             </td>
         </tbody>
         @endforeach
