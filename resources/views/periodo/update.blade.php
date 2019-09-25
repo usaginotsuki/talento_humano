@@ -15,9 +15,14 @@
             <div class="col">
                 <div class="form-group">
                     <label for="PER_ESTADO">Estado</label>
-                    <select class="form-control" id="PER_ESTADO" name="PER_ESTADO" value="{{ $periodo->PER_ESTADO }}">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
+                    <select class="form-control" id="PER_ESTADO" name="PER_ESTADO">
+                        @if ($periodo->PER_ESTADO === 0)
+                            <option selected>0</option>
+                            <option>1</option>
+                        @elseif ($periodo->PER_ESTADO === 1)
+                            <option>0</option>
+                            <option selected>1</option>
+                        @endif
                     </select>
                 </div>
             </div>
