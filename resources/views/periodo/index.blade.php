@@ -26,7 +26,7 @@
             <td>{{$per -> PER_FECHA_FIN}}</td>
             <td>
                 <a href="{{url('periodo')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                <a href="{{url('periodo')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                <a href="{{url('periodo/eliminar/'.$per->PER_CODIGO)}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
             </td>
         </tbody>
         @endforeach

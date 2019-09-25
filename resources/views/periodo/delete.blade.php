@@ -3,8 +3,8 @@
 @section('periodo')
 
 <div class="container">
-    <h2>Eliminar Periodo</h2>
-    <form action="{{url('/periodo/guardar')}}" method="POST">
+    <h2>Elimina</h2>
+    <form action="{{url('periodo/eliminar/'.$per->PER_CODIGO)}}" method="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
             <label for="per_nombre">Nombre</label>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2">Crear</button>
+        <button type="submit" class="btn btn-primary mb-2">Eliminar</button>
         <a href="/periodo" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>

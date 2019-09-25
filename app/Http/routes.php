@@ -17,4 +17,4 @@ Route::get('periodo', 'PeriodoController@index');
 Route::get('periodo/crear', 'PeriodoController@crear');
 Route::post('periodo/guardar', 'PeriodoController@guardar');
 Route::get('periodo/{periodo}', 'PeriodoController@actualizar');
-Route::post('periodo/eliminar', 'PeriodoController@eliminar');
+Route::delete('periodo/delete', 'PeriodoController@delete');
