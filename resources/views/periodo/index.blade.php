@@ -3,7 +3,10 @@
 @section('periodo')
 
 <div class="container">
-    <h2>Periodos</h2>
+    <h2>
+        <span>Periodos</span>
+        <a href="{{url('periodo/crear')}}" class="btn btn-primary mb-2 float-right">Nuevo periodo</a>
+    </h2>
     <table class="table">
         <thead>
             <tr>

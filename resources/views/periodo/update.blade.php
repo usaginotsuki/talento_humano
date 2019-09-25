@@ -29,7 +29,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="PER_HORAS_ATENCION">Horas Atencion</label>
-                    <input type="number" class="form-control" id="PER_HORAS_ATENCION" name="PER_HORAS_ATENCION" min="1" max="15" value="{{ $periodo->PER_HORAS_ATENCION }}">
+                    <input type="number" class="form-control" id="PER_HORAS_ATENCION" name="PER_HORAS_ATENCION" min="0" max="15" value="{{ $periodo->PER_HORAS_ATENCION }}">
                 </div>
             </div>
         </div>
