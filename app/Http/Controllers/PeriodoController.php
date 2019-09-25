@@ -14,7 +14,8 @@ class PeriodoController extends Controller {
 	 */
 	public function index()
 	{
-		return view('periodo');
+		$periodo = \SGlab\Periodo::All();
+		return view('periodo',compact('periodo'));
 	}
 
 	public function FunctionName()
