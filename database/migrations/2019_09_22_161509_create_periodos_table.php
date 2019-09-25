@@ -20,6 +20,7 @@ class CreatePeriodosTable extends Migration {
 			$table->integer('PER_HORAS_ATENCION');
 			$table->date('PER_FECHA_INICIO');
 			$table->date('PER_FECHA_FIN');
+			$table->dropTimestamps();
 		});
 	}
 
