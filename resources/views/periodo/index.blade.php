@@ -3,19 +3,26 @@
 @section('periodo')
 
 <div class="container">
-    <h2>
-        <span>Periodos</span>
-        <a href="{{url('periodo/crear')}}" class="btn btn-primary mb-2 float-right">Nuevo periodo</a>
-    </h2>
-    <table class="table">
+    @if (session('title') && session('subtitle'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ session('title') }}</h4>
+        <p>{{ session('subtitle') }}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    <h2>Periodos</h2>
+    <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+    <table id="periodoTabla" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">NOMBRE</th>
-                <th scope="col">ESTADO</th>
-                <th scope="col">HORAS ATENCION</th>
-                <th scope="col">FECHA INICIO</th>
-                <th scope="col">FECHA FIN</th>
+                <th>#</th>
+                <th>NOMBRE</th>
+                <th>ESTADO</th>
+                <th>HORAS ATENCION</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -28,8 +35,12 @@
             <td>{{$per -> PER_FECHA_INICIO}}</td>
             <td>{{$per -> PER_FECHA_FIN}}</td>
             <td>
-                <a href="{{url('periodo/'.$per->PER_CODIGO.'/editar')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                <a href="{{url('periodo/'.$per->PER_CODIGO.'/eliminar')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
+                </form>
+                <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                &nbsp;
             </td>
         </tbody>
         @endforeach

@@ -1,4 +1,4 @@
-<?php namespace SGlab\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 class HomeController extends Controller {
 

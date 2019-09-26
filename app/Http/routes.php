@@ -14,9 +14,8 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::get('periodo', 'PeriodoController@index');
-Route::get('periodo/crear', 'PeriodoController@crear');
-Route::post('periodo/guardar', 'PeriodoController@guardar');
-Route::get('periodo/{id}/editar', 'PeriodoController@editar');
-Route::post('periodo/actualizar', 'PeriodoController@actualizar');
-Route::get('periodo/{id}/eliminar', 'PeriodoController@eliminar');
-Route::post('periodo/eliminar', 'PeriodoController@eliminado');
+Route::get('periodo/create', 'PeriodoController@create');
+Route::post('periodo/store', 'PeriodoController@store');
+Route::get('periodo/{id}/edit', 'PeriodoController@edit');
+Route::post('periodo/update', 'PeriodoController@update');
+Route::POST('periodo/{id}/destroy', 'PeriodoController@destroy');

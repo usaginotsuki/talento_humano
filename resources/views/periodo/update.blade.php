@@ -4,7 +4,7 @@
 
 <div class="container">
     <h2>Actualizar Periodo</h2>
-    <form action="{{url('/periodo/actualizar')}}" method="POST">
+    <form action="{{url('/periodo/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="PER_CODIGO" value="{{ $periodo->PER_CODIGO }}">
         <div class="form-group">
@@ -12,18 +12,14 @@
             <input type="input" class="form-control" id="PER_NOMBRE" name="PER_NOMBRE" value="{{ $periodo->PER_NOMBRE }}">
         </div>
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="PER_ESTADO">Estado</label>
-                    <select class="form-control" id="PER_ESTADO" name="PER_ESTADO">
-                        @if ($periodo->PER_ESTADO === 0)
-                            <option selected>0</option>
-                            <option>1</option>
-                        @elseif ($periodo->PER_ESTADO === 1)
-                            <option>0</option>
-                            <option selected>1</option>
-                        @endif
-                    </select>
+            <div class="col" style="display: flex;align-items: center;">
+                <div class="custom-control custom-switch">
+                    @if ($periodo->PER_ESTADO === 0)
+                    <input type="checkbox" class="custom-control-input" id="PER_ESTADO" name="PER_ESTADO">
+                    @elseif ($periodo->PER_ESTADO === 1)
+                    <input type="checkbox" class="custom-control-input" id="PER_ESTADO" name="PER_ESTADO" checked>
+                    @endif
+                    <label class="custom-control-label" for="PER_ESTADO">Estado</label>
                 </div>
             </div>
             <div class="col">

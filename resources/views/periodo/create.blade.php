@@ -4,20 +4,17 @@
 
 <div class="container">
     <h2>Crear Periodo</h2>
-    <form action="{{url('/periodo/guardar')}}" method="POST">
+    <form action="{{url('/periodo/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
             <label for="PER_NOMBRE">Nombre</label>
             <input type="input" class="form-control" id="PER_NOMBRE" name="PER_NOMBRE" placeholder="Nombre del periodo" required>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="PER_ESTADO">Estado</label>
-                    <select class="form-control" id="PER_ESTADO" name="PER_ESTADO" required>
-                    <option>0</option>
-                    <option>1</option>
-                    </select>
+            <div class="col" style="display: flex;align-items: center;">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="PER_ESTADO" name="PER_ESTADO">
+                    <label class="custom-control-label" for="PER_ESTADO">Estado</label>
                 </div>
             </div>
             <div class="col">

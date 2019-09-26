@@ -1,4 +1,4 @@
-<?php namespace SGlab;
+<?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
