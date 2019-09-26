@@ -13,9 +13,9 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::get('periodo', 'PeriodoController@index');
+Route::get('periodo/create', 'PeriodoController@create');
+Route::post('periodo/store', 'PeriodoController@store');
+Route::get('periodo/{id}/edit', 'PeriodoController@edit');
+Route::post('periodo/update', 'PeriodoController@update');
+Route::POST('periodo/{id}/destroy', 'PeriodoController@destroy');
