@@ -18,5 +18,8 @@
     <li class="nav-item">
       <a class="nav-link  text-white" href="{{url('periodo')}}">Periodo</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('carrera')}}">Carrera</a>
+    </li>
   </ul>
 </nav>

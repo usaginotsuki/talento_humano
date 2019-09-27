@@ -2,8 +2,10 @@
 @section('content')
 @include ('shared.navbar')
 
-<div class="container">
+<div class="jumbotron">
     <h2>Actualizar Periodo</h2>
+</div>
+<div class="container">
     <form action="{{url('/periodo/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="PER_CODIGO" value="{{ $periodo->PER_CODIGO }}">
@@ -45,7 +47,7 @@
         </div>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
-        <a href="/periodo" class="btn btn-danger mb-2">Cancelar</a>
+        <a href="{{url('carrera')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
 @endsection
