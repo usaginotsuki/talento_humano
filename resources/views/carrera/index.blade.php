@@ -3,7 +3,7 @@
 @include ('shared.navbar')
 
 <div class="jumbotron">
-    <h2>Periodos</h2>
+    <h2>Carreras</h2>
 </div>
 <div class="container">
     @if (session('title') && session('subtitle'))
@@ -17,7 +17,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('carrera/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col">
@@ -37,27 +37,21 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">NOMBRE</th>
-                <th scope="col">ESTADO</th>
-                <th scope="col">HORAS ATENCION</th>
-                <th scope="col">FECHA INICIO</th>
-                <th scope="col">FECHA FIN</th>
+                <th scope="col">ABREVIATURA</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
-        @foreach ($periodos as $per)
+        @foreach ($carreras as $car)
         <tbody>
-            <td scope="row">{{$per -> PER_CODIGO}}</td>
-            <td scope="row">{{$per -> PER_NOMBRE}}</td>
-            <td scope="row">{{$per -> PER_ESTADO}}</td>
-            <td scope="row">{{$per -> PER_HORAS_ATENCION}}</td>
-            <td scope="row">{{$per -> PER_FECHA_INICIO}}</td>
-            <td scope="row">{{$per -> PER_FECHA_FIN}}</td>
+            <td scope="row">{{$car -> CAR_CODIGO}}</td>
+            <td scope="row">{{$car -> CAR_NOMBRE}}</td>
+            <td scope="row">{{$car -> CAR_ABREVIATURA}}</td>
             <td>
-                <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                <form action="{{url('/carrera/'.$car->CAR_CODIGO.'/destroy')}}" method="POST" class="float-right">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
                 </form>
-                <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                <a href="{{url('carrera/'.$car->CAR_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
                 &nbsp;
             </td>
         </tbody>

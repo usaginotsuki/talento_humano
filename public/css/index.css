@@ -1,0 +1,27 @@
+body {
+    background-color: #F0F0EE;
+}
+.header-img {
+    background-image: url('/images/principal/header.png');
+    height: 60px;
+}
+.nav-color {
+    background-color: #666666;
+}
+.container-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.footer-color {
+    background-color: #262626;
+    color: white;
+}
+.footer-display {
+    padding: 20px 0; 
+}
+.footer p {
+    margin-bottom: 0;
+}

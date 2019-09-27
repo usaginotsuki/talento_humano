@@ -1,9 +1,11 @@
-@extends('layouts.principal')
+@extends('app')
+@section('content')
+@include ('shared.navbar')
 
-@section('periodo')
-
-<div class="container">
+<div class="jumbotron">
     <h2>Crear Periodo</h2>
+</div>
+<div class="container">
     <form action="{{url('/periodo/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group">
@@ -43,5 +45,4 @@
         <a href="{{url('periodo')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
-
-@stop
+@endsection
