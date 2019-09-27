@@ -13,6 +13,8 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('/auth/login', 'WelcomeController@auth');
+
 Route::get('periodo', 'PeriodoController@index');
 Route::get('periodo/create', 'PeriodoController@create');
 Route::post('periodo/store', 'PeriodoController@store');

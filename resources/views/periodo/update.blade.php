@@ -1,6 +1,6 @@
-@extends('layouts.principal')
-
-@section('periodo')
+@extends('app')
+@section('content')
+@include ('shared.navbar')
 
 <div class="container">
     <h2>Actualizar Periodo</h2>
@@ -48,5 +48,4 @@
         <a href="/periodo" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
-
-@stop
+@endsection

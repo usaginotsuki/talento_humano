@@ -1,6 +1,6 @@
-@extends('layouts.principal')
-
-@section('periodo')
+@extends('app')
+@section('content')
+@include ('shared.navbar')
 
 <div class="container">
     @if (session('title') && session('subtitle'))
@@ -13,9 +13,10 @@
     </div>
     @endif
     <h2>Periodos</h2>
-    <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
     <div class="row">
-        <div class="col"></div>
+        <div class="col">
+            <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+        </div>
         <div class="col"></div>
         <div class="col float-right">
             <div class="form-group pull-right">
@@ -65,7 +66,6 @@
         <li class="page-item"><a href="#" class="page-link">4</a></li>
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-    </ul>
-</div> -->
-
-@stop
+    </ul> -->
+</div>
+@endsection
