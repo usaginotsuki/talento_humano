@@ -20,10 +20,22 @@ class PeriodoController extends Controller {
 		return view('periodo.index', compact('periodos'));
 	}
 
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
 	public function create()
 	{
 		return view('periodo.create');
 	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
 	public function store(Request $request)
 	{
 		$estado = 0;
@@ -39,14 +51,29 @@ class PeriodoController extends Controller {
 			'PER_FECHA_FIN' => $request['PER_FECHA_FIN']
 		]);
 
-		$periodos = Periodo::All();
-		return redirect('periodo')->with('title', 'Periodo registrado!')->with('subtitle', 'El registro del periodo acádemico se ha realizado con éxito.');
+		return redirect('periodo')
+			->with('title', 'Periodo registrado!')
+			->with('subtitle', 'El registro del periodo acádemico se ha realizado con éxito.');
 	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
 	public function edit($id)
 	{
 		$periodo = Periodo::find($id);
 		return view('periodo.update', ['periodo' => $periodo]);
 	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
 	public function update(Request $request)
 	{
 		if ($request['PER_ESTADO'] === 'on') {
@@ -57,11 +84,22 @@ class PeriodoController extends Controller {
 		$periodo = Periodo::find($request['PER_CODIGO']);
 		$periodo->fill($request->all());
 		$periodo->save();
-		return redirect('periodo')->with('title', 'Periodo actualizado!')->with('subtitle', 'La actualización del periodo acádemico se ha realizado con éxito.');
+		return redirect('periodo')
+			->with('title', 'Periodo actualizado!')
+			->with('subtitle', 'La actualización del periodo acádemico se ha realizado con éxito.');
 	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
 	public function destroy($id)
 	{
 		Periodo::destroy($id);
-		return redirect('periodo')->with('title', 'Periodo eliminado!')->with('subtitle', 'La eliminación del periodo acádemico se ha realizado con éxito.');
+		return redirect('periodo')
+			->with('title', 'Periodo eliminado!')
+			->with('subtitle', 'La eliminación del periodo acádemico se ha realizado con éxito.');
 	}
 }
