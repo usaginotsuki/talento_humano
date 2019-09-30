@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html>
  <head>
-    <title>ADD </title>
+    <title>Add </title>
  </head>
- @extends('layouts.principal')
- @section('empresa')
+@extends('app')
+@section('content')
+@include ('shared.navbar')
  <body >
         
         <div class="container">
@@ -15,19 +16,22 @@
             <div class="row"> 
                 <div class="col">
                         <div class="form-group">
-                        <label for="EMP_NOMBRE">Nombre  Laboratorio General</label>
+                        <label for="EMP_NOMBRE">Nombre Laboratorio General</label>
                                 <input type="text" class="form-control"  name="EMP_NOMBRE" required >
                         </div>
                 </div>
              
                 <div class="col">
                         <div class="form-group">
-                        <label for="EMP_FIRMA_DEE">Nombre Director de Departamento</label>
+                        <label for="EMP_FIRMA_DEE"> Director de Departamento</label>
                                 <input type="text" class="form-control"  name="EMP_FIRMA_DEE" required >
                         </div>
                 </div>
              
-                <div class="col">
+                
+           </div>  
+           <div class="row">
+           <div class="col">
                         <div class="form-group">
                         <label for="EMP_PIE_DEE:">Cargo del Director Departamento</label>
                                 <input type="text" class="form-control"  name="EMP_PIE_DEE"  required >
@@ -36,11 +40,11 @@
              
                 <div class="col">
                         <div class="form-group">
-                        <label for="EMP_FIRMA_JEFE">Nombre del Jefe del Laboratorio</label>
+                        <label for="EMP_FIRMA_JEFE">Jefe del Laboratorio</label>
                                 <input type="text" class="form-control"  name="EMP_FIRMA_JEFE"  required >
                         </div>
                 </div>
-           </div>     
+           </div>   
            <div class="row">
                 <div class="col">
                         <div class="form-group">
@@ -51,10 +55,13 @@
              
                 <div class="col">
                         <div class="form-group">
-                        <label for="EMP_FIRMA_LAB">Nombre Laboratorista</label>
+                        <label for="EMP_FIRMA_LAB"> Laboratorista</label>
                                 <input type="text"  class="form-control"  name="EMP_FIRMA_LAB" required >
                         </div>
                 </div>
+           </div>
+           <div class="row">
+                
              
                 <div class="col">
                         <div class="form-group">
@@ -72,16 +79,56 @@
                         </select>
                         </div>
                 </div>
+               
+            </div>
+            
+            <div class="row">
+                
+                <div class="col">
+                        <div class="form-group">
+                                <label for="EMP_IMAGEN_ENCABEZADO">Imagen Encabezado</label>
+                                <input type="text"  class="form-control" name="EMP_IMAGEN_ENCABEZADO" required  >
+                               
+                        </div>
+                </div>
+                <div class="col">
+                        <div class="form-group">
+                                <label for="EMP_IMAGEN_ENCABEZADO2">Imagen Encabezado</label>
+                                <input type="text"  class="form-control" name="EMP_IMAGEN_ENCABEZADO2" required  >
+                        </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
-                        <label for="">Relacion Suficiencia</label>
-                        <select class="form-control" id="EMP_RELACION_SUFICIENCIA" name="EMP_RELACION_SUFICIENCIA" required>
+                        <div class="form-group">
+                                <label for="EMP_AUX1">Auxiliar</label>
+                                <input type="text"  class="form-control" name="EMP_AUX1" required  >
+                        </div>
+                </div>
+                <div class="col">
+                        <div class="form-group">
+                                <label for="EMP_AUX2">Auxiliar 2</label>
+                                <input type="text"  class="form-control" name="EMP_AUX2" required  >
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col">
+                        <label for="EMP_RELACION_SUFICIENCIA">Relacion Suficiencia</label>
+                        <select class="form-control" id="EMP_RELACION_SUFICIENCIA"   name="EMP_RELACION_SUFICIENCIA"  required>
                                 <option>0</option>
                                 <option>1</option>
                         </select>
                 </div>
+                <div class="form-group">
+                        <label for="INS_CODIGO">Instituto</label>
+                        <select class="form-control" id="INS_CODIGO" name="INS_CODIGO" required>
+                                <option>1</option>
+                                <option>2</option>
+                        </select>
+                </div>
             </div>
+
                 <br>
                 <button type="submit" class="btn btn-primary mb-2">Crear</button>
                  <a href="{{url('empresa')}}" class="btn btn-danger mb-2">Cancelar</a> 
@@ -89,5 +136,6 @@
         </form>
        </div> 
 </body>
+@endsection
 </html>
 

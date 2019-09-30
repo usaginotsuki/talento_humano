@@ -51,8 +51,14 @@ class empresaController extends Controller {
 			'EMP_PIE_LAB' => $request['EMP_PIE_LAB'],
 			'EMP_ESTADO' => $request['EMP_ESTADO'],
 			'EMP_RELACION_SUFICIENCIA' => $request['EMP_RELACION_SUFICIENCIA'],
+			'EMP_IMAGEN_ENCABEZADO' => $request['EMP_IMAGEN_ENCABEZADO'],
+			'EMP_IMAGEN_ENCABEZADO2' => $request['EMP_IMAGEN_ENCABEZADO2'],
+			'EMP_AUX1' => $request['EMP_AUX1'],
+			'EMP_AUX2' => $request['EMP_AUX2'],
+			'INS_CODIGO' => $request['INS_CODIGO'],
 		]);
-		return redirect('empresa');;
+
+		return redirect('empresa');
 	}
 
 
