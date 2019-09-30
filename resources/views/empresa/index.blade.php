@@ -84,7 +84,7 @@
                 <th>Cargo Laboratorista</th>
                 <th>Estado Laboratorio</th>
                 <th>Relacion Suficiencia</th>
-                <th>Imagen Encabezado</th>
+                <th></th>
                 <th>Imagen Encabezado 2</th>
                 <th>Auxiliar 1</th>
                 <th>Auxiliar 2</th>
