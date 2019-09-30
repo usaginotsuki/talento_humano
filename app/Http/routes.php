@@ -19,3 +19,10 @@ Route::post('periodo/store', 'PeriodoController@store');
 Route::get('periodo/{id}/edit', 'PeriodoController@edit');
 Route::post('periodo/update', 'PeriodoController@update');
 Route::POST('periodo/{id}/destroy', 'PeriodoController@destroy');
+/////////////////////////////////////////////////////////////////
+Route::post('empresa/store', 'empresaController@store');
+Route::post('empresa/search', 'empresaController@store');
+Route::post('empresa/update', 'empresaController@update');
+Route::get('empresa/edit/{id}','empresaController@edit');
+Route::get('empresa/destroy/{id}','empresaController@destroy');
+Route::resource('empresa','empresaController');
