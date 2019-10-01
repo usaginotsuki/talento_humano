@@ -96,9 +96,9 @@ class ParametroController extends Controller {
 	public function edit($id)
 	{   $empresas= empresa::All();
 		$parametro = Parametro::find($id);
-		$empr= empresa::find($parametro->EMP_CODIGO);
-		return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas)
-		->with('empresas',$empresas);
+		//$empr= $parametro->empresas->EMP_NOMBRE;
+		return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
+		//->with('empr',$empr);
 	}
 
 	/**

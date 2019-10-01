@@ -62,7 +62,7 @@
         <tbody>
             <td scope="row">{{$par -> PAR_CODIGO}}</td>
             <td scope="row">{{$par -> PAR_TODOS}}</td>
-            <td scope="row">{{$par -> EMP_CODIGO}}</td>
+            <td scope="row">{{$par ->empresas->EMP_NOMBRE}}</td>
 
 
             

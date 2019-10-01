@@ -10,7 +10,7 @@ class Parametro extends Model {
 
 	public function empresas(){
 
-	return $this->belongsTo('App\empresa','foreign_key');
+	return $this->belongsTo('App\empresa','EMP_CODIGO');
 		//en la tabla empresa va =
 	//	return $this->hasMany('App\Parametro');
 

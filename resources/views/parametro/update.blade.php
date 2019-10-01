@@ -22,13 +22,14 @@
 
             <select type="input" class="form-control" id="EMP_CODIGO" name="EMP_CODIGO"  >
                @foreach ($empresas as $emp)
-                 <option value="{{$emp->EMP_CODIGO}}">{{$emp->EMP_NOMBRE}}</option>
-
+                @if($emp->EMP_CODIGO==$parametro->EMP_CODIGO)
+                      <option value="{{$emp->EMP_CODIGO}}" selected="{{$emp->EMP_CODIGO}}">{{$emp->EMP_NOMBRE}}</option>
+                @else
+                 <option value="{{$emp->EMP_CODIGO}}"  >{{$emp->EMP_NOMBRE}}</option>
+               @endif
                @endforeach
             </select> 
         </div>
-
-
 
 
        
