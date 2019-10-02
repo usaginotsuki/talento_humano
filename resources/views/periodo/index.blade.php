@@ -1,8 +1,3 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-</head>
 @extends('app')
 @section('content')
 @include ('shared.navbar')    
@@ -29,13 +24,13 @@
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
-                <th >#</th>
-                <th >NOMBRE</th>
-                <th >ESTADO</th>
-                <th >HORAS ATENCION</th>
-                <th >FECHA INICIO</th>
-                <th >FECHA FIN</th>
-                <th >ACCIONES</th>
+                <th scope="row">#</th>
+                <th scope="row">NOMBRE</th>
+                <th scope="row">ESTADO</th>
+                <th scope="row">HORAS ATENCION</th>
+                <th scope="row">FECHA INICIO</th>
+                <th scope="row">FECHA FIN</th>
+                <th scope="row">ACCIONES</th>
             </tr>
         </thead>
         <tbody>
