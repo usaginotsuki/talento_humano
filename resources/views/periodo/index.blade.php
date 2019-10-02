@@ -1,7 +1,11 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+</head>
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-
+@include ('shared.navbar')    
 <div class="jumbotron">
     <h2>Periodos</h2>
 </div>
@@ -25,13 +29,13 @@
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">NOMBRE</th>
-                <th scope="col">ESTADO</th>
-                <th scope="col">HORAS ATENCION</th>
-                <th scope="col">FECHA INICIO</th>
-                <th scope="col">FECHA FIN</th>
-                <th scope="col">ACCIONES</th>
+                <th >#</th>
+                <th >NOMBRE</th>
+                <th >ESTADO</th>
+                <th >HORAS ATENCION</th>
+                <th >FECHA INICIO</th>
+                <th >FECHA FIN</th>
+                <th >ACCIONES</th>
             </tr>
         </thead>
         <tbody>
@@ -54,17 +58,6 @@
             </tr>
         @endforeach   
         </tbody>
-</table>
-<!-- BOTONES DE NAVEGACION -->
-<!-- <div class="clearfix">
-    <ul class="pagination">
-        <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-        <li class="page-item"><a href="#" class="page-link">1</a></li>
-        <li class="page-item"><a href="#" class="page-link">2</a></li>
-        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-        <li class="page-item"><a href="#" class="page-link">4</a></li>
-        <li class="page-item"><a href="#" class="page-link">5</a></li>
-        <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-    </ul> -->
+    </table>
 </div>
 @endsection
