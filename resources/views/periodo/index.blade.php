@@ -1,7 +1,11 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+</head>
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-
+@include ('shared.navbar')    
 <div class="jumbotron">
     <h2>Periodos</h2>
 </div>
@@ -35,23 +39,25 @@
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">NOMBRE</th>
-                <th scope="col">ESTADO</th>
-                <th scope="col">HORAS ATENCION</th>
-                <th scope="col">FECHA INICIO</th>
-                <th scope="col">FECHA FIN</th>
-                <th scope="col">ACCIONES</th>
+                <th >#</th>
+                <th >NOMBRE</th>
+                <th >ESTADO</th>
+                <th >HORAS ATENCION</th>
+                <th >FECHA INICIO</th>
+                <th >FECHA FIN</th>
+                <th >ACCIONES</th>
             </tr>
         </thead>
-        @foreach ($periodos as $per)
+       
         <tbody>
-            <td scope="row">{{$per -> PER_CODIGO}}</td>
-            <td scope="row">{{$per -> PER_NOMBRE}}</td>
-            <td scope="row">{{$per -> PER_ESTADO}}</td>
-            <td scope="row">{{$per -> PER_HORAS_ATENCION}}</td>
-            <td scope="row">{{$per -> PER_FECHA_INICIO}}</td>
-            <td scope="row">{{$per -> PER_FECHA_FIN}}</td>
+        @foreach ($periodos as $per)
+            <tr>
+            <td >{{$per -> PER_CODIGO}}</td>
+            <td >{{$per -> PER_NOMBRE}}</td>
+            <td >{{$per -> PER_ESTADO}}</td>
+            <td >{{$per -> PER_HORAS_ATENCION}}</td>
+            <td >{{$per -> PER_FECHA_INICIO}}</td>
+            <td >{{$per -> PER_FECHA_FIN}}</td>
             <td>
                 <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -60,8 +66,22 @@
                 <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
                 &nbsp;
             </td>
+            </tr>
+            @endforeach   
         </tbody>
-        @endforeach   
+        
+
+        <tfoot>
+            <tr>
+                <th >#</th>
+                <th >NOMBRE</th>
+                <th >ESTADO</th>
+                <th >HORAS ATENCION</th>
+                <th >FECHA INICIO</th>
+                <th >FECHA FIN</th>
+                <th >ACCIONES</th>
+            </tr>
+        </tfoot>
 </table>
 <!-- BOTONES DE NAVEGACION -->
 <!-- <div class="clearfix">
