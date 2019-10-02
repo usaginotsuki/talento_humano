@@ -87,7 +87,7 @@
                 <div class="col">
                         <div class="form-group">
                                 <label for="EMP_IMAGEN_ENCABEZADO">Imagen Encabezado</label>
-                                <input type="file"  class="form-control" name="EMP_IMAGEN_ENCABEZADO" required  >
+                                <input type="text"  class="form-control" name="EMP_IMAGEN_ENCABEZADO" required  >
                                
                         </div>
                 </div>
