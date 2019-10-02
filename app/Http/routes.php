@@ -28,3 +28,14 @@ Route::post('carrera/store', 'CarreraController@store');
 Route::get('carrera/{id}/edit', 'CarreraController@edit');
 Route::post('carrera/update', 'CarreraController@update');
 Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
+
+
+
+Route::get('docente', 'docenteController@index');
+
+Route::get('docente/create', 'docenteController@create');
+Route::post('docente/store', 'docenteController@store');
+Route::get('docente/{id}/edit', 'docenteController@edit');
+Route::post('docente/update', 'docenteController@update');
+Route::post('docente/{id}/destroy', 'docenteController@destroy');
+
