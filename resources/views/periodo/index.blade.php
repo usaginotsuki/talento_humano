@@ -20,18 +20,8 @@
             <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
-        <div class="col">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">
-                        <span class="oi oi-magnifying-glass"></span>
-                    </span>
-                </div>
-                <input type="text" class="form-control search" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1">
-            </div>
-        </div>
+        <div class="col"></div>
     </div>
-    <span class="counter pull-right"></span>
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
@@ -44,24 +34,26 @@
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
-        @foreach ($periodos as $per)
         <tbody>
-            <td scope="row">{{$per -> PER_CODIGO}}</td>
-            <td scope="row">{{$per -> PER_NOMBRE}}</td>
-            <td scope="row">{{$per -> PER_ESTADO}}</td>
-            <td scope="row">{{$per -> PER_HORAS_ATENCION}}</td>
-            <td scope="row">{{$per -> PER_FECHA_INICIO}}</td>
-            <td scope="row">{{$per -> PER_FECHA_FIN}}</td>
-            <td>
-                <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                </form>
-                <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                &nbsp;
-            </td>
-        </tbody>
+        @foreach ($periodos as $per)
+            <tr>
+                <td scope="row">{{$per -> PER_CODIGO}}</td>
+                <td scope="row">{{$per -> PER_NOMBRE}}</td>
+                <td scope="row">{{$per -> PER_ESTADO}}</td>
+                <td scope="row">{{$per -> PER_HORAS_ATENCION}}</td>
+                <td scope="row">{{$per -> PER_FECHA_INICIO}}</td>
+                <td scope="row">{{$per -> PER_FECHA_FIN}}</td>
+                <td>
+                    <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
+                    </form>
+                    <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                    &nbsp;
+                </td>
+            </tr>
         @endforeach   
+        </tbody>
 </table>
 <!-- BOTONES DE NAVEGACION -->
 <!-- <div class="clearfix">
