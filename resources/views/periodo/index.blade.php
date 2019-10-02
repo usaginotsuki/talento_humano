@@ -27,12 +27,12 @@
                         <span class="oi oi-magnifying-glass"></span>
                     </span>
                 </div>
-                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1">
+                <input type="text" class="form-control search" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1">
             </div>
         </div>
     </div>
     <span class="counter pull-right"></span>
-    <table class="table table-hover table-bordered results">
+    <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th scope="col">#</th>
