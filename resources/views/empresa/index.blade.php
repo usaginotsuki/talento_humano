@@ -62,7 +62,7 @@
             <td>{{ $empresa->EMP_IMAGEN_ENCABEZADO2 }}</td>
             <td>{{ $empresa->EMP_AUX1 }}</td>
             <td>{{ $empresa->EMP_AUX2 }}</td>
-            <td>{{ $empresa->INS_CODIGO }}</td>
+            <td>{{ $empresa->institucion->INS_NOMBRE }}</td>
            
             <td>
                 <a href="empresa/edit/{{$empresa->EMP_CODIGO}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
