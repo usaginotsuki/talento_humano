@@ -28,6 +28,15 @@ Route::post('empresa/update', 'empresaController@update');
 Route::get('empresa/edit/{id}','empresaController@edit');
 Route::get('empresa/destroy/{id}','empresaController@destroy');
 Route::resource('empresa','empresaController');
+
+///////////////////////////////////////////////////////////////////
+Route::post('institucion/store', 'institucionController@store');
+Route::post('institucion/search', 'institucionController@store');
+Route::post('institucion/update', 'institucionController@update');
+Route::get('institucion/edit/{id}','institucionController@edit');
+Route::get('institucion/destroy/{id}','institucionController@destroy');
+Route::resource('institucion','institucionController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

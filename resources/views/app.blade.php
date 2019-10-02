@@ -45,5 +45,6 @@
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
   <script type="text/javascript" src="{{ URL::asset('js/table.js') }}"></script>
   <script type="text/javascript" src="{{ URL::asset('js/ListTable.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/TableInstitucion.js') }}"></script>
 </body>
 
