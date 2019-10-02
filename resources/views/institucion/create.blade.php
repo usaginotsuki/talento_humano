@@ -41,8 +41,8 @@
              
                 <div class="col">
                         <div class="form-group">
-                        <label for="INS_PIE_DIRECTOR2">Pie Director Dos</label>
-                                <input type="text" class="form-control"  name="INS_PIE_DIRECTOR2" placeholder="Ingrese un pie de director dos" required>
+                        <label for="INS_PIE_DIRECTOR2">Pie Director</label>
+                                <input type="text" class="form-control"  name="INS_PIE_DIRECTOR2" placeholder="Ingrese un pie de director" required>
                         </div>
                 </div>
            </div>   
