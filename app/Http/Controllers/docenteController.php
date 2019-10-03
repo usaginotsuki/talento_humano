@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\docente;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-
 
 class docenteController extends Controller {
 
@@ -15,7 +16,7 @@ class docenteController extends Controller {
 	 */
 	public function index()
 	{
-		$docentes = DOCENTE::paginate(9);
+		$docentes = DOCENTE::All();
 		return view('docente.index', compact('docentes'));
 	}
 

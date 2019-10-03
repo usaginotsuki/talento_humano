@@ -38,7 +38,7 @@ Route::get('docente/{id}/edit', 'docenteController@edit');
 Route::post('docente/update', 'docenteController@update');
 Route::post('docente/{id}/destroy', 'docenteController@destroy');
 
-
+Route::get('laboratorio', 'laboratorioController@index');
 Route::get('laboratorio/create', 'laboratorioController@create');
 Route::post('laboratorio/store', 'laboratorioController@store');
 Route::get('laboratorio/{id}/edit', 'laboratorioController@edit');

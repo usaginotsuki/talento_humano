@@ -1,6 +1,6 @@
-@extends('layouts.principal')
-
-@section('docente')
+@extends('app')
+@section('content')
+@include ('shared.navbar')
 
 <div class="container">
     <h2>Actualizar docente</h2>
