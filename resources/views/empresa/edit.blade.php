@@ -76,18 +76,14 @@
                         </div>
                 </div>
              
-                <div class="col">
-                        <div class="form-group">
-                        <label for="EMP_ESTADO">Estado del Laboratorio</label>
-                        <select class="form-control" id="EMP_ESTADO" name="EMP_ESTADO"   required>
+                <div class="col" style="display: flex;align-items: center;">
+                        <div class="custom-control custom-switch">
                         @if ($empresa->EMP_ESTADO === 0)
-                            <option selected>0</option>
-                            <option>1</option>
+                        <input type="checkbox" class="custom-control-input" id="EMP_ESTADO" name="EMP_ESTADO">
                         @elseif ($empresa->EMP_ESTADO === 1)
-                            <option>0</option>
-                            <option selected>1</option>
+                        <input type="checkbox" class="custom-control-input" id="EMP_ESTADO" name="EMP_ESTADO" checked>
                         @endif
-                        </select>
+                        <label class="custom-control-label" for="EMP_ESTADO">Estado</label>
                         </div>
                 </div>
                
@@ -139,8 +135,9 @@
                 <div class="form-group">
                         <label for="INS_CODIGO">Instituto</label>
                         <select class="form-control" id="INS_CODIGO" name="INS_CODIGO" value="{{$empresa->INS_CODIGO}}"  required>
-                                <option>1</option>
-                                <option>2</option>
+                                @foreach ($instituciones as $institucion)
+                                 <option value="{{$institucion->INS_CODIGO}}">{{$institucion->INS_NOMBRE}}</option>
+                                @endforeach
                         </select>
                 </div>
             </div>

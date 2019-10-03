@@ -70,15 +70,13 @@
                         </div>
                 </div>
              
-                <div class="col">
-                        <div class="form-group">
-                        <label for="EMP_ESTADO">Estado del Laboratorio</label>
-                        <select class="form-control" id="EMP_ESTADO" name="EMP_ESTADO" required>
-                                <option>0</option>
-                                <option>1</option>
-                        </select>
+                
+                <div class="col" style="display: flex;align-items: center;">
+                        <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="EMP_ESTADO" name="EMP_ESTADO">
+                                    <label class="custom-control-label" for="EMP_ESTADO">Estado</label>
                         </div>
-                </div>
+                 </div>
                
             </div>
             
@@ -115,18 +113,17 @@
             <div class="row">
             <div class="col">
                         <label for="EMP_RELACION_SUFICIENCIA">Relacion Suficiencia</label>
-                        <select class="form-control" id="EMP_RELACION_SUFICIENCIA"   name="EMP_RELACION_SUFICIENCIA"  required>
-                                <option>0</option>
-                                <option>1</option>
-                        </select>
+                        <input type="number"  class="form-control" name="EMP_RELACION_SUFICIENCIA" required  >
                 </div>
                 <div class="form-group">
-                        <label for="INS_CODIGO">Instituto</label>
-                        <select class="form-control" id="INS_CODIGO" name="INS_CODIGO" required>
-                                <option>1</option>
-                                <option>2</option>
-                        </select>
+                        <label for="INS_CODIGO">Institucion</label>
+                        <select type="input" class="form-control" id="INS_CODIGO" name="INS_CODIGO" placeholder="Institucion"  required>
+                                @foreach ($instituciones as $institucion)
+                                        <option value="{{$institucion->INS_CODIGO}}">{{$institucion->INS_NOMBRE}}</option>
+                                @endforeach
+                         </select> 
                 </div>
+               
             </div>
 
                 <br>
