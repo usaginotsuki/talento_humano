@@ -6,6 +6,15 @@
     <h2>Actualizar Parametro</h2>
 </div>
 <div class="container">
+      @if (session('title') && session('subtitle'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ session('title') }}</h4>
+        <p>{{ session('subtitle') }}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <form action="{{url('/parametro/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="PAR_CODIGO" value="{{ $parametro->PAR_CODIGO }}">

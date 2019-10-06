@@ -45,11 +45,15 @@ class ParametroController extends Controller {
 	{
 		$codn=1;
 		$sino=0;
+
+		
 		if ($request['PAR_SINO'] === 'SI') {
 			$sino = 1;
 		}else{
 			$sino =0;
 		}
+
+
 
 		Parametro::create([
 			'EMP_CODIGO'=> $request['EMP_CODIGO'],
@@ -74,6 +78,7 @@ class ParametroController extends Controller {
 		return redirect('parametro')
 		->with('title', 'Parametro registrado!')
 		->with('subtitle', 'El registro del parametro realizado con éxito.');
+
 	}
 
 	/**
