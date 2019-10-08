@@ -49,6 +49,24 @@ Route::post('carrera/store', 'CarreraController@store');
 Route::get('carrera/{id}/edit', 'CarreraController@edit');
 Route::post('carrera/update', 'CarreraController@update');
 Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
+
+
+
+
+Route::get('docente', 'docenteController@index');
+Route::get('docente/create', 'docenteController@create');
+Route::post('docente/store', 'docenteController@store');
+Route::get('docente/{id}/edit', 'docenteController@edit');
+Route::post('docente/update', 'docenteController@update');
+Route::post('docente/{id}/destroy', 'docenteController@destroy');
+
+Route::get('laboratorio', 'laboratorioController@index');
+Route::get('laboratorio/create', 'laboratorioController@create');
+Route::post('laboratorio/store', 'laboratorioController@store');
+Route::get('laboratorio/{id}/edit', 'laboratorioController@edit');
+Route::post('laboratorio/update', 'laboratorioController@update');
+Route::post('laboratorio/{id}/destroy', 'laboratorioController@destroy');
+
 //----------Parametros----------------------------
 
 Route::get('parametro', 'ParametroController@index');
@@ -71,4 +89,5 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 
 ]);
+
 

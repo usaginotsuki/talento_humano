@@ -1,5 +1,6 @@
 
 
+
 $(document).ready(function() {
     $('#ListTable').DataTable( {
         language: {
@@ -43,6 +44,7 @@ $(document).ready(function() {
             } );
         }
     } );
+
 
 $(document).ready(function() {
     $('#ListTable').DataTable({
