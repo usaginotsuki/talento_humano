@@ -34,12 +34,14 @@
             <th>Laboratorista</th> 
             <th>Cargo Laboratorista</th>
             <th>Estado Laboratorio</th> 
+
             <th>Relacion Suficiencia</th>
             <th>Imagen Encabezado</th>
             <th>Imagen Encabezado 2</th>
             <th>Auxiliar 1</th>
             <th>Auxiliar 2</th>
             <th>Instituto</th>
+
             <th>OPCIONES</th>
           </tr>       
         </thead>
@@ -56,6 +58,16 @@
             <td>{{ $empresa->EMP_PIE_JEFE }}</td>
             <td>{{ $empresa->EMP_FIRMA_LAB }}</td>
             <td>{{ $empresa->EMP_PIE_LAB }}</td>
+
+            
+            @if ($empresa->EMP_ESTADO !== 1)
+            <td>{{"False"}}</td> 
+            @elseif ($empresa->EMP_ESTADO === 1)
+            <td>{{"True"}}</td>     
+            @endif
+           
+            
+
             <td>{{ $empresa->EMP_ESTADO }}</td>
             <td>  {{ $empresa->EMP_RELACION_SUFICIENCIA }}</td>
             <td> <img src="{{ $empresa->EMP_IMAGEN_ENCABEZADO }}" alt="{{ $empresa->EMP_IMAGEN_ENCABEZADO }}" > </td>
@@ -64,6 +76,7 @@
             <td>{{ $empresa->EMP_AUX2 }}</td>
             <td>{{ $empresa->INS_CODIGO }}</td>
            
+
             <td>
                 <a href="empresa/edit/{{$empresa->EMP_CODIGO}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
                 <a href="empresa/destroy/{{$empresa->EMP_CODIGO}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
@@ -83,12 +96,16 @@
                 <th>Laboratorista</th>
                 <th>Cargo Laboratorista</th>
                 <th>Estado Laboratorio</th>
+
+        
+
                 <th>Relacion Suficiencia</th>
                 <th></th>
                 <th>Imagen Encabezado 2</th>
                 <th>Auxiliar 1</th>
                 <th>Auxiliar 2</th>
                 <th>Instituto</th>
+
             </tr>
         </tfoot>
      </table>
