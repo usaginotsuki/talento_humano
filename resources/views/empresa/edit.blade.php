@@ -76,6 +76,7 @@
                         </div>
                 </div>
              
+
                 <div class="col" style="display: flex;align-items: center;">
                         <div class="custom-control custom-switch">
                         @if ($empresa->EMP_ESTADO !=1)
@@ -84,6 +85,20 @@
                         <input type="checkbox" class="custom-control-input" id="EMP_ESTADO" name="EMP_ESTADO" checked>
                         @endif
                         <label class="custom-control-label" for="EMP_ESTADO">Estado</label>
+
+                <div class="col">
+                        <div class="form-group">
+                        <label for="EMP_ESTADO">Estado del Laboratorio</label>
+                        <select class="form-control" id="EMP_ESTADO" name="EMP_ESTADO"   required>
+                        @if ($empresa->EMP_ESTADO === 0)
+                            <option selected>0</option>
+                            <option>1</option>
+                        @elseif ($empresa->EMP_ESTADO === 1)
+                            <option>0</option>
+                            <option selected>1</option>
+                        @endif
+                        </select>
+
                         </div>
                 </div>
                
@@ -122,6 +137,7 @@
             <div class="row">
             <div class="col">
                         <label for="EMP_RELACION_SUFICIENCIA">Relacion Suficiencia</label>
+
                         <input type="number"  class="form-control" name="EMP_RELACION_SUFICIENCIA" value="{{$empresa->EMP_RELACION_SUFICIENCIA}}" required  >
                 </div>
                 <div class="form-group">
@@ -134,12 +150,33 @@
                                         <option value="{{$institucion->INS_CODIGO}}"  >{{$institucion->INS_NOMBRE}}</option>
                                 @endif
                                 @endforeach
+
+                        <select class="form-control" id="EMP_RELACION_SUFICIENCIA"   name="EMP_RELACION_SUFICIENCIA"   required>
+                               @if ($empresa->EMP_RELACION_SUFICIENCIA === 0)
+                                <option selected>0</option>
+                                <option>1</option>
+                                @elseif ($empresa->EMP_RELACION_SUFICIENCIA === 1)
+                                <option>0</option>
+                                <option selected>1</option>
+                                @endif
+                        </select>
+                </div>
+                <div class="form-group">
+                        <label for="INS_CODIGO">Instituto</label>
+                        <select class="form-control" id="INS_CODIGO" name="INS_CODIGO" value="{{$empresa->INS_CODIGO}}"  required>
+                                <option>1</option>
+                                <option>2</option>
+
                         </select>
                 </div>
             </div>
 
                 <br>
+
                 <button type="submit" class="btn btn-primary mb-2">Guardar</button>
+
+                <button type="submit" class="btn btn-primary mb-2">Crear</button>
+
                  <a href="{{url('empresa')}}" class="btn btn-danger mb-2">Cancelar</a> 
              
         </form>
