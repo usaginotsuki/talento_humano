@@ -63,4 +63,24 @@ $(document).ready(function() {
         }
     });
 
+    $('input[name="PER_FECHAS"]').daterangepicker({
+        drops: 'up',
+        cancelClass: "btn-danger",
+        locale: {
+            format: "DD-MM-YYYY",
+            separator: " al ",
+            applyLabel: "Aplicar",
+            cancelLabel: "Cancelar",
+            fromLabel: "Desde",
+            toLabel: "Hasta",
+            customRangeLabel: "Custom",
+            weekLabel: "W",
+            daysOfWeek: ["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
+            monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+            firstDay: 1
+        },
+    });
+});
+
 } );
+
