@@ -148,11 +148,22 @@ class ReportesController extends Controller {
 		# code...
 	}
 
-	public function eventosOcasionales()
+	public function eventosOcasionalesIndex()
 	{
-		# code...
-	}
+		$periodos = Periodo::codigoNombre()->get();
 
+		return view('reportes.eventosOcasionales', [
+			'periodos' => $periodos->reverse(),
+		]);
+	}
+	public function eventosOcasionalesPost(Request $request)
+	{
+		$periodos= Periodo::All();
+	   $carreras = Carrera::All();
+
+	 return view('reportes.evento', ['periodos' => $periodos])->with('materias',$materias);
+   }
+	
 	public function materiaxcarrera()
 	{
 
