@@ -21,5 +21,8 @@
     <li class="nav-item">
       <a class="nav-link  text-white" href="{{url('carrera')}}">Carrera</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('horario')}}">Horario</a>
+    </li>
   </ul>
 </nav>

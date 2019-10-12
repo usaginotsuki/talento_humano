@@ -14,7 +14,7 @@
 </head>
 <body>
   <header>
-    <div class="header-img"> 
+  <div class="header-img" style="background-image:url({{URL::asset('images/principal/header.png')}})">
       <ul class="nav topnav float-right">
 		@if (Auth::guest())
 			<a type="button" class="btn btn-dark" href="{{url('/')}}">Inicio</a>

@@ -8,7 +8,7 @@ body {
     margin-bottom: 100px;
 }
 .header-img {
-    background-image: url('/images/principal/header.png');
+    /* background-image: url('/images/principal/header.png'); */
     height: 60px;
 }
 .nav-color {
