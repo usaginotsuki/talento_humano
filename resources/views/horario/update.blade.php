@@ -1,15 +1,18 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-
 <div class="jumbotron">
     <h2>Actualizar Horario</h2>
 </div>
 <div class="container">
+    <div class="card border-primary mb-3">
+        <div class="card-header">Recomendaciones</div>
+        <div class="card-body text-primary">
+            <h5 class="card-title">Checkbox</h5>
+            <p class="card-text">Los campos de tipo checkbox son campos opcionales y sirven para determinar si la hora es opcional.</p>
+        </div>
+    </div>
     <form action="{{url('/horario/update')}}" method="POST">
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
-        <a href="{{url('horario')}}" class="btn btn-danger mb-2">Cancelar</a>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="HOR_CODIGO" value="{{ $horario->HOR_CODIGO }}">
         <input type="hidden" name="PER_CODIGO" value="{{ $horario->PER_CODIGO }}">
@@ -1588,10 +1591,10 @@
                 </tr>
             </tbody>
         </table>
-    </form>
-    <form action="{{url('/horario/'.$horario->HOR_CODIGO.'/destroy')}}" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn btn-warning mb-2">Eliminar</button>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+        <a href="{{url('/horario/'.$horario->HOR_CODIGO.'/destroy')}}" class="btn btn-warning mb-2">Eliminar</a>
+        <a href="{{url('horario')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
 @endsection

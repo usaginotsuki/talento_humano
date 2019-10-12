@@ -1,11 +1,17 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-
 <div class="jumbotron">
     <h2>Crear Horario</h2>
 </div>
 <div class="container">
+    <div class="card border-primary mb-3">
+        <div class="card-header">Recomendaciones</div>
+        <div class="card-body text-primary">
+            <h5 class="card-title">Checkbox</h5>
+            <p class="card-text">Los campos de tipo checkbox son campos opcionales y sirven para determinar si la hora es opcional.</p>
+        </div>
+    </div>
     <form action="{{url('/horario/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="PER_CODIGO" value="{{ $ids[1] }}">

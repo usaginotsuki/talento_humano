@@ -11,7 +11,7 @@ $(document).ready(function() {
                     previous: 'Anterior',
                     next:     'Siguiente',
                     last:     'Último'
-            },
+            }
         }
     });
 

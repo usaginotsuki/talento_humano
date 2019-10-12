@@ -27,14 +27,14 @@ Route::post('empresa/search', 'empresaController@store');
 Route::post('empresa/update', 'empresaController@update');
 Route::get('empresa/edit/{id}','empresaController@edit');
 Route::get('empresa/destroy/{id}','empresaController@destroy');
-Route::resource('empresa','empresaController');
+Route::get('empresa','empresaController@index');
 ///////////////////////////////////////////////////////////////////
 Route::post('institucion/store', 'institucionController@store');
 Route::post('institucion/search', 'institucionController@store');
 Route::post('institucion/update', 'institucionController@update');
 Route::get('institucion/edit/{id}','institucionController@edit');
 Route::get('institucion/destroy/{id}','institucionController@destroy');
-Route::resource('institucion','institucionController');
+Route::get('institucion','institucionController@index');
 ///////////////////////////////////////////////////////////////////
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -48,12 +48,12 @@ Route::get('carrera/{id}/edit', 'CarreraController@edit');
 Route::post('carrera/update', 'CarreraController@update');
 Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
 ///////////////////////////////////////////////////////////////////
-Route::get('horario', 'HorarioController@index');
-Route::get('horario/{laboratorio_id}/{periodo_id}/create', 'HorarioController@create');
 Route::post('horario/store', 'HorarioController@store');
 Route::get('horario/{laboratorio_id}/{periodo_id}/edit', 'HorarioController@edit');
 Route::post('horario/update', 'HorarioController@update');
-Route::post('horario/{id}/destroy', 'HorarioController@destroy');
+Route::get('horario/{laboratorio_id}/{periodo_id}/create', 'HorarioController@create');
+Route::get('horario/{id}/destroy', 'HorarioController@destroy');
+Route::get('horario', 'HorarioController@index');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'docenteController@index');
 Route::get('docente/create', 'docenteController@create');
