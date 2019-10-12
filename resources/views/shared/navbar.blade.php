@@ -24,5 +24,14 @@
     <li class="nav-item">
       <a class="nav-link  text-white" href="{{url('horario')}}">Horario</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('docente')}}">Docente</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('empresa')}}">Empresa</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('institucion')}}">Institucion</a>
+    </li>
   </ul>
 </nav>
