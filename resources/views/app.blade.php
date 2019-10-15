@@ -52,4 +52,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
   <script src="https://momentjs.com/downloads/moment.min.js"></script>
   <script type="text/javascript" src="{{ URL::asset('js/ListTable.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/jspdf.min.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/jspdf.plugin.autotable.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/jsReport.js') }}"></script>
 </body>
