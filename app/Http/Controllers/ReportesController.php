@@ -103,11 +103,10 @@ class ReportesController extends Controller {
 				}
 			}
 		}
-
-		set_time_limit (300);
-		$view = view('reportes.horarioSalaExport', ['horario' => $horario]);
-		$pdf = PDF::loadView('reportes.horarioSalaExport', ['horario' => $horario]);
-		return $pdf->stream();
+		// set_time_limit (300);
+		// $view = view('reportes.horarioSalaExport', ['horario' => $horario]);
+		// $pdf = PDF::loadView('reportes.horarioSalaExport', ['horario' => $horario]);
+		// return $pdf->stream();
 	}
 
 	public function hojaControl()

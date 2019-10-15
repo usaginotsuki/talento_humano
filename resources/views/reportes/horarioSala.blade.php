@@ -28,7 +28,8 @@
             </form>
         </div>
         <div class="col">
-            <form action="{{url('/reporte/horario/sala/export')}}" method="post">
+            <!-- <form action="{{url('/reporte/horario/sala/export')}}" method="post" name="export"> -->
+            <form name="export">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 @if (isset($horario))
                 <input type="hidden" name="labId" value="{{ $horario->laboratorio->LAB_CODIGO }}">
@@ -39,14 +40,14 @@
                     <div class="card-body text-primary">
                         <h5 class="card-title">Incluir Horas Ocasionales</h5>
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="colorFondo" name="opts">
+                            <input type="radio" class="custom-control-input" id="colorFondo" name="opts" onChange="changeBackground()">
                             <label class="custom-control-label" for="colorFondo">Fondo Gris</label>
                         </div>
                         <div class="custom-control custom-radio mb-3">
-                            <input type="radio" class="custom-control-input" id="textoFondo" name="opts">
+                            <input type="radio" class="custom-control-input" id="textoFondo" name="opts" onChange="changeText()">
                             <label class="custom-control-label" for="textoFondo">Texto (O)</label>
                         </div>
-                        <button type="submit" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                        <button class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
                     </div>
                 </div>
             </form>
@@ -84,25 +85,40 @@
             <tr class="d-flex">
                 <td class="col">{{ $horario['HOR_HORA'.$x] }}</td>
                 <!-- <td class="table-secondary col"> -->
-                <td class="col">
-                    {{ $horario['HOR_LUNES'.$x] }} <br>
+                <td class="col opts">
+                    @if ($horario['HOR_LUNES'.$x] != 0 || $horario['HOR_LUNES'.$x] != NULL)
+                    {{ $horario['HOR_LUNES'.$x] }} <span class="text-{{ $horario['HOR_LUNES'.$x.'_OPC'] }}"></span>
+                    <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_LUNES_DOC'.$x] }}</b>
+                    @endif
                 </td>
-                <td class="col">
-                    {{ $horario['HOR_MATES'.$x] }} <br>
+                <td class="col opts">
+                    @if ($horario['HOR_MATES'.$x] != 0 || $horario['HOR_MATES'.$x] != NULL)
+                    {{ $horario['HOR_MATES'.$x] }} <span class="text-{{ $horario['HOR_MARTES'.$x.'_OPC'] }}"></span>
+                    <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_MATES_DOC'.$x] }}</b>
+                    @endif
                 </td>
-                <td class="col">
-                    {{ $horario['HOR_MIERCOLES'.$x] }} <br>
+                <td class="col opts">
+                    @if ($horario['HOR_MIERCOLES'.$x] != 0 || $horario['HOR_MIERCOLES'.$x] != NULL)
+                    {{ $horario['HOR_MIERCOLES'.$x] }} <span class="text-{{ $horario['HOR_MIERCOLES'.$x.'_OPC'] }}"></span>
+                    <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_MIERCOLES_DOC'.$x] }}</b>
+                    @endif
                 </td>
-                <td class="col">
-                    {{ $horario['HOR_JUEVES'.$x] }} <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_JUEVES_DOC'.$x] }}</b>
+                <td class="col opts">
+                    @if ($horario['HOR_JUEVES'.$x] != 0 || $horario['HOR_JUEVES'.$x] != NULL)
+                    {{ $horario['HOR_JUEVES'.$x] }} <span class="text-{{ $horario['HOR_JUEVES'.$x.'_OPC'] }}"></span>
+                    <br>
+                    <b class="small font-weight-bold">{{ $horario['HOR_JUEVES_DOC'.$x] }}></b>
+                    @endif
                 </td>
-                <td class="col">
-                    {{ $horario['HOR_VIERNES'.$x] }} <br>
+                <td class="col opts">
+                    @if ($horario['HOR_VIERNES'.$x] != 0 || $horario['HOR_VIERNES'.$x] != NULL)
+                    {{ $horario['HOR_VIERNES'.$x] }} <span class="text-{{ $horario['HOR_VIERNES'.$x.'_OPC'] }}"></span>
+                    <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_VIERNES_DOC'.$x] }}</b>
+                    @endif
                 </td>
             </tr>
             @endfor
