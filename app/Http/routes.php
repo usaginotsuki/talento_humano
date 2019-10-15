@@ -54,6 +54,7 @@ Route::post('horario/update', 'HorarioController@update');
 Route::get('horario/{laboratorio_id}/{periodo_id}/create', 'HorarioController@create');
 Route::get('horario/{id}/destroy', 'HorarioController@destroy');
 Route::get('horario', 'HorarioController@index');
+Route::get('horario/export', 'HorarioController@export');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'docenteController@index');
 Route::get('docente/create', 'docenteController@create');
@@ -75,3 +76,12 @@ Route::post('parametro/store', 'ParametroController@store');
 Route::get('parametro/{id}/edit', 'ParametroController@edit');
 Route::post('parametro/update', 'ParametroController@update');
 Route::post('parametro/{id}/destroy', 'ParametroController@destroy');
+///////////////////////////////////////////////////////////////////
+Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
+Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
+Route::post('reporte/horario/sala/export', 'ReportesController@horarioPorSalasPdf');
+
+Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
+Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
+Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
+Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');

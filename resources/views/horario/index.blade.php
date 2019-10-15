@@ -2,7 +2,7 @@
 @section('content')
 @include ('shared.navbar')    
 <div class="jumbotron">
-    <h2>Periodos</h2>
+    <h2>Salas</h2>
 </div>
 <div class="container">
     @if (session('title') && session('subtitle'))

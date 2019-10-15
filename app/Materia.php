@@ -20,4 +20,15 @@ class Materia extends Model {
 
 	];
 	public $timestamps = false;
+
+	public function docente()
+    {
+        return $this->belongsTo('App\docente', 'DOC_CODIGO');
+	}
+	
+	public function scopeReporte($query, $periodoId)
+	{
+		return $query->select('MAT_CODIGO', 'DOC_CODIGO', 'MAT_ABREVIATURA', 'MAT_OCACIONAL')
+			->where('PER_CODIGO', $periodoId);
+	}
 }
