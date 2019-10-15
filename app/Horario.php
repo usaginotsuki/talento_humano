@@ -153,4 +153,18 @@ class Horario extends Model {
 		'HOR_VIERNES13_OPC'
 	];
 	public $timestamps = false;
+
+	public function periodo() {
+		return $this->belongsTo('App\Periodo', 'PER_CODIGO');
+	}
+
+	public function laboratorio() {
+		return $this->belongsTo('App\Laboratorio', 'LAB_CODIGO');
+	}
+
+	public function scopeObtenerHorario($query, $periodoId, $laboratorioId)
+	{
+		return $query->where('PER_CODIGO', $periodoId)
+			->where('LAB_CODIGO', $laboratorioId);
+	}
 }

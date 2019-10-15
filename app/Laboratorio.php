@@ -9,6 +9,11 @@ class Laboratorio extends Model {
 	public $timestamps = false;
 
 	public function horarios() {
-		return $this->hasMany('App\Horario', 'LAB_CODIGO');
+		return $this->hasMany('App\Horario');
+	}
+	
+	public function scopeCodigoNombreCapacidad($query)
+	{
+		return $query->select('LAB_CODIGO', 'LAB_NOMBRE', 'LAB_CAPACIDAD');
 	}
 }

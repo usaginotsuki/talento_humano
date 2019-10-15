@@ -26,13 +26,13 @@ class HorarioController extends Controller {
 		$periodo = Periodo::where('PER_ESTADO', 1)
 		->select('PER_CODIGO')
 		->first();
-		$id_periodo = $periodo->PER_CODIGO;
+		$periodoId = $periodo->PER_CODIGO;
 		foreach($laboratorios as $laboratorio) {
 			$horario = Horario::where('LAB_CODIGO', $laboratorio->LAB_CODIGO)
-			->where('PER_CODIGO','=',$id_periodo)
-			->count();
+				->where('PER_CODIGO','=',$periodoId)
+				->count();
 			// tomar el id del periodo activo
-			$laboratorio->PER_CODIGO = $id_periodo;
+			$laboratorio->PER_CODIGO = $periodoId;
 			if ($horario == 1) { // existe el registro
 				// mostramos el lapiz
 				$laboratorio->visible = 'lapiz';
@@ -52,11 +52,11 @@ class HorarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($laboratorio_id, $periodo_id)
+	public function create($laboratorioId, $periodoId)
 	{
-		$ids = array($laboratorio_id, $periodo_id);
+		$ids = array($laboratorioId, $periodoId);
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
-			->where('PER_CODIGO', $periodo_id)
+			->where('PER_CODIGO', $periodoId)
 			->where('MAT_OCACIONAL', 0)
 			->get();
 		$horas = Hora::select('HORA_NOMBRE')->get();
@@ -487,31 +487,20 @@ class HorarioController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($laboratorio_id, $periodo_id)
+	public function edit($laboratorioId, $periodoId)
 	{
-		$horario = Horario::where('LAB_CODIGO', $laboratorio_id)
-			->where('PER_CODIGO', $periodo_id)
+		$horario = Horario::where('LAB_CODIGO', $laboratorioId)
+			->where('PER_CODIGO', $periodoId)
 			->first();
 		
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
-		->where('PER_CODIGO', $periodo_id)
-		->where('MAT_OCACIONAL', 0)
+			->where('PER_CODIGO', $periodoId)
+			->where('MAT_OCACIONAL', 0)
 			->get();
 		return view('horario.update', ['horario' => $horario, 'materias' => $materias]);
 	}
