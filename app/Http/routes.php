@@ -52,6 +52,23 @@ Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
 
 
 
+Route::get('campus', 'CampusController@index');
+Route::get('campus/create', 'CampusController@create');
+Route::post('campus/store', 'CampusController@store');
+Route::get('campus/{id}/edit', 'CampusController@edit');
+Route::post('campus/update', 'CampusController@update');
+Route::post('campus/{id}/destroy', 'CampusController@destroy');
+
+Route::get('carrera', 'CarreraController@index');
+Route::get('carrera/create', 'CarreraController@create');
+Route::post('carrera/store', 'CarreraController@store');
+Route::get('carrera/{id}/edit', 'CarreraController@edit');
+Route::post('carrera/update', 'CarreraController@update');
+Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
+
+
+
+
 
 Route::get('docente', 'docenteController@index');
 Route::get('docente/create', 'docenteController@create');
@@ -108,5 +125,6 @@ Route::controllers([
 
 
 ]);
+
 
 
