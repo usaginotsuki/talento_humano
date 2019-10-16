@@ -51,6 +51,7 @@ Route::post('carrera/update', 'CarreraController@update');
 Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
 
 
+
 Route::get('campus', 'CampusController@index');
 Route::get('campus/create', 'CampusController@create');
 Route::post('campus/store', 'CampusController@store');
@@ -64,6 +65,7 @@ Route::post('carrera/store', 'CarreraController@store');
 Route::get('carrera/{id}/edit', 'CarreraController@edit');
 Route::post('carrera/update', 'CarreraController@update');
 Route::post('carrera/{id}/destroy', 'CarreraController@destroy');
+
 
 
 
@@ -90,6 +92,22 @@ Route::post('parametro/store', 'ParametroController@store');
 Route::get('parametro/{id}/edit', 'ParametroController@edit');
 Route::post('parametro/update', 'ParametroController@update');
 Route::post('parametro/{id}/destroy', 'ParametroController@destroy');
+//----------Materias----------------------------
+
+Route::get('materia', 'MateriaController@index');
+Route::get('materia/create', 'MateriaController@create');
+Route::post('materia/store', 'MateriaController@store');
+Route::get('materia/{id}/edit', 'MateriaController@edit');
+Route::post('materia/update', 'MateriaController@update');
+Route::post('materia/{id}/destroy', 'MateriaController@destroy');
+
+////////////////////////////////////////////PDF//////////////////////////
+
+Route::get('materiaxcarrera', 'ReportesController@materiaxcarrera');
+Route::post('materiaxcarrera/store', 'ReportesController@store');
+Route::get('materiaxcarrera/{per}/{car}/pdf', 'ReportesController@pdf');
+
+Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 
 
 ///////////////////////////////////////////////////////////////////
@@ -102,6 +120,9 @@ Route::resource('empresa','empresaController');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
+
+
+
 
 ]);
 
