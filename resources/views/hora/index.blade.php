@@ -1,8 +1,9 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')    
+@include ('shared.navbar')
+
 <div class="jumbotron">
-    <h2>Campus</h2>
+    <h2>Hora</h2>
 </div>
 <div class="container">
     @if (session('title') && session('subtitle'))
@@ -16,11 +17,12 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('campus/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('hora/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>
     </div>
+    <span class="counter pull-right"></span>
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
@@ -29,16 +31,16 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($campuses as $cam)
+        @foreach ($horas as $hor)
             <tr>
-                <td scope="row">{{$cam -> CAM_CODIGO}}</td>
-                <td scope="row">{{$cam -> CAM_NOMBRE}}</td>
+                <td scope="row">{{$hor -> HORA_CODIGO}}</td>
+                <td scope="row">{{$hor -> HORA_NOMBRE}}</td>
                 <td>
-                    <form action="{{url('/campus/'.$cam->CAM_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                    <form action="{{url('/hora/'.$hor->HORA_CODIGO.'/destroy')}}" method="POST" class="float-right">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
                     </form>
-                    <a href="{{url('campus/'.$cam->CAM_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                    <a href="{{url('hora/'.$hor->HORA_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
                     &nbsp;
                 </td>
             </tr>
