@@ -37,6 +37,14 @@ Route::get('institucion/edit/{id}','institucionController@edit');
 Route::get('institucion/destroy/{id}','institucionController@destroy');
 Route::resource('institucion','institucionController');
 
+///////////////////////////////////////////////////////////////////
+Route::post('control/store', 'controlController@store');
+Route::post('control/search', 'controlController@store');
+Route::post('control/update', 'controlController@update');
+Route::get('control/edit/{id}','controlController@edit');
+Route::get('control/destroy/{id}','controlController@destroy');
+Route::resource('control','controlController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
