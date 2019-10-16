@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\empresa;
+
+use App\institucion;
+
+//use File;
+
 class empresaController extends Controller {
 
 	/**
@@ -30,7 +35,12 @@ class empresaController extends Controller {
 	public function create()
 	{
 		//
+
+		$instituciones=institucion::all();
+		return view('empresa.create',["instituciones"=>$instituciones]);
+
 		return view('empresa.create');
+
 	}
 
 	/**
@@ -40,7 +50,20 @@ class empresaController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
+/*		$file = $request->file('EMP_IMAGEN_ENCABEZADO');
+		\Storage::disk('local')->put('savefile.jpg',  \File::get($file));
+		$public_path = public_path();
+		$url = $public_path.'/storage/'.'savefile.jpeg';*/
+		$estado = 0;
+		if ($request['EMP_ESTADO'] === 'on') {
+			$estado = 1;
+		}
+
+
+
 	
+
 		empresa::create([
             'EMP_NOMBRE' => $request['EMP_NOMBRE'],
             'EMP_FIRMA_DEE' => $request['EMP_FIRMA_DEE'],
@@ -49,9 +72,15 @@ class empresaController extends Controller {
 			'EMP_PIE_JEFE' => $request['EMP_PIE_JEFE'],
 			'EMP_FIRMA_LAB' => $request['EMP_FIRMA_LAB'],
 			'EMP_PIE_LAB' => $request['EMP_PIE_LAB'],
+
+			'EMP_ESTADO' =>$estado,
+			'EMP_RELACION_SUFICIENCIA' => $request['EMP_RELACION_SUFICIENCIA'],
+			'EMP_IMAGEN_ENCABEZADO' =>  $request['EMP_IMAGEN_ENCABEZADO'],
+
 			'EMP_ESTADO' => $request['EMP_ESTADO'],
 			'EMP_RELACION_SUFICIENCIA' => $request['EMP_RELACION_SUFICIENCIA'],
 			'EMP_IMAGEN_ENCABEZADO' => $request['EMP_IMAGEN_ENCABEZADO'],
+
 			'EMP_IMAGEN_ENCABEZADO2' => $request['EMP_IMAGEN_ENCABEZADO2'],
 			'EMP_AUX1' => $request['EMP_AUX1'],
 			'EMP_AUX2' => $request['EMP_AUX2'],
@@ -88,7 +117,12 @@ class empresaController extends Controller {
 	public function edit($id)
 	{
 		$empresa =	empresa::find($id);
+
+		$instituciones=institucion::all();
+		return view("empresa.edit", ["empresa"=>$empresa,"instituciones"=>$instituciones]);
+
 		return view("empresa.edit", ["empresa"=>$empresa]);
+
 		
 	}
 
@@ -102,6 +136,13 @@ class empresaController extends Controller {
 	{
 		
 		//
+
+		if ($request['EMP_ESTADO'] === 'on') {
+			$request['EMP_ESTADO'] = 1;
+		} else {
+			$request['EMP_ESTADO'] = 0;
+		}
+
 		$empresa =	empresa::find( $request['EMP_CODIGO']);
 		$empresa->EMP_NOMBRE = $request['EMP_NOMBRE'];
 		$empresa->EMP_FIRMA_DEE = $request['EMP_FIRMA_DEE'];
@@ -111,6 +152,14 @@ class empresaController extends Controller {
 		$empresa->EMP_PIE_LAB = $request['EMP_PIE_LAB'];
 		$empresa->EMP_ESTADO = $request['EMP_ESTADO'];
 		$empresa->EMP_RELACION_SUFICIENCIA = $request['EMP_RELACION_SUFICIENCIA'];
+
+		$empresa->EMP_IMAGEN_ENCABEZADO =$request['EMP_IMAGEN_ENCABEZADO'];
+		$empresa->EMP_IMAGEN_ENCABEZADO2 = $request['EMP_IMAGEN_ENCABEZADO2'];
+		$empresa->EMP_AUX1 = $request['EMP_AUX1'];
+		$empresa->EMP_AUX2 = $request['EMP_AUX2'];
+		$empresa->INS_CODIGO = $request['INS_CODIGO'];
+
+
 		$empresa->save();
 		return redirect('empresa');
 	}
@@ -128,5 +177,6 @@ class empresaController extends Controller {
 		$empresa->delete();
 		return redirect('empresa');
 	}
+
 
 }

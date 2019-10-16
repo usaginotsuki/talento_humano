@@ -135,8 +135,15 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Barryvdh\DomPDF\ServiceProvider',
 
+
+
+         
 		/*
+
+
+
 		 * Application Service Providers...
 		 */
 		'App\Providers\AppServiceProvider',
@@ -192,6 +199,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'PDF' => 'Barryvdh\DomPDF\Facade',
+		
 
 	],
 
