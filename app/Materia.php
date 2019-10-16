@@ -14,8 +14,8 @@ class Materia extends Model {
     }
 
 
-	public function scopePeriodo($query, $periodo){
-        return $query->where('PER_NOMBRE',$periodo);
+	public function periodos(){
+        return $this->belongsTo('App\Periodo','PER_CODIGO');
     }
 	public function docentes(){
 		return $this->belongsTo('App\docente','DOC_CODIGO');

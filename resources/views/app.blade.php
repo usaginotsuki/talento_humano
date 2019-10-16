@@ -29,6 +29,8 @@
       </ul>
 	</div>
   </header>
+  
+@include ('shared.navbar')
    
   @yield('content')
 

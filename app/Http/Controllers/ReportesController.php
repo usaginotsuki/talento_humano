@@ -72,7 +72,7 @@ class ReportesController extends Controller {
         $carrera=Carrera::find($car);
 
         $pdf = PDF::loadView('reportes.pdfmateriasxcarrera',['materias' => $materias , 'carrera' => $carrera, 'periodo'=>$periodo]);
-        return $pdf->download('MateriasporCarrera.pdf');
+        return $pdf->scream('MateriasporCarrera.pdf');
 
 	}
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Materia;
-use App\periodo;
+use App\Periodo;
 use App\docente;
 use App\carrera;
 
@@ -19,7 +19,8 @@ class MateriaController extends Controller {
 	 */
 	public function index()
 	{
-		$materias = Materia::All();
+		$materias = Materia::select('PER_CODIGO','DOC_CODIGO','CAR_CODIGO','MAT_NRC','MAT_NOMBRE')
+			->get();
 		return view ('materia.index',compact('materias'));
 	}
 
@@ -47,6 +48,11 @@ class MateriaController extends Controller {
 
 	public function store(Request $request)
 	{
+		if ($request['MAT_OCACIONAL'] === 'on') {
+			$request['MAT_OCACIONAL'] = 1;
+		} else {
+			$request['MAT_OCACIONAL'] = 0;
+		}
 		$materiaValida = DB::table('materia')->where('MAT_NRC', $request->MAT_NRC)->where('PER_CODIGO', $request->PER_CODIGO)->get();
 		if (count($materiaValida) === 1){
 			$periodo= periodo::All();

@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 
 <div class="jumbotron">
     <h2>Materias</h2>
@@ -38,7 +37,7 @@
                 <tr>       
                     <td scope="row">{{$mat -> PER_CODIGO}}</td>
                     <td scope="row">{{$mat -> DOC_CODIGO}}</td>
-                    <td scope="row">{{$mat -> CAR_CODIGO}}</td>
+                    <td scope="row">{{$mat -> CAR_CODIGO}}</td>  
                     <td scope="row">{{$mat -> MAT_NRC}}</td>
                     <td scope="row">{{$mat -> MAT_NOMBRE}}</td>
                     <td>
