@@ -79,7 +79,6 @@ Route::post('parametro/{id}/destroy', 'ParametroController@destroy');
 ///////////////////////////////////////////////////////////////////
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
-Route::post('reporte/horario/sala/export', 'ReportesController@horarioPorSalasPdf');
 
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');

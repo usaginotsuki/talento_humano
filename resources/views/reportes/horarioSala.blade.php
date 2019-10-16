@@ -28,47 +28,54 @@
             </form>
         </div>
         <div class="col">
-            <form action="{{url('/reporte/horario/sala/export')}}" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                @if (isset($horario))
-                <input type="hidden" name="labId" value="{{ $horario->laboratorio->LAB_CODIGO }}">
-                <input type="hidden" name="perId" value="{{ $horario->periodo->PER_CODIGO }}">
-                @endif
-                <div class="card border-primary mb-3">
-                    <div class="card-header text-primary">Opciones</div>
-                    <div class="card-body text-primary">
+            <div class="card border-info mb-3">
+                <div class="card-header text-info">Opciones</div>
+                <div class="card-body text-info">
+                    <form>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <h5 class="card-title">Incluir Horas Ocasionales</h5>
                         <div class="custom-control custom-radio">
+                            @if (isset($horario))
                             <input type="radio" class="custom-control-input" id="colorFondo" name="opts" onChange="changeBackground()">
+                            @else
+                            <input disabled type="radio" class="custom-control-input" id="colorFondo" name="opts" onChange="changeBackground()">
+                            @endif
                             <label class="custom-control-label" for="colorFondo">Fondo Gris</label>
                         </div>
                         <div class="custom-control custom-radio mb-3">
+                            @if (isset($horario))
                             <input type="radio" class="custom-control-input" id="textoFondo" name="opts" onChange="changeText()">
+                            @else
+                            <input disabled type="radio" class="custom-control-input" id="textoFondo" name="opts" onChange="changeText()">
+                            @endif
                             <label class="custom-control-label" for="textoFondo">Texto (O)</label>
                         </div>
-                        <button type="submit" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
-                    </div>
+                    </form>
+                    @if (isset($horario))
+                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    @else
+                    <button disabled onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    @endif
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <br>
     <!-- horario -->
     @if (isset($count) && $count === 1)
-    <p>
+    <p id="sala">
         <span class="h4">SALA: &emsp;
             <span style="font-weight: 300;">{{ $horario->laboratorio->LAB_NOMBRE }}</span>
         </span>
         <br>
-        <span class="h6">PERIODO: &emsp;
+        <span class="h6" style="margin-right:150px;">PERIODO: &emsp;
             <span style="font-weight: 300;">{{ $horario->periodo->PER_NOMBRE }}</span>
         </span>
-        &emsp;&emsp;&emsp;&emsp;
         <span class="h6">CAPACIDAD: &emsp;
             <span style="font-weight: 300;">{{ $horario->laboratorio->LAB_CAPACIDAD }} PCs</span>
         </span>
     </p>
-    <table class="table table-hover table-bordered table-sm">
+    <table id="horarioSalaTable" class="table table-hover table-bordered table-sm">
         <thead>
             <tr class="d-flex">
                 <th class="col">HORA</th>
@@ -108,7 +115,7 @@
                     @if ($horario['HOR_JUEVES'.$x] != 0 || $horario['HOR_JUEVES'.$x] != NULL)
                     {{ $horario['HOR_JUEVES'.$x] }} <span class="text-{{ $horario['HOR_JUEVES'.$x.'_OPC'] }}"></span>
                     <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_JUEVES_DOC'.$x] }}></b>
+                    <b class="small font-weight-bold">{{ $horario['HOR_JUEVES_DOC'.$x] }}</b>
                     @endif
                 </td>
                 <td class="col opts">
