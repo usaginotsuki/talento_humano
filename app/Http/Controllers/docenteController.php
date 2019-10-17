@@ -2,12 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\docente;
+use App\Docente;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-class docenteController extends Controller {
+class DocenteController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,7 +16,7 @@ class docenteController extends Controller {
 	 */
 	public function index()
 	{
-		$docentes = DOCENTE::All();
+		$docentes = Docente::All();
 		return view('docente.index', compact('docentes'));
 	}
 
@@ -38,7 +38,6 @@ class docenteController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		//
 		Docente::create([
 			'DOC_CEDULA' => $request['DOC_CEDULA'], 
 			'DOC_MIESPE' => $request['DOC_MIESPE'],
@@ -50,19 +49,9 @@ class docenteController extends Controller {
 			
 		]);
 
-		$docente = Docente::All();
-		return redirect('docente')->with('title', 'Docente registrado!')->with('subtitle', 'El registro del docente se ha realizado con éxito.');
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+		return redirect('docente')
+			->with('title', 'Docente registrado!')
+			->with('subtitle', 'El registro del docente se ha realizado con éxito.');
 	}
 
 	/**
@@ -86,11 +75,12 @@ class docenteController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		//
 		$docente = Docente::find($request['DOC_CODIGO']);
 		$docente->fill($request->all());
 		$docente->save();
-		return redirect('docente')->with('title', 'Docente actualizado!')->with('subtitle', 'La actualización del docente se ha realizado con éxito.');
+		return redirect('docente')
+			->with('title', 'Docente actualizado!')
+			->with('subtitle', 'La información del docente se ha actualizado con éxito.');
 	}
 
 	/**
@@ -101,9 +91,9 @@ class docenteController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
 		$docente = Docente::destroy($id);
-		return redirect('docente')->with('title', 'Docente ELIMINADO!')->with('subtitle', 'El registro del docente se ha borrado con éxito.');
+		return redirect('docente')
+			->with('title', 'Docente Eliminado!')
+			->with('subtitle', 'El registro del docente se ha eliminado con éxito.');
 	}
-
 }

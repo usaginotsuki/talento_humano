@@ -1,10 +1,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-<div class="jumbotron">
-    <h2>Crear Horario</h2>
-</div>
 <div class="container">
+    <h2>Crear Horario</h2>
     <div class="card border-primary mb-3">
         <div class="card-header">Recomendaciones</div>
         <div class="card-body text-primary">
@@ -30,7 +28,7 @@
             <tbody>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA1" value="{{ $horas[0]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA1" value="{{ $horas[0]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -110,7 +108,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA2" value="{{ $horas[1]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA2" value="{{ $horas[1]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -190,7 +188,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA3" value="{{ $horas[2]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA3" value="{{ $horas[2]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -270,7 +268,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA4" value="{{ $horas[3]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA4" value="{{ $horas[3]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -350,7 +348,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA5" value="{{ $horas[4]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA5" value="{{ $horas[4]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -430,7 +428,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA6" value="{{ $horas[5]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA6" value="{{ $horas[5]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -510,7 +508,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA7" value="{{ $horas[6]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA7" value="{{ $horas[6]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -590,7 +588,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA8" value="{{ $horas[7]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA8" value="{{ $horas[7]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -670,7 +668,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA9" value="{{ $horas[8]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA9" value="{{ $horas[8]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -750,7 +748,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA10" value="{{ $horas[9]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA10" value="{{ $horas[9]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -830,7 +828,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA11" value="{{ $horas[10]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA11" value="{{ $horas[10]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -910,7 +908,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA12" value="{{ $horas[11]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA12" value="{{ $horas[11]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">
@@ -990,7 +988,7 @@
                 </tr>
                 <tr>
                     <td scope="row">
-                        <input type="input" class="form-control" name="HOR_HORA13" value="{{ $horas[12]->HORA_NOMBRE }}" required>
+                        <input type="text" class="form-control" name="HOR_HORA13" value="{{ $horas[12]->HORA_NOMBRE }}" required>
                     </td>
                     <td scope="row">
                         <div class="input-group">

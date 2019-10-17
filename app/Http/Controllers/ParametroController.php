@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Parametro;
-use App\empresa;
+use App\Empresa;
 
 use Illuminate\Http\Request;
 
@@ -32,8 +32,8 @@ class ParametroController extends Controller {
 	 */
 	public function create()
 	{
-		$empresas= empresa::All();
-		return view('parametro.create')->with('empresas',$empresas);
+		$empresas = Empresa::All();
+		return view('parametro.create')->with('empresas', $empresas);
 	}
 	
 
@@ -46,53 +46,34 @@ class ParametroController extends Controller {
 
 	public function store(Request $request)
 	{
-		$codn=1;
-		$sino=0;
-
-		
 		if ($request['PAR_SINO'] === 'SI') {
-			$sino = 1;
+			$request['PAR_SINO'] = 1;
 		}else{
-			$sino =0;
+			$request['PAR_SINO'] = 0;
 		}
 
-
-
 		Parametro::create([
-			'EMP_CODIGO'=> $request['EMP_CODIGO'],
-             'PAR_TODOS'=> $request['PAR_TODOS'],
-             'PAR_SINO'=> $sino,
-             'PAR_DESTINO'=> $request['PAR_DESTINO'], 
-             'DOC_CODIGO'=> $request['DOC_CODIGO'],
-             'DOC_MIESPE'=> $request['DOC_MIESPE'],
-             'DOC_CLAVE'=> $request['DOC_CLAVE'],
-             'LAB_CODIGO'=> $request['LAB_CODIGO'],
-             'CAR_CODIGO'=> $request['CAR_CODIGO'], 
-             'PER_CODIGO'=> $request['PER_CODIGO'],
-             'PAR_OBSERVACION'=> $request['PAR_OBSERVACION'],
-             'CON_CODIGO'=> $request['CON_CODIGO'], 
-             'MAT_CODIGO'=> $request['MAT_CODIGO'], 
-             'PAR_FECHA_INI'=> $request['PAR_FECHA_INI'], 
-             'PAR_FECHA_FIN'=> $request['PAR_FECHA_FIN'],
-             'CAM_CODIGO'=> $request['CAM_CODIGO']
-             
+			'EMP_CODIGO' => 		$request['EMP_CODIGO'],
+			'PAR_TODOS' => 			$request['PAR_TODOS'],
+			'PAR_SINO' => 			$request['PAR_SINO'],
+			'PAR_DESTINO' =>		$request['PAR_DESTINO'], 
+			'DOC_CODIGO' =>			$request['DOC_CODIGO'],
+			'DOC_MIESPE' =>			$request['DOC_MIESPE'],
+			'DOC_CLAVE' =>			$request['DOC_CLAVE'],
+			'LAB_CODIGO' =>			$request['LAB_CODIGO'],
+			'CAR_CODIGO' =>			$request['CAR_CODIGO'], 
+			'PER_CODIGO' =>			$request['PER_CODIGO'],
+			'PAR_OBSERVACION' =>	$request['PAR_OBSERVACION'],
+			'CON_CODIGO' =>			$request['CON_CODIGO'], 
+			'MAT_CODIGO' =>			$request['MAT_CODIGO'], 
+			'PAR_FECHA_INI' =>		$request['PAR_FECHA_INI'], 
+			'PAR_FECHA_FIN' =>		$request['PAR_FECHA_FIN'],
+			'CAM_CODIGO' =>			$request['CAM_CODIGO']
 		]);
 
 		return redirect('parametro')
-		->with('title', 'Parametro registrado!')
-		->with('subtitle', 'El registro del parametro realizado con éxito.');
-
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+			->with('title', 'Parametro registrado!')
+			->with('subtitle', 'El registro del parametro realizado con éxito.');
 	}
 
 	/**
@@ -102,35 +83,15 @@ class ParametroController extends Controller {
 	 * @return Response
 	 */
 	public function edit($id)
-	{   $empresas= empresa::All();
+	{   
+		$empresas = Empresa::All();
 		$parametro = Parametro::find($id);
-		//$empr= $parametro->empresas->EMP_NOMBRE;
-		return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
-		//->with('empr',$empr);
+
+		return view('parametro.update', [
+			'parametro' => $parametro,
+			'empresas' => $empresas
+		]);
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function pdf($id)
-	{ //  $empresas= empresa::All();
-	//	$parametro = Parametro::find($id);
-		//$empr= $parametro->empresas->EMP_NOMBRE;
-	//	return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
-		//->with('empr',$empr);
-		$parametro = Parametro::All();
-
-        $pdf = PDF::loadView('parametro.pdf',['parametros'=>$parametro]);
-
-     
-        return $pdf->download('parametro.docx');
-
-	}
-
 
 
 	/**
@@ -141,7 +102,6 @@ class ParametroController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		
 		if ($request['PAR_SINO'] === 'SI') {
 			$request['PAR_SINO'] = 1;
 		} else {
@@ -149,13 +109,12 @@ class ParametroController extends Controller {
 		}
 
 		$parametro = Parametro::find($request['PAR_CODIGO']);
-        
 		$parametro->fill($request->all());
 		$parametro->save();
+        
 		return redirect('parametro')
 			->with('title', 'Parametro actualizado!')
 			->with('subtitle', 'La actualización del parametro se ha realizado con éxito.');
-			
 	}
 
 	/**
@@ -171,5 +130,4 @@ class ParametroController extends Controller {
 			->with('title', 'Parametro eliminado!')
 			->with('subtitle', 'La eliminación del parametro se ha realizado con éxito.');
 	}
-
 }

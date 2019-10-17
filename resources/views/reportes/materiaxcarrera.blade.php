@@ -1,11 +1,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-
-<div class="jumbotron">
-    <h2>Materias por Carrera</h2>
-</div>
 <div class="container">
+    <h2>Materias por Carrera</h2>
       @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -24,7 +21,7 @@
             <label for="PER_CODIGO">Periodo</label>
 
 
-            <select type="input" class="form-control" id="PER_CODIGO" name="PER_CODIGO"  >
+            <select class="form-control" id="PER_CODIGO" name="PER_CODIGO"  >
                @foreach ($periodos as $per)
                 @if($per->PER_CODIGO==$valores['PER_CODIGO'])
                    <option value="{{$per->PER_CODIGO}}" selected="{{$per->PER_CODIGO}}">{{$per->PER_NOMBRE}}</option>
@@ -43,7 +40,7 @@
             <label for="CAR_CODIGO">Carrera</label>
 
 
-            <select type="input" class="form-control" id="CAR_CODIGO" name="CAR_CODIGO"  >
+            <select class="form-control" id="CAR_CODIGO" name="CAR_CODIGO"  >
                @foreach ($carreras as $car)
                 @if($car->CAR_CODIGO==$valores['CAR_CODIGO'])
                    <option value="{{$car->CAR_CODIGO}}" selected="{{$car->CAR_CODIGO}}">{{$car->CAR_NOMBRE}}</option>

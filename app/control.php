@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class control extends Model {
+class Control extends Model {
 
 	//
 	protected $table = 'control';
@@ -13,7 +13,7 @@ class control extends Model {
 
 	public function laboratorio()
     {
-        return $this->belongsTo('App\laboratorio', 'LAB_CODIGO');
+        return $this->belongsTo('App\Laboratorio', 'LAB_CODIGO');
 	}
 	
 	public function materia()
@@ -23,6 +23,6 @@ class control extends Model {
 	
 	public function docente()
     {
-        return $this->belongsTo('App\docente', 'DOC_CODIGO');
+        return $this->belongsTo('App\Docente', 'DOC_CODIGO');
     }
 }

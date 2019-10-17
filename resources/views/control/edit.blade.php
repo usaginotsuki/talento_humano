@@ -7,11 +7,9 @@
 @section('content')
 @include ('shared.navbar')
  <body >
-        <div class="jumbotron">
+        <div class="container">
                 <h2>Editar Control</h2>
                 <h3>CODIGO {{ $control->CON_CODIGO }}: {{ $control->CON_DIA }}</h3>
-        </div>
-        <div class="container">
            
          <form  action="/control/update"  method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -135,7 +133,7 @@
                         <div class="col">
                                 <div class="form-group">
                                         <label for="LAB_CODIGO">Laboratorio</label>
-                                        <select type="input" class="form-control" id="LAB_CODIGO" name="LAB_CODIGO"  >
+                                        <select class="form-control" id="LAB_CODIGO" name="LAB_CODIGO"  >
                                                 @foreach ($laboratorios as $laboratorio)
                                                 @if($laboratorio->LAB_CODIGO==$control->LAB_CODIGO)
                                                         <option value="{{$laboratorio->LAB_CODIGO}}" selected="{{$laboratorio->LAB_CODIGO}}">{{$laboratorio->LAB_NOMBRE}}</option>
@@ -151,7 +149,7 @@
                         <div class="col">
                                 <div class="form-group">
                                         <label for="MAT_CODIGO">Materia</label>
-                                        <select type="input" class="form-control" id="MAT_CODIGO" name="MAT_CODIGO"  >
+                                        <select class="form-control" id="MAT_CODIGO" name="MAT_CODIGO"  >
                                                 @foreach ($materias as $materia)
                                                 @if($materia->MAT_CODIGO==$control->MAT_CODIGO)
                                                         <option value="{{$materia->MAT_CODIGO}}" selected="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}}</option>
@@ -166,7 +164,7 @@
                         <div class="col">
                                 <div class="form-group">
                                         <label for="DOC_CODIGO">Docente</label>
-                                        <select type="input" class="form-control" id="DOC_CODIGO" name="DOC_CODIGO"  >
+                                        <select class="form-control" id="DOC_CODIGO" name="DOC_CODIGO"  >
                                                 @foreach ($docentes as $docente)
                                                 @if($docente->DOC_CODIGO==$control->DOC_CODIGO)
                                                         <option value="{{$docente->DOC_CODIGO}}" selected="{{$docente->DOC_CODIGO}}">{{$docente->DOC_NOMBRES}}</option>

@@ -52,11 +52,11 @@ class HorarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($laboratorioId, $periodoId)
+	public function create($labId, $perId)
 	{
-		$ids = array($laboratorioId, $periodoId);
+		$ids = array($labId, $perId);
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
-			->where('PER_CODIGO', $periodoId)
+			->where('PER_CODIGO', $perId)
 			->where('MAT_OCACIONAL', 0)
 			->get();
 		$horas = Hora::select('HORA_NOMBRE')->get();
@@ -492,14 +492,14 @@ class HorarioController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($laboratorioId, $periodoId)
+	public function edit($labId, $perId)
 	{
-		$horario = Horario::where('LAB_CODIGO', $laboratorioId)
-			->where('PER_CODIGO', $periodoId)
+		$horario = Horario::where('LAB_CODIGO', $labId)
+			->where('PER_CODIGO', $perId)
 			->first();
 		
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
-			->where('PER_CODIGO', $periodoId)
+			->where('PER_CODIGO', $perId)
 			->where('MAT_OCACIONAL', 0)
 			->get();
 		return view('horario.update', ['horario' => $horario, 'materias' => $materias]);

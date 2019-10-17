@@ -1,10 +1,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')    
-<div class="jumbotron">
-    <h2>Salas</h2>
-</div>
 <div class="container">
+    <h2>Salas</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -31,9 +29,9 @@
                 <td scope="row">{{$lab -> LAB_CAPACIDAD}}</td>
                 <td>
                     @if ($lab -> visible == 'lapiz')
-                    <a href="{{url('horario/'.$lab->LAB_CODIGO.'/'.$lab->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                    <a href="{{url('horario/'.$lab->LAB_CODIGO.'/'.$lab->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
                     @elseif ($lab -> visible == 'plus')
-                    <a href="{{url('horario/'.$lab->LAB_CODIGO.'/'.$lab->PER_CODIGO.'/create')}}" class="btn btn-success mb-2 float-right"><span class="oi oi-plus"></span></a>
+                    <a href="{{url('horario/'.$lab->LAB_CODIGO.'/'.$lab->PER_CODIGO.'/create')}}" class="btn btn-success mb-2"><span class="oi oi-plus"></span></a>
                     @endif
                 </td>
             </tr>

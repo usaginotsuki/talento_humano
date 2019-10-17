@@ -1,10 +1,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-<div class="jumbotron">
-    <h2>Empresa</h2>
-</div>
 <div class="container">
+  <h2>Empresa</h2>
   @if (session('title') && session('subtitle'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
       <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -53,11 +51,13 @@
         <td scope="row">{{ $empresa->EMP_PIE_JEFE }}</td>
         <td scope="row">{{ $empresa->EMP_FIRMA_LAB }}</td>
         <td scope="row">{{ $empresa->EMP_PIE_LAB }}</td>
-        @if ($empresa->EMP_ESTADO !== 1)
-        <td scope="row">{{"False"}}</td> 
-        @elseif ($empresa->EMP_ESTADO === 1)
-        <td scope="row">{{"True"}}</td>     
-        @endif
+        <td scope="row">
+          @if ($empresa->EMP_ESTADO !== 1)
+          <span class="badge badge-danger">No Disponible</span>
+          @elseif ($empresa->EMP_ESTADO === 1)
+          <span class="badge badge-primary">Disponible</span>
+          @endif
+        </td>
         <td scope="row">{{ $empresa->EMP_RELACION_SUFICIENCIA }}</td>
         <td scope="row"><img src="{{ $empresa->EMP_IMAGEN_ENCABEZADO }}" alt="{{ $empresa->EMP_IMAGEN_ENCABEZADO }}" ></td>
         <td scope="row">{{ $empresa->EMP_IMAGEN_ENCABEZADO2 }}</td>
@@ -65,8 +65,10 @@
         <td scope="row">{{ $empresa->EMP_AUX2 }}</td>
         <td scope="row">{{ $empresa->INS_CODIGO }}</td>
         <td>
-            <a href="empresa/edit/{{$empresa->EMP_CODIGO}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-            <a href="empresa/destroy/{{$empresa->EMP_CODIGO}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{{url('empresa/'.$empresa->EMP_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+            <a href="{{url('empresa/'.$empresa->EMP_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+          </div>
         </td>
       </tr>
     @endforeach
