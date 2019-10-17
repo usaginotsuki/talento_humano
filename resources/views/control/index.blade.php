@@ -16,12 +16,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
- <body >
-
-  <div class="jumbotron">
-    <h2>Control</h2>
-  </div>
   <div class="container" >
+    <h2>Control</h2>
       
       <a href="control/create" class="btn btn-primary mb-2" >Agregar</a> 
       <br><br>

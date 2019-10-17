@@ -1,11 +1,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-
-<div class="jumbotron">
-    <h2>Actualizar carrera</h2>
-</div>
 <div class="container">
+    <h2>Actualizar carrera</h2>
     <form action="{{url('/carrera/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="CAR_CODIGO" value="{{ $carrera->CAR_CODIGO }}">
@@ -13,13 +10,13 @@
             <div class="col">
                 <div class="form-group">
                     <label for="CAR_NOMBRE">Nombre</label>
-                    <input type="input" class="form-control" id="CAR_NOMBRE" name="CAR_NOMBRE" placeholder="Nombre de la carrera" value="{{ $carrera->CAR_NOMBRE }}" required>
+                    <input type="text" class="form-control" id="CAR_NOMBRE" name="CAR_NOMBRE" placeholder="Nombre de la carrera" value="{{ $carrera->CAR_NOMBRE }}" required>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label for="CAR_ABREVIATURA">Horas Atencion</label>
-                    <input type="input" class="form-control" id="CAR_ABREVIATURA" name="CAR_ABREVIATURA" value="{{ $carrera->CAR_ABREVIATURA }}" required>
+                    <input type="text" class="form-control" id="CAR_ABREVIATURA" name="CAR_ABREVIATURA" value="{{ $carrera->CAR_ABREVIATURA }}" required>
                 </div>
             </div>
         </div>

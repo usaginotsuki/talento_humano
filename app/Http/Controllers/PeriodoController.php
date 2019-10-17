@@ -48,11 +48,11 @@ class PeriodoController extends Controller {
 		$end = date_create($end);
 		
 		Periodo::create([
-				'PER_NOMBRE' => $request['PER_NOMBRE'], 
-				'PER_ESTADO' => $estado,
+				'PER_NOMBRE' => 		$request['PER_NOMBRE'], 
+				'PER_ESTADO' => 		$estado,
 				'PER_HORAS_ATENCION' => $request['PER_HORAS_ATENCION'],
-				'PER_FECHA_INICIO' => date_format($start,"Y/m/d H:i:s"),
-				'PER_FECHA_FIN' => date_format($end,"Y/m/d H:i:s")
+				'PER_FECHA_INICIO' => 	date_format($start,"Y/m/d H:i:s"),
+				'PER_FECHA_FIN' => 		date_format($end,"Y/m/d H:i:s")
 			]);
 			
 		return redirect('periodo')

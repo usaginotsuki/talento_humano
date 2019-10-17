@@ -1,14 +1,15 @@
 <?php namespace App\Http\Controllers;
 
-use App\control;
-use App\docente;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\laboratorio;
+use App\Control;
+use App\Docente;
+use App\Laboratorio;
 use App\Materia;
+
 use Illuminate\Http\Request;
 
-class controlController extends Controller {
+class ControlController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -18,8 +19,8 @@ class controlController extends Controller {
 	public function index()
 	{
 		//
-		$control = control::all();
-		return view("control.index", ["controles"=>$control]);
+		$control = Control::all();
+		return view("control.index", ["controles" => $control]);
 	}
 
 	/**
@@ -29,10 +30,9 @@ class controlController extends Controller {
 	 */
 	public function create()
 	{
-		//
-		$laboratorios=laboratorio::all();
-		$materias=materia::all();
-		$docentes=docente::all();
+		$laboratorios = Laboratorio::all();
+		$materias = Materia::all();
+		$docentes = Docente::all();
 		//return view('control.create',["laboratorios"=>$laboratorios],["materias"=>$materias],["docentes"=>$docentes]);
 		return view('control.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
@@ -45,7 +45,7 @@ class controlController extends Controller {
 	public function store(Request $request)
 	{
 		//
-		control::create([
+		Control::create([
             'CON_DIA' => $request['CON_DIA'],
 			'CON_HORA_ENTRADA' => $request['CON_HORA_ENTRADA'],
 			'CON_HORA_SALIDA' => $request['CON_HORA_SALIDA'],
@@ -70,23 +70,6 @@ class controlController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-
-	}
-	public function search(Request $request)
-	{
-	
-		return redirect('control');
-		//
-	}
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -95,10 +78,10 @@ class controlController extends Controller {
 	public function edit($id)
 	{
 		//
-		$control =	control::find($id);
-		$laboratorios=laboratorio::all();
-		$materias=materia::all();
-		$docentes=docente::all();
+		$control = Control::find($id);
+		$laboratorios = Laboratorio::all();
+		$materias = Materia::all();
+		$docentes = Docente::all();
 		//return view("control.edit", ["control"=>$control,"laboratorios"=>$laboratorios,"materias"=>$materias,"docentes"=>$docentes]);
 		return view('control.edit')->with('control', $control)->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
@@ -112,7 +95,7 @@ class controlController extends Controller {
 	public function update(Request $request)
 	{
 		//
-		$control =	control::find( $request['CON_CODIGO']);
+		$control = Control::find( $request['CON_CODIGO']);
 		$control->CON_DIA = $request['CON_DIA'];
 		$control->CON_HORA_ENTRADA = $request['CON_HORA_ENTRADA'];
 		$control->CON_HORA_SALIDA = $request['CON_HORA_SALIDA'];
@@ -144,9 +127,8 @@ class controlController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$control =	control::find($id);
+		$control = Control::find($id);
 		$control->delete();
 		return redirect('control');
 	}
-
 }

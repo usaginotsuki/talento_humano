@@ -8,10 +8,8 @@
 @section('content')
 @include ('shared.navbar')
  <body >
-        <div class="jumbotron">
-                <h2>Crear Control</h2>
-            </div>
         <div class="container">
+                <h2>Crear Control</h2>
          <form  action="/control/store"  method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row"> 
@@ -125,7 +123,7 @@
                 </div>
                 <div class="col">
                         <label for="LAB_CODIGO">Laboratorio</label>
-                        <select type="input" class="form-control" id="LAB_CODIGO" name="LAB_CODIGO" placeholder="Laboratorio"  required>
+                        <select class="form-control" id="LAB_CODIGO" name="LAB_CODIGO" placeholder="Laboratorio"  required>
                                 @foreach ($laboratorios as $laboratorio)
                                         <option value="{{$laboratorio->LAB_CODIGO}}">{{$laboratorio->LAB_NOMBRE}}</option>
                                 @endforeach
@@ -136,7 +134,7 @@
             <div class="row">
                 <div class="col">
                         <label for="MAT_CODIGO">Materia</label>
-                        <select type="input" class="form-control" id="MAT_CODIGO" name="MAT_CODIGO" placeholder="Materia"  required>
+                        <select class="form-control" id="MAT_CODIGO" name="MAT_CODIGO" placeholder="Materia"  required>
                                 @foreach ($materias as $materia)
                                         <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}}</option>
                                 @endforeach
@@ -144,7 +142,7 @@
                 </div>
                 <div class="col">
                         <label for="DOC_CODIGO">Docente</label>
-                        <select type="input" class="form-control" id="DOC_CODIGO" name="DOC_CODIGO" placeholder="Docente"  required>
+                        <select class="form-control" id="DOC_CODIGO" name="DOC_CODIGO" placeholder="Docente"  required>
                                 @foreach ($docentes as $docente)
                                         <option value="{{$docente->DOC_CODIGO}}">{{$docente->DOC_NOMBRES}}</option>
                                 @endforeach

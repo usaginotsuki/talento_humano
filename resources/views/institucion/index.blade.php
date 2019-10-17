@@ -1,14 +1,11 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-<div class="jumbotron">
-<h2>Institucion</h2>
-</div>
 <div class="container" >
-  
-  <a href="institucion/create" class="btn btn-primary mb-2">Nuevo</a> 
+  <h2>Instituciones</h2>
+  <a href="{{url('institucion/create')}}" class="btn btn-primary mb-2">Nuevo</a> 
   <br><br>
-  <table class="table table-striped table-bordered table-responsive"  id="ListTable">
+  <table class="table table-striped table-bordered table-responsive" id="ListTable">
     <thead>
       <tr>
         <th>ID</th>
@@ -21,24 +18,23 @@
       </tr>       
     </thead>
     <tbody>
-    
-    
-    @foreach ($instituciones as $institucion)
+      @foreach ($instituciones as $ins)
       <tr>
-        <td>{{ $institucion->INS_CODIGO }}</td>
-        <td>{{ $institucion->INS_NOMBRE }}</td>
-        <td>{{ $institucion->INS_FIRMA_DIRECTOR }}</td>
-        <td>{{ $institucion->INS_PIE_DIRECTOR }}</td>
-        <td>{{ $institucion->INS_PIE_DIRECTOR2 }}</td>
-        <td>{{ $institucion->INS_AUX }}</td>
+        <td>{{ $ins->INS_CODIGO }}</td>
+        <td>{{ $ins->INS_NOMBRE }}</td>
+        <td>{{ $ins->INS_FIRMA_DIRECTOR }}</td>
+        <td>{{ $ins->INS_PIE_DIRECTOR }}</td>
+        <td>{{ $ins->INS_PIE_DIRECTOR2 }}</td>
+        <td>{{ $ins->INS_AUX }}</td>
         <td>
-            <a href="institucion/edit/{{$institucion->INS_CODIGO}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-            <a href="institucion/destroy/{{$institucion->INS_CODIGO}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="{{url('institucion/'.$ins->INS_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+              <a href="{{url('institucion/'.$ins->INS_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+            </div>
         </td>
       </tr>
-  
-    @endforeach
+      @endforeach
     <tbody>
   </table>
-</div >
+</div>
 @endsection

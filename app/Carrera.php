@@ -15,4 +15,14 @@ class Carrera extends Model {
 	}
 	
 	public $timestamps = false;
+
+	public function materias() {
+
+		return $this->hasMany('App\Materia');
+
+	}
+	
+	public function scopeCodigoNombre($query) {
+		return $query->select('CAR_CODIGO', 'CAR_NOMBRE');
+	}
 }

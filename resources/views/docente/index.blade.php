@@ -1,12 +1,8 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-
-<div class="jumbotron">
-    <h2>Docentes</h2>
-</div>
 <div class="container">
-
+    <h2>Docentes</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -29,12 +25,9 @@
             <tr>
                 <th>#</th>
                 <th>CEDULA</th>
-                <th>MI ESPE</th>
-                <th>NOMBRES</th>
-                <th>APELLIDOS</th>
+                <th>USUARIO MIESPE</th>
+                <th>DOCENTE</th>
                 <th>CORREO</th>
-                <th>CLAVE</th>
-                <th>TITULO</th>
                 <th>ACCIONES</th>
             </tr>
         </thead>
@@ -42,26 +35,20 @@
         <tbody>
         @foreach ($docentes as $doc)
         <tr>
-            <td>{{$doc -> DOC_CODIGO }}</td>
-            <td>{{$doc -> DOC_CEDULA}}</td>
-            <td>{{$doc -> DOC_MIESPE}}</td>
-            <td>{{$doc -> DOC_NOMBRES}}</td>
-            <td>{{$doc -> DOC_APELLIDOS}}</td>
-            <td>{{$doc -> DOC_CORREO}}</td>
-            <td>{{$doc -> DOC_CLAVE}}</td>
-            <td>{{$doc -> DOC_TITULO}}</td>
+            <td>{{$doc->DOC_CODIGO }}</td>
+            <td>{{$doc->DOC_CEDULA}}</td>
+            <td>{{$doc->DOC_MIESPE}}</td>
+            <td>{{$doc->DOC_TITULO}} {{$doc->DOC_NOMBRES}} {{$doc->DOC_APELLIDOS}}</td>
+            <td>{{$doc->DOC_CORREO}}</td>
             <td>
-                <form action="{{url('/docente/'.$doc->DOC_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                </form>
-                <a href="{{url('docente/'.$doc->DOC_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                &nbsp;
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{url('docente/'.$doc->DOC_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                    <a href="{{url('docente/'.$doc->DOC_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-pencil"></span></a>
+                </div>
             </td>
         </tr>
         @endforeach
         </tbody>
-       
     </table>
 </div>
 @endsection

@@ -1,10 +1,8 @@
 @extends('app')
 @section('content')
-
-<div class="jumbotron">
-    <h2>Materias</h2>
-</div>
+@include ('shared.navbar')
 <div class="container">
+    <h2>Materias</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -34,35 +32,21 @@
         </thead>
         <tbody >
             @foreach ($materias as $mat)
-                <tr>       
-                    <td scope="row">{{$mat -> PER_CODIGO}}</td>
-                    <td scope="row">{{$mat -> DOC_CODIGO}}</td>
-                    <td scope="row">{{$mat -> CAR_CODIGO}}</td>  
-                    <td scope="row">{{$mat -> MAT_NRC}}</td>
-                    <td scope="row">{{$mat -> MAT_NOMBRE}}</td>
-                    <td>
-                        <form action="{{url('/materia/'.$mat->MAT_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                        </form>
-                        <a href="{{url('materia/'.$mat->MAT_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                        &nbsp;
-                        
-                    </td>
-                </tr>
+            <tr>       
+                <td scope="row">{{$mat-> PER_CODIGO}}</td>
+                <td scope="row">{{$mat-> DOC_CODIGO}}</td>
+                <td scope="row">{{$mat-> CAR_CODIGO}}</td>  
+                <td scope="row">{{$mat-> MAT_NRC}}</td>
+                <td scope="row">{{$mat-> MAT_NOMBRE}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{url('materia/'.$mat->MAT_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <a href="{{url('materia/'.$mat->MAT_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                    </div>
+                </td>
+            </tr>
             @endforeach
         </tbody>   
     </table>
-<!-- BOTONES DE NAVEGACION -->
-<!-- <div class="clearfix">
-    <ul class="pagination">
-        <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-        <li class="page-item"><a href="#" class="page-link">1</a></li>
-        <li class="page-item"><a href="#" class="page-link">2</a></li>
-        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-        <li class="page-item"><a href="#" class="page-link">4</a></li>
-        <li class="page-item"><a href="#" class="page-link">5</a></li>
-        <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-    </ul> -->
 </div>
 @endsection
