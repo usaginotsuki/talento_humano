@@ -10,9 +10,7 @@ class Carrera extends Model {
 	public $timestamps = false;
 
 	public function materias() {
-
 		return $this->hasMany('App\Materia');
-
 	}
 	
 	public function scopeCodigoNombre($query) {
