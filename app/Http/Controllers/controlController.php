@@ -5,7 +5,7 @@ use App\docente;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\laboratorio;
-use App\materia;
+use App\Materia;
 use Illuminate\Http\Request;
 
 class controlController extends Controller {

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Materia;
 use App\Periodo;
 use App\docente;
-use App\carrera;
+use App\Carrera;
 
 use Illuminate\Http\Request;
 
