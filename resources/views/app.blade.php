@@ -32,7 +32,7 @@
       </ul>
 	</div>
   </header>
-   
+  @include ('shared.navbar')
   @yield('content')
 
   <footer class="footer footer-color footer-display">

@@ -20,7 +20,7 @@ Route::get('periodo/create', 'PeriodoController@create');
 Route::post('periodo/store', 'PeriodoController@store');
 Route::get('periodo/{id}/edit', 'PeriodoController@edit');
 Route::post('periodo/update', 'PeriodoController@update');
-Route::POST('periodo/{id}/destroy', 'PeriodoController@destroy');
+Route::post('periodo/{id}/destroy', 'PeriodoController@destroy');
 ///////////////////////////////////////////////////////////////////
 Route::post('empresa/store', 'empresaController@store');
 Route::post('empresa/search', 'empresaController@store');
@@ -55,6 +55,13 @@ Route::get('horario/{laboratorio_id}/{periodo_id}/create', 'HorarioController@cr
 Route::get('horario/{id}/destroy', 'HorarioController@destroy');
 Route::get('horario', 'HorarioController@index');
 Route::get('horario/export', 'HorarioController@export');
+///////////////////////////////////////////////////////////////////
+Route::get('campus', 'CampusController@index');
+Route::get('campus/create', 'CampusController@create');
+Route::post('campus/store', 'CampusController@store');
+Route::get('campus/{id}/edit', 'CampusController@edit');
+Route::post('campus/update', 'CampusController@update');
+Route::post('campus/{id}/destroy', 'CampusController@destroy');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'docenteController@index');
 Route::get('docente/create', 'docenteController@create');
