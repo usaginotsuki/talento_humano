@@ -2,18 +2,27 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class materia extends Model {
+class Materia extends Model {
 
-	//
 	protected $table = 'materia';
 	protected $primaryKey = 'MAT_CODIGO';
-	//							1		  2		         3				   4			  5			           6				7				8			  9			   10			11		
-	protected $fillable = ['MAT_NRC', 'MAT_NOMBRE', 'MAT_CREDITOS', 'MAT_NUM_EST', 'MAT_ABREVIATURA', 'MAT_CODIGO_BANNER', 'MAT_NIVEL', 'MAT_OCACIONAL', 'PER_CODIGO','DOC_CODIGO','CAR_CODIGO'];
-	public $timestamps = false;
-	public function control()
-    {
-		//return $this->belongsTo('App\campus', 'CAM_CODIGO');
-		//return $this->belongsTo('App\empresa', 'EMP_CODIGO');
-		//return $this->belongsTo('App\campus', 'CAM_CODIGO');
+	protected $fillable = ['PER_CODIGO','DOC_CODIGO','CAR_CODIGO','MAT_NRC','MAT_NOMBRE','MAT_CREDITOS','MAT_NUM_EST','MAT_ABREVIATURA','MAT_CODIGO_BANNER','MAT_NIVEL','MAT_OCACIONAL'];
+
+
+     public function scopeMateriasx($query, $periodo, $carrera){
+        return $query->where('PER_CODIGO',$periodo)->where('CAR_CODIGO', $carrera);
     }
+
+
+	public function periodos(){
+        return $this->belongsTo('App\Periodo','PER_CODIGO');
+    }
+	public function docentes(){
+		return $this->belongsTo('App\docente','DOC_CODIGO');
+	}
+	public function carreras(){
+		return $this->belongsTo('App\Carrera','CAR_CODIGO');
+	}
+	
+	public $timestamps = false;
 }
