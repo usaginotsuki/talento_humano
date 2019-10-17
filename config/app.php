@@ -137,7 +137,13 @@ return [
 		'Illuminate\View\ViewServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
 
+
+
+         
 		/*
+
+
+
 		 * Application Service Providers...
 		 */
 		'App\Providers\AppServiceProvider',

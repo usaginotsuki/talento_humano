@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 
 <div class="jumbotron">
     <h2>Parametros</h2>
@@ -86,6 +85,9 @@
                     <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
                 </form>
                 <a href="{{url('parametro/'.$par->PAR_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                &nbsp;
+
+                <a href="{{url('parametro/'.$par->PAR_CODIGO.'/pdf')}}" class="btn btn-primary mb-2 float-right"><span >ver</span></a>
                 &nbsp;
             </td>
        </tr>
