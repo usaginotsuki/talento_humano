@@ -42,7 +42,7 @@ Route::post('control/store', 'controlController@store');
 Route::post('control/search', 'controlController@store');
 Route::post('control/update', 'controlController@update');
 Route::get('control/edit/{id}','controlController@edit');
-Route::get('control/destroy/{id}','controlController@destroy');
+Route::get('control/init','controlController@init');
 Route::resource('control','controlController');
 
 Route::controllers([
@@ -50,7 +50,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-
+////////////////////////////////////////////////////////////////////////
 Route::get('carrera', 'CarreraController@index');
 Route::get('carrera/create', 'CarreraController@create');
 Route::post('carrera/store', 'CarreraController@store');

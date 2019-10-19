@@ -13,10 +13,12 @@
 	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
  </head>
-@extends('app')
-@section('content')
-@include ('shared.navbar')
- <body >
+
+  @extends('app')
+  @section('content')
+  @include ('shared.navbar')
+
+<body >
 
   <div class="jumbotron">
     <h2>Control</h2>
@@ -29,10 +31,15 @@
         <thead>
           <tr>
             <th>ID</th>
+
             <th>Dia</th> 
+
             <th>Hora Entrada</th>
+  
             <th>Hora Salida</th> 
+
             <th>Laboratorio Abierto</th>
+
             <th>Hora Entrada Registro</th>
             <th>Registro Firma Entrada</th>
             <th>Hora Salida Registro</th>
@@ -48,6 +55,7 @@
             <th>Materia</th>
             <th>Docente</th>
             <th>OPCIONES</th>
+
           </tr>       
         </thead>
         <tbody>

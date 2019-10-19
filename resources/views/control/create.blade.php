@@ -12,6 +12,7 @@
                 <h2>Crear Control</h2>
             </div>
         <div class="container">
+         
          <form  action="/control/store"  method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row"> 
@@ -21,7 +22,7 @@
                                 <input type="date" class="form-control"  name="CON_DIA"  required>
                         </div>
                 </div>
-             
+                            
                 <div class="col">
                         <div class="form-group">
                         <label for="CON_HORA_ENTRADA">Hora Entrada*</label>

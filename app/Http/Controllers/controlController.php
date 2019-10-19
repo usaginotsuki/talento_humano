@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\laboratorio;
 use App\materia;
 use Illuminate\Http\Request;
+use DB;
+use App\Quotation;
 
 class controlController extends Controller {
 
@@ -36,6 +38,22 @@ class controlController extends Controller {
 		//return view('control.create',["laboratorios"=>$laboratorios],["materias"=>$materias],["docentes"=>$docentes]);
 		return view('control.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
+	public function init()
+	{
+		//select laboratorio.LAB_CODIGO as lab ,materia.MAT_NOMBRE as materia , materia.MAT_CODIGO as mcod from laboratorio ,control,materia where laboratorio.LAB_CODIGO=control.LAB_CODIGO and materia.MAT_CODIGO=control.MAT_CODIGO and 
+		//select laboratorio.LAB_CODIGO as lab, Count(control.LAB_CODIGO) as registro from laboratorio ,control where laboratorio.LAB_CODIGO=control.LAB_CODIGO  and control.CON_DIA='2014-11-05' ; 
+		
+
+		$results = DB::select('select laboratorio.LAB_CODIGO as lab ,materia.MAT_NOMBRE as materia , materia.MAT_CODIGO as mcod from laboratorio ,control,materia where laboratorio.LAB_CODIGO=control.LAB_CODIGO and materia.MAT_CODIGO=control.MAT_CODIGO and  control.CON_DIA = :dia', ['dia' => '2014-11-05']);
+		return view('control.init', ["informacion"=>$results]);
+
+
+		
+
+
+	}
+
+	
 
 	/**
 	 * Store a newly created resource in storage.

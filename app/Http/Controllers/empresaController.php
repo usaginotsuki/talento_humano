@@ -20,11 +20,9 @@ class empresaController extends Controller {
 	public function index()
 	{
 		
-		//return 'this is empresa index';
+
 		$empresa=empresa::all();
-		//$this->set('empresas', $empresa);
-		//return View::make('empresa.index')->with('empresas', $empresa);
-		return view("empresa.index", ["empresas"=>$empresa]);
+			return view("empresa.index", ["empresas"=>$empresa]);
 	}
 
 	/**
@@ -51,10 +49,7 @@ class empresaController extends Controller {
 	public function store(Request $request)
 	{
 
-/*		$file = $request->file('EMP_IMAGEN_ENCABEZADO');
-		\Storage::disk('local')->put('savefile.jpg',  \File::get($file));
-		$public_path = public_path();
-		$url = $public_path.'/storage/'.'savefile.jpeg';*/
+
 		$estado = 0;
 		if ($request['EMP_ESTADO'] === 'on') {
 			$estado = 1;

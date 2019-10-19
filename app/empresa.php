@@ -23,7 +23,7 @@ class empresa extends Model {
 
 	}
       
-	public $timestamps = false;
+
 
 
 
