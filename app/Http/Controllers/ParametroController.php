@@ -8,6 +8,9 @@ use App\empresa;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\RedirectResponse;
+use PDF;
+use App;
+
 
 class ParametroController extends Controller {
 
@@ -105,6 +108,30 @@ class ParametroController extends Controller {
 		return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
 		//->with('empr',$empr);
 	}
+
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function pdf($id)
+	{ //  $empresas= empresa::All();
+	//	$parametro = Parametro::find($id);
+		//$empr= $parametro->empresas->EMP_NOMBRE;
+	//	return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
+		//->with('empr',$empr);
+		$parametro = Parametro::All();
+
+        $pdf = PDF::loadView('parametro.pdf',['parametros'=>$parametro]);
+
+     
+        return $pdf->download('parametro.docx');
+
+	}
+
+
 
 	/**
 	 * Update the specified resource in storage.
