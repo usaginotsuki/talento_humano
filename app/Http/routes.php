@@ -41,6 +41,8 @@ Route::resource('institucion','institucionController');
 Route::post('control/store', 'controlController@store');
 Route::post('control/search', 'controlController@store');
 Route::post('control/update', 'controlController@update');
+Route::post('control/fecha', 'controlController@fecha');
+
 Route::get('control/edit/{id}','controlController@edit');
 Route::get('control/init','controlController@init');
 Route::resource('control','controlController');
