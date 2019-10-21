@@ -87,3 +87,7 @@ Route::post('parametro/store', 'ParametroController@store');
 Route::get('parametro/{id}/edit', 'ParametroController@edit');
 Route::post('parametro/update', 'ParametroController@update');
 Route::post('parametro/{id}/destroy', 'ParametroController@destroy');
+
+Route::get('eventoocacional', 'EventoOcacionalController@index');
+Route::get('eventoocacional/create', 'EventoOcacionalController@create');
+Route::post('eventoocacional/store', 'EventoOcacionalController@store');

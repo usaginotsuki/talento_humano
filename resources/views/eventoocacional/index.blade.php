@@ -2,7 +2,7 @@
 @section('content')
 @include ('shared.navbar')    
 <div class="jumbotron">
-    <h2>Periodos</h2>
+    <h2> Lista de Evento Ocacional</h2>
 </div>
 <div class="container">
     @if (session('title') && session('subtitle'))
@@ -16,7 +16,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('eventoocacional/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -24,32 +24,29 @@
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
-                <th scope="row">#</th>
-                <th scope="row">NOMBRE</th>
-                <th scope="row">ESTADO</th>
-                <th scope="row">HORAS ATENCION</th>
-                <th scope="row">FECHA INICIO</th>
-                <th scope="row">FECHA FIN</th>
-                <th scope="row">ACCIONES</th>
+                <th scope="row">ID</th>
+                <th scope="row">SALA</th>
+                <th scope="row">MATERIA</th>
+                <th scope="row">DOCENTE</th>
+                <th scope="row">DIA</th>
+                <th scope="row">HORA ENTRADA</th>
+                <th scope="row">HORA SALIDA </th>
+                <th scope="row">NUMERO HORAS </th>
+                <th scope="row">NOTA </th>
             </tr>
         </thead>
         <tbody>
-        @foreach ($periodos as $per)
+        @foreach ($eventoocacionales as $eve)
             <tr>
-                <td scope="row">{{$per -> PER_CODIGO}}</td>
-                <td scope="row">{{$per -> PER_NOMBRE}}</td>
-                <td scope="row">{{$per -> PER_ESTADO}}</td>
-                <td scope="row">{{$per -> PER_HORAS_ATENCION}}</td>
-                <td scope="row">{{$per -> PER_FECHA_INICIO}}</td>
-                <td scope="row">{{$per -> PER_FECHA_FIN}}</td>
-                <td>
-                    <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                    </form>
-                    <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                    &nbsp;
-                </td>
+                <td scope="row">{{$eve -> CON_CODIGO}}</td>
+                <td scope="row">{{$eve -> LAB_CODIGO}}</td>
+                <td scope="row">{{$eve -> MAT_CODIGO}}</td>
+                <td scope="row">{{$eve -> DOC_CODIGO}}</td>
+                <td scope="row">{{$eve -> CON_DIA }}</td>
+                <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
+                <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
+                <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
+                <td scope="row">{{$eve -> CON_NOTA}}</td>
             </tr>
         @endforeach   
         </tbody>
