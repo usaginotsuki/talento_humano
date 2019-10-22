@@ -116,7 +116,7 @@ Route::post('materia/{id}/destroy', 'MateriaController@destroy');
 Route::get('materiaxcarrera', 'ReportesController@materiaxcarrera');
 Route::post('materiaxcarrera/store', 'ReportesController@store');
 Route::get('materiaxcarrera/{per}/{car}/pdf', 'ReportesController@pdf');
-
+Route::get('control/pdfcontrol/{fecha}', 'ReportesController@pdfcontrol');
 Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 
 

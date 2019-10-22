@@ -34,9 +34,14 @@
           <td scope="row">{{$con -> MAT_NOMBRE}}</td>
           <td scope="row">{{$con -> REGISTROS}}</td>    
         </tr>
+        
         @endif
         @endforeach   
+      
         </tbody>
     </table>
+        @if($controles != null )
+          <a href="{{url('control/pdfcontrol/'. $controles['fecha'].'')}}" class="btn btn-danger mb-2">DESCARGAR PDF</a>
+        @endif
 </div>
 @endsection
