@@ -10,11 +10,12 @@ use App\Periodo;
 use App\Docente;
 use App\Carrera;
 use PDF;
+use DB;
 
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller {
-
+	public static $materiaDocentePeriodo=null;
 	public function horarioPorSalasIndex()
 	{
 		$periodos = Periodo::codigoNombre()->get();
@@ -62,6 +63,8 @@ class ReportesController extends Controller {
 			}
 		}
 
+
+	
 		return view('reportes.horarioSala', [
 			'periodos' => $periodos->reverse(),
 			'laboratorios' => $laboratorios,
@@ -116,6 +119,12 @@ class ReportesController extends Controller {
 			}
 		}
 		print($count);
+		$materiaDocentePeriodo = [
+			'periodos' => $periodos->reverse(),
+			'docentes' => $docentes,
+			'count' => $count,
+			'horario' => $horario
+		];
 		return view('reportes.horarioDocente', [
 			'periodos' => $periodos->reverse(),
 			'docentes' => $docentes,
@@ -190,7 +199,16 @@ class ReportesController extends Controller {
         $carrera=Carrera::find($car);
 
         $pdf = PDF::loadView('reportes.pdfmateriasxcarrera',['materias' => $materias , 'carrera' => $carrera, 'periodo'=>$periodo]);
-        return $pdf->scream('MateriasporCarrera.pdf');
+        return $pdf->stream('MateriasporCarrera.pdf');
+
+	}
+	public function pdfmateriasdocenteperiodo()
+	{ 
+		 
+    
+		$pdf = PDF::loadView('reportes.pdfmateriasdocenteperiodo');
+		
+        return $pdf->stream('ReporteControl.pdf');
 
 	}
 }

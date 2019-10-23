@@ -50,9 +50,9 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <button onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <a href="{{url('reporte/horario/pdfmateriasdocenteperiodo/')}}"  class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</a>
                     @else
-                    <button disabled onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <a disabled onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</a>
                     @endif
                 </div>
             </div>
