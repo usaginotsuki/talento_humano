@@ -2,10 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\institucion;
+use App\Institucion;
 use Illuminate\Http\Request;
 
-class institucionController extends Controller {
+class InstitucionController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,10 +14,8 @@ class institucionController extends Controller {
 	 */
 	public function index()
 	{
-		//
-
-		$institucion=institucion::all();
-		return view("institucion.index", ["instituciones"=>$institucion]);
+		$institucion = Institucion::all();
+		return view("institucion.index", ["instituciones" => $institucion]);
 	}
 
 	/**
@@ -27,8 +25,7 @@ class institucionController extends Controller {
 	 */
 	public function create()
 	{
-		//
-		return view('institucion.create');
+		return view('institucion.create'); 
 	}
 
 	/**
@@ -38,8 +35,7 @@ class institucionController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		//
-		institucion::create([
+		Institucion::create([
             'INS_NOMBRE' => $request['INS_NOMBRE'],
             'INS_FIRMA_DIRECTOR' => $request['INS_FIRMA_DIRECTOR'],
             'INS_PIE_DIRECTOR' => $request['INS_PIE_DIRECTOR'],
@@ -51,22 +47,6 @@ class institucionController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-	public function search(Request $request)
-	{
-	
-		return redirect('institucion');
-		//
-	}
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -74,9 +54,8 @@ class institucionController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
-		$institucion =	institucion::find($id);
-		return view("institucion.edit", ["institucion"=>$institucion]);
+		$institucion = Institucion::find($id);
+		return view("institucion.edit", ["institucion" => $institucion]);
 	}
 
 	/**
@@ -87,14 +66,10 @@ class institucionController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		//
-		$institucion =	institucion::find( $request['INS_CODIGO']);
-		$institucion->INS_NOMBRE = $request['INS_NOMBRE'];
-		$institucion->INS_FIRMA_DIRECTOR = $request['INS_FIRMA_DIRECTOR'];
-		$institucion->INS_PIE_DIRECTOR = $request['INS_PIE_DIRECTOR'];
-		$institucion->INS_PIE_DIRECTOR2 = $request['INS_PIE_DIRECTOR2'];
-		$institucion->INS_AUX = $request['INS_AUX'];
+		$institucion = Institucion::find( $request['INS_CODIGO']);
+		$institucion->fill($request->all());
 		$institucion->save();
+
 		return redirect('institucion');
 	}
 
@@ -106,10 +81,8 @@ class institucionController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
-		$institucion =	institucion::find($id);
-		$institucion->delete();
+		Institucion::destroy($id);
+
 		return redirect('institucion');
 	}
-
 }

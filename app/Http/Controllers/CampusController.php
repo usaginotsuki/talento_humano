@@ -2,10 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Campus;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 
 class CampusController extends Controller {
 
@@ -16,8 +14,7 @@ class CampusController extends Controller {
 	 */
 	public function index()
 	{
-		$campuses = Campus::All();
-		return view('campus.index', compact('campuses'));
+		return view('campus.index');
 	}
 
 	/**
@@ -33,18 +30,22 @@ class CampusController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store()
 	{
-		Campus::create([
-			'CAM_CODIGO' => $request['CAM_CODIGO'],
-			'CAM_NOMBRE' => $request['CAM_NOMBRE']
-		]);
-		return redirect('campus')
-			->with('title','Campus creada!')
-			->with('subtitle','Se ha creado correctamente el campus.');
+		//
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
 	}
 
 	/**
@@ -55,24 +56,18 @@ class CampusController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$campus = Campus::find($id);
-		return view('campus.update', ['campus' => $campus]);
+		return view('campus.update');
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  Request  $request
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Request $request)
+	public function update($id)
 	{
-		$campus = Campus::find($request['CAM_CODIGO']);
-		$campus->fill($request->all());
-		$campus->save();
-		return redirect('campus')
-			->with('title','Campus actualizada!')
-			->with('subtitle','Se han actualizado correctamente los datos del campus.');
+		//
 	}
 
 	/**
@@ -83,10 +78,7 @@ class CampusController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Campus::destroy($id);
-		return redirect('campus')
-			->with('title','Campus eliminado!')
-			->with('subtitle','Se ha eliminado correctamente el campus.');
+		//
 	}
 
 }

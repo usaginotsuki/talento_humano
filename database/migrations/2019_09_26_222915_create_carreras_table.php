@@ -12,7 +12,7 @@ class CreateCarrerasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('carreras', function(Blueprint $table)
+		Schema::create('carrera', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->timestamps();

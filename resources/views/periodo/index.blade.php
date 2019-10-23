@@ -1,10 +1,8 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')    
-<div class="jumbotron">
-    <h2>Periodos</h2>
-</div>
+@include ('shared.navbar')
 <div class="container">
+    <h2>Períodos</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -36,19 +34,23 @@
         <tbody>
         @foreach ($periodos as $per)
             <tr>
-                <td scope="row">{{$per -> PER_CODIGO}}</td>
-                <td scope="row">{{$per -> PER_NOMBRE}}</td>
-                <td scope="row">{{$per -> PER_ESTADO}}</td>
-                <td scope="row">{{$per -> PER_HORAS_ATENCION}}</td>
-                <td scope="row">{{$per -> PER_FECHA_INICIO}}</td>
-                <td scope="row">{{$per -> PER_FECHA_FIN}}</td>
+                <td scope="row">{{$per->PER_CODIGO}}</td>
+                <td scope="row">{{$per->PER_NOMBRE}}</td>
+                <td scope="row">
+                    @if ($per->PER_ESTADO === 1)
+                    <span class="badge badge-primary">Activo</span>
+                    @elseif ($per->PER_ESTADO === 0)
+                    <span class="badge badge-danger">Inactivo</span>
+                    @endif
+                </td>
+                <td scope="row">{{$per->PER_HORAS_ATENCION}}</td>
+                <td scope="row">{{$per->PER_FECHA_INICIO}}</td>
+                <td scope="row">{{$per->PER_FECHA_FIN}}</td>
                 <td>
-                    <form action="{{url('/periodo/'.$per->PER_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                    </form>
-                    <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                    &nbsp;
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{url('periodo/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <a href="{{url('periodo/'.$per->PER_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                    </div>
                 </td>
             </tr>
         @endforeach   

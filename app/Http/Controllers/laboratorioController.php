@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\laboratorio;
+use App\Laboratorio;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 
-class laboratorioController extends Controller {
+class LaboratorioController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,7 +15,7 @@ class laboratorioController extends Controller {
 	 */
 	public function index()
 	{
-		$laboratorios = LABORATORIO::paginate(9);
+		$laboratorios = Laboratorio::paginate(9);
 		return view('laboratorio.index', compact('laboratorios'));
 	}
 
@@ -41,23 +41,10 @@ class laboratorioController extends Controller {
 	Laboratorio::create([
 			'LAB_NOMBRE' => $request['LAB_NOMBRE'], 
 			'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'], 
-
-			
 		]);
 
 		$laboratorio = Laboratorio::All();
 		return redirect('laboratorio')->with('title', 'laboratorio registrado!')->with('subtitle', 'El registro del laboratorio se ha realizado con éxito.');
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
 	}
 
 	/**

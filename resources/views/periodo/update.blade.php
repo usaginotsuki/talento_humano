@@ -1,17 +1,14 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
-
-<div class="jumbotron">
-    <h2>Actualizar Periodo</h2>
-</div>
 <div class="container">
+    <h2>Actualizar Período</h2>
     <form action="{{url('/periodo/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="PER_CODIGO" value="{{ $periodo->PER_CODIGO }}">
         <div class="form-group">
             <label for="PER_NOMBRE">Nombre</label>
-            <input type="input" class="form-control" id="PER_NOMBRE" name="PER_NOMBRE" value="{{ $periodo->PER_NOMBRE }}">
+            <input type="text" class="form-control" id="PER_NOMBRE" name="PER_NOMBRE" value="{{ $periodo->PER_NOMBRE }}">
         </div>
         <div class="row">
             <div class="col" style="display: flex;align-items: center;">
@@ -47,7 +44,7 @@
         </div>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
-        <a href="{{url('carrera')}}" class="btn btn-danger mb-2">Cancelar</a>
+        <a href="{{url('periodo')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
 @endsection
