@@ -104,9 +104,7 @@ class ParametroController extends Controller {
 	public function edit($id)
 	{   $empresas= empresa::All();
 		$parametro = Parametro::find($id);
-		//$empr= $parametro->empresas->EMP_NOMBRE;
 		return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
-		//->with('empr',$empr);
 	}
 
 
@@ -117,11 +115,7 @@ class ParametroController extends Controller {
 	 * @return Response
 	 */
 	public function pdf($id)
-	{ //  $empresas= empresa::All();
-	//	$parametro = Parametro::find($id);
-		//$empr= $parametro->empresas->EMP_NOMBRE;
-	//	return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
-		//->with('empr',$empr);
+	{ 
 		$parametro = Parametro::All();
 
         $pdf = PDF::loadView('parametro.pdf',['parametros'=>$parametro]);

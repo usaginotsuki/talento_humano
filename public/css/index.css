@@ -35,3 +35,32 @@ body {
 .footer p {
     margin-bottom: 0;
 }
+.pagination:nth-child(0n+3){
+  display: inline-block;
+}
+
+.pagination:nth-child(0n+3) li{
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination:nth-child(0n+3) li.active {
+  background-color: #2392E5;
+  color: white;
+  border: 1px solid #2392E5;
+}
+
+.pagination:nth-child(0n+3) li:hover:not(.active) {background-color: #ddd;}
+
+.pagination:nth-child(0n+3) li:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination:nth-child(0n+3) li:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

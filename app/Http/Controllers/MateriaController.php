@@ -20,7 +20,7 @@ class MateriaController extends Controller {
 	public function index()
 	{
 		$materias = Materia::select('MAT_CODIGO','PER_CODIGO','DOC_CODIGO','CAR_CODIGO','MAT_NRC','MAT_NOMBRE')
-			->paginate(10);
+			->paginate(5);
 		return view ('materia.index',compact('materias'));
 	}
 

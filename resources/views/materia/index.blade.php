@@ -17,11 +17,14 @@
     <div class="row">
         <div class="col">
             <a href="{{url('materia/create')}}" class="btn btn-primary mb-2">Nuevo</a>
-        </div>
+        </div>       
         <div class="col"></div>
         <div class="col"></div>
+        <div class="col">
+            <input id="buscar" type="text" class="form-control" placeholder="BUSCAR" />
+        </div> 
     </div>
-    <table id="ListTable1" class="table table-hover table-bordered results">
+    <table id="tabla" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th scope="row">Periodo</th>
@@ -53,17 +56,6 @@
             @endforeach
         </tbody>   
     </table>
-<!-- BOTONES DE NAVEGACION -->
-<!-- <div class="clearfix">
-    <ul class="pagination">
-        <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-        <li class="page-item"><a href="#" class="page-link">1</a></li>
-        <li class="page-item"><a href="#" class="page-link">2</a></li>
-        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-        <li class="page-item"><a href="#" class="page-link">4</a></li>
-        <li class="page-item"><a href="#" class="page-link">5</a></li>
-        <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-    </ul> -->
     <?php echo $materias->render(); ?>
 </div>
 @endsection

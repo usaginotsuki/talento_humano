@@ -5,7 +5,6 @@
  </head>
 @extends('app')
 @section('content')
-@include ('shared.navbar')
  <body >
         <div class="jumbotron">
                 <h2>Editar Institucion</h2>

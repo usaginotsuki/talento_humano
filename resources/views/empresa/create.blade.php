@@ -1,13 +1,6 @@
 
-<!DOCTYPE html>
-<html>
- <head>
-    <title>Add </title>
- </head>
 @extends('app')
 @section('content')
-@include ('shared.navbar')
- <body >
         
         <div class="container">
          <h2>Crear Empresa</h2>
@@ -157,7 +150,5 @@
              
         </form>
        </div> 
-</body>
 @endsection
-</html>
 
