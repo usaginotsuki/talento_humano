@@ -10,12 +10,11 @@ use App\Periodo;
 use App\Docente;
 use App\Carrera;
 use PDF;
-use DB;
 
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller {
-	public static $materiaDocentePeriodo=null;
+
 	public function horarioPorSalasIndex()
 	{
 		$periodos = Periodo::codigoNombre()->get();
@@ -63,8 +62,6 @@ class ReportesController extends Controller {
 			}
 		}
 
-
-	
 		return view('reportes.horarioSala', [
 			'periodos' => $periodos->reverse(),
 			'laboratorios' => $laboratorios,
@@ -90,45 +87,42 @@ class ReportesController extends Controller {
 		$docenteId = $request->input('docente');
 		$periodos = Periodo::codigoNombre()->get();
 		$docentes = Docente::codigoNombre()->get();
+		$profesor = Docente::nombreDocente($docenteId)->get();
+		
 		$count = Horario::obtenerHorarioPorPeriodo($periodoId)->count();
 		$horario = Horario::obtenerHorarioPorPeriodo($periodoId)->first();
 		$materias = Materia::obtenerMateriaPorDocente($periodoId, $docenteId)->get();
 		for ($x = 1; $x <= 13; $x++) {
 			foreach ($materias as $mat) {
-				$docente = $mat->docente->DOC_TITULO.' '.$mat->docente->DOC_NOMBRES.' '.$mat->docente->DOC_APELLIDOS;
+				$docente = $horario->laboratorio->LAB_NOMBRE;
 				if ($horario['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
 					$horario['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
-					$horario['HOR_LUNES_DOC'.$x] = $mat->MAT_NOMBRE;
+					$horario['HOR_LUNES_DOC'.$x] = $docente ;
 				}
 				if ($horario['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
 					$horario['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
-					$horario['HOR_MATES_DOC'.$x] = $mat->MAT_NOMBRE;
+					$horario['HOR_MATES_DOC'.$x] = $docente ;
 				}
 				if ($horario['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
 					$horario['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
-					$horario['HOR_MIERCOLES_DOC'.$x] = $mat->MAT_NOMBRE;
+					$horario['HOR_MIERCOLES_DOC'.$x] = $docente ;
 				}
 				if ($horario['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
 					$horario['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
-					$horario['HOR_JUEVES_DOC'.$x] = $mat->MAT_NOMBRE;
+					$horario['HOR_JUEVES_DOC'.$x] = $docente ;
 				}
 				if ($horario['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
 					$horario['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
-					$horario['HOR_VIERNES_DOC'.$x] = $mat->MAT_NOMBRE;
+					$horario['HOR_VIERNES_DOC'.$x] = $docente ;
 				}
 			}
 		}
 		print($count);
-		$materiaDocentePeriodo = [
-			'periodos' => $periodos->reverse(),
-			'docentes' => $docentes,
-			'count' => $count,
-			'horario' => $horario
-		];
 		return view('reportes.horarioDocente', [
 			'periodos' => $periodos->reverse(),
 			'docentes' => $docentes,
 			'count' => $count,
+			'profesor' => $profesor,
 			'horario' => $horario
 		]);
 	}
@@ -199,16 +193,7 @@ class ReportesController extends Controller {
         $carrera=Carrera::find($car);
 
         $pdf = PDF::loadView('reportes.pdfmateriasxcarrera',['materias' => $materias , 'carrera' => $carrera, 'periodo'=>$periodo]);
-        return $pdf->stream('MateriasporCarrera.pdf');
-
-	}
-	public function pdfmateriasdocenteperiodo()
-	{ 
-		 
-    
-		$pdf = PDF::loadView('reportes.pdfmateriasdocenteperiodo');
-		
-        return $pdf->stream('ReporteControl.pdf');
+        return $pdf->scream('MateriasporCarrera.pdf');
 
 	}
 }

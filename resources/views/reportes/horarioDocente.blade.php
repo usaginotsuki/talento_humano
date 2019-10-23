@@ -1,6 +1,5 @@
 @extends('app')
-@section('content')
-@include ('shared.navbar')    
+@section('content')    
 <div class="container">
     <h2>Horario por Docente</h2>
     <div class="row">
@@ -50,9 +49,9 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <a href="{{url('reporte/horario/pdfmateriasdocenteperiodo/')}}"  class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</a>
+                    <button onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
                     @else
-                    <a disabled onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</a>
+                    <button disabled onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
                     @endif
                 </div>
             </div>
@@ -61,12 +60,17 @@
     <br>
     <!-- horario -->
  
-    @if (isset($horario) )
+    @if (isset($horario) && isset($profesor))
     <p id="sala">
-        
+       <span class="h4">REPORTE: &emsp;
+            <span style="font-weight: 300;">HORARIO POR DOCENTE</span>
+        </span>
         <br>
-        <span class="h6" style="margin-right:150px;">HORARIO: &emsp;
+        <span class="h6" style="margin-right:150px;">PERIODO: &emsp;
             <span style="font-weight: 300;">{{ $horario->periodo->PER_NOMBRE }}</span>
+        </span>
+        <span class="h6">DOCENTE: &emsp;
+            <span style="font-weight: 300;"> </span>
         </span>
       
     </p>

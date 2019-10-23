@@ -110,7 +110,6 @@ Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 // ESTAS SON LAS RUTAS QUE CREE PARA LOS REPORTES, PERO NADIE LAS HA UTILIZADO
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocenteIndex');
 Route::post('reporte/horario/docente', 'ReportesController@horarioPorDocentePost');
-Route::get('reporte/horario/pdfmateriasdocenteperiodo', 'ReportesController@pdfmateriasdocenteperiodo');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
