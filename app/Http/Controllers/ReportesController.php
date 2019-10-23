@@ -9,8 +9,9 @@ use App\Laboratorio;
 use App\Periodo;
 use App\Docente;
 use App\Carrera;
+use App\Control;
 use PDF;
-
+use DB;
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller {
@@ -138,5 +139,13 @@ class ReportesController extends Controller {
         $pdf = PDF::loadView('reportes.pdfmateriasxcarrera',['materias' => $materias , 'carrera' => $carrera, 'periodo'=>$periodo]);
         return $pdf->stream('MateriasporCarrera.pdf');
 
+	}
+	public function pdfcontrol($fecha)
+	{ 
+		 
+        $controles = DB::select('select materia.MAT_NOMBRE,Count(*) as REGISTROS,control.CON_DIA from materia,control where materia.MAT_CODIGO=control.MAT_CODIGO and control.CON_DIA="'.$fecha.'" group by materia.MAT_NOMBRE;' );
+		$controles["fecha"]=$fecha;
+        $pdf = PDF::loadView('reportes.pdfcontrol',['controles' => $controles]);
+        return $pdf->stream('ReporteControl.pdf');
 	}
 }
