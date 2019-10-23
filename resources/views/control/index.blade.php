@@ -34,13 +34,15 @@
 <form class="form-inline" id="form" action="{{ url('control/generar') }}" method="POST">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class='form-group mx-sm-3 mb-2'>
+  <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value={{$controles['fecha']}} />
+  <button type="submit" class="btn btn-primary mb-2">GENERAR CONTROL</button>    
       <div class="custom-control custom-switch">
           <input type="checkbox" class="custom-control-input" id="MAT_OCACIONAL" >
           <label class="custom-control-label" for="MAT_OCACIONAL">Ocacional</label>
-       </div>
+      </div>
   </div>
-  <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value={{$controles['fecha']}} />
-  <button type="submit" class="btn btn-primary mb-2">GENERAR CONTROL</button>
+  
+  
 
 </form>
 <br>
@@ -56,7 +58,7 @@
         @foreach ($controles as $con)
         @if($con !=  $controles["fecha"])
         <tr>
-          <td scope="row">{{$con -> MAT_NOMBRE}}</td>
+          <td scope="row">{{$con -> LAB_NOMBRE}}</td>
           <td scope="row">{{$con -> REGISTROS}}</td>    
         </tr>
         
@@ -65,8 +67,6 @@
       
         </tbody>
     </table>
-        @if($controles != null )
-          <a href="{{url('control/pdfcontrol/'. $controles['fecha'].'')}}" class="btn btn-danger mb-2">DESCARGAR PDF</a>
-        @endif
+
 </div>
 @endsection
