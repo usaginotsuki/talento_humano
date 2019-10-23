@@ -29,6 +29,7 @@ Route::post('periodo/{id}/destroy', 'PeriodoController@destroy');
 Route::get('empresa','empresaController@index');
 Route::get('empresa/edit/{id}','empresaController@edit');
 Route::get('empresa/destroy/{id}','empresaController@destroy');
+Route::get('empresa/create','empresaController@create');
 Route::post('empresa/store', 'empresaController@store');
 Route::post('empresa/search', 'empresaController@store');
 Route::post('empresa/update', 'empresaController@update');
