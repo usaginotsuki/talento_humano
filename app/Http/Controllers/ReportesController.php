@@ -72,7 +72,7 @@ class ReportesController extends Controller {
 
 	public function hojaControl()
 	{
-		# code...
+		return view('reportes.hojaControl');
 	}
 
 	public function materiaPorCarrera()
