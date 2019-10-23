@@ -32,5 +32,8 @@
     <li class="nav-item">
       <a class="nav-link  text-white" href="{{url('institucion')}}">Institucion</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('control')}}">Control</a>
+    </li>
   </ul>
 </nav>

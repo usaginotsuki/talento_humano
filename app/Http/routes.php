@@ -131,5 +131,7 @@ Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
 Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
+Route::post('reporte/hoja/control', 'ReportesController@hojaControl');
+
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');

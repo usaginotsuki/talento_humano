@@ -71,9 +71,24 @@ class ReportesController extends Controller {
 		]);
 	}
 
-	public function hojaControl()
+	public function hojaControl(Request $request)
 	{
-		return view('reportes.hojaControl');
+		
+		$controles= $this->listar($request['CON_DIA']);
+		return view('reportes.hojaControl', compact('controles'));
+	
+	}
+
+	public function listar($fecha){
+		if($fecha==null){
+			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
+		}
+        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO
+		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente
+		where control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'"
+		order by control.CON_HORA_ENTRADA ASC;');
+		$controles["fecha"]=$fecha;
+		return $controles;
 	}
 
 	public function materiaPorCarrera()
