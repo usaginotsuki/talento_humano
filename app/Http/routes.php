@@ -44,13 +44,13 @@ Route::get('institucion/destroy/{id}','institucionController@destroy');
 Route::resource('institucion','institucionController');
 
 ///////////////////////////////////////////////////////////////////
-Route::post('control/store', 'controlController@store');
-Route::post('control/search', 'controlController@store');
-Route::post('control/update', 'controlController@update');
-Route::post('control/fecha', 'controlController@fecha');
+Route::post('control/store', 'ControlController@store');
+Route::post('control/search', 'ControlController@store');
+Route::post('control/update', 'ControlController@update');
+Route::post('control/index', 'ControlController@index');
+Route::post('control/generar', 'ControlController@generar');
 
 Route::get('control/edit/{id}','controlController@edit');
-Route::get('control/init','controlController@init');
 Route::resource('control','controlController');
 
 
