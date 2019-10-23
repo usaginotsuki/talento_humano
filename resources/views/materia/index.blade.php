@@ -20,11 +20,14 @@
         </div>       
         <div class="col"></div>
         <div class="col"></div>
-        <div class="col">
-            <input id="buscar" type="text" class="form-control" placeholder="BUSCAR" />
-        </div> 
+
+          <div class="form-group">
+ <input id="buscar" type="text" class="form-control" placeholder="Buscar" onkeyup="myFunction()"/>
+</div>
+
+
     </div>
-    <table id="tabla" class="table table-hover table-bordered results">
+    <table id="ListTable1" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th scope="row">Periodo</th>
