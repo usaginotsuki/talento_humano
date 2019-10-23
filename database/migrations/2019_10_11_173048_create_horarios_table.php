@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarrerasTable extends Migration {
+class CreateHorariosTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCarrerasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('carrera', function(Blueprint $table)
+		Schema::create('horarios', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->timestamps();
@@ -26,7 +26,7 @@ class CreateCarrerasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('carreras');
+		Schema::drop('horarios');
 	}
 
 }

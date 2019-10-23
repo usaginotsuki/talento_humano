@@ -18,7 +18,7 @@ class control extends Model {
 	
 	public function materia()
     {
-        return $this->belongsTo('App\materia', 'MAT_CODIGO');
+        return $this->belongsTo('App\Materia', 'MAT_CODIGO');
 	}
 	
 	public function docente()

@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')    
+@include ('shared.navbar')
 <div class="jumbotron">
     <h2>Periodos</h2>
 </div>
