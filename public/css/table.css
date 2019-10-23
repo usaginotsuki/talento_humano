@@ -11,3 +11,12 @@
   padding:8px; 
   color:#ccc;
 }
+
+.export-table {
+  font-size: 9px;
+  background-color: white;
+   } 
+#horario td {
+  padding: 1px;
+}
+

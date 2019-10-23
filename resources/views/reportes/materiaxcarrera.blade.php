@@ -1,22 +1,16 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-
+@include ('shared.navbar')  
+  
 <div class="jumbotron">
-    <h2>Materias por Carrera</h2>
+    <h2>Materias por Carreras</h2>
 </div>
+
 <div class="container">
-      @if (session('title') && session('subtitle'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">{{ session('title') }}</h4>
-        <p>{{ session('subtitle') }}</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-    <form action="{{url('/materiaxcarrera/store')}}" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="row">
+        <div class="col">
+    <form action="{{url('/reporte/materia/carrera')}}" method="POST">
+       <input type="hidden" name="_token" value="{{ csrf_token() }}">
         
     
 
@@ -84,49 +78,64 @@
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
        
     </form>
+</div>
+ </div>
+
+<br>
+
+@if($materias != null )
 
 
-        @if($materias != null )
+       
 
+            <p id="carrera">
 
-         <span class="counter pull-right"></span>
-    <table id="ListTable" class="table table-hover table-bordered results">
+          <span class="h6" style="margin-right:150px;">REPORTE: &emsp;
+            <span style="font-weight: 300;">MATERIAS POR CARRERAS</span>
+        </span>
+        <br>
+
+        <span class="h6" style="margin-right:150px;">PERIODO: &emsp;
+                @foreach ($periodos as $per)
+                @if($per->PER_CODIGO==$valores['PER_CODIGO'])
+            <span style="font-weight: 300;">{{ $per->PER_NOMBRE }}</span>
+              @endif
+            @endforeach
+        </span>
+
+             <span class="h6" style="margin-right:150px;">CARRERA: &emsp;
+               @foreach ($carreras as $car)
+                @if($car->CAR_CODIGO==$valores['CAR_CODIGO'])
+            <span style="font-weight: 300;">{{ $car->CAR_NOMBRE }}</span>
+               @endif
+            @endforeach
+        </span>
+        
+    </p>
+     <table id="materiaCarreraTable" class="table table-hover table-bordered table-sm">
         <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">MATERIA</th>
-                <th scope="col">NRC</th>
-                <th scope="col">DOCENTE</th>
-                <th scope="col">CREDITOS</th>
-                <th scope="col">ESTUDIANTES</th>
-                <th scope="col">ABREVIATURA</th>
-                <!--<th scope="col">MI ESPE</th>
-                <th scope="col">CLAVE DOC</th>
-                <th scope="col">COD LABORATORIO</th>
-                <th scope="col">CAR CODIGO</th>
-                <th scope="col">PERIODO COD</th>
-                <th scope="col">OBSERVACION</th>
-                <th scope="col">CON CODIGO</th>
-                <th scope="col">MAT CODIGO</th>
-
-
-
-                <th scope="col">FECHA INICIO</th>
-                <th scope="col">FECHA FIN</th>
-                <th scope="col">Acciones</th>-->
+            <tr class="d-flex">
+                <th class="col" >ORD</th>
+                <th class="col" >MATERIA</th>
+                <th class="col">NRC</th>
+                <th class="col">DOCENTE</th>
+                <th class="col">CREDITOS</th>
+                <th class="col">ESTUDIANTES</th>
+                <th class="col">ABREVIATURA</th>
+               
             </tr>
         </thead>
          <tbody >
         @foreach ($materias as $mat)
-        <tr>
+        <tr class="d-flex">
        
-            <td scope="row">{{$mat ->MAT_CODIGO}}</td>
-            <td scope="row">{{$mat ->MAT_NOMBRE}}</td>
-            <td scope="row">{{$mat ->MAT_NRC}}</td>
-            <td scope="row">{{$mat->docentes->DOC_NOMBRES.' '.$mat->docentes->DOC_APELLIDOS}}</td>
-            <td scope="row">{{$mat ->MAT_CREDITOS}}</td>
-            <td scope="row">{{$mat ->MAT_NUM_EST}}</td>
-            <td scope="row">{{$mat ->MAT_ABREVIATURA}}</td>
+            <td class="col opts">{{$mat ->MAT_CODIGO}}</td>
+            <td class="col opts">{{$mat ->MAT_NOMBRE}}</td>
+            <td class="col opts">{{$mat ->MAT_NRC}}</td>
+            <td class="col opts">{{$mat->docentes->DOC_NOMBRES.' '.$mat->docentes->DOC_APELLIDOS}}</td>
+            <td class="col opts">{{$mat ->MAT_CREDITOS}}</td>
+            <td class="col opts">{{$mat ->MAT_NUM_EST}}</td>
+            <td class="col opts">{{$mat ->MAT_ABREVIATURA}}</td>
 
 
 
@@ -135,7 +144,9 @@
         @endforeach
          </tbody>   
 </table>
-  <a href="{{url('materiaxcarrera/'.$valores['PER_CODIGO'].'/'.$valores['CAR_CODIGO'].'/pdf')}}" class="btn btn-danger mb-2">DESCARGAR PDF</a>
+   <button onclick="exportMateriaCarrerra()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
 @endif
+
+
 </div>
 @endsection

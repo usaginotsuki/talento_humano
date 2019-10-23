@@ -21,7 +21,7 @@
         <div class="col"></div>
         <div class="col"></div>
     </div>
-    <table id="ListTable" class="table table-hover table-bordered results">
+    <table id="ListTable1" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th scope="row">Periodo</th>
@@ -35,9 +35,9 @@
         <tbody >
             @foreach ($materias as $mat)
                 <tr>       
-                    <td scope="row">{{$mat -> PER_CODIGO}}</td>
-                    <td scope="row">{{$mat -> DOC_CODIGO}}</td>
-                    <td scope="row">{{$mat -> CAR_CODIGO}}</td>  
+                    <td scope="row">{{$mat -> periodos -> PER_NOMBRE}}</td>
+                    <td scope="row">{{$mat -> docentes -> DOC_NOMBRES}}</td>
+                    <td scope="row">{{$mat -> carreras -> CAR_NOMBRE}}</td>  
                     <td scope="row">{{$mat -> MAT_NRC}}</td>
                     <td scope="row">{{$mat -> MAT_NOMBRE}}</td>
                     <td>
@@ -64,5 +64,6 @@
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
     </ul> -->
+    <?php echo $materias->render(); ?>
 </div>
 @endsection

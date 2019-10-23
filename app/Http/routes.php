@@ -101,14 +101,6 @@ Route::get('materia/{id}/edit', 'MateriaController@edit');
 Route::post('materia/update', 'MateriaController@update');
 Route::post('materia/{id}/destroy', 'MateriaController@destroy');
 
-////////////////////////////////////////////PDF//////////////////////////
-
-Route::get('materiaxcarrera', 'ReportesController@materiaxcarrera');
-Route::post('materiaxcarrera/store', 'ReportesController@store');
-Route::get('materiaxcarrera/{per}/{car}/pdf', 'ReportesController@pdf');
-
-Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
-
 
 ///////////////////////////////////////////////////////////////////
 Route::post('empresa/store', 'empresaController@store');
@@ -125,6 +117,19 @@ Route::controllers([
 
 
 ]);
+
+///////////////////////////////////////////////////////////////////
+Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
+Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
+
+Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
+Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
+Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
+Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
+
+
+
+Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 
 
 

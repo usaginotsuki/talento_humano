@@ -14,5 +14,9 @@ class Carrera extends Model {
 
 	}
 	
+	public function scopeCodigoNombre($query)
+	{
+		return $query->select('CAR_CODIGO', 'CAR_NOMBRE');
+	}
 	public $timestamps = false;
 }

@@ -23,6 +23,8 @@ class Materia extends Model {
 	public function carreras(){
 		return $this->belongsTo('App\Carrera','CAR_CODIGO');
 	}
+
+	
 	
 	public $timestamps = false;
 }

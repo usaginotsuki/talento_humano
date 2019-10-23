@@ -12,6 +12,13 @@ class Periodo extends Model {
 		return $this->hasMany('App\Materia');
 
 	}
+
+	public function scopeCodigoNombre($query)
+	{
+		return $query->select('PER_CODIGO', 'PER_NOMBRE');
+	}
 	
+
+
 	public $timestamps = false;
 }
