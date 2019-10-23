@@ -2,30 +2,110 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use App\Carrera;
-use App\Periodo;
+// aqui declaren todos los modelos que necesiten
+use App\Horario;
 use App\Materia;
-use DB;
+use App\Laboratorio;
+use App\Periodo;
+use App\Docente;
+use App\Carrera;
+use App\Control;
 use PDF;
+use DB;
+use Illuminate\Http\Request;
+
 class ReportesController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
+	public function horarioPorSalasIndex()
 	{
-		//
+		$periodos = Periodo::codigoNombre()->get();
+		$laboratorios = Laboratorio::codigoNombreCapacidad()->get();
+		
+		return view('reportes.horarioSala', [
+			'periodos' => $periodos->reverse(),
+			'laboratorios' => $laboratorios
+		]);
+	}
+	public function horarioPorSalasPost(Request $request)
+	{
+		$periodoId = $request->input('periodo');
+		$laboratorioId = $request->input('laboratorio');
+
+		$periodos = Periodo::codigoNombre()->get();
+		$laboratorios = Laboratorio::codigoNombreCapacidad()->get();
+		$count = Horario::obtenerHorario($periodoId, $laboratorioId)->count();
+		$horario = Horario::obtenerHorario($periodoId, $laboratorioId)->first();
+		$materias = Materia::reporte($periodoId)->get();
+
+		for ($x = 1; $x <= 13; $x++) {
+			foreach ($materias as $mat) {
+				$docente = $mat->docente->DOC_TITULO.' '.$mat->docente->DOC_NOMBRES.' '.$mat->docente->DOC_APELLIDOS;
+				if ($horario['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_LUNES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_MATES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_MIERCOLES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_JUEVES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_VIERNES_DOC'.$x] = $docente;
+				}
+			}
+		}
+
+		return view('reportes.horarioSala', [
+			'periodos' => $periodos->reverse(),
+			'laboratorios' => $laboratorios,
+			'count' => $count,
+			'horario' => $horario
+		]);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+	public function hojaControl(Request $request)
+	{
+		
+		$controles= $this->listar($request['CON_DIA']);
+		return view('reportes.hojaControl', compact('controles'));
+	
+	}
+
+	public function listar($fecha){
+		if($fecha==null){
+			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
+		}
+        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO
+		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente
+		where control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'"
+		order by control.CON_HORA_ENTRADA ASC;');
+		$controles["fecha"]=$fecha;
+		return $controles;
+	}
+
+	public function materiaPorCarrera()
+	{
+		# code...
+	}
+
+	public function horarioPorDocente()
+	{
+		# code...
+	}
+
+	public function eventosOcasionales()
+	{
+		# code...
+	}
+
 	public function materiaxcarrera()
 	{
 
@@ -80,55 +160,7 @@ class ReportesController extends Controller {
 		 
         $controles = DB::select('select materia.MAT_NOMBRE,Count(*) as REGISTROS,control.CON_DIA from materia,control where materia.MAT_CODIGO=control.MAT_CODIGO and control.CON_DIA="'.$fecha.'" group by materia.MAT_NOMBRE;' );
 		$controles["fecha"]=$fecha;
-
         $pdf = PDF::loadView('reportes.pdfcontrol',['controles' => $controles]);
         return $pdf->stream('ReporteControl.pdf');
-
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

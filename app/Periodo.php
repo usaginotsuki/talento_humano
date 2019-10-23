@@ -14,4 +14,13 @@ class Periodo extends Model {
 	}
 	
 	public $timestamps = false;
+
+	public function horarios() {
+		return $this->hasMany('App\Horario');
+	}
+
+	public function scopeCodigoNombre($query)
+	{
+		return $query->select('PER_CODIGO', 'PER_NOMBRE');
+	}
 }

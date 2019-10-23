@@ -12,7 +12,7 @@ $(document).ready(function() {
                     previous: 'Anterior',
                     next:     'Siguiente',
                     last:     'Último'
-            },
+            }
         }
     });
 
@@ -37,11 +37,17 @@ $(document).ready(function() {
     $('input[name="CON_DIA"]').datepicker({
         dateFormat:"yy-mm-dd"
     });
+    $('input[name="CON_DIA1"]').datepicker({
+        dateFormat:"yy-mm-dd"
+    });
     $('input[name="CON_DIA"]').change(function(){
         $( "#form" ).submit();
     });
 
     
 });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> Team2

@@ -47,7 +47,7 @@
         </div>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
-        <a href="{{url('carrera')}}" class="btn btn-danger mb-2">Cancelar</a>
+        <a href="{{url('periodo')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
 @endsection
