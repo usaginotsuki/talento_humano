@@ -109,10 +109,6 @@ Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 
 
-
-
-]);
-
 ///////////////////////////////////////////////////////////////////
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
