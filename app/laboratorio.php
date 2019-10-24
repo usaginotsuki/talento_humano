@@ -24,5 +24,13 @@ class Laboratorio extends Model {
 	public function controles(){
 		return $this->hasMany('App\control');
 	}
+	public function horarios() {
+		return $this->hasMany('App\Horario');
+	}
+	
+	public function scopeCodigoNombreCapacidad($query)
+	{
+		return $query->select('LAB_CODIGO', 'LAB_NOMBRE', 'LAB_CAPACIDAD');
+	}
 
 }

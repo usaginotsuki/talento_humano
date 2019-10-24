@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 // aqui declaren todos los modelos que necesiten
 use App\Horario;
 use App\Materia;
-use App\Laboratorio;
+use App\laboratorio;
 use App\Periodo;
 use App\Docente;
 use App\Carrera;
@@ -30,8 +30,8 @@ class ReportesController extends Controller {
 		if($fecha==null){
 			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
 		}
-		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,campus,empresa
         $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO,empresa.EMP_NOMBRE,control.CON_EXTRA,control.CON_DIA,campus.CAM_CODIGO, materia.MAT_NUM_EST,laboratorio.LAB_CODIGO
+		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,campus,empresa
 		where laboratorio.EMP_CODIGO=empresa.EMP_CODIGO and control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and campus.CAM_CODIGO=laboratorio.CAM_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'" and campus.CAM_CODIGO="'.$campus.'"
 		order by control.CON_HORA_ENTRADA ASC;');
 		return $controles;
@@ -53,13 +53,11 @@ class ReportesController extends Controller {
 	{
 		$periodoId = $request->input('periodo');
 		$laboratorioId = $request->input('laboratorio');
-
 		$periodos = Periodo::codigoNombre()->get();
 		$laboratorios = Laboratorio::codigoNombreCapacidad()->get();
 		$count = Horario::obtenerHorario($periodoId, $laboratorioId)->count();
 		$horario = Horario::obtenerHorario($periodoId, $laboratorioId)->first();
 		$materias = Materia::reporte($periodoId)->get();
-
 		for ($x = 1; $x <= 13; $x++) {
 			foreach ($materias as $mat) {
 				$docente = $mat->docente->DOC_TITULO.' '.$mat->docente->DOC_NOMBRES.' '.$mat->docente->DOC_APELLIDOS;
@@ -85,7 +83,6 @@ class ReportesController extends Controller {
 				}
 			}
 		}
-
 		return view('reportes.horarioSala', [
 			'periodos' => $periodos->reverse(),
 			'laboratorios' => $laboratorios,
@@ -120,6 +117,7 @@ class ReportesController extends Controller {
 			'valores'=>$request,
 			'materias'=>$materias
 		]);
+	}
 	public function pdfcontrol(Request $request)
 	{ 
 		$controles= $this->listar($request['CON_DIA'],$request['CAM_CODIGO']);

@@ -1,7 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use App\Control;
-use App\docente;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Control;
