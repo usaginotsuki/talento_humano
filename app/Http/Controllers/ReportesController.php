@@ -10,6 +10,7 @@ use App\Periodo;
 use App\Docente;
 use App\Carrera;
 use App\Control;
+use App\Campus;
 use PDF;
 use DB;
 use Illuminate\Http\Request;
@@ -73,19 +74,19 @@ class ReportesController extends Controller {
 
 	public function hojaControl(Request $request)
 	{
-		
-		$controles= $this->listarControles($request['CON_DIA']);
-		return view('reportes.hojaControl', compact('controles'));
+		$controles= $this->listar($request['CON_DIA'],$request['CAM_CODIGO']);
+		$campus=DB::select('SELECT * FROM campus');
+		return view('reportes.hojaControl', compact('controles','campus'));
 	
 	}
 
-	public function listarControles($fecha){
+	public function listar($fecha,$campus){
 		if($fecha==null){
 			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
 		}
-        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, materia.MAT_NUM_EST,control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_CODIGO,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO,empresa.EMP_NOMBRE,control.CON_EXTRA,control.CON_DIA
-		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,empresa
-		where laboratorio.EMP_CODIGO=empresa.EMP_CODIGO and control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'" 
+        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO
+		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,campus
+		where control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and campus.CAM_CODIGO=laboratorio.CAM_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'" and campus.CAM_CODIGO="'.$campus.'"
 		order by control.CON_HORA_ENTRADA ASC;');
 
 		

@@ -19,14 +19,18 @@
   <div class="form-group row">
     <label for="inputCampus" class="col-sm-2 col-form-label">CAMPUS:</label>
     <div class="col-sm-4">
-        <select class="form-control" id="" title="Seleccione un Campus...">
-            <option value="CAMPUS G.G.R.L">CAMPUS G.G.R.L</option>
-            <option value="LATACUNGA">LATACUNGA</option> 
-        </select>
+    <select name="CAM_CODIGO" title="Seleccione un Periodo..." class="form-control">
+    <option selected=disabled>Escoja un Campus...</option>
+      @foreach ($campus as $camp)
+          <option value="{{ $camp->CAM_CODIGO  }}">{{ $camp->CAM_NOMBRE }}</option> 
+       @endforeach
+      </select>
     </div>
   </div>
   <div class="form-group row">
      <button type="submit" class="btn btn-primary mb-2">Actualizar Reporte</button>
+     &nbsp; |&nbsp;
+     <button type="button" class="btn btn-secondary mb-2">Generar PDF</button>
   </div>
 </form>
 <form class="form" id="form" action="{{url('reporte/pdfcontrol')}}" method="POST">
