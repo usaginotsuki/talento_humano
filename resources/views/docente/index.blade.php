@@ -46,6 +46,8 @@
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
+       
+        <tbody>
         @foreach ($docentes as $doc)
         <tbody>
             <td scope="row">{{$doc -> DOC_CODIGO}}</td>
@@ -64,6 +66,8 @@
                 <a href="{{url('docente/'.$doc->DOC_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
                 &nbsp;
             </td>
+        </tr>
+        @endforeach
         </tbody>
         @endforeach   
 </table>

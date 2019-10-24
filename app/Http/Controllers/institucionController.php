@@ -2,12 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Institucion;
-
+use App\institucion;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 
-class InstitucionController extends Controller {
+class institucionController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -18,7 +16,7 @@ class InstitucionController extends Controller {
 	{
 		//
 
-		$institucion=Institucion::all();
+		$institucion=institucion::all();
 		return view("institucion.index", ["instituciones"=>$institucion]);
 	}
 
@@ -41,7 +39,7 @@ class InstitucionController extends Controller {
 	public function store(Request $request)
 	{
 		//
-		Institucion::create([
+		institucion::create([
             'INS_NOMBRE' => $request['INS_NOMBRE'],
             'INS_FIRMA_DIRECTOR' => $request['INS_FIRMA_DIRECTOR'],
             'INS_PIE_DIRECTOR' => $request['INS_PIE_DIRECTOR'],
@@ -77,7 +75,7 @@ class InstitucionController extends Controller {
 	public function edit($id)
 	{
 		//
-		$institucion =	Institucion::find($id);
+		$institucion =	institucion::find($id);
 		return view("institucion.edit", ["institucion"=>$institucion]);
 	}
 
@@ -90,7 +88,7 @@ class InstitucionController extends Controller {
 	public function update(Request $request)
 	{
 		//
-		$institucion =	Institucion::find( $request['INS_CODIGO']);
+		$institucion =	institucion::find( $request['INS_CODIGO']);
 		$institucion->INS_NOMBRE = $request['INS_NOMBRE'];
 		$institucion->INS_FIRMA_DIRECTOR = $request['INS_FIRMA_DIRECTOR'];
 		$institucion->INS_PIE_DIRECTOR = $request['INS_PIE_DIRECTOR'];
@@ -109,7 +107,7 @@ class InstitucionController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$institucion =	Institucion::find($id);
+		$institucion =	institucion::find($id);
 		$institucion->delete();
 		return redirect('institucion');
 	}

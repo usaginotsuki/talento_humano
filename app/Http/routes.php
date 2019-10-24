@@ -20,7 +20,28 @@ Route::get('periodo/create', 'PeriodoController@create');
 Route::post('periodo/store', 'PeriodoController@store');
 Route::get('periodo/{id}/edit', 'PeriodoController@edit');
 Route::post('periodo/update', 'PeriodoController@update');
-Route::post('periodo/{id}/destroy', 'PeriodoController@destroy');
+Route::POST('periodo/{id}/destroy', 'PeriodoController@destroy');
+///////////////////////////////////////////////////////////////////
+Route::post('empresa/store', 'empresaController@store');
+Route::post('empresa/search', 'empresaController@store');
+Route::post('empresa/update', 'empresaController@update');
+Route::get('empresa/edit/{id}','empresaController@edit');
+Route::get('empresa/destroy/{id}','empresaController@destroy');
+Route::resource('empresa','empresaController');
+
+///////////////////////////////////////////////////////////////////
+Route::post('institucion/store', 'institucionController@store');
+Route::post('institucion/search', 'institucionController@store');
+Route::post('institucion/update', 'institucionController@update');
+Route::get('institucion/edit/{id}','institucionController@edit');
+Route::get('institucion/destroy/{id}','institucionController@destroy');
+Route::resource('institucion','institucionController');
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+
 
 Route::get('carrera', 'CarreraController@index');
 Route::get('carrera/create', 'CarreraController@create');
