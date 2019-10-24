@@ -1,111 +1,80 @@
-
-<!DOCTYPE html>
-
-<html>
-
-
- <head>
-
-    <title>Control </title>
-    
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-
-	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
- </head>
 @extends('app')
-@section('content')
-@include ('shared.navbar')
-  <div class="container" >
-    <h2>Control</h2>
-      
-      <a href="control/create" class="btn btn-primary mb-2" >Agregar</a> 
-      <br><br>
-      <table class="table table-striped table-bordered table-responsive"  id="ListTable">
+@section('content')   
+<div class="jumbotron">
+    <h2>Lista de Control</h2>
+</div>
+<div class="container">
+  @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ session('success') }}</h4>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  @endif
+  @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ session('error') }}</h4>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  @endif
+<form class="form" id="form" action="/control/index" method="POST">
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <div class="form-group row">
+   <label for="inputFecha" class="col-sm-1 col-form-label">FECHA: </label>
+    <div class="col-sm-4">
+      @if (!session('fecha'))
+      <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value="{{$controles['fecha']}}" />
+      @else
+      <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value="{{session('fecha')}}" />
+      @endif
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary mb-2">BUSCAR</button>
+    </div>
+  </div>
+
+  
+</form>
+<form class="form" id="form" action="{{ url('control/generar') }}" method="POST">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<div class="form-group row">
+  <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value="{{$controles['fecha']}}" />
+  <button type="submit" class="btn btn-success mb-2">GENERAR CONTROL</button>   
+  
+  <div class="custom-control custom-switch ">
+    <input type="checkbox" class="custom-control-input" id="MAT_OCACIONAL" >
+    <label class="custom-control-label" for="MAT_OCACIONAL">Ocacional</label>
+   </div>
+</div>
+  
+  
+
+</form>
+<br>
+    <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Dia</th> 
-            <th>Hora Entrada</th>
-            <th>Hora Salida</th> 
-            <th>Laboratorio Abierto</th>
-            <th>Hora Entrada Registro</th>
-            <th>Registro Firma Entrada</th>
-            <th>Hora Salida Registro</th>
-            <th>Registro Firma Salida</th>
-            <th>Laboratorio Cierra</th>
-            <th>Observaciones</th>
-            <th>Numero Horas</th>
-            <th>Nota</th>
-            <th>Extra</th>
-            <th>Guia</th>
-            <th>Codigo Guia</th>
-            <th>Laboratorio</th>
-            <th>Materia</th>
-            <th>Docente</th>
-            <th>OPCIONES</th>
-          </tr>       
+            <tr>
+              <th scope="row">MATERIA</th>
+               <th scope="row">REGISTRO</th>
+               
+            </tr>
         </thead>
         <tbody>
-        
-        
-        @foreach ($controles as $control)
-          <tr>
-            <td>{{ $control->CON_CODIGO }}</td>
-            <td>{{ $control->CON_DIA }}</td>
-            <td>{{ $control->CON_HORA_ENTRADA }}</td>
-            <td>{{ $control->CON_HORA_SALIDA }}</td>
-            <td>{{ $control->CON_LAB_ABRE }}</td>
-            <td>{{ $control->CON_HORA_ENTRADA_R }}</td>
-            <td>{{ $control->CON_REG_FIRMA_ENTRADA }}</td>
-            <td>{{ $control->CON_HORA_SALIDA_R }}</td>
-            <td>{{ $control->CON_REG_FIRMA_SALIDA }}</td>
-            <td>{{ $control->CON_LAB_CIERRA }}</td>
-            <td>{{ $control->CON_OBSERVACIONES }}</td>
-            <td>{{ $control->CON_NUMERO_HORAS}}</td>
-            <td>{{ $control->CON_NOTA }}</td>
-            <td>{{ $control->CON_EXTRA }}</td>
-            <td>{{ $control->CON_GUIA }}</td>
-            <td>{{ $control->GUI_CODIGO }}</td>
-            <td>{{ $control->LAB_CODIGO }}</td>
-            <td>{{ $control->MAT_CODIGO }}</td>
-            <td>{{ $control->DOC_CODIGO }}</td>
-            <td>
-                <a href="control/edit/{{$control->CON_CODIGO}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                <a href="control/destroy/{{$control->CON_CODIGO}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
-            </td>
-          </tr>
-      
-        @endforeach
-        <tbody>
-        <tfoot>
+        @foreach ($controles as $con)
+        @if($con !=  $controles["fecha"])
         <tr>
-          <th>ID</th>
-          <th>Dia</th> 
-          <th>Hora Entrada</th>
-          <th>Hora Salida</th> 
-          <th>Laboratorio Abierto</th>
-          <th>Hora Entrada Registro</th>
-          <th>Registro Firma Entrada</th>
-          <th>Hora Salida Registro</th>
-          <th>Laboratorio Cierra</th>
-          <th>Observaciones</th>
-          <th>Numero Horas</th>
-          <th>Nota</th>
-          <th>Extra</th>
-          <th>Guia</th>
-          <th>Codigo Guia</th>
-          <th>Laboratorio</th>
-          <th>Materia</th>
-          <th>Docente</th>
+          <td scope="row">{{$con -> LAB_NOMBRE}}</td>
+          <td scope="row">{{$con -> REGISTROS}}</td>    
         </tr>
-        </tfoot>
-     </table>
-    </div >
-</body>
+        
+        @endif
+        @endforeach   
+      
+        </tbody>
+    </table>
+
+</div>
 @endsection
-</html>
-
-
-
-

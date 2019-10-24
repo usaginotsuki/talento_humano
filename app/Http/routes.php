@@ -14,6 +14,14 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('/auth/login', 'WelcomeController@auth');
 ///////////////////////////////////////////////////////////////////
+Route::post('control/store', 'ControlController@store');
+Route::post('control/search', 'ControlController@store');
+Route::post('control/update', 'ControlController@update');
+Route::post('control/generar', 'ControlController@generar');
+Route::post('control/index', 'ControlController@index');
+Route::get('control/edit/{id}','controlController@edit');
+Route::resource('control','controlController');
+///////////////////////////////////////////////////////////////////
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
@@ -32,13 +40,6 @@ Route::get('carrera/{id}/edit', 'CarreraController@edit');
 Route::get('carrera/{id}/destroy', 'CarreraController@destroy');
 Route::post('carrera/store', 'CarreraController@store');
 Route::post('carrera/update', 'CarreraController@update');
-///////////////////////////////////////////////////////////////////
-Route::get('control','ControlController@index');
-Route::get('control/create','ControlController@create');
-Route::get('control/{id}/edit','ControlController@edit');
-Route::get('control/{id}/destroy','ControlController@destroy');
-Route::post('control/store', 'ControlController@store');
-Route::post('control/update', 'ControlController@update');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');
@@ -107,13 +108,17 @@ Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
+Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
+Route::get('reporte/hojacontrol', 'ReportesController@hojaControl');
+Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
+Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
+Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
 
+Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
+Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 
 ///////////////////////////////////////////////////////////////////
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
-Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
-Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
-Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
