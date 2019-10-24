@@ -1,6 +1,9 @@
 @extends('app')
 @section('content')
 
+<div class="jumbotron">
+    <h2>Actualizar docente</h2>
+</div>
 <div class="container">
     <h2>Actualizar Docente</h2>
     <form action="{{url('/docente/update')}}" method="POST">
@@ -45,10 +48,19 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
+                    <label for="DOC_CORREO">Correo</label>
+                    <input type="email" class="form-control" id="DOC_CORREO" name="DOC_CORREO" placeholder="Correo del docente" value="{{ $docente->DOC_CORREO }}" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
                     <label for="DOC_CLAVE">Clave</label>
                     <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}">
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_TITULO">Titulo</label>
@@ -59,7 +71,7 @@
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
-        <a href="/docente" class="btn btn-danger mb-2">Cancelar</a>
+        <a href="{{url('docente')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
 @endsection

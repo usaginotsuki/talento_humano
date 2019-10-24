@@ -101,6 +101,7 @@ Route::post('periodo/update', 'PeriodoController@update');
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
 
+Route::get('control/consola', 'ControlController@consola');
 
 ///////////////////////////////////////////////////////////////////
 // ESTAS SON LAS RUTAS QUE CREE PARA LOS REPORTES, PERO NADIE LAS HA UTILIZADO
@@ -114,11 +115,8 @@ Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
 
-Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
-Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 
 ///////////////////////////////////////////////////////////////////
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
-Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');

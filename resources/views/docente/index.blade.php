@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="jumbotron">
-    <h2>Docentes</h2>
+<h2>Docentes</h2>
 </div>
 <div class="container">
     <h2>Docentes</h2>
@@ -20,10 +20,19 @@
             <a href="{{url('docente/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
-        <div class="col"></div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <span class="oi oi-magnifying-glass"></span>
+                    </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1">
+            </div>
+        </div>
     </div>
     <span class="counter pull-right"></span>
-    <table id="ListTable" class="table table-hover table-bordered results" >
+    <table class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th>#</th>

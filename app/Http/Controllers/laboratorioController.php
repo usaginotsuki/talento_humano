@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Laboratorio;
+use App\Campus;
+use App\Empresa;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-
 
 class LaboratorioController extends Controller {
 
@@ -15,8 +18,8 @@ class LaboratorioController extends Controller {
 	 */
 	public function index()
 	{
-		$laboratorios = Laboratorio::paginate(9);
-		return view('laboratorio.index', compact('laboratorios'));
+		$laboratorio=Laboratorio::all();
+		return view("laboratorio.index", ["laboratorios"=>$laboratorio]);
 	}
 
 	/**
@@ -26,25 +29,47 @@ class LaboratorioController extends Controller {
 	 */
 	public function create()
 	{
-		//
-		return view('laboratorio.create');
+		$campus=campus::all();
+		$empresas=empresa::all();
+		return view('laboratorio.create',["campus"=>$campus],["empresas"=>$empresas]);
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param  Request  $request
 	 * @return Response
 	 */
 	public function store(Request $request)
 	{
-		//
-	Laboratorio::create([
-			'LAB_NOMBRE' => $request['LAB_NOMBRE'], 
-			'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'], 
+		Laboratorio::create([
+            'LAB_NOMBRE' => $request['LAB_NOMBRE'],
+            'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'],
+			'CAM_CODIGO' => $request['CAM_CODIGO'],
+			'EMP_CODIGO' => $request['EMP_CODIGO'],
 		]);
 
-		$laboratorio = Laboratorio::All();
-		return redirect('laboratorio')->with('title', 'laboratorio registrado!')->with('subtitle', 'El registro del laboratorio se ha realizado con éxito.');
+		return redirect('laboratorio')
+			->with('title','Laboratorio creado!')
+			->with('subtitle','Se ha creado correctamente el laboratorio.');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	public function search(Request $request)
+	{
+	
+		return redirect('laboratorio');
+		//
 	}
 
 	/**
@@ -55,24 +80,26 @@ class LaboratorioController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
-		$laboratorio= Laboratorio::find($id);
-		return view('laboratorio.update', ['laboratorio' => $laboratorio]);
+		$laboratorio =	Laboratorio::find($id);
+		$campus=campus::all();
+		$empresas=empresa::all();
+		return view("laboratorio.update", ["laboratorio"=>$laboratorio,"campus"=>$campus,"empresas"=>$empresas]);
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  Request  $request
 	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-		//
-		$laboratorio = Laboratorio::find($request['LAB_CODIGO']);
+		$laboratorio =	Laboratorio::find( $request['LAB_CODIGO']);
 		$laboratorio->fill($request->all());
 		$laboratorio->save();
-		return redirect('laboratorio')->with('title', 'laboratorio actualizado!')->with('subtitle', 'La actualización del laboratorio se ha realizado con éxito.');
+		return redirect('laboratorio')
+			->with('title','Laboratorio actualizado!')
+			->with('subtitle','Se han actualizado correctamente los datos del laboratorio.');
 	}
 
 	/**
@@ -83,9 +110,10 @@ class LaboratorioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
-		$laboratorio = Laboratorio::destroy($id);
-		return redirect('laboratorio')->with('title', 'laboratorio ELIMINADO!')->with('subtitle', 'El registro del laboratorio se ha borrado con éxito.');
+		Laboratorio::destroy($id);
+		return redirect('laboratorio')
+			->with('title','Laboratorio eliminado!')
+			->with('subtitle','Se ha eliminado correctamente el laboratorio.');
 	}
 
 }
