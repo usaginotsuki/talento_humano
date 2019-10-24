@@ -21,5 +21,14 @@
     <li class="nav-item">
       <a class="nav-link  text-white" href="{{url('carrera')}}">Carrera</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('docente')}}">Docente</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  text-white" href="{{url('laboratorio')}}">Laboratorio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  text-white" href="{{url('hora')}}">Hora</a>
+      </li>
   </ul>
 </nav>

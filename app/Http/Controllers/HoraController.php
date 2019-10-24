@@ -2,14 +2,13 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Laboratorio;
-use App\Campus;
+use App\Hora;
 use App\Empresa;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-class LaboratorioController extends Controller {
+class HoraController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -18,8 +17,8 @@ class LaboratorioController extends Controller {
 	 */
 	public function index()
 	{
-		$laboratorio=Laboratorio::all();
-		return view("laboratorio.index", ["laboratorios"=>$laboratorio]);
+		$hora=Hora::all();
+		return view("hora.index", ["horas"=>$hora]);
 	}
 
 	/**
@@ -29,9 +28,8 @@ class LaboratorioController extends Controller {
 	 */
 	public function create()
 	{
-		$campus=campus::all();
 		$empresas=empresa::all();
-		return view('laboratorio.create',["campus"=>$campus],["empresas"=>$empresas]);
+		return view('hora.create',["empresas"=>$empresas]);
 	}
 
 	/**
@@ -42,16 +40,14 @@ class LaboratorioController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		Laboratorio::create([
-            'LAB_NOMBRE' => $request['LAB_NOMBRE'],
-            'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'],
-			'CAM_CODIGO' => $request['CAM_CODIGO'],
+		Hora::create([
 			'EMP_CODIGO' => $request['EMP_CODIGO'],
+			'HORA_NOMBRE' => $request['HORA_NOMBRE'],
 		]);
 
-		return redirect('laboratorio')
-			->with('title','Laboratorio creado!')
-			->with('subtitle','Se ha creado correctamente el laboratorio.');
+		return redirect('hora')
+			->with('title','Hora creada!')
+			->with('subtitle','Se ha creado correctamente la hora.');
 	}
 
 	/**
@@ -68,7 +64,7 @@ class LaboratorioController extends Controller {
 	public function search(Request $request)
 	{
 	
-		return redirect('laboratorio');
+		return redirect('hora');
 		//
 	}
 
@@ -80,10 +76,9 @@ class LaboratorioController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$laboratorio =	Laboratorio::find($id);
-		$campus=campus::all();
+		$hora =	Hora::find($id);
 		$empresas=empresa::all();
-		return view("laboratorio.update", ["laboratorio"=>$laboratorio,"campus"=>$campus,"empresas"=>$empresas]);
+		return view("hora.update", ["hora"=>$hora,"empresas"=>$empresas]);
 	}
 
 	/**
@@ -94,12 +89,12 @@ class LaboratorioController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		$laboratorio =	Laboratorio::find( $request['LAB_CODIGO']);
-		$laboratorio->fill($request->all());
-		$laboratorio->save();
-		return redirect('laboratorio')
-			->with('title','Laboratorio actualizado!')
-			->with('subtitle','Se han actualizado correctamente los datos del laboratorio.');
+		$hora =	Hora::find( $request['HORA_CODIGO']);
+		$hora->fill($request->all());
+		$hora->save();
+		return redirect('hora')
+			->with('title','Hora actualizada!')
+			->with('subtitle','Se han actualizado correctamente los datos de la hora.');
 	}
 
 	/**
@@ -110,10 +105,10 @@ class LaboratorioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Laboratorio::destroy($id);
-		return redirect('laboratorio')
-			->with('title','Laboratorio eliminado!')
-			->with('subtitle','Se ha eliminado correctamente el laboratorio.');
+		Hora::destroy($id);
+		return redirect('hora')
+			->with('title','Hora eliminada!')
+			->with('subtitle','Se ha eliminado correctamente la hora.');
 	}
 
 }

@@ -5,7 +5,6 @@ use App\docente;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-
 class docenteController extends Controller {
 
 	/**
@@ -15,7 +14,7 @@ class docenteController extends Controller {
 	 */
 	public function index()
 	{
-		$docentes = DOCENTE::paginate(9);
+		$docentes = docente::All();
 		return view('docente.index', compact('docentes'));
 	}
 

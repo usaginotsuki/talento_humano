@@ -8,4 +8,8 @@ class Carrera extends Model {
 	protected $primaryKey = 'CAR_CODIGO';
 	protected $fillable = ['CAR_NOMBRE', 'CAR_ABREVIATURA'];
 	public $timestamps = false;
+
+	public function materias(){
+		return $this->hasMany('App\Materia');
+	}
 }

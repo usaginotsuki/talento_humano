@@ -3,7 +3,7 @@
 @include ('shared.navbar')
 
 <div class="jumbotron">
-<h2>Docentes</h2>
+    <h2>Campus</h2>
 </div>
 <div class="container">
     @if (session('title') && session('subtitle'))
@@ -17,7 +17,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('docente/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('campus/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col">
@@ -36,32 +36,20 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">CEDULA</th>
-                <th scope="col">MI ESPE</th>
-                <th scope="col">NOMBRES</th>
-                <th scope="col">APELLIDOS</th>
-                <th scope="col">CORREO</th>
-                <th scope="col">CLAVE</th>
-                <th scope="col">TITULO</th>
+                <th scope="col">NOMBRE</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
-        @foreach ($docentes as $doc)
+        @foreach ($campus as $cam)
         <tbody>
-            <td scope="row">{{$doc -> DOC_CODIGO}}</td>
-            <td scope="row">{{$doc -> DOC_CEDULA}}</td>
-            <td scope="row">{{$doc -> DOC_MIESPE}}</td>
-            <td scope="row">{{$doc -> DOC_NOMBRES}}</td>
-            <td scope="row">{{$doc -> DOC_APELLIDOS}}</td>
-            <td scope="row">{{$doc -> DOC_CORREO}}</td>
-            <td scope="row">{{$doc -> DOC_CLAVE}}</td>
-            <td scope="row">{{$doc -> DOC_TITULO}}</td>
+            <td scope="row">{{$cam -> CAM_CODIGO}}</td>
+            <td scope="row">{{$cam -> CAM_NOMBRE}}</td>
             <td>
-                <form action="{{url('/docente/'.$doc->DOC_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                <form action="{{url('/campus/'.$cam->CAM_CODIGO.'/destroy')}}" method="POST" class="float-right">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
                 </form>
-                <a href="{{url('docente/'.$doc->DOC_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                <a href="{{url('campus/'.$cam->CAM_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
                 &nbsp;
             </td>
         </tbody>
