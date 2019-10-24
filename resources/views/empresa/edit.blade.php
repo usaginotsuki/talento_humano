@@ -1,19 +1,14 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-<div class="container">
-    <h2>Editar Empresa</h2>
-    <h3>Código {{ $empresa->EMP_CODIGO }}: {{ $empresa->EMP_NOMBRE }}</h3> 
-    <form action="{{url('/empresa/update')}}" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="EMP_CODIGO" value="{{ $empresa->EMP_CODIGO }}">
-        <div class="row"> 
-            <div class="col">
-                <div class="form-group">
-                    <label for="EMP_NOMBRE">Nombre Laboratorio General</label>
-                    <input type="text" class="form-control"  name="EMP_NOMBRE" value="{{$empresa->EMP_NOMBRE}}" required>
-                </div>
-            </div>
+ <body >
+        
+        <div class="container">
+         <h2>Editar Empresa</h2>
+         <h3>CODIGO {{ $empresa->EMP_CODIGO }}: {{ $empresa->EMP_NOMBRE }}</h3>  
+         <form  action="/empresa/update"  method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="EMP_CODIGO" value="{{ $empresa->EMP_CODIGO }}">
+            <div class="row"> 
 
             <div class="col">
                 <div class="form-group">

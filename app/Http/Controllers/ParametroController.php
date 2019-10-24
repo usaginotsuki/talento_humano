@@ -86,11 +86,25 @@ class ParametroController extends Controller {
 	{   
 		$empresas = Empresa::All();
 		$parametro = Parametro::find($id);
+		return view('parametro.update', ['parametro' => $parametro])->with('empresas',$empresas);
+	}
 
-		return view('parametro.update', [
-			'parametro' => $parametro,
-			'empresas' => $empresas
-		]);
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function pdf($id)
+	{ 
+		$parametro = Parametro::All();
+
+        $pdf = PDF::loadView('parametro.pdf',['parametros'=>$parametro]);
+
+     
+        return $pdf->download('parametro.docx');
+
 	}
 
 

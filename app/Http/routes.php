@@ -100,11 +100,6 @@ Route::post('periodo/update', 'PeriodoController@update');
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
 
-Route::get('materiaxcarrera', 'ReportesController@materiaxcarrera');
-Route::post('materiaxcarrera/store', 'ReportesController@store');
-Route::get('materiaxcarrera/{per}/{car}/pdf', 'ReportesController@pdf');
-
-Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 
 ///////////////////////////////////////////////////////////////////
 // ESTAS SON LAS RUTAS QUE CREE PARA LOS REPORTES, PERO NADIE LAS HA UTILIZADO
@@ -112,3 +107,17 @@ Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
+
+
+
+
+]);
+
+///////////////////////////////////////////////////////////////////
+Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
+Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
+Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
+Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
+Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
+Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
+Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');

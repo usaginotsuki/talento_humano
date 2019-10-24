@@ -1,15 +1,17 @@
+
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-<div class="container">
-    <h2>Crear Empresa</h2>
-    <form action="{{url('/empresa/store')}}" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="row"> 
-            <div class="col">
-                <div class="form-group">
-                    <label for="EMP_NOMBRE">Nombre Laboratorio General</label>
-                    <input type="text" class="form-control"  name="EMP_NOMBRE" required>
+        
+        <div class="container">
+         <h2>Crear Empresa</h2>
+         <form  action="/empresa/store"  method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="row"> 
+                <div class="col">
+                        <div class="form-group">
+                        <label for="EMP_NOMBRE">Nombre Laboratorio General</label>
+                                <input type="text" class="form-control"  name="EMP_NOMBRE" required >
+                        </div>
                 </div>
             </div>
 
@@ -120,8 +122,11 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mb-2">Crear</button>
-        <a href="{{url('empresa')}}" class="btn btn-danger mb-2">Cancelar</a> 
-    </form>
-</div> 
+                <br>
+                <button type="submit" class="btn btn-primary mb-2">Crear</button>
+                 <a href="{{url('empresa')}}" class="btn btn-danger mb-2">Cancelar</a> 
+             
+        </form>
+       </div> 
 @endsection
+

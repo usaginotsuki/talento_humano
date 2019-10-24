@@ -15,11 +15,17 @@
     <div class="row">
         <div class="col">
             <a href="{{url('materia/create')}}" class="btn btn-primary mb-2">Nuevo</a>
-        </div>
+        </div>       
         <div class="col"></div>
         <div class="col"></div>
+
+          <div class="form-group">
+ <input id="buscar" type="text" class="form-control" placeholder="Buscar" onkeyup="myFunction()"/>
+</div>
+
+
     </div>
-    <table id="ListTable" class="table table-hover table-bordered results">
+    <table id="ListTable1" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th scope="row">Periodo</th>
@@ -32,21 +38,25 @@
         </thead>
         <tbody >
             @foreach ($materias as $mat)
-            <tr>       
-                <td scope="row">{{$mat-> PER_CODIGO}}</td>
-                <td scope="row">{{$mat-> DOC_CODIGO}}</td>
-                <td scope="row">{{$mat-> CAR_CODIGO}}</td>  
-                <td scope="row">{{$mat-> MAT_NRC}}</td>
-                <td scope="row">{{$mat-> MAT_NOMBRE}}</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{url('materia/'.$mat->MAT_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                        <a href="{{url('materia/'.$mat->MAT_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
-                    </div>
-                </td>
-            </tr>
+                <tr>       
+                    <td scope="row">{{$mat -> periodos -> PER_NOMBRE}}</td>
+                    <td scope="row">{{$mat -> docentes -> DOC_NOMBRES}}</td>
+                    <td scope="row">{{$mat -> carreras -> CAR_NOMBRE}}</td>  
+                    <td scope="row">{{$mat -> MAT_NRC}}</td>
+                    <td scope="row">{{$mat -> MAT_NOMBRE}}</td>
+                    <td>
+                        <form action="{{url('/materia/'.$mat->MAT_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
+                        </form>
+                        <a href="{{url('materia/'.$mat->MAT_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                        &nbsp;
+                        
+                    </td>
+                </tr>
             @endforeach
         </tbody>   
     </table>
+    <?php echo $materias->render(); ?>
 </div>
 @endsection

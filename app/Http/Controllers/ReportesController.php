@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 
 class ReportesController extends Controller {
 
+
+
+
 	public function horarioPorSalasIndex()
 	{
 		$periodos = Periodo::codigoNombre()->get();
@@ -77,7 +80,33 @@ class ReportesController extends Controller {
 
 	public function materiaPorCarrera()
 	{
-		# code...
+		$periodos = Periodo::codigoNombre()->get();
+		$carreras = Carrera::codigoNombre()->get();
+
+		$request=null;
+		$materias=null;
+		
+		return view('reportes.materiaxcarrera', [
+			'periodos' => $periodos,
+			'carreras' => $carreras,
+			'valores'=>$request,
+			'materias'=>$materias
+		]);
+	}
+
+    public function materiasPorCarreraPost(Request $request)
+	{
+		$periodos = Periodo::codigoNombre()->get();
+		$carreras = Carrera::codigoNombre()->get();
+	    $materias=Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
+		
+		return view('reportes.materiaxcarrera', [
+			'periodos' => $periodos->reverse(),
+			'carreras' => $carreras,
+			'valores'=>$request,
+			'materias'=>$materias
+		]);
+           
 	}
 
 	public function horarioPorDocente()
@@ -90,53 +119,5 @@ class ReportesController extends Controller {
 		# code...
 	}
 
-	public function materiaxcarrera()
-	{
 
-         $periodos= Periodo::All();
-		$carreras = Carrera::All();
-		$materias=null;
-		$request=null;
-
-		//$empr= $parametro->empresas->EMP_NOMBRE;
-		return view('reportes.materiaxcarrera', ['periodos' => $periodos])->with('carreras',$carreras)->with('materias',$materias)->with('valores',$request);
-		
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store(Request $request)
-	{
-            
-         //$materias=Materia::select('SELECT * FROM materia WHERE PER_CODIGO= ? AND CAR_CODIGO=?',[$request['PER_CODIGO'],$request['CAR_CODIGO']]);
-           // $materias= DB::table('materia')->where('PER_CODIGO', $request['PER_CODIGO'])->where('CAR_CODIGO', $request['CAR_CODIGO'])->get();
-          $materias=Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
-
-         $periodos= Periodo::All();
-		$carreras = Carrera::All();
-
-		//$pdf = PDF::loadView('reportes.materiaxcarrera', ['periodos' => $periodos])->with('carreras',$carreras)->with('materias',$materias)->with('valores',$request);
-
-
-
-	  return view('reportes.materiaxcarrera', ['periodos' => $periodos])->with('carreras',$carreras)->with('materias',$materias)->with('valores',$request);//->with('pdf',$pdf);
-	}
-
-
-
-	public function pdf($per,$car)
-	{ 
-		 
-        $materias=Materia::materiasx($per,$car)->get();
-
-        $periodo=Periodo::find($per);
-        $carrera=Carrera::find($car);
-
-        $pdf = PDF::loadView('reportes.pdfmateriasxcarrera',['materias' => $materias , 'carrera' => $carrera, 'periodo'=>$periodo]);
-        return $pdf->scream('MateriasporCarrera.pdf');
-
-	}
 }

@@ -1,6 +1,9 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
+
+<div class="jumbotron">
+    <h2>Carreras</h2>
+</div>
 <div class="container">
     <h2>Carreras</h2>
     @if (session('title') && session('subtitle'))

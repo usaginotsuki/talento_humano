@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
+
 <div class="container">
     <h2>Actualizar Docente</h2>
     <form action="{{url('/docente/update')}}" method="POST">
