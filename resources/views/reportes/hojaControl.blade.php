@@ -4,7 +4,7 @@
     <h2>Hoja de Control de Salas</h2>
 </div>
 <div class="container">
-<form class="form" id="form" action="{{url('reporte/hoja/control')}}" method="POST">
+<form class="form" id="form" action="{{url('reporte/hojacontrol')}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="form-group row">
     <label for="inputFecha" class="col-sm-2 col-form-label">FECHA: </label>
@@ -27,6 +27,13 @@
   </div>
   <div class="form-group row">
      <button type="submit" class="btn btn-primary mb-2">Actualizar Reporte</button>
+  </div>
+</form>
+<form class="form" id="form" action="{{url('reporte/pdfcontrol')}}" method="POST">
+  <div class="form-group row">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" />
+    <button type="submit" class="btn btn-primary mb-2">Generar Reporte</button>
   </div>
 </form>
 <br>

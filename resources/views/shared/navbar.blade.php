@@ -8,7 +8,7 @@
         <a class="dropdown-item" href="{{url('reporte/horario/sala')}}">Horario por Sala</a>
         <a class="dropdown-item" href="{{url('reporte/horario/docente')}}">Horario por Docente</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('reporte/hoja/control')}}">Hoja de Control</a>
+        <a class="dropdown-item" href="{{url('reporte/hojacontrol')}}">Hoja de Control</a>
         <a class="dropdown-item" href="{{url('reporte/materia/carrera')}}">Materia por Carrera</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('reporte/eventos')}}">Eventos ocasionales</a>

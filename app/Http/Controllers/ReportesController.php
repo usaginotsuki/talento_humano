@@ -74,19 +74,24 @@ class ReportesController extends Controller {
 	public function hojaControl(Request $request)
 	{
 		
-		$controles= $this->listar($request['CON_DIA']);
+		$controles= $this->listarControles($request['CON_DIA']);
 		return view('reportes.hojaControl', compact('controles'));
 	
 	}
 
-	public function listar($fecha){
+	public function listarControles($fecha){
 		if($fecha==null){
 			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
 		}
-        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO
-		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente
-		where control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'"
+        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, materia.MAT_NUM_EST,control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_CODIGO,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO,empresa.EMP_NOMBRE,control.CON_EXTRA,control.CON_DIA
+		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,empresa
+		where laboratorio.EMP_CODIGO=empresa.EMP_CODIGO and control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'" 
 		order by control.CON_HORA_ENTRADA ASC;');
+
+		
+		
+		
+
 		$controles["fecha"]=$fecha;
 		return $controles;
 	}
@@ -155,12 +160,10 @@ class ReportesController extends Controller {
         return $pdf->stream('MateriasporCarrera.pdf');
 
 	}
-	public function pdfcontrol($fecha)
+	public function pdfcontrol(Request $request)
 	{ 
-		 
-        $controles = DB::select('select materia.MAT_NOMBRE,Count(*) as REGISTROS,control.CON_DIA from materia,control where materia.MAT_CODIGO=control.MAT_CODIGO and control.CON_DIA="'.$fecha.'" group by materia.MAT_NOMBRE;' );
-		$controles["fecha"]=$fecha;
-        $pdf = PDF::loadView('reportes.pdfcontrol',['controles' => $controles]);
+		$controles= $this->listarControles($request['CON_DIA']);
+        $pdf = PDF::loadView('reportes.pdfcontrol',compact('controles'))->setPaper('a4', 'landscape');
         return $pdf->stream('ReporteControl.pdf');
 	}
 }
