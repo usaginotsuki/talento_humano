@@ -68,9 +68,18 @@ p{
   <table>
             <tr>
               <td scope="row" id="fondo"width="15%" > NOMBRE DE LABORATORIO: </td>
-              <td scope="row" id="centrado"width="65%"> {{$controles[0]->EMP_NOMBRE}} </td>
+              
+              <td scope="row" id="centrado"width="65%">
+              @if(!empty($controles)) 
+              {{$controles[0]->EMP_NOMBRE}}
+              @endif
+               </td>
+            
               <td scope="row" id="fondo"width="7%"> CODIGO DEL LAB: </td>
-              <td scope="row" id="centrado"width="13%"> {{$controles[0]->LAB_CODIGO}}</td>
+              <td scope="row" id="centrado"width="13%">
+               @if(!empty($controles)) 
+              {{$controles[0]->LAB_CODIGO}}
+              @endif</td>
             </tr>
   </table>
   <table>
@@ -127,7 +136,6 @@ p{
   <table>
          <tbody >
        @foreach ($controles as $con)
-        @if($con !=  $controles["fecha"])
         <tr>
           <td scope="row" id="centrado"width="7.5%">{{$con -> CON_DIA}}</td>  
           <td scope="row"id="centrado"width="3.75%">X</td>
@@ -155,7 +163,6 @@ p{
           </td>  
 
         </tr>
-        @endif
         @endforeach   
   
          </tbody>   

@@ -134,5 +134,7 @@ Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
 Route::get('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
+Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
+
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');

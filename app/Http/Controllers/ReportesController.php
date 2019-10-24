@@ -84,16 +84,12 @@ class ReportesController extends Controller {
 		if($fecha==null){
 			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
 		}
-        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO
-		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,campus
-		where control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and campus.CAM_CODIGO=laboratorio.CAM_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'" and campus.CAM_CODIGO="'.$campus.'"
+        $controles = DB::select('SELECT @rownum:=@rownum+1 AS ORD, control.MAT_CODIGO,materia.MAT_ABREVIATURA,materia.MAT_NRC,laboratorio.LAB_NOMBRE,control.CON_HORA_ENTRADA,CON_HORA_SALIDA,docente.DOC_CODIGO, docente.DOC_NOMBRES, docente.DOC_APELLIDOS, docente.DOC_TITULO,empresa.EMP_NOMBRE,control.CON_EXTRA,control.CON_DIA,campus.CAM_CODIGO, materia.MAT_NUM_EST,laboratorio.LAB_CODIGO
+		FROM (SELECT @rownum:=0) r, control,materia,laboratorio,docente,campus,empresa
+		where laboratorio.EMP_CODIGO=empresa.EMP_CODIGO and control.MAT_CODIGO=materia.MAT_CODIGO and control.LAB_CODIGO=laboratorio.LAB_CODIGO and campus.CAM_CODIGO=laboratorio.CAM_CODIGO and materia.DOC_CODIGO=docente.DOC_CODIGO and control.CON_DIA="'.$fecha.'" and campus.CAM_CODIGO="'.$campus.'"
 		order by control.CON_HORA_ENTRADA ASC;');
 
-		
-		
-		
-
-		$controles["fecha"]=$fecha;
+		//$controles["fecha"]=$fecha;
 		return $controles;
 	}
 
@@ -163,8 +159,9 @@ class ReportesController extends Controller {
 	}
 	public function pdfcontrol(Request $request)
 	{ 
-		$controles= $this->listarControles($request['CON_DIA']);
-        $pdf = PDF::loadView('reportes.pdfcontrol',compact('controles'))->setPaper('a4', 'landscape');
+		$controles= $this->listar($request['CON_DIA'],$request['CAM_CODIGO']);
+		$pdf = PDF::loadView('reportes.pdfcontrol',compact('controles'))->setPaper('a4', 'landscape');
+		
         return $pdf->stream('ReporteControl.pdf');
 	}
 }

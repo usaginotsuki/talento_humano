@@ -6,38 +6,44 @@
 <div class="container">
 <form class="form" id="form" action="{{url('reporte/hojacontrol')}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <div class="form-group row">
+  <div class="form-group row">
     <label for="inputFecha" class="col-sm-2 col-form-label">FECHA: </label>
+    
     <div class="col-sm-4">
-        @if (!session('fecha'))
-        <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value={{$controles['fecha']}} />
-        @else
-        <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value={{session('fecha')}} />
-        @endif
+    @if(!empty($controles))
+        <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value="{{$controles[0]->CON_DIA}}" />
+       @else
+       <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" />
+       @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="inputCampus" class="col-sm-2 col-form-label">CAMPUS:</label>
     <div class="col-sm-4">
-    <select name="CAM_CODIGO" title="Seleccione un Periodo..." class="form-control">
+    <select name="CAM_CODIGO" id="CAM_CODIGO" title="Seleccione un Periodo..." class="form-control">
     <option selected=disabled>Escoja un Campus...</option>
       @foreach ($campus as $camp)
-          <option value="{{ $camp->CAM_CODIGO  }}">{{ $camp->CAM_NOMBRE }}</option> 
-       @endforeach
+           
+           <option value="{{ $camp->CAM_CODIGO  }}">{{ $camp->CAM_NOMBRE }}</option> 
+           @endforeach
       </select>
     </div>
+    <button type="submit" class="btn btn-primary mb-2">ACTUALIZAR REPORTE</button>
   </div>
-  <div class="form-group row">
-     <button type="submit" class="btn btn-primary mb-2">Actualizar Reporte</button>
-     &nbsp; |&nbsp;
-     <button type="button" class="btn btn-secondary mb-2">Generar PDF</button>
-  </div>
+
+  
+
 </form>
 <form class="form" id="form" action="{{url('reporte/pdfcontrol')}}" method="POST">
   <div class="form-group row">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" />
-    <button type="submit" class="btn btn-primary mb-2">Generar Reporte</button>
+    @if(!empty($controles))
+    <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO" value="{{$controles[0]->CAM_CODIGO}}"  />
+    @else
+    <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO"   />
+    @endif
+    <button type="submit" class="btn btn-danger mb-2">GENERAR REPORTE PDF</button>
   </div>
 </form>
 <br>
@@ -54,7 +60,7 @@
         </thead>
         <tbody>
         @foreach ($controles as $con)
-        @if($con !=  $controles["fecha"])
+        
         <tr>
           <td scope="row">{{$con -> ORD}}</td>
           <td scope="row">{{$con -> MAT_ABREVIATURA}} - {{$con -> MAT_NRC}}</td>
@@ -63,7 +69,7 @@
           <td scope="row">{{$con -> CON_HORA_SALIDA}}</td> 
           <td scope="row">{{$con -> DOC_TITULO}} {{$con -> DOC_APELLIDOS}} {{$con -> DOC_NOMBRES}}</td>
         </tr>    
-        @endif
+        
         @endforeach 
         <tbody>
       

@@ -20,27 +20,35 @@
         </button>
     </div>
   @endif
-<form class="form-inline" id="form" action="/control/index" method="POST">
+<form class="form" id="form" action="/control/index" method="POST">
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-  <div class="form-group mb-2">
-    <label for="inputFecha" class="col-sm-2 col-form-label">FECHA:</label>
-    @if (!session('fecha'))
-    <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value={{$controles['fecha']}} />
-    @else
-    <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value={{session('fecha')}} />
-    @endif
+  <div class="form-group row">
+   <label for="inputFecha" class="col-sm-1 col-form-label">FECHA: </label>
+    <div class="col-sm-4">
+      @if (!session('fecha'))
+      <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value="{{$controles['fecha']}}" />
+      @else
+      <input type="text" class="form-control" name="CON_DIA" id="CON_DIA" value="{{session('fecha')}}" />
+      @endif
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary mb-2">BUSCAR</button>
+    </div>
   </div>
+
+  
 </form>
-<form class="form-inline" id="form" action="{{ url('control/generar') }}" method="POST">
+<form class="form" id="form" action="{{ url('control/generar') }}" method="POST">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-  <div class='form-group mx-sm-3 mb-2'>
-  <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value={{$controles['fecha']}} />
-  <button type="submit" class="btn btn-primary mb-2">GENERAR CONTROL</button>    
-      <div class="custom-control custom-switch">
-          <input type="checkbox" class="custom-control-input" id="MAT_OCACIONAL" >
-          <label class="custom-control-label" for="MAT_OCACIONAL">Ocacional</label>
-      </div>
-  </div>
+<div class="form-group row">
+  <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value="{{$controles['fecha']}}" />
+  <button type="submit" class="btn btn-success mb-2">GENERAR CONTROL</button>   
+  
+  <div class="custom-control custom-switch ">
+    <input type="checkbox" class="custom-control-input" id="MAT_OCACIONAL" >
+    <label class="custom-control-label" for="MAT_OCACIONAL">Ocacional</label>
+   </div>
+</div>
   
   
 
