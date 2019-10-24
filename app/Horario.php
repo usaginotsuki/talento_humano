@@ -161,6 +161,7 @@ class Horario extends Model {
 	public function laboratorio() {
 		return $this->belongsTo('App\Laboratorio', 'LAB_CODIGO');
 	}
+	
 
 	public function scopeObtenerHorario($query, $periodoId, $laboratorioId)
 	{
