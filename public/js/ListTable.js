@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     $('#ListTable').DataTable({
         language: {
@@ -33,16 +32,4 @@ $(document).ready(function() {
             firstDay: 1
         },
     });
-
-    $('input[name="CON_DIA"]').datepicker({
-        dateFormat:"yy-mm-dd"
-    });
-    $('input[name="CON_DIA1"]').datepicker({
-        dateFormat:"yy-mm-dd"
-    });
-    $('input[name="CON_DIA"]').change(function(){
-        $( "#form" ).submit();
-    });
-
-    
 });
