@@ -40,15 +40,6 @@
       
         @endforeach
         <tbody>
-        <tfoot>
-        <tr>
-                <th>Nombre</th> 
-                <th>Firma Direccion</th>
-                <th>Pie Director</th> 
-                <th>Pie Director</th>
-                <th>Auxiliar</th>
-                </tr>
-        </tfoot>
      </table>
     </div >
 </body>

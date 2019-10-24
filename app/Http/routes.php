@@ -97,6 +97,9 @@ Route::get('periodo/{id}/destroy', 'PeriodoController@destroy');
 Route::post('periodo/store', 'PeriodoController@store');
 Route::post('periodo/update', 'PeriodoController@update');
 
+Route::get('eventoocacional','EventoOcacionalController@index');
+Route::get('eventoocacional/create','EventoOcacionalController@create');
+Route::post('eventoocacional/store', 'EventoOcacionalController@store');
 ///////////////////////////////////////////////////////////////////
 Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
@@ -108,7 +111,6 @@ Route::get('control/consola', 'ControlController@consola');
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocente');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
-Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
 Route::get('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
@@ -117,6 +119,6 @@ Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl')
 
 
 ///////////////////////////////////////////////////////////////////
-Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
-Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
+Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');
+Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');
