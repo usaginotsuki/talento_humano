@@ -7,14 +7,13 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/docente">Docente</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('reporte/eventos')}}">Eventos ocasionales</a>
         <a class="dropdown-item" href="/periodo">Periodo</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/materia">Materia</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/horario">Registrar Horario</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Evento Ocasional</a>
+        <a class="dropdown-item" href="{{url('reporte/eventos')}}">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Control Laboratorio</a>
         <div class="dropdown-divider"></div>

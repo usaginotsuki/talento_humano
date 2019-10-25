@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')    
 <div class="container">
     <h2>Evento ocacional </h2>
       @if (session('title') && session('subtitle'))
@@ -66,7 +65,6 @@
          </tbody>   
 </table>
   <a href="{{url('evento/'.$valores['PER_CODIGO'].'/pdf')}}" class="btn btn-danger mb-2">DESCARGAR PDF</a>
-@endif
 </div>
 
 @endsection

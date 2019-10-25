@@ -62,6 +62,13 @@ Route::get('horario/{id}/destroy', 'HorarioController@destroy');
 Route::post('horario/store', 'HorarioController@store');
 Route::post('horario/update', 'HorarioController@update');
 ///////////////////////////////////////////////////////////////////
+Route::get('hora', 'HoraController@index');
+Route::get('hora/create', 'HoraController@create');
+Route::post('hora/store', 'HoraController@store');
+Route::get('hora/{id}/edit', 'HoraController@edit');
+Route::post('hora/update', 'HoraController@update');
+Route::post('hora/{id}/destroy', 'HoraController@destroy');
+///////////////////////////////////////////////////////////////////
 Route::get('institucion','InstitucionController@index');
 Route::get('institucion/create','InstitucionController@create');
 Route::get('institucion/{id}/edit','InstitucionController@edit');

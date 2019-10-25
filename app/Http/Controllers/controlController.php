@@ -25,6 +25,7 @@ class ControlController extends Controller {
 	}
 
 
+
 	public function listar($fecha)
 	{
 		if($fecha==null){
@@ -228,5 +229,17 @@ class ControlController extends Controller {
 		$control = Control::find($id);
 		$control->delete();
 		return redirect('control');
+	}
+	public function consola(Request $request)
+	{
+		//
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		$control = control::where('CON_DIA', $date)
+			->get();
+		//$control = control::all();
+		
+		return view("control.consola", ["controles"=>$control]);
+		
 	}
 }
