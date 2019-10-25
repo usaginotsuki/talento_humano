@@ -1,10 +1,8 @@
 @extends('app')
 @section('content')
-<div class="jumbotron">
-    <h2>Periodos</h2>
-</div>
+
 <div class="container">
-    <h2>Campus</h2> 
+    <h2>Campus</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -16,41 +14,43 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('campus/create')}}" class="btn btn-primary mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
-        <div class="col"></div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <span class="oi oi-magnifying-glass"></span>
+                    </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1">
+            </div>
+        </div>
     </div>
-    <table id="ListTable" class="table table-hover table-bordered results">
+    <span class="counter pull-right"></span>
+    <table class="table table-hover table-bordered results">
         <thead>
             <tr>
-                <th scope="row">#</th>
-                <th scope="row">NOMBRE</th>
-                <th scope="row">ESTADO</th>
-                <th scope="row">HORAS ATENCION</th>
-                <th scope="row">FECHA INICIO</th>
-                <th scope="row">FECHA FIN</th>
-                <th scope="row">ACCIONES</th>
+                <th scope="col">#</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">ACCIONES</th>
             </tr>
         </thead>
+        @foreach ($campus as $cam)
         <tbody>
-        @foreach ($periodos as $per)
-            <tr>
-                <td scope="row">{{$per->PER_CODIGO}}</td>
-                <td scope="row">{{$per->PER_NOMBRE}}</td>
-                <td scope="row">{{$per->PER_ESTADO}}</td>
-                <td scope="row">{{$per->PER_HORAS_ATENCION}}</td>
-                <td scope="row">{{$per->PER_FECHA_INICIO}}</td>
-                <td scope="row">{{$per->PER_FECHA_FIN}}</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{url('campus/'.$per->PER_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                        <a href="{{url('campus/'.$per->PER_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-pencil"></span></a>
-                    </div>
-                </td>
-            </tr>
-        @endforeach   
+            <td scope="row">{{$cam -> CAM_CODIGO}}</td>
+            <td scope="row">{{$cam -> CAM_NOMBRE}}</td>
+            <td>
+                <form action="{{url('/campus/'.$cam->CAM_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
+                </form>
+                <a href="{{url('campus/'.$cam->CAM_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
+                &nbsp;
+            </td>
         </tbody>
-    </table>
+        @endforeach   
+</table>
 </div>
 @endsection
