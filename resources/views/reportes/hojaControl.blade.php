@@ -37,7 +37,11 @@
 <form class="form" id="form" action="{{url('reporte/pdfcontrol')}}" method="POST">
   <div class="form-group row">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" />
+    @if(!empty($controles))
+    <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value="{{$controles[0]->CON_DIA}}" />
+    @else
+    <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA"/>
+    @endif
     @if(!empty($controles))
     <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO" value="{{$controles[0]->CAM_CODIGO}}"  />
     @else
