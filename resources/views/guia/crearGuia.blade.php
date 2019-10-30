@@ -29,7 +29,7 @@
                         </div>
                         <div>
                             <label>Seleccione una Guia...</label>
-                            <select   id="guiaCombo" >
+                            <select name="guiaCombo"  id="guiaCombo" >
                           
                             </select>
                         </div>
