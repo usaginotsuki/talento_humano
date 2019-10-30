@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col">
             <div class="card border-primary mb-3">
-                    <a href="{{url('controlGuiaLaboratorio/create')}}" class="btn btn-primary mb-2">Crear Guia Vacia/a>
+                    <a href="{{url('controlGuiaLaboratorio/create')}}" class="btn btn-primary mb-2">Crear Guia Vacia</a>
             </div>
         </div>
 
