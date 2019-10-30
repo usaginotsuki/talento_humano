@@ -47,7 +47,7 @@
     @else
     <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO"   />
     @endif
-    <button type="submit" class="btn btn-danger mb-2">GENERAR REPORTE PDF</button>
+    <button type="submit" class="btn btn-danger mb-2">GENERAR PDF HOJA DE CONTROL</button>
   </div>
 </form>
 <br>
