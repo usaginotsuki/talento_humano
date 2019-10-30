@@ -129,3 +129,5 @@ Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl')
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
 Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');
+///////////////////////////////////////////////////////////////////
+Route::get('listarGuias', 'GuiaController@listarGuias');
