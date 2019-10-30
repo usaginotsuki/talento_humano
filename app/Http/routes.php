@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'WelcomeController@index');
-Route::get('/auth/login', 'WelcomeController@auth');
+Route::get('guias/login', 'GuiaController@login');
+Route::get('guias/cerrarsession', 'GuiaController@cerrarsession');
+Route::post('login/validar', 'GuiaController@validar');
+
 ///////////////////////////////////////////////////////////////////
 Route::post('control/store', 'ControlController@store');
 Route::post('control/search', 'ControlController@store');
