@@ -13,7 +13,16 @@ class Docente extends Model {
 		return $this->hasMany('App\Materia');
 	}
 
+	public function controles(){
+		return $this->hasMany('App\control');
+	}
+
 	public function scopeCodigoNombre($query) {
 		return $query->select('DOC_CODIGO', 'DOC_TITULO', 'DOC_NOMBRES', 'DOC_APELLIDOS');
+	}
+
+	public function scopeNombreDocente($query,$id){
+		return $query->select( 'DOC_TITULO', 'DOC_NOMBRES', 'DOC_APELLIDOS')->where('DOC_CODIGO',$id);
+
 	}
 }

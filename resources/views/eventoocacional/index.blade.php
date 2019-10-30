@@ -1,5 +1,6 @@
  @extends('app')
 @section('content')
+@include ('shared.navbar')    
 <div class="jumbotron">
     <h2> Lista de Evento Ocacional</h2>
 </div>

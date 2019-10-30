@@ -1,21 +1,15 @@
 @extends('app')
 @section('content')
-  
-<div class="jumbotron">
-    <h2>Materias por Carreras</h2>
-</div>
 
 <div class="container">
+    <h2>Materias por Carreras</h2>
     <div class="row">
         <div class="col">
     <form action="{{url('/reporte/materia/carrera')}}" method="POST">
        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         
-    
-
          <div class="form-group">
             <label for="PER_CODIGO">Periodo</label>
-
 
             <select class="form-control" id="PER_CODIGO" name="PER_CODIGO"  >
                @foreach ($periodos as $per)
@@ -29,9 +23,6 @@
             </select> 
         </div>
 
-
-       
-      
          <div class="form-group">
             <label for="CAR_CODIGO">Carrera</label>
 
@@ -49,30 +40,6 @@
         </div>
 
 
-      
-
-
-    
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
        
@@ -83,9 +50,6 @@
 <br>
 
 @if($materias != null )
-
-
-       
 
             <p id="carrera">
 

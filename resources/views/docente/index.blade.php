@@ -1,9 +1,5 @@
 @extends('app')
 @section('content')
-
-<div class="jumbotron">
-<h2>Docentes</h2>
-</div>
 <div class="container">
     <h2>Docentes</h2>
     @if (session('title') && session('subtitle'))

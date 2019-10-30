@@ -1,11 +1,8 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 
-<div class="jumbotron">
-    <h2>Actualizar laboratorio</h2>
-</div>
 <div class="container">
+    <h2>Actualizar laboratorio</h2>
     <form action="{{url('/laboratorio/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="LAB_CODIGO" value="{{ $laboratorio->LAB_CODIGO }}">

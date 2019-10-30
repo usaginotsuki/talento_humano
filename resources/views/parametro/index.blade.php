@@ -41,20 +41,19 @@
                 <td scope="row">NO</td>
                 @else
                 <td scope="row">SI</td>
-            @endif
-            <td scope="row">{{$par -> PAR_DESTINO}}</td>
-            <td scope="row">{{$par -> DOC_CODIGO}}</td>
-            <td>
-                <form action="{{url('/parametro/'.$par->PAR_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                </form>
-                <a href="{{url('parametro/'.$par->PAR_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                &nbsp;
-            </td>
-       </tr>
-        @endforeach
+                @endif
+                <td scope="row">{{$par -> PAR_DESTINO}}</td>
+                <td scope="row">{{$par -> DOC_CODIGO}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{url('parametro/'.$par->PAR_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <button class="btn btn-info mb-2"><span class="oi oi-file"></span></button>
+                        <a href="{{url('parametro/'.$par->PAR_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
          </tbody>   
-</table>
+    </table>
 </div>
 @endsection

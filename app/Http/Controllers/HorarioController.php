@@ -860,5 +860,4 @@ class HorarioController extends Controller {
 			->with('title', 'Horario eliminado!')
 			->with('subtitle', 'La eliminación del horario se ha realizado con éxito.');
 	}
-
 }

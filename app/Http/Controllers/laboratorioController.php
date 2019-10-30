@@ -18,8 +18,8 @@ class LaboratorioController extends Controller {
 	 */
 	public function index()
 	{
-		$laboratorio=Laboratorio::all();
-		return view("laboratorio.index", ["laboratorios"=>$laboratorio]);
+		$laboratorios = Laboratorio::paginate(9);
+		return view('laboratorio.index', compact('laboratorios'));
 	}
 
 	/**
@@ -42,34 +42,15 @@ class LaboratorioController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		Laboratorio::create([
-            'LAB_NOMBRE' => $request['LAB_NOMBRE'],
-            'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'],
-			'CAM_CODIGO' => $request['CAM_CODIGO'],
-			'EMP_CODIGO' => $request['EMP_CODIGO'],
+		//
+	Laboratorio::create([
+			'LAB_NOMBRE' => $request['LAB_NOMBRE'], 
+			'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'], 
 		]);
 
 		return redirect('laboratorio')
 			->with('title','Laboratorio creado!')
 			->with('subtitle','Se ha creado correctamente el laboratorio.');
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	public function search(Request $request)
-	{
-	
-		return redirect('laboratorio');
-		//
 	}
 
 	/**
