@@ -23,7 +23,7 @@
                         </select>
                         <div>
                             <label>Seleccione una Materia...</label>
-                            <select   id="materiaCombo" >
+                            <select name="materiaCombo"  id="materiaCombo" >
                         
                            </select>
                         </div>
