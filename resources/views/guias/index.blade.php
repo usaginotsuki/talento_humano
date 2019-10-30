@@ -48,35 +48,35 @@
             <tr class="d-flex">
                 <td class="col">{{ $horario['HOR_HORA'.$x] }}</td>
                 <td class="col opts">
-                    @if ($horario['HOR_LUNES'.$x] != 0 || $horario['HOR_LUNES'.$x] != NULL)
+                    @if ($horario['HOR_LUNES_DOC'.$x] != 0 || $horario['HOR_LUNES_DOC'.$x] != NULL)
                     {{ $horario['HOR_LUNES'.$x] }} <span class="text-{{ $horario['HOR_LUNES'.$x.'_OPC'] }}"></span>
                     <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_LUNES_DOC'.$x] }}</b>
                     @endif
                 </td>
                 <td class="col opts">
-                    @if ($horario['HOR_MATES'.$x] != 0 || $horario['HOR_MATES'.$x] != NULL)
+                    @if ($horario['HOR_MATES_DOC'.$x] != 0 || $horario['HOR_MATES_DOC'.$x] != NULL)
                     {{ $horario['HOR_MATES'.$x] }} <span class="text-{{ $horario['HOR_MARTES'.$x.'_OPC'] }}"></span>
                     <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_MATES_DOC'.$x] }}</b>
                     @endif
                 </td>
                 <td class="col opts">
-                    @if ($horario['HOR_MIERCOLES'.$x] != 0 || $horario['HOR_MIERCOLES'.$x] != NULL)
+                    @if ($horario['HOR_MIERCOLES_DOC'.$x] != 0 || $horario['HOR_MIERCOLES_DOC'.$x] != NULL)
                     {{ $horario['HOR_MIERCOLES'.$x] }} <span class="text-{{ $horario['HOR_MIERCOLES'.$x.'_OPC'] }}"></span>
                     <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_MIERCOLES_DOC'.$x] }}</b>
                     @endif
                 </td>
                 <td class="col opts">
-                    @if ($horario['HOR_JUEVES'.$x] != 0 || $horario['HOR_JUEVES'.$x] != NULL)
+                    @if ($horario['HOR_JUEVES_DOC'.$x] != 0 || $horario['HOR_JUEVES_DOC'.$x] != NULL)
                     {{ $horario['HOR_JUEVES'.$x] }} <span class="text-{{ $horario['HOR_JUEVES'.$x.'_OPC'] }}"></span>
                     <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_JUEVES_DOC'.$x] }}</b>
                     @endif
                 </td>
                 <td class="col opts">
-                    @if ($horario['HOR_VIERNES'.$x] != 0 || $horario['HOR_VIERNES'.$x] != NULL)
+                    @if ($horario['HOR_VIERNES_DOC'.$x] != 0 || $horario['HOR_VIERNES_DOC'.$x] != NULL)
                     {{ $horario['HOR_VIERNES'.$x] }} <span class="text-{{ $horario['HOR_VIERNES'.$x.'_OPC'] }}"></span>
                     <br>
                     <b class="small font-weight-bold">{{ $horario['HOR_VIERNES_DOC'.$x] }}</b>

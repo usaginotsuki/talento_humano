@@ -19,27 +19,18 @@ class GuiaController extends Controller {
 	{
         return view ('guias.login');
 	}
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function validar(Request $request)
-	{
-       
+	{       
 		$docentes=Docente::where('DOC_MIESPE',$request['usuario'])->where('DOC_CLAVE',$request['clave'])->first();
 		if(empty($docentes)){
            return view ('guias.login')->with('title', 'Auntenticación incorrecta!')->with('subtitle', 'Ingrese el usuario y clave correctas.');
 		}else {            
-            \Session(['iddocente'=>$docentes ->DOC_CODIGO]);
+            \Session(['DOC_CODIGO'=>$docentes ->DOC_CODIGO]);
             $periodo=Periodo::All()->last();
             $materias=Materia::where('DOC_CODIGO', $docentes ->DOC_CODIGO)->where('PER_CODIGO',$periodo->PER_CODIGO)->get();
 			$count = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->count();
@@ -82,7 +73,7 @@ class GuiaController extends Controller {
 	public function cerrarsession()
 	{
        
-           session()->forget('iddocente');
+           session()->forget('DOC_CODIGO');
            return view ('guias.login');
 	}
 

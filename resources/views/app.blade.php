@@ -33,21 +33,21 @@
    
       <a type="button" class="btn btn-dark" href="{{url('/')}}">Inicio</a>
 
-      @if(session('iddocente'))
+      @if(session('DOC_CODIGO'))
           <a type="button" class="btn btn-dark" href="{{url('/guias/cerrarsession')}}">Cerrar sesion</a>
       @else
 
-      <a type="button" class="btn btn-dark" href="{{url('/guias/login')}}">Entrar</a>
+      <a type="button" class="btn btn-dark" href="">Entrar</a>
       @endif
  s
       </ul>
   </div>
   </header>
 
-@if(session('iddocente'))
+  @if(session('DOC_CODIGO'))
 
-  @include('shared.navbar')
-@endif  
+    @include('shared.navbar')
+  @endif  
 
 
 

@@ -1,44 +1,6 @@
 @extends('app')
-
 @section('content')
-
-<!--
-
-
-                     
-
-					<form class="form-horizontal" role="form" method="POST" action="/login/validar">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Usuario</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="usuario" id="usuario">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Clave</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="clave" id="clave">
-							</div>
-						</div>
-
-						
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
-									ver Asignatura
-								</button>
-
-								
-							</div>
-						</div>
-					</form>
-
--->
-<div class="cotainer">
+	<div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -66,19 +28,11 @@
                                 <button type="submit" class="btn btn-primary" style="margin-right: 15px;">
 									Ver Asignatura
 								</button>
-                            </div>
-                    
+                            </div>                    
                     	</form>
                     </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-@if(!empty($docentelog))
-{{$docentelog->id}}
-@endif
-
-			
+	            </div>
+	        </div>
+	    </div>
+    </div>	
 @endsection
