@@ -24,8 +24,6 @@ class ControlController extends Controller {
 		return view('control.index', compact('controles'));
 	}
 
-
-
 	public function listar($fecha)
 	{
 		if($fecha==null){
