@@ -9,7 +9,7 @@
 </div>
 <div class="container">
     <div class="col">
-                <a href="{{url('guia/create')}}" class="btn btn-primary mb-2">Crear Guías</a>
+                <a href="{{url('guia/crearGuia')}}" class="btn btn-primary mb-2">Crear Guías</a>
     </div>
     <table   class="table table-hover table-bordered results">
             <thead>
@@ -24,38 +24,51 @@
             </thead>
             <tbody>
             @if(!empty($guias_terminadas))
-                <tr>
-                    <td scope="row">{{$guias_terminadas[sizeof($guias_terminadas)-1] -> GUI_NUMERO}}</td>
-                    <td scope="row">{{$guias_terminadas[sizeof($guias_terminadas)-1] -> GUI_FECHA}}</td>
-                    <td scope="row">{{$guias_terminadas[sizeof($guias_terminadas)-1] -> GUI_TEMA}}</td> 
-                    <td scope="row">{{$guias_terminadas[sizeof($guias_terminadas)-1] -> LAB_NOMBRE}}</td>
-                    <td scope="row">
-                    <a href="" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
-                    </td> 
-                    <td scope="row">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="{{url('guia/'.$guias_terminadas[sizeof($guias_terminadas)-1]->GUI_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                            <a href="{{url('guia/'.$guias_terminadas[sizeof($guias_terminadas)-1]->GUI_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
-                        </div>
-                    </td>
-                </tr>
             
-                @for ($i=sizeof($guias_terminadas)-2;$i>=0;$i--)
+                @for ($i=sizeof($guias_terminadas)-1;$i>=0;$i--)
                 <tr>
                     <td scope="row">{{$guias_terminadas[$i] -> GUI_NUMERO}}</td>
                     <td scope="row">{{$guias_terminadas[$i] -> GUI_FECHA}}</td>
                     <td scope="row">{{$guias_terminadas[$i] -> GUI_TEMA}}</td> 
                     <td scope="row">{{$guias_terminadas[$i] -> LAB_NOMBRE}}</td>
                     <td scope="row">
-                    <a href="" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
+                        <a href="" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
                     </td> 
-                    <td scope="row">
-                       
-                    </td>
+                    @if($guias_terminadas[$i]->GUI_REGISTRADO==1) 
+                        <td scope="row">
+                            <span class="badge badge-success">Entregada</span>
+                        </td>
+                        <td scope="row">
+                        </td>
+                    @else
+                        <td scope="row">
+                            <span class="badge badge-danger">Pendiente</span>
+                        </td>
+                        {{--*/$valido=0/*--}}
+                        @for ($j=$i+1;$j<=sizeof($guias_terminadas)-1;$j++)
+                            @if($guias_terminadas[$j]->GUI_REGISTRADO==1)
+                                {{-- */$valido=0/*--}}
+                            @else
+                                {{--*/$valido=1/*--}}
+                                {{--*/ $j=sizeof($guias_terminadas) /*--}}
+                            @endif
+                        @endfor
+                        @if($valido==0)
+                                <td scope="row">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{url('guia/'.$guias_terminadas[sizeof($guias_terminadas)-1]->GUI_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                                            <a href="{{url('guia/'.$guias_terminadas[sizeof($guias_terminadas)-1]->GUI_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                                        </div>
+                                </td>
+                            @else
+                                <td scope="row">
+                                </td>
+                            @endif
+                    @endif
                 </tr>    
-            </tbody>
-            @endfor
+                @endfor
             @endif
+            </tbody>
     </table>
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
@@ -79,7 +92,7 @@
                     @if ($guiap -> CON_EXTRA!==1)
                         HORA
                     @else
-                        <b>OCACIONAL</b>
+                        <b>OCASIONAL</b>
                     @endif
                 </td>
                 <td scope="row">{{$guiap -> CON_NUMERO_HORAS}}</td> 
@@ -92,7 +105,7 @@
                         @if ($guiap -> CON_GUIA!==1)
                             <span class="badge badge-danger">Pendiente</span>
                         @else
-                            <span class="badge badge-success">Terminada</span>
+                            <span class="badge badge-success">Entregada</span>
                         @endif
                     @endif
                 </td>

@@ -130,7 +130,7 @@ Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPos
 Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');
 ///////////////////////////////////////////////////////////////////
-Route::get('listarGuias', 'GuiaController@listarGuias');
+Route::get('guia/listarGuias', 'GuiaController@listarGuias');
 Route::get('guia/{id}/edit', 'GuiaController@edit');
 Route::get('guia/{id}/destroy', 'GuiaController@destroy');
 Route::post('guia/update', 'GuiaController@update');
