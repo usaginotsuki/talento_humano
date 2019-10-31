@@ -27,6 +27,9 @@ class Laboratorio extends Model {
 	public function horarios() {
 		return $this->hasMany('App\Horario');
 	}
+	public function guias() {
+		return $this->hasMany('App\Guia');
+	}
 	
 	public function scopeCodigoNombreCapacidad($query)
 	{

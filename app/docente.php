@@ -13,7 +13,11 @@ class Docente extends Model {
 		return $this->hasMany('App\Materia');
 	}
 
+	public function guias() {
+		return $this->hasMany('App\Guia');
+	}
+
 	public function scopeCodigoNombre($query) {
-		return $query->select('DOC_CODIGO', 'DOC_TITULO', 'DOC_NOMBRES', 'DOC_APELLIDOS');
+		return $query->select('DOC_CODIGO', 'DOC_NOMBRES', 'DOC_APELLIDOS')->orderBy('DOC_APELLIDOS', 'ASC');;
 	}
 }

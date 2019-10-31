@@ -11,6 +11,10 @@ class Materia extends Model {
 
      public function scopeMateriasx($query, $periodo, $carrera){
         return $query->where('PER_CODIGO',$periodo)->where('CAR_CODIGO', $carrera);
+	}
+	
+	public function scopeMateriasxP($query, $periodo, $docente){
+        return $query->where('PER_CODIGO',$periodo)->where('DOC_CODIGO', $docente);
     }
 
 
@@ -23,8 +27,13 @@ class Materia extends Model {
 	public function carreras(){
 		return $this->belongsTo('App\Carrera','CAR_CODIGO');
 	}
+	public function guias() {
+		return $this->hasMany('App\Guia');
+	}
 
-	
+	public function scopeCodigoNombre($query) {
+		return $query->select('MAT_CODIGO', 'MAT_NOMBRE', 'MAT_NRC');
+	}
 	
 	public $timestamps = false;
 }
