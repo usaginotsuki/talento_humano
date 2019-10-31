@@ -1,9 +1,5 @@
 @extends('app')
 @section('content')
-
-<div class="jumbotron">
-    <h2>Actualizar Periodo</h2>
-</div>
 <div class="container">
     <h2>Actualizar Período</h2>
     <form action="{{url('/periodo/update')}}" method="POST">

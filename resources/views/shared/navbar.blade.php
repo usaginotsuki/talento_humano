@@ -2,7 +2,7 @@
   <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        Proceso
+        Reportes
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/docente">Docente</a>
@@ -23,7 +23,7 @@
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        Reportes
+        CRUD revisados
       </a>
      <div class="dropdown-menu">
         <a class="dropdown-item" href="{{url('reporte/horario/sala')}}">Horarios de Sala</a>
@@ -80,6 +80,8 @@
         <a class="dropdown-item" href="/">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/campus">Campus</a>        
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/Campus">campus</a>
       </div>
     </li>
    

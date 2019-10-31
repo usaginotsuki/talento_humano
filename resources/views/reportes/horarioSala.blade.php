@@ -51,7 +51,7 @@
                     @if (isset($horario))
                     <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
                     @else
-                    <button disabled onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button disabled class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
                     @endif
                 </div>
             </div>

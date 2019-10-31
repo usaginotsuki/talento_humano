@@ -167,8 +167,6 @@ class Horario extends Model {
 		return $query->where('PER_CODIGO', $periodoId)
 			->where('LAB_CODIGO', $laboratorioId);
 	}
-
-
 	public function scopeObtenerHorarioPorPeriodo($query, $periodoId)
 	{
 		return $query->where('PER_CODIGO', $periodoId);

@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 <div class="container">
     <h2>Actualizar Horario</h2>
     <div class="card border-primary mb-3">

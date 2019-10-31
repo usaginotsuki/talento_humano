@@ -1,9 +1,5 @@
 @extends('app')
 @section('content')
-
-<div class="jumbotron">
-    <h2>Crear docente</h2>
-</div>
 <div class="container">
     <h2>Crear Docente</h2>
     <form action="{{url('/docente/store')}}" method="POST">
@@ -48,17 +44,20 @@
                     <label for="DOC_CLAVE">Clave</label>
                     <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" required>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="DOC_CLAVE">Clave</label>
-                        <input type="password" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" placeholder="Clave del docente" required>
-                    </div>
-                </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_TITULO">Titulo</label>
                     <input type="text" class="form-control" id="DOC_TITULO" name="DOC_TITULO" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="DOC_TITULO">Titulo</label>
+                        <input type="input" class="form-control" id="DOC_TITULO" name="DOC_TITULO" min="0" max="15" required>
+                    </div>
                 </div>
             </div>
         

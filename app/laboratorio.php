@@ -22,7 +22,7 @@ class Laboratorio extends Model {
 	}
 
 	public function controles(){
-		return $this->hasMany('App\control');
+		return $this->hasMany('App\Control');
 	}
 	public function horarios() {
 		return $this->hasMany('App\Horario');

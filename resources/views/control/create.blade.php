@@ -9,7 +9,7 @@
 @include ('shared.navbar')
  <body >
         <div class="container">
-         
+                <h2>Crear Control</h2>
          <form  action="/control/store"  method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row"> 

@@ -1,8 +1,15 @@
 @extends('app')
 @section('content')
- <body >
-        <div class="jumbotron">
-                <h2>Crear Institucion</h2>
+<div class="container">
+    <h2>Crear Institución</h2>
+    <form action="{{url('institucion/store')}}"  method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="row"> 
+            <div class="col">
+                <div class="form-group">
+                    <label for="INS_NOMBRE">Nombre Institucion*</label>
+                    <input type="text" class="form-control"  name="INS_NOMBRE" required placeholder="Ingrese el nombre de una institucion" required>
+                </div>
             </div>
         
             <div class="col">

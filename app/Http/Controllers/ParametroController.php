@@ -104,7 +104,6 @@ class ParametroController extends Controller {
 
      
         return $pdf->download('parametro.docx');
-
 	}
 
 

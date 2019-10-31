@@ -1,5 +1,6 @@
 @extends('app')
 @section('content')
+@include ('shared.navbar')
 
 <div class="container">
     @if (session('title') && session('subtitle'))

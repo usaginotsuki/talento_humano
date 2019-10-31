@@ -1,9 +1,8 @@
 @extends('app')
 @section('content')   
-<div class="jumbotron">
-    <h2>Lista de Control</h2>
-</div>
+
 <div class="container">
+    <h2>Lista de Control</h2>
   @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('success') }}</h4>
