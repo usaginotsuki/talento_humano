@@ -120,6 +120,8 @@ Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
 Route::get('reporte/hojacontrol', 'ReportesController@hojaControl');
+Route::get('reporte/guia/docente', 'ReportesController@usoGuiasEntregadas');
+Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
@@ -127,5 +129,7 @@ Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl')
 
 ///////////////////////////////////////////////////////////////////
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
+Route::post('reporte/guia/docente', 'ReportesController@usoGuiasEntregadasPost');
+Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
 Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');

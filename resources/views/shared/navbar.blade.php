@@ -36,6 +36,10 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('reporte/eventos')}}">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{url('reporte/guia/carrera')}}">Guias por Carrera</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{url('reporte/guia/docente')}}">Uso con Guias Entregadas</a>
+        <div class="dropdown-divider"></div>
       </div>
     </li>
 

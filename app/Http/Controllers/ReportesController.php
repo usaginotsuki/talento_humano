@@ -9,8 +9,9 @@ use App\laboratorio;
 use App\Periodo;
 use App\Docente;
 use App\Carrera;
-use App\Control;
+use App\control;
 use App\Campus;
+use App\Guia;
 use PDF;
 use DB;
 use Illuminate\Http\Request;
@@ -152,4 +153,71 @@ class ReportesController extends Controller {
 	   $carreras = Carrera::All();
 	 return view('reportes.eventos', ['periodos' => $periodos])->with('materias',$materias);
    }
+
+   public function usoGuiasEntregadas()
+	{
+		$periodos = Periodo::codigoNombre()->get();
+		$docentes = docente::codigoNombre()->get();
+
+		$request=null;
+		$controles=null;
+		
+		return view('reportes.usoguiasentregadas', [
+			'periodos' => $periodos,
+			'docentes' => $docentes,
+			'valores'=>$request,
+			'controles'=>$controles
+		]);
+	}
+	public function usoGuiasEntregadasPost(Request $request)
+	{
+		$periodos = Periodo::codigoNombre()->get();
+		$docentes = docente::codigoNombre()->get();
+		
+		$materias=Materia::materiasxP($request['PER_CODIGO'],$request['DOC_CODIGO'])->get();
+		$controles= null;
+		for($i=0;$i<sizeof($materias);$i++){
+			$controles[$i]=control::entregadasx($materias[$i]['MAT_CODIGO'])->get();
+		}
+		
+		return view('reportes.usoguiasentregadas', [
+			'periodos' => $periodos->reverse(),
+			'docentes' => $docentes,
+			'valores'=>$request,
+			'controles'=>$controles
+		]);
+	}
+
+	public function guiasPorCarrera()
+	{
+		$periodos = Periodo::codigoNombre()->get();
+		$carreras = Carrera::codigoNombre()->get();
+
+		$request=null;
+		$guias=null;
+		
+		return view('reportes.guiaxcarrera', [
+			'periodos' => $periodos,
+			'carreras' => $carreras,
+			'valores'=>$request,
+			'guias'=>$guias
+		]);
+	}
+	public function guiasPorCarreraPost(Request $request)
+	{
+		$periodos = Periodo::codigoNombre()->get();
+		$carreras = Carrera::codigoNombre()->get();
+		
+		$materias=Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
+		$guias=Guia::guiasxCarrera($request['PER_CODIGO'])->get();
+		
+		return view('reportes.guiaxcarrera', [
+			'periodos' => $periodos->reverse(),
+			'carreras' => $carreras,
+			'materias' => $materias,
+			'valores'=>$request,
+			'guias'=>$guias
+		]);
+	}
+
 }

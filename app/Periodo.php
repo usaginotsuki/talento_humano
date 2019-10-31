@@ -16,7 +16,11 @@ class Periodo extends Model {
 		return $this->hasMany('App\Horario');
 	}
 
+	public function guias() {
+		return $this->hasMany('App\Guia');
+	}
+
 	public function scopeCodigoNombre($query) {
-		return $query->select('PER_CODIGO', 'PER_NOMBRE');
+		return $query->select('PER_CODIGO', 'PER_NOMBRE')->orderBy('PER_CODIGO', 'DESC');
 	}
 }
