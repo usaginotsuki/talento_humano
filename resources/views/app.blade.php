@@ -30,21 +30,27 @@
   <header>
   <div class="header-img" style="background-image:url({{URL::asset('images/principal/header.png')}})">
       <ul class="nav topnav float-right">
-    @if (Auth::guest())
+   
       <a type="button" class="btn btn-dark" href="{{url('/')}}">Inicio</a>
-      <a type="button" class="btn btn-dark" href="{{url('/auth/login')}}">Entrar</a>
-    @else
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="/auth/logout">Cerrar Sesión</a></li>
-        </ul>
-      </li>
-    @endif
+
+      @if(session('DOC_CODIGO'))
+          <a type="button" class="btn btn-dark" href="{{url('/guias/cerrarsession')}}">Cerrar sesion</a>
+      @else
+
+      <a type="button" class="btn btn-dark" href="">Entrar</a>
+      @endif
+ s
       </ul>
   </div>
   </header>
-  @include ('shared.navbar')
+
+  @if(session('DOC_CODIGO'))
+
+    @include('shared.navbar')
+  @endif  
+
+
+
   @yield('content')
 
   <footer class="footer footer-color footer-display">

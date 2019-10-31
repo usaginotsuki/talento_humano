@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container container-main bg-white">
-    <img src="{{URL::asset('images/principal/icono_guia.png')}}" >
+	<a href="{{url('/guias/login')}}" ><img src="{{URL::asset('images/principal/icono_guia.png')}}"> </a>
     <img src="{{URL::asset('images/principal/espe.png')}}" >
 </div>
 @endsection
