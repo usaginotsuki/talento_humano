@@ -16,20 +16,21 @@
                 <div class="card border-primary mb-3">
                     
                     <div class="card-body text-primary">
-                        <select class="selectpicker show-tick mb-3 "  id="periodo" title="Seleccione un Periodo..." name="periodo" data-live-search="true" data-width="100%">
+                        <label>Seleccione un Periodo...</label>
+                        <select  id="periodo" name="periodo" data-live-search="true" data-width="100%">
                             @foreach ($periodos as $periodo)
                             <option value="{{ $periodo->PER_CODIGO }}">{{ $periodo->PER_NOMBRE }}</option>
                             @endforeach
                         </select>
                         <div>
                             <label>Seleccione una Materia...</label>
-                            <select name="materiaCombo"  id="materiaCombo" >
+                            <select  name="materiaCombo" id="materiaCombo" >
                         
                            </select>
                         </div>
                         <div>
                             <label>Seleccione una Guia...</label>
-                            <select name="guiaCombo"  id="guiaCombo" >
+                            <select  name="guiaCombo"  id="guiaCombo" >
                           
                             </select>
                         </div>

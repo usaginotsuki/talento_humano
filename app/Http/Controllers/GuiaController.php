@@ -26,7 +26,8 @@ class GuiaController extends Controller {
 
 	public function byPeriodoGet(Request $request,$id){
 		if($request->ajax()){
-			$data = Materia::obtenerMateriaPorDocente($id, '85')->get();
+			$idDocente=\Session::get('DOC_CODIGO');
+			$data = Materia::obtenerMateriaPorDocente($id, $idDocente)->get();
 			//$data = Materia::reporte($id)->get();
 			return response()->json($data);
 		}
