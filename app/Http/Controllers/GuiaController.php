@@ -39,4 +39,49 @@ class GuiaController extends Controller {
 			return response()->json($data);
 		}
 	}
+		/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+   public function controlGuiaLaboratoriocreate()
+   {
+	   
+	   return view('guia.controlGuiaLaboratoriocreate');
+   }
+
+   /**
+	* Store a newly created resource in storage.
+	*
+	* @return Response
+	*/
+   public function store(Request $request)
+   {
+	   $guiaId=$request->input('guiaCombo');
+	   $guiass = Guia::codigoNombre($guiaId)->get();
+	   return view('guia.controlGuiaLaboratoriocreate', [
+		   'guiass' => $guiass,	
+	   ]);
+	   
+	   Guia::controlGuiaLaboratoriocreate([
+		   'GUI_CODIGO' => $request['GUI_CODIGO'],
+		   'GUI_FECHA' => $request['GUI_FECHA'],
+		   'GUI_TEMA' => $request['GUI_TEMA'],
+		   'GUI_DURACION' => $request['GUI_DURACION'],
+		   'GUI_OBJETIVO' => $request['GUI_OBJETIVO'],
+		   'GUI_EQUIPO_MATERIALES' => $request['GUI_EQUIPO_MATERIALES'],
+		   'GUI_TRABAJO_PREPARATORIO' => $request['GUI_TRABAJO_PREPARATORIO'],
+		   'GUI_ACTIVIDADES' => $request['GUI_ACTIVIDADES'],
+		   'GUI_RESULTADOS' => $request['GUI_RESULTADOS'],
+		   'GUI_CONCLUSIONES' => $request['GUI_CONCLUSIONES'],
+		   'GUI_RECOMENDACIONES' => $request['GUI_RECOMENDACIONES'],
+		   'GUI_REFERENCIAS_BIBLIOGRAFICAS' => $request['GUI_REFERENCIAS_BIBLIOGRAFICAS'],
+		   'GUI_INTRODUCCION' => $request['GUI_INTRODUCCION'],
+		   'GUI_COORDINADOR' => $request['GUI_COORDINADOR'],
+	   ]);
+	   return redirect('guia.controlGuiaLaboratoriocreate')
+		   ->with('title','Guia creada!')
+		   ->with('subtitle','Se ha creado correctamente la guia.');
+   }
+
 }

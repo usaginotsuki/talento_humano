@@ -5,12 +5,12 @@
     <div class="row">
         <div class="col">
             <div class="card border-primary mb-3">
-                    <a href="{{url('controlGuiaLaboratorio/create')}}" class="btn btn-primary mb-2">Crear Guia Vacia</a>
+                    <a href="{{url('guia/controlGuiaLaboratoriocreate')}}" class="btn btn-primary mb-2">Crear Guia Vacia</a>
             </div>
         </div>
 
         <div class="col">
-            <form action="{{url('controlGuiaLaboratorio/store')}}" method="post">
+            <form action="{{url('guia/controlGuiaLaboratoriostore')}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 
                 <div class="card border-primary mb-3">

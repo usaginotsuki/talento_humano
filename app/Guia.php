@@ -17,4 +17,13 @@ class Guia extends Model {
 			->where('MAT_CODIGO', $materiaId);
 	}
 
+	public function scopeCodigoNombre($query, $guiaId) {
+		return $query->select('GUI_CODIGO', 'GUI_FECHA', 
+		'GUI_TEMA', 'GUI_DURACION', 'GUI_OBJETIVO', 
+		'GUI_EQUIPO_MATERIALES', 'GUI_TRABAJO_PREPARATORIO', 
+		'GUI_ACTIVIDADES', 'GUI_RESULTADOS', 'GUI_CONCLUSIONES', 
+		'GUI_RECOMENDACIONES', 'GUI_REFERENCIAS_BIBLIOGRAFICAS', 
+		'GUI_INTRODUCCION','GUI_COORDINADOR')
+		->where('GUI_CODIGO',$guiaId);
+	}
 }
