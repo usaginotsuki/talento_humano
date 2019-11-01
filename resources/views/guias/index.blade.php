@@ -19,7 +19,7 @@
             <tbody >
                 @foreach ($materias as $mat)
                     <tr>       
-                        <td scope="row">{{$mat -> carreras -> CAR_NOMBRE}}</td> 
+                        <td scope="row">{{$mat -> carrera -> CAR_NOMBRE}}</td> 
                         <td scope="row">{{$mat -> MAT_NOMBRE}}</td> 
                         <td scope="row">{{$mat -> MAT_NRC}}</td>
                         

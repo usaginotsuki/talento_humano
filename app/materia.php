@@ -42,5 +42,4 @@ class Materia extends Model {
 		return $query->select('MAT_CODIGO', 'MAT_NOMBRE', 'MAT_NRC');
 	}
 	
-	public $timestamps = false;
 }

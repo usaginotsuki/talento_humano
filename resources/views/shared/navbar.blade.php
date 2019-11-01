@@ -2,28 +2,28 @@
   <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        Reportes
+        Proceso
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="/docente">Docente</a>
+        <a class="dropdown-item" href="{{url('docente')}}">Docente</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/periodo">Periodo</a>
+        <a class="dropdown-item" href="{{url('periodo')}}">Periodo</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/materia">Materia</a>
+        <a class="dropdown-item" href="{{url('materia')}}">Materia</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/horario">Registrar Horario</a>
+        <a class="dropdown-item" href="{{url('horario')}}">Registrar Horario</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Evento Ocasional</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/control">Control</a>
+        <a class="dropdown-item" href="{{url('control')}}">Control</a>
         <div class="dropdown-divider"></div>
       </div>
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        CRUD revisados
+        Reportes
       </a>
      <div class="dropdown-menu">
         <a class="dropdown-item" href="{{url('reporte/horario/sala')}}">Horarios de Sala</a>
@@ -79,9 +79,7 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/campus">Campus</a>        
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/Campus">campus</a>
+        <a class="dropdown-item" href="/campus">Campus</a>
       </div>
     </li>
    
