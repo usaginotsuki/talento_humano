@@ -1,7 +1,11 @@
 @extends('app')
 @section('content')
-<div class="container">
+
+<div class="jumbotron">
     <h2>Actualizar Institución</h2>
+</div>
+
+<div class="container-fluid">
     <form  action="{{url('institucion/update')}}"  method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="INS_CODIGO" value="{{ $institucion->INS_CODIGO }}">
