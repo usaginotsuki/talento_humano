@@ -3,6 +3,7 @@
 @include ('shared.navbar')
 <div class="container">
 <h2>Actualizar Parámetro</h2>
+<h3>CODIGO {{ $parametro->PAR_CODIGO }}</h3>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -10,6 +11,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+        
     </div>
     @endif
     <form action="{{url('/parametro/update')}}" method="POST">
@@ -30,6 +32,9 @@
                     </select>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="PAR_TODOS">Todos</label>
