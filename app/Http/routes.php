@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,12 +9,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', 'WelcomeController@index');
 Route::get('guias/login', 'GuiaController@login');
 Route::get('guias/cerrarsession', 'GuiaController@cerrarsession');
 Route::post('login/validar', 'GuiaController@validar');
-
 ///////////////////////////////////////////////////////////////////
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -47,7 +44,6 @@ Route::get('control/{id}/destroy','ControlController@destroy');
 Route::post('control/store', 'ControlController@store');
 Route::post('control/update', 'ControlController@update');
 Route::post('control/generar', 'ControlController@generar');
-
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');
@@ -130,7 +126,6 @@ Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
-
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocenteIndex');
 Route::post('reporte/horario/docente', 'ReportesController@horarioPorDocentePost');
@@ -138,7 +133,6 @@ Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');
 Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');
-
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
 Route::post('reporte/guia/docente', 'ReportesController@usoGuiasEntregadasPost');
 Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
