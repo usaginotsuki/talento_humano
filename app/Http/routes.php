@@ -22,10 +22,11 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 ///////////////////////////////////////////////////////////////////
-Route::get('campus/{id}', [
-    'uses' => 'ControlController@searchCampus',
-    'as' => 'control.search.campus'
-]);
+//Route::get('campus/{id}', [
+//    'uses' => 'ControlController@searchCampus',
+//    'as' => 'control.search.campus'
+//]);
+///////////////////////////////////////////////////////////////////
 Route::get('campus', 'CampusController@index');
 Route::get('campus/create', 'CampusController@create');
 Route::get('campus/{id}/edit', 'CampusController@edit');
@@ -33,6 +34,7 @@ Route::get('campus/{id}/destroy', 'CampusController@destroy');
 Route::post('campus/store', 'CampusController@store');
 Route::post('campus/update', 'CampusController@update');
 ///////////////////////////////////////////////////////////////////
+
 Route::get('carrera', 'CarreraController@index');
 Route::get('carrera/create', 'CarreraController@create');
 Route::get('carrera/{id}/edit', 'CarreraController@edit');

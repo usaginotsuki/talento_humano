@@ -1,5 +1,11 @@
 <?php namespace App;
-
+/*
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+ */
 use Illuminate\Database\Eloquent\Model;
 
 class Docente extends Model {
