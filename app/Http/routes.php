@@ -40,6 +40,7 @@ Route::get('carrera/{id}/destroy', 'CarreraController@destroy');
 Route::post('carrera/store', 'CarreraController@store');
 Route::post('carrera/update', 'CarreraController@update');
 ///////////////////////////////////////////////////////////////////
+Route::get('control/consola', 'ControlController@consola');
 Route::get('control','ControlController@index');
 Route::get('control/create','ControlController@create');
 Route::get('control/{id}/edit','ControlController@edit');

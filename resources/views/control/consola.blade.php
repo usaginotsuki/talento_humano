@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 
 <div class="container">
     @if (session('title') && session('subtitle'))
@@ -58,7 +57,7 @@
                         <img src="{{URL::asset('images/consola/update.png')}}" >
                     </a>
                 </td>
-            
+
         </tbody>
         @endforeach 
 </table>
