@@ -4,7 +4,7 @@
 <div class="container">
     <h2 style="color:#FA6910">Crear Guia:</h2>
     <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
-    <form class="form" id="form" action="{{url('/guias/store')}}" method="POST">
+    <form class="form" id="form" action="{{url('/guia/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group row">
                 <label for="GUI_FECHA"class="col-sm-2 col-form-label">Fecha<span style="color:#FF0000";>*</span></label>
