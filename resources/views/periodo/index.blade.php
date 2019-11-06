@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <h2>Períodos</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">

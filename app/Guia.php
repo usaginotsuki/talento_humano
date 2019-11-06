@@ -41,7 +41,8 @@ class Guia extends Model {
 		return $query->select('DOC_CODIGO', 'MAT_CODIGO','LAB_CODIGO',
 	'PER_CODIGO', 'GUI_NUMERO', 'GUI_FECHA', 'GUI_TEMA')
 			->where('MAT_CODIGO', $materiaId);
-	}
+	
+    }
 
 	public function scopeCodigoNombre($query, $guiaId) {
 		return $query->select('GUI_CODIGO', 'GUI_FECHA', 

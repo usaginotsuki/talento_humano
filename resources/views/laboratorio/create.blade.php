@@ -12,7 +12,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="LAB_NOMBRE">Nombre*</label>
-                            <input type="input" class="form-control" id="LAB_NOMBRE" name="LAB_NOMBRE" placeholder="Nombre del laboratorio" required>
+                            <input type="text" class="form-control" id="LAB_NOMBRE" name="LAB_NOMBRE" placeholder="Nombre del laboratorio" required>
                         </div>
                     </div>
                     <div class="col">
@@ -50,9 +50,6 @@
                 <a href="{{url('laboratorio')}}" class="btn btn-danger mb-2">Cancelar</a>
             </div>
             
-
-
-       
     </form>
 </div>
 @endsection

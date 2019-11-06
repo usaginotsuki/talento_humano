@@ -18,7 +18,7 @@ class Laboratorio extends Model {
 	
 	public function empresa()
     {
-        return $this->belongsTo('App\Empresa', 'EMP_CODIGO');
+        return $this->belongsTo('App\empresa', 'EMP_CODIGO');
 	}
 
 	public function controles(){

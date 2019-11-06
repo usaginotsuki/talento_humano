@@ -39,12 +39,10 @@
             <td scope="row">{{$lab -> campus->CAM_NOMBRE}}</td>
             <td scope="row">{{$lab -> empresa->EMP_NOMBRE}}</td>
             <td>
-                <form action="{{url('/laboratorio/'.$lab->LAB_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                </form>
-                <a href="{{url('laboratorio/'.$lab->LAB_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                &nbsp;
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{url('laboratorio/'.$lab->LAB_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                    <a href="{{url('laboratorio/'.$lab->LAB_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                </div>
             </td>
         </tbody>
         @endforeach   
