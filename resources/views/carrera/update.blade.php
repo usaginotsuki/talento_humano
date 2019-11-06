@@ -1,7 +1,17 @@
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Actualizar carrera</h2>
+
+<div class="jumbotron">
+    <h2>Actualizar Carrera</h2>
+    @if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+        <p>{{$error}}</p>
+        @endforeach
+    </div>
+    @endif
+</div>
+<div class="container-fluid">
     <form action="{{url('/carrera/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="CAR_CODIGO" value="{{ $carrera->CAR_CODIGO }}">

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
-
 use App\Http\Requests;
+use App\Http\Requests\CarreraStoreRequest;
+use App\Http\Requests\CarreraUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Carrera;
 
@@ -36,7 +37,7 @@ class CarreraController extends Controller {
 	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CarreraStoreRequest $request)
 	{
 		Carrera::create([
 			'CAR_CODIGO' => $request['CAR_CODIGO'],
@@ -66,7 +67,7 @@ class CarreraController extends Controller {
 	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function update(Request $request)
+	public function update(CarreraUpdateRequest $request)
 	{
 		$carrera = Carrera::find($request['CAR_CODIGO']);
 		$carrera->fill($request->all());
