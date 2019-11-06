@@ -1,10 +1,9 @@
  @extends('app')
 @section('content')
 @include ('shared.navbar')    
-<div class="jumbotron">
-    <h2> Lista de Evento Ocacional</h2>
-</div>
-<div class="container">
+
+<div class="container-fluid">
+<h2>Evento Ocacional</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -36,18 +35,20 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($eventoocacionales as $eve)
+        @foreach ($data as $eve)
+            
             <tr>
-                <td scope="row">{{$eve -> CON_CODIGO}}</td>
-                <td scope="row">{{$eve -> LAB_CODIGO}}</td>
-                <td scope="row">{{$eve -> MAT_CODIGO}}</td>
-                <td scope="row">{{$eve -> DOC_CODIGO}}</td>
+                <td scope="row">{{$eve-> CON_CODIGO}}</td>
+                <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
+                <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
+                <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
                 <td scope="row">{{$eve -> CON_DIA }}</td>
                 <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
                 <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
                 <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
-                <td scope="row">{{$eve -> CON_NOTA}}</td>
+                <td scope="row">{{$eve-> CON_NOTA}}</td>
             </tr>
+            
         @endforeach   
         </tbody>
     </table>

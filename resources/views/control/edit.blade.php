@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
- <head>
-    <title>Edit </title>
- </head>
 @extends('app')
 @section('content')
-@include ('shared.navbar')
  <body >
         <div class="container">
                 <h2>Editar Control</h2>

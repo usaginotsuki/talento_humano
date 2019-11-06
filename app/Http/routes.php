@@ -39,6 +39,7 @@ Route::get('carrera/{id}/destroy', 'CarreraController@destroy');
 Route::post('carrera/store', 'CarreraController@store');
 Route::post('carrera/update', 'CarreraController@update');
 ///////////////////////////////////////////////////////////////////
+Route::get('control/consola', 'ControlController@consola');
 Route::get('control','ControlController@index');
 Route::get('control/create','ControlController@create');
 Route::get('control/{id}/edit','ControlController@edit');
@@ -114,10 +115,10 @@ Route::get('reporte/horario/sala', 'ReportesController@horarioPorSalasIndex');
 Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::post('reporte/materia/carrera', 'ReportesController@materiasPorCarreraPost');
-///////////////////////////////////////////////////////////////////
-Route::get('eventoocacional','EventoOcacionalController@index');
-Route::get('eventoocacional/create','EventoOcacionalController@create');
-Route::post('eventoocacional/store', 'EventoOcacionalController@store');
+//////////////////////////////////////////////////////////////////
+Route::get('eventoocasional','EventoOcacionalController@index');
+Route::get('eventoocasional/create','EventoOcacionalController@create');
+Route::post('eventoocasional/store', 'EventoOcacionalController@store');
 ///////////////////////////////////////////////////////////////////
 Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 ///////////////////////////////////////////////////////////////////
@@ -127,8 +128,9 @@ Route::get('reporte/guia/docente', 'ReportesController@usoGuiasEntregadas');
 Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
+Route::get('reporte/pdfevento/{id}', 'ReportesController@pdfevento');
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
-Route::get('reporte/eventos', 'ReportesController@eventosOcasionales');
+
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocenteIndex');
 Route::post('reporte/horario/docente', 'ReportesController@horarioPorDocentePost');
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
