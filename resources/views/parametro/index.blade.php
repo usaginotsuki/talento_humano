@@ -1,5 +1,6 @@
 @extends('app')
 @section('content')
+@include('shared.navbar')
 <div class="container">
     <h2>Parámetros</h2>
     @if (session('title') && session('subtitle'))
@@ -13,7 +14,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('parametro/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('parametro/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -47,7 +48,7 @@
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{url('parametro/'.$par->PAR_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                        <button class="btn btn-info mb-2"><span class="oi oi-file"></span></button>
+                        
                         <a href="{{url('parametro/'.$par->PAR_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
                     </div>
                 </td>
