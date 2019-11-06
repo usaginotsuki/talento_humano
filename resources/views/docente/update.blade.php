@@ -1,42 +1,41 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <h2>Actualizar Docente</h2>
+    @if(isset($mensajes))
+        <div class="alert alert-warning">
+            {{ $mensajes }}
+        </div>
+    @endif   
+    <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p>
+
     <form action="{{url('/docente/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="DOC_CODIGO" value="{{ $docente->DOC_CODIGO }}">
 
         <div class="form-group">
-            <label for="DOC_CEDULA">Cedula</label>
-            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" value="{{ $docente->DOC_CEDULA }}">
+            <label for="DOC_CEDULA">Cedula <span style="color:#FF0000";>*</span></label>
+            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" value="{{ $docente->DOC_CEDULA }}" required>
         </div>
 
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_MIESPE">Mi Espe</label>
-                    <input type="text" class="form-control" id="DOC_MIESPE" name="DOC_MIESPE" value="{{ $docente->DOC_MIESPE }}">
+                    <label for="DOC_MIESPE">Mi Espe <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_MIESPE" name="DOC_MIESPE" value="{{ $docente->DOC_MIESPE }}" required>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_NOMBRES">Nombres</label>
-                    <input type="text" class="form-control" id="DOC_NOMBRES" name="DOC_NOMBRES" value="{{ $docente->DOC_NOMBRES }}">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="DOC_APELLIDOS">Apellidos</label>
-                    <input type="text" class="form-control" id="DOC_APELLIDOS" name="DOC_APELLIDOS" value="{{ $docente->DOC_APELLIDOS }}">
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="DOC_CORREO">Correo</label>
-                    <input type="text" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="{{ $docente->DOC_CORREO }}">
+                     <label for="DOC_NOMBRES">Nombres <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_NOMBRES" name="DOC_NOMBRES" value="{{ $docente->DOC_NOMBRES }}" required>
                 </div>
             </div>
         </div>
@@ -44,19 +43,29 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_CORREO">Correo</label>
-                    <input type="email" class="form-control" id="DOC_CORREO" name="DOC_CORREO" placeholder="Correo del docente" value="{{ $docente->DOC_CORREO }}" required>
+                     <label for="DOC_APELLIDOS">Apellidos <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_APELLIDOS" name="DOC_APELLIDOS" value="{{ $docente->DOC_APELLIDOS }}" required>
                 </div>
             </div>
+            <div class="col">
+                <div class="form-group">
+                      <label for="DOC_CORREO">Correo <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="{{ $docente->DOC_CORREO }}" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+           
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_CLAVE">Clave</label>
                     <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}">
                 </div>
             </div>
-        </div>
+        
 
-        <div class="row">
+      
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_TITULO">Titulo</label>
