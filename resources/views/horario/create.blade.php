@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <h2>Crear Horario</h2>
     <div class="card border-primary mb-3">
         <div class="card-header">Recomendaciones</div>
