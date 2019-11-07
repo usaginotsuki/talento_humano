@@ -2,8 +2,8 @@
 /*
  * Sistema de Gestion de Laboratorios - ESPE
  *
- * Author: Barrera Erick - LLamuca Andrea
- * Revisado por: 
+ * Author: Antony Andrade - Jonel Lopez
+ * Revisado por: Antony Andrade - Jonel Lopez
  *
  */
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +28,7 @@ class Docente extends Model {
 	}
 
 	public function scopeCodigoNombre($query) {
-		return $query->select('DOC_CODIGO', 'DOC_NOMBRES', 'DOC_APELLIDOS')->orderBy('DOC_APELLIDOS', 'ASC');;
+		return $query->select('DOC_CODIGO', 'DOC_TITULO', 'DOC_NOMBRES', 'DOC_APELLIDOS')->orderBy('DOC_APELLIDOS', 'ASC');;
 	}
 
 	public function scopeNombreDocente($query,$id){
