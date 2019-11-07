@@ -1,3 +1,10 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Jerson Morocho
+ Revisado por: DevOps
+ -->
+
 <nav class="navbar navbar-expand-lg navbar-dark nav-color">
   <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
@@ -43,7 +50,6 @@
       </div>
     </li>
 
-
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Estadisticas
@@ -56,6 +62,7 @@
         
       </div>
     </li>
+    
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Institucion
