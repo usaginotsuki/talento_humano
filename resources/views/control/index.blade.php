@@ -29,7 +29,7 @@
 
   <div class="row">
       <div class="col">
-          <form action="{{url('/control/index')}}" method="post">
+          <form action="{{url('/control')}}" method="post">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
               <div class="card border-primary mb-3">
@@ -43,7 +43,7 @@
                       @endif
                     </div>
                     
-                    <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
+                    <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Seleccionar</button>
                   </div>
               </div>
           </form>
@@ -61,10 +61,11 @@
                   <input type="checkbox" class="custom-control-input" id="MAT_OCACIONAL">
                   <label class="custom-control-label" for="MAT_OCACIONAL">Ocasional</label>
                 </div>
+                <br>
+                <button class="btn btn-info"><span class="oi oi-cloud-download"></span> Generar Control</button>
               </form>
-              <br>
 
-              <button class="btn btn-info"><span class="oi oi-cloud-download"></span> Generar Control</button>
+              
           </div>
         </div>
       </div>
