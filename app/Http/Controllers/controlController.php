@@ -237,13 +237,12 @@ class ControlController extends Controller {
 		//
 		$date = Carbon::now();
 		$date = $date->format('Y-m-d');
-		//$control = Control::where('CON_DIA', $date)->get();
-		$control =DB::table('control')->where('CON_DIA', $date)->get();
+		$control = Control::where('CON_DIA', $date)->get();
+		//$control =DB::table('control')->where('CON_DIA','$date')->get();
 		//print_r ($control);
 		//$control = control::all();
-		//$control = DB::select('SELECT * FROM control where CON_DIA = ?', $date);
+		//$control = DB::select('SELECT * FROM control where CON_DIA = 2019-11-05');
 		//$control = DB::select('SELECT * FROM control where CON_DIA = :CON_DIA', ['CON_DIA' => '$date']);
-		print_r ($control);
 		return view("control.consola", ["controles"=>$control]);
 		
 	}

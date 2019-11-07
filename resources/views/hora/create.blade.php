@@ -1,9 +1,7 @@
 @extends('app')
 @section('content')
-
-<div class="jumbotron">
+@include ('shared.navbar')
     <h2>Crear hora</h2>
-</div>
 <div class="container">
     <form action="{{url('/hora/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">

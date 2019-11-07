@@ -22,7 +22,7 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Evento Ocasional</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Control Laboratorio</a>
+        <a class="dropdown-item" href="{{url('control/consola')}}">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('control')}}">Control</a>
         <div class="dropdown-divider"></div>

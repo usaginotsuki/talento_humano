@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
-
-<div class="container">
+@include ('shared.navbar')
+<div class="container fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
