@@ -13,7 +13,7 @@
   <div class="card border-primary mb-3">
     <div class="card-header text-primary">Consultar</div>
     <div class="card-body text-primary">
-      <form action="{{ url('reporte/hojacontrol') }}" method="post">
+      <form action="{{ url('reporte/hoja/control') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
       
         <div class="row">
@@ -56,12 +56,16 @@
         <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO" />
         @endif
   
+
+
+   @if(!empty($controles))
         <button type="submit" class="btn btn-info mb-2"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+   @endif    
       </form>
     </div>
   </div>
   <br>
-
+  @if(!empty($controles))
   <table id="ListTable" class="table table-hover table-bordered results">
     <thead>
       <tr>
@@ -85,5 +89,6 @@
       </tr>
       @endforeach
   </table>
+  @endif
 </div>
 @endsection

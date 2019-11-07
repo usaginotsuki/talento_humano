@@ -130,9 +130,9 @@ Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl')
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocenteIndex');
 Route::post('reporte/horario/docente', 'ReportesController@horarioPorDocentePost');
 
-Route::get('reporte/hojacontrol', 'ReportesController@hojaControl');
+
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
-Route::post('reporte/hojacontrol', 'ReportesController@hojaControl');
+Route::post('reporte/hoja/control', 'ReportesController@hojaControl');
 
 Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');
 Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');

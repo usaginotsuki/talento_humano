@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <h2>Materias</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,13 +18,11 @@
         <div class="col"></div>
         <div class="col"></div>
 
-          <div class="form-group">
- <input id="buscar" type="text" class="form-control" placeholder="Buscar" onkeyup="myFunction()"/>
-</div>
+  
 
 
     </div>
-    <table id="ListTable1" class="table table-hover table-bordered results">
+    <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th scope="row">Periodo</th>
