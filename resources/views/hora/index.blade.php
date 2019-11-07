@@ -1,11 +1,10 @@
 @extends('app')
 @section('content')
+@include ('shared.navbar')
  <body >
 
-  <div class="jumbotron">
     <h2>Hora</h2>
-  </div>
-  <div class="container" >
+  <div class="container fluid" >
   @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -17,7 +16,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('hora/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('hora/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
     </div>
     <table class="table table-hover table-bordered results" id="ListTable">
