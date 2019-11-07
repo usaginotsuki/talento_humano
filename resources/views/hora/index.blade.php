@@ -31,7 +31,7 @@
         </thead>
         <tbody>
         
-        
+
         @foreach ($horas as $hora)
             <tr>
                 <td scope="row">{{$hora -> HORA_CODIGO}}</td>

@@ -1,7 +1,13 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Lorena Perez-David Esparza
+ Revisado por: Lorena Perez-David Esparza
+ -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Crear Período'))
 <div class="container-fluid">
-    <h2>Crear Período</h2>
     <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
     <form action="{{url('/periodo/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -32,7 +38,7 @@
                     <input type="date" class="form-control" name="PER_FECHA_FIN" required/>
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="row">
             <div class="col" style="display: flex;align-items: center;">
                 <div class="custom-control custom-switch">
@@ -40,7 +46,7 @@
                     <label class="custom-control-label" for="PER_ESTADO">Estado<span style="color:#FF0000";>*</span></label>
                 </div>
             </div>
-        </div>
+        </div><br>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Crear</button>
         <a href="{{url('periodo')}}" class="btn btn-danger mb-2">Cancelar</a>
