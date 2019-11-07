@@ -42,17 +42,14 @@ class PeriodoController extends Controller {
 		if ($request['PER_ESTADO'] === 'on') {
 			$estado = 1;
 		}
-		$fechas = $request['PER_FECHAS'];
-		list($start, $end) = preg_split('/ al /', $fechas);
-		$start = date_create($start);
-		$end = date_create($end);
+		
 		
 		Periodo::create([
-				'PER_NOMBRE' => 		$request['PER_NOMBRE'], 
-				'PER_ESTADO' => 		$estado,
-				'PER_HORAS_ATENCION' => $request['PER_HORAS_ATENCION'],
-				'PER_FECHA_INICIO' => 	date_format($start,"Y/m/d H:i:s"),
-				'PER_FECHA_FIN' => 		date_format($end,"Y/m/d H:i:s")
+			'PER_NOMBRE' => 		$request['PER_NOMBRE'], 
+			'PER_ESTADO' => 		$estado,
+			'PER_HORAS_ATENCION' => $request['PER_HORAS_ATENCION'],
+			'PER_FECHA_INICIO' => 	$request['PER_FECHA_INICIO'],
+			'PER_FECHA_FIN' => 		$request['PER_FECHA_FIN']
 			]);
 			
 		return redirect('periodo')

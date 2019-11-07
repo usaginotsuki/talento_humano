@@ -14,9 +14,9 @@ use Illuminate\Http\RedirectResponse;
 class HorarioController extends Controller {
 
 	/**
-	 * Display a listing of the resource.
+	 * Despliega la vista principal del módulo carrera
 	 *
-	 * @return Response
+	 * @return view "carrera.index" & $carreras
 	 */
 	public function index()
 	{
@@ -48,7 +48,7 @@ class HorarioController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Despliega el formulario para crear un nuevo Horario
 	 *
 	 * @return Response
 	 */
@@ -64,9 +64,13 @@ class HorarioController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Guarda un horario en la base de datos.
+	 * El método recibe un objeto $request con los valores enviados del formulario.
+	 * Guarda los datos con el método create.
+	 * Redirecciona a la view "horario"
 	 *
-	 * @return Response
+	 * @param  Request  $request
+	 * @return redirect view "horario" & title & subtitle
 	 */
 	public function store(Request $request)
 	{
@@ -485,11 +489,9 @@ class HorarioController extends Controller {
 			->with('title', 'Horario registrado!')
 			->with('subtitle', 'El registro del horario para el periodo acádemico actual se ha realizado con éxito.');
 	}
-
 	/**
-	 * Show the form for editing the specified resource.
+	 * Despliega el formulario para editar Horario y materias
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($labId, $perId)
@@ -506,10 +508,13 @@ class HorarioController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Edita un horario en la base de datos.
+	 * El método recibe un objeto $request con los valores enviados del formulario.
+	 * Guarda los datos con el método update.
+	 * Redirecciona a la view "horario"
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Request  $request
+	 * @return redirect view "horario" & title & subtitle
 	 */
 	public function update(Request $request)
 	{
@@ -848,7 +853,7 @@ class HorarioController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Eliminar un horario especificado de la base de datos.
 	 *
 	 * @param  int  $id
 	 * @return Response

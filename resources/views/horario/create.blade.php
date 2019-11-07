@@ -1,6 +1,13 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Mauro Morales - Jerson Morocho
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <h2>Crear Horario</h2>
     <div class="card border-primary mb-3">
         <div class="card-header">Recomendaciones</div>
@@ -33,8 +40,8 @@
                         <div class="input-group">
                             <select class="custom-select" name="HOR_LUNES1">
                                 <option value=""></option>
-                                @foreach ($materias as $materia)
-                                <option value="{{ $materia->MAT_CODIGO }}">{{ $materia->MAT_ABREVIATURA }}</option>
+                                @foreach ($materias->sortBy('MAT_ABREVIATURA') as $materia)
+                                <option value="{{ $materia->MAT_CODIGO }}">{{ $materia->MAT_ABREVIATURA}}</option>
                                 @endforeach
                             </select>
                             <div class="input-group-append">
@@ -48,7 +55,7 @@
                         <div class="input-group">
                             <select class="custom-select" name="HOR_MATES1">
                                 <option value=""></option>
-                                @foreach ($materias as $materia)
+                                @foreach ($materias->sortBy('MAT_ABREVIATURA') as $materia)
                                 <option value="{{ $materia->MAT_CODIGO }}">{{ $materia->MAT_ABREVIATURA }}</option>
                                 @endforeach
                             </select>

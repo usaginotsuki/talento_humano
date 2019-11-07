@@ -86,7 +86,7 @@
                 </tbody>  
             @endforeach     
     </table>
-   <button onclick="#" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+   <button onclick="#" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
 @endif
 
 
