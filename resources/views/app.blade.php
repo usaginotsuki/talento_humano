@@ -22,25 +22,15 @@
 </head>
 <body>
   <header>
-  <div class="header-img" style="background-image:url({{URL::asset('images/principal/header.png')}})">
-      <ul class="nav topnav float-right">
-   
-      <a type="button" class="btn btn-dark" href="{{url('/')}}">Inicio</a>
-
-     
-
-      <a type="button" class="btn btn-dark" href="">Entrar</a>
-  
-      </ul>
-  </div>
+    <div class="header-img" style="background-image:url({{URL::asset('images/principal/header.png')}})">
+        <ul class="nav topnav float-right">
+          <a type="button" class="btn btn-dark" href="{{url('/')}}">Inicio</a>
+          <a type="button" class="btn btn-dark" href="">Entrar</a>
+        </ul>
+    </div>
   </header>
 
-  
-
-    @include('shared.navbar')
-  
-
-
+  @include('shared.navbar')
 
   @yield('content')
 
@@ -68,4 +58,4 @@
   <script type="text/javascript" src="{{ URL::asset('js/jspdf.plugin.autotable.js') }}"></script>
   <script type="text/javascript" src="{{ URL::asset('js/jsReport.js') }}"></script>
   <script type="text/javascript" src="{{ URL::asset('js/combo.js') }}"></script> 
- <script type="text/javascript" src="{{ URL::asset('js/primer.js') }}"></script> 
+  <script type="text/javascript" src="{{ URL::asset('js/primer.js') }}"></script> 
