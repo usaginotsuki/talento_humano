@@ -1,6 +1,13 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Mauro Morales - Jerson Morocho
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
+<div class="container-fluid">
   <h2>Empresa</h2>
   @if (session('title') && session('subtitle'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -13,11 +20,11 @@
   @endif
   <div class="row">
       <div class="col">
-          <a href="{{url('empresa/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+          <a href="{{url('empresa/create')}}" class="btn btn-success mb-2">Nuevo</a>
       </div>
       <div class="col"></div>
-      <div class="col"></div>
   </div>  
+  <span class="counter pull-right"></span>
   <table id="ListTable" class="table table-hover table-bordered table-responsive results">
     <thead>
       <tr>

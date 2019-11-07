@@ -45,9 +45,9 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @else
-                    <button disabled onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button disabled onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif
                 </div>
             </div>

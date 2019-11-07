@@ -1,7 +1,15 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Jerson Morocho
+ Revisado por: Jerson Morocho
+ -->
+
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Horario por salas</h2>
+@include('shared.title', array('titulo' => 'Reporte Horario por Salas'))
+
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <form action="{{url('/reporte/horario/sala')}}" method="post">
@@ -49,15 +57,16 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @else
-                    <button disabled class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button disabled class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif
                 </div>
             </div>
         </div>
     </div>
     <br>
+    
     <!-- horario -->
     @if (isset($count) && $count === 1)
     <p id="sala">
