@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 class EmpresaController extends Controller {
 
 	/**
-	 * Display a listing of the resource.
+	 * Despliega la vista principal del módulo empresa
 	 *
-	 * @return Response
+	 * @return view "empresa.index" & $empresas
 	 */
 	public function index()
 	{
@@ -22,7 +22,7 @@ class EmpresaController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Despliega el formulario para crear una nueva empresa
 	 *
 	 * @return Response
 	 */
@@ -33,9 +33,13 @@ class EmpresaController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Guarda una empresa en la base de datos.
+	 * El método recibe un objeto $request con los valores enviados del formulario.
+	 * Guarda los datos con el método create.
+	 * Redirecciona a la view "empresa"
 	 *
-	 * @return Response
+	 * @param  Request  $request
+	 * @return redirect view "empresa" & title & subtitle
 	 */
 	public function store(Request $request)
 	{
@@ -65,9 +69,7 @@ class EmpresaController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
+	 * Despliega el formulario para editar Empresa	 *
 	 * @return Response
 	 */
 	public function edit($id)
@@ -82,10 +84,13 @@ class EmpresaController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Edita una empresa en la base de datos.
+	 * El método recibe un objeto $request con los valores enviados del formulario.
+	 * Guarda los datos con el método update.
+	 * Redirecciona a la view "empresa"
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Request  $request
+	 * @return redirect view "empresa" & title & subtitle
 	 */
 	public function update(Request $request)
 	{
@@ -102,7 +107,7 @@ class EmpresaController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Eliminar una Empresa  de la base de datos.
 	 *
 	 * @param  int  $id
 	 * @return Response

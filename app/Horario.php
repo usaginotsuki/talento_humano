@@ -153,20 +153,45 @@ class Horario extends Model {
 		'HOR_VIERNES13_OPC'
 	];
 	public $timestamps = false;
-
+	/**
+	 * Relación uno-uno entre Horario y Periodo.
+	 *
+	 * @return Horario $this relacion uno-uno
+	 */
 	public function periodo() {
 		return $this->belongsTo('App\Periodo', 'PER_CODIGO');
 	}
-
+	/**
+	 * Relación uno-uno entre Horario y Carrera.
+	 *
+	 * @return Carrera $this relacion uno-uno
+	 */
 	public function laboratorio() {
 		return $this->belongsTo('App\Laboratorio', 'LAB_CODIGO');
 	}
-
+	/**
+	 * Metodo scope
+	 * Realiza una consulta a la tabla Horario
+	 * Retorna un scope al que le añade una consulta select 
+	 * con los campos 'PER_CODIGO' solo mientras tenga 'LAB_CODIGO'
+	 *
+	 * @param Scope $query
+	 * @return Scope $query
+	 */	
 	public function scopeObtenerHorario($query, $periodoId, $laboratorioId)
 	{
 		return $query->where('PER_CODIGO', $periodoId)
 			->where('LAB_CODIGO', $laboratorioId);
 	}
+	/**
+	 * Metodo scope
+	 * Realiza una consulta a la tabla Horario
+	 * Retorna un scope al que le añade una consulta select 
+	 * con los campos 'PER_CODIGO'
+	 *
+	 * @param Scope $query
+	 * @return Scope $query
+	 */
 	public function scopeObtenerHorarioPorPeriodo($query, $periodoId)
 	{
 		return $query->where('PER_CODIGO', $periodoId);

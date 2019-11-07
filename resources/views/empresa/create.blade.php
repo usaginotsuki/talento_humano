@@ -1,20 +1,35 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Mauro Morales - Jerson Morocho
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
+
 <div class="container">
     <h2>Crear Empresa</h2>
+
+    @if(isset($mensajes))
+        <div class="alert alert-warning">
+            {{ $mensajes }}
+        </div>
+    @endif 
+    <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p> 
     <form action="{{url('/empresa/store')}}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row"> 
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_NOMBRE">Nombre Laboratorio General</label>
+                    <label for="EMP_NOMBRE">Nombre Laboratorio General <span style="color:#FF0000";>*</span></label>
                     <input type="text" class="form-control"  name="EMP_NOMBRE" required>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_FIRMA_DEE"> Director de Departamento</label>
+                    <label for="EMP_FIRMA_DEE"> Director de Departamento <span style="color:#FF0000";>*</span></label>
                     <input type="text" class="form-control"  name="EMP_FIRMA_DEE" required>
                 </div>
             </div>
@@ -23,14 +38,14 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_PIE_DEE:">Cargo del Director Departamento</label>
+                    <label for="EMP_PIE_DEE:">Cargo del Director Departamento <span style="color:#FF0000";>*</span></label>
                     <input type="text" class="form-control"  name="EMP_PIE_DEE"  required>
                 </div>
             </div>
             
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_FIRMA_JEFE">Jefe del Laboratorio</label>
+                    <label for="EMP_FIRMA_JEFE">Jefe del Laboratorio <span style="color:#FF0000";>*</span></label>
                     <input type="text" class="form-control"  name="EMP_FIRMA_JEFE"  required>
                 </div>
             </div>
@@ -39,14 +54,14 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_PIE_JEFE">Cargo del Jefe de Laboratorio</label>
+                    <label for="EMP_PIE_JEFE">Cargo del Jefe de Laboratorio <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control" name="EMP_PIE_JEFE" required>
                 </div>
             </div>
             
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_FIRMA_LAB"> Laboratorista</label>
+                    <label for="EMP_FIRMA_LAB"> Laboratorista <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control"  name="EMP_FIRMA_LAB" required>
                 </div>
             </div>
@@ -55,14 +70,14 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_PIE_LAB">Cargo del Laboratorista</label>
+                    <label for="EMP_PIE_LAB">Cargo del Laboratorista <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control" name="EMP_PIE_LAB" required>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_RELACION_SUFICIENCIA">Relacion Suficiencia</label>
+                    <label for="EMP_RELACION_SUFICIENCIA">Relacion Suficiencia <span style="color:#FF0000";>*</span></label>
                     <input type="number"  class="form-control" name="EMP_RELACION_SUFICIENCIA" required>
                 </div>
             </div>
@@ -71,14 +86,14 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_IMAGEN_ENCABEZADO">Imagen Encabezado</label>
+                    <label for="EMP_IMAGEN_ENCABEZADO">Imagen Encabezado <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control" name="EMP_IMAGEN_ENCABEZADO" required>
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_IMAGEN_ENCABEZADO2">Imagen Encabezado 2</label>
+                    <label for="EMP_IMAGEN_ENCABEZADO2">Imagen Encabezado 2 <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control" name="EMP_IMAGEN_ENCABEZADO2" required>
                 </div>
             </div>
@@ -87,13 +102,13 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_AUX1">Auxiliar</label>
+                    <label for="EMP_AUX1">Auxiliar <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control" name="EMP_AUX1" required>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="EMP_AUX2">Auxiliar 2</label>
+                    <label for="EMP_AUX2">Auxiliar 2 <span style="color:#FF0000";>*</span></label>
                     <input type="text"  class="form-control" name="EMP_AUX2" required>
                 </div>
             </div>
@@ -102,7 +117,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="INS_CODIGO">Institucion</label>
+                    <label for="INS_CODIGO">Institucion <span style="color:#FF0000";>*</span></label>
                     <select class="form-control" id="INS_CODIGO" name="INS_CODIGO" placeholder="Institucion"  required>
                         @foreach ($instituciones as $ins)
                         <option value="{{$ins->INS_CODIGO}}">{{$ins->INS_NOMBRE}}</option>
