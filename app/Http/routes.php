@@ -146,7 +146,7 @@ Route::post('reporte/guia/docente', 'ReportesController@usoGuiasEntregadasPost')
 Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
 ///////////////////////////////////////////////////////////////////
-Route::get('guias/listarGuias/{id}', 'GuiaController@listarGuias');
+Route::get('guia/listarGuias/{id}', 'GuiaController@listarGuias');
 Route::get('guia/{id}/edit', 'GuiaController@edit');
 Route::get('guia/{id}/destroy', 'GuiaController@destroy');
 Route::post('guia/update', 'GuiaController@update');
