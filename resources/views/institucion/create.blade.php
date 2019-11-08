@@ -1,18 +1,17 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Crear Institución'))
 <body>
-<div class="jumbotron">
-    <h2>Crear Institucion</h2>
-</div>
+
     <div class="container-fluid">
-        <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p>
+        <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatórios</h5></p>
         <form action="{{url('institucion/store')}}"  method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row"> 
                 <div class="col">
                     <div class="form-group">
-                        <label for="INS_NOMBRE">Nombre Institucion<span style="color:#FF0000";>*</span></label>
-                        <input type="text" class="form-control"  name="INS_NOMBRE" required placeholder="Ingrese el nombre de una institucion" required>
+                        <label for="INS_NOMBRE">Nombre Institución<span style="color:#FF0000";>*</span></label>
+                        <input type="text" class="form-control"  name="INS_NOMBRE" required placeholder="Ingrese el nombre de una institución" required>
                     </div>
                 </div>
             

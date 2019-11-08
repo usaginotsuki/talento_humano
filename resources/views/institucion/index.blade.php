@@ -1,10 +1,9 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Institución'))
+
  <body >
 
-  <div class="jumbotron">
-    <h2>Institucion</h2>
-  </div>
   <div class="container-fluid" >
       
       <a href="institucion/create" class="btn btn-success mb-2" >Nuevo</a> 
@@ -14,7 +13,7 @@
           <tr>
             <th>ID</th>
             <th>Nombre</th> 
-            <th>Firma Direccion</th>
+            <th>Firma Dirección</th>
             <th>Pie Director</th> 
             <th>Pie Director Dos</th>
             <th>Auxiliar</th>

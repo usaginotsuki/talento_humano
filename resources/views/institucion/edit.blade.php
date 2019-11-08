@@ -1,9 +1,7 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Actualizar Institución'))
 
-<div class="jumbotron">
-    <h2>Actualizar Institución</h2>
-</div>
 
 <div class="container-fluid">
     <form  action="{{url('institucion/update')}}"  method="post">
@@ -12,7 +10,7 @@
         <div class="row"> 
             <div class="col">
                 <div class="form-group">
-                    <label for="INS_NOMBRE">Nombre Institucion</label>
+                    <label for="INS_NOMBRE">Nombre Institución</label>
                     <input type="text" class="form-control"  name="INS_NOMBRE" value="{{$institucion->INS_NOMBRE}}" required>
                 </div>
             </div>
