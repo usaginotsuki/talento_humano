@@ -1,11 +1,11 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')    
+
 <div class="container-fluid">
     <h2>Evento ocacional </h2>
     <div class="row">
         <div class="col">
-            <form action="{{url('/reporte/eventos')}}" method="post">
+            <form action="{{url('/reporte/ocasionales')}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="card border-primary mb-3">
                     <div class="card-header text-primary">Consultar</div>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body text-primary">
                     <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
-                    <a type="button" href="{{url('/reporte/pdfevento/'.$periodoActual.'')}}" class="btn btn-primary"><span class="oi -cloud-download"></span> Descargar</a>
+                  
                     </div>
                     
                 </div>
@@ -68,8 +68,10 @@
             <span style="font-weight: 300;">EVENTO OCASIONAL</span>
         </span>
         <br>
-        <span class="h6" style="margin-right:150px;">PERIODO:;
-            <span style="font-weight: 300;">{{ $data[$periodoActual]->PER_NOMBRE }}</span>
+        <span class="h6" style="margin-right:150px;">PERIODO;
+        @if (isset($periodos[$periodoActual]))
+            <span style="font-weight: 300;">{{ $periodos[$periodoActual]->PER_NOMBRE }}</span>
+        @endif
         </span>>
       
     </p>     
@@ -88,21 +90,23 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($data as $eve)
-            
-            <tr>
-                <td scope="row">{{$eve-> CON_CODIGO}}</td>
-                <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
-                <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
-                <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
-                <td scope="row">{{$eve -> CON_DIA }}</td>
-                <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
-                <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
-                <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
-                <td scope="row">{{$eve-> CON_NOTA}}</td>
-            </tr>
-            
-        @endforeach     
+        @if (isset($data))
+                @foreach ($data as $eve)
+                    
+                    <tr>
+                        <td scope="row">{{$eve-> CON_CODIGO}}</td>
+                        <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
+                        <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
+                        <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
+                        <td scope="row">{{$eve -> CON_DIA }}</td>
+                        <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
+                        <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
+                        <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
+                        <td scope="row">{{$eve-> CON_NOTA}}</td>
+                    </tr>
+                    
+                @endforeach     
+        @endif        
         </tbody> 
          </tbody>   
         </tbody> 

@@ -1,11 +1,9 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 
-<div class="jumbotron">
-    <h2>Crear Hora Evento Ocasional</h2>
-</div>
-<div class="container">
+
+<div class="container-fluid">
+<h2>Crear Hora Evento Ocasional</h2>
     <form action="{{url('/eventoocacional/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
@@ -14,6 +12,7 @@
                     <label for="LAB_CODIGO">Sala</label>
                     <select type="input" class="form-control" id="LAB_CODIGO" name="LAB_CODIGO" placeholder="Laboratorio"  required>
                         @foreach ($laboratorios as $laboratorio)
+                        
                             <option value="{{$laboratorio->LAB_CODIGO}}">{{$laboratorio->LAB_NOMBRE}}</option>
                         @endforeach
                     </select> 
@@ -30,13 +29,18 @@
             </div>
         </div>
         <div class="row">
+        
+        </row>
+        <div class="row">
             
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_CODIGO">Docente</label>
                     <select type="input" class="form-control" id="DOC_CODIGO" name="DOC_CODIGO" placeholder="Docente"  required>
                         @foreach ($docentes as $docente)
-                            <option value="{{$docente->DOC_CODIGO}}">{{$docente->DOC_NOMBRES}}</option>
+                            @if (isset($docente->DOC_NOMBRE))
+                                 <option value="{{$docente->DOC_CODIGO}}">{{$docente->DOC_NOMBRE}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

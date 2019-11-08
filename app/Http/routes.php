@@ -112,9 +112,9 @@ Route::get('periodo/{id}/destroy', 'PeriodoController@destroy');
 Route::post('periodo/store', 'PeriodoController@store');
 Route::post('periodo/update', 'PeriodoController@update');
 ///////////////////////////////////////////////////////////////////
-Route::get('eventoocasional','EventoOcacionalController@index');
-Route::get('eventoocasional/create','EventoOcacionalController@create');
-Route::post('eventoocasional/store', 'EventoOcacionalController@store');
+Route::get('ocasionales','EventoOcacionalController@index');
+Route::get('ocasionales/create','EventoOcacionalController@create');
+Route::post('ocasionales/store', 'EventoOcacionalController@store');
 ///////////////////////////////////////////////////////////////////
 Route::get('parametro/{id}/pdf', 'ParametroController@pdf');
 ///////////////////////////////////////////////////////////////////
@@ -135,8 +135,8 @@ Route::post('reporte/horario/docente', 'ReportesController@horarioPorDocentePost
 Route::get('reporte/hoja/control', 'ReportesController@hojaControl');
 Route::post('reporte/hoja/control', 'ReportesController@hojaControl');
 
-Route::get('reporte/eventos', 'ReportesController@eventosOcasionalesIndex');
-Route::post('reporte/eventos', 'ReportesController@eventosOcasionalesPost');
+Route::get('reporte/ocasionales', 'ReportesController@eventosOcasionalesIndex');
+Route::post('reporte/ocasionales', 'ReportesController@eventosOcasionalesPost');
 
 Route::get('reporte/materia/carrera', 'ReportesController@materiaPorCarrera');
 Route::post('reporte/materia/carrera', 'ReportesController@materiaPorCarreraPost');
