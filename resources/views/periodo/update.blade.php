@@ -1,7 +1,14 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Lorena Perez-David Esparza
+ Revisado por: Lorena Perez-David Esparza
+ -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Actualizar Período'))
 <div class="container-fluid">
-    <h2>Actualizar Período</h2>
+    <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
     <form action="{{url('/periodo/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="PER_CODIGO" value="{{ $periodo->PER_CODIGO }}">
@@ -44,7 +51,7 @@
                     <label class="custom-control-label" for="PER_ESTADO">Estado<span style="color:#FF0000";>*</span></label>
                 </div>
             </div>
-        </div>
+        </div><br>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
         <a href="{{url('periodo')}}" class="btn btn-danger mb-2">Cancelar</a>
