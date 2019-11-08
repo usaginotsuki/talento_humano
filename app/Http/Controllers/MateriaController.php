@@ -19,9 +19,17 @@ class MateriaController extends Controller {
 	 */
 	public function index()
 	{
-		$materias = Materia::select('MAT_CODIGO','PER_CODIGO','DOC_CODIGO','CAR_CODIGO','MAT_NRC','MAT_NOMBRE')
-			->paginate(5);
-		return view ('materia.index',compact('materias'));
+
+		$periodoActual=Periodo::where('PER_ESTADO','1')->first();
+		$materias = Materia::select('MAT_CODIGO','DOC_CODIGO','CAR_CODIGO','MAT_NRC','MAT_NOMBRE')->where('PER_CODIGO',$periodoActual->PER_CODIGO)->get();
+		foreach ($materias as $mat) {
+			$carrera = Carrera::select('CAR_NOMBRE')->where('CAR_CODIGO',$mat->CAR_CODIGO)->first();
+			$docente = Docente::select('DOC_NOMBRES','DOC_APELLIDOS')->where('DOC_CODIGO',$mat->DOC_CODIGO)->first();
+			$mat->CAR_CODIGO=$carrera->CAR_NOMBRE;
+			$mat->DOC_CODIGO=$docente->DOC_APELLIDOS.' '.$docente->DOC_NOMBRES;
+			$mat->PER_CODIGO=$periodoActual->PER_NOMBRE;
+		}
+		return view ('materia.index',['materias' => $materias]);
 	}
 
 	/**
