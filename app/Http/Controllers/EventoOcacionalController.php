@@ -33,10 +33,9 @@ class EventoOcacionalController extends Controller {
 	 */
 	public function create()
 	{
-		$laboratorios=laboratorio::all();
-		$materias=materia::all();
-		$docentes=docente::all();
-		
+		$laboratorios=DB::select('select LAB_NOMBRE,LAB_CODIGO from laboratorio ORDER BY LAB_NOMBRE ASC;');
+		$materias=DB::select('select MAT_NOMBRE,MAT_CODIGO from materia ORDER BY MAT_NOMBRE ASC;');
+		$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
 		return view('eventoocacional.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
 

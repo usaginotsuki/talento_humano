@@ -1,6 +1,6 @@
  @extends('app')
 @section('content')
-@include ('shared.navbar')    
+
 
 <div class="container-fluid">
 <h2>Evento Ocacional</h2>
@@ -15,7 +15,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('eventoocacional/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('ocasionales/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>

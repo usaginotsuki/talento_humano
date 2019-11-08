@@ -20,7 +20,7 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('horario')}}">Registrar Horario</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Evento Ocasional</a>
+        <a class="dropdown-item" href="{url('ocasionales')}}">Evento Ocasional</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('control/consola')}}">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
@@ -41,7 +41,7 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('reporte/materia/carrera')}}">Materia por Carrera</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('reporte/eventos')}}">Eventos ocasionales</a>
+        <a class="dropdown-item" href="{{url('reporte/ocasionales')}}">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('reporte/guia/carrera')}}">Guias por Carrera</a>
         <div class="dropdown-divider"></div>

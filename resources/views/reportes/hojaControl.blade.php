@@ -62,7 +62,7 @@
   </div>
   <br>
 
-  <table id="ListTable" class="table table-hover table-bordered results">
+  <table id="ListOC" class="table table-hover table-bordered results">
     <thead>
       <tr>
         <th scope="row">ORD</th>
