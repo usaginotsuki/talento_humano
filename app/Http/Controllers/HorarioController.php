@@ -56,6 +56,7 @@ class HorarioController extends Controller {
 	{
 		$ids = array($labId, $perId);
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
+			->orderby('MAT_ABREVIATURA')
 			->where('PER_CODIGO', $perId)
 			->where('MAT_OCACIONAL', 0)
 			->get();
@@ -501,6 +502,7 @@ class HorarioController extends Controller {
 			->first();
 		
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
+			->orderby('MAT_ABREVIATURA')
 			->where('PER_CODIGO', $perId)
 			->where('MAT_OCACIONAL', 0)
 			->get();
