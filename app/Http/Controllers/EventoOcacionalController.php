@@ -7,6 +7,7 @@ use App\laboratorio;
 use App\materia;
 use App\docente;
 use App\Quotation;
+use App\Control;
 use DB;
 
 use Carbon\Carbon; 
@@ -25,7 +26,8 @@ class EventoOcacionalController extends Controller {
 	{
 		$date = Carbon::now();
 		$date = $date->format('Y-m-d');
-		$data = DB::select('select control.CON_CODIGO as  CON_CODIGO, laboratorio.LAB_NOMBRE as LAB_NOMBRE, materia.MAT_NOMBRE as MAT_NOMBRE,materia.MAT_CODIGO as MAT_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS)   as DOC_NOMBRE ,control.CON_DIA as CON_DIA,control.CON_HORA_ENTRADA as CON_HORA_ENTRADA , control.CON_HORA_SALIDA as CON_HORA_SALIDA, control.CON_NUMERO_HORAS as CON_NUMERO_HORAS, control.CON_NOTA as CON_NOTA  from control,materia,docente,laboratorio where control.LAB_CODIGO = laboratorio.LAB_CODIGO and control.MAT_CODIGO =materia.MAT_CODIGO and control.DOC_CODIGO = docente.DOC_CODIGO and CON_EXTRA=1;');
+		//$control = Control::where('CON_DIA', $date)->get();
+		$data = Control::where('CON_DIA', $date)->get();
 		return view('eventoocacional.index', compact('data'));
 	}
 
@@ -52,21 +54,21 @@ class EventoOcacionalController extends Controller {
 	{
 		EventoOcacional::create([
 			'CON_DIA' => $request['CON_DIA'],
-			'CON_EXTRA' => $request[NULL],
+			//'CON_EXTRA' => $request[NULL],
 			'CON_HORA_ENTRADA' => $request['CON_HORA_ENTRADA'],
 			'CON_HORA_SALIDA' => $request['CON_HORA_SALIDA'],
-			'CON_LAB_ABRE' => $request[NULL],
-			'CON_HORA_ENTRADA_R' => $request[NULL],
-			'CON_REG_FIRMA_ENTRADA' => $request[NULL],
-			'CON_HORA_SALIDA_R' => $request[NULL],
-			'CON_REG_FIRMA_SALIDA' => $request[NULL],
-			'CON_LAB_CIERRE' => $request[NULL],
-			'CON_OBSERVACIONES' => $request[NULL],
-			'CON_NUMERO_HORA' => $request['CON_NUMERO_HORA'],
+			//'CON_LAB_ABRE' => $request[NULL],
+			//'CON_HORA_ENTRADA_R' => $request[NULL],
+			//'CON_REG_FIRMA_ENTRADA' => $request[NULL],
+			//'CON_HORA_SALIDA_R' => $request[NULL],
+			//'CON_REG_FIRMA_SALIDA' => $request[NULL],
+			//'CON_LAB_CIERRE' => $request[NULL],
+			//'CON_OBSERVACIONES' => $request[NULL],
+			'CON_NUMERO_HORAS' => $request['CON_NUMERO_HORAS'],
 			'CON_NOTA' => $request['CON_NOTA'],
-			'CON_EXTRA' => $request[NULL],
-			'CON_GUIA' => $request[NULL],
-			'GUI_CODIGO' => $request[NULL],
+			//'CON_EXTRA' => $request[NULL],
+			//'CON_GUIA' => $request[NULL],
+			//'GUI_CODIGO' => $request[NULL],
 			'LAB_CODIGO' => $request['LAB_CODIGO'],
 			'MAT_CODIGO' => $request['MAT_CODIGO'],
 			'DOC_CODIGO' => $request['DOC_CODIGO'],
