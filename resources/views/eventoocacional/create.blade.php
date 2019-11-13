@@ -82,7 +82,7 @@
         </div>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Crear</button>
-        <a href="{{url('eventoocacional')}}" class="btn btn-danger mb-2">Cancelar</a>
+        <a href="{{url('ocasionales')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
 @endsection

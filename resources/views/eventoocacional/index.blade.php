@@ -39,15 +39,15 @@
         @foreach ($data as $eve)
             
             <tr>
-                <td scope="row">{{$eve-> CON_CODIGO}}</td>
-                <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
-                <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
-                <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
+                <td scope="row">{{$eve -> CON_CODIGO}}</td>
+                <td scope="row">{{$eve -> laboratorio -> LAB_NOMBRE}}</td>
+                <td scope="row">{{$eve -> materia -> MAT_NOMBRE}}</td>
+                <td scope="row">{{$eve -> docente -> DOC_NOMBRES}} {{$eve -> docente->DOC_APELLIDOS}}</td>
                 <td scope="row">{{$eve -> CON_DIA }}</td>
                 <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
                 <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
                 <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
-                <td scope="row">{{$eve-> CON_NOTA}}</td>
+                <td scope="row">{{$eve -> CON_NOTA}}</td>
             </tr>
             
         @endforeach   
