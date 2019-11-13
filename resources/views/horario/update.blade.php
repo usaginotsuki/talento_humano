@@ -7,8 +7,9 @@
 -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Actualizar Horario'))
+
 <div class="container-fluid">
-    <h2>Actualizar Horario</h2>
     <div class="card border-primary mb-3">
         <div class="card-header">Recomendaciones</div>
         <div class="card-body text-primary">

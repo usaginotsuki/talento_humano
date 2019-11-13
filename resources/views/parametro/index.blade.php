@@ -1,8 +1,15 @@
+<!-- 
+    Sistema de Gestion de Laboratorios - ESPE
+
+    Author: Antony Andrade - Jonel Lopez
+    Revisado por: Andrade - Jonel Lopez
+-->
+
 @extends('app')
 @section('content')
-@include('shared.navbar')
-<div class="container">
-    <h2>Parámetros</h2>
+@include('shared.title', array('titulo' => 'Parámetros'))
+
+<div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -38,11 +45,13 @@
                 <td scope="row">{{$par->PAR_CODIGO}}</td>
                 <td scope="row">{{$par->PAR_TODOS}}</td>
                 <td scope="row">{{$par->empresa->EMP_NOMBRE}}</td>
-                @if ($par->PAR_SINO === '0')
-                <td scope="row">NO</td>
-                @else
-                <td scope="row">SI</td>
-                @endif
+                <td scope="row">
+                    @if ($par->PAR_SINO === '0')
+                        <span class="badge badge-danger">NO</span>
+                    @elseif ($par->PAR_SINO !== '0')
+                        <span class="badge badge-primary">SI</span>
+                    @endif
+                </td>
                 <td scope="row">{{$par -> PAR_DESTINO}}</td>
                 <td scope="row">{{$par -> DOC_CODIGO}}</td>
                 <td>

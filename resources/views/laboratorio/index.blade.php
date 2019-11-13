@@ -1,8 +1,14 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Lorena Perez-David Esparza
+ Revisado por: Lorena Perez-David Esparza
+ -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Laboratorios'))
 
 <div class="container-fluid">
-    <h2>Laboratorios</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -14,13 +20,13 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('laboratorio/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('laboratorio/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>
     </div>
 
-    <table id="ListTable" class="table table-hover table-bordered results">
+    <table class="table table-hover table-bordered results" id="ListTable">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -31,8 +37,10 @@
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
-        @foreach ($laboratorios as $lab)
+        
         <tbody>
+        @foreach ($laboratorios as $lab)
+            <tr>
             <td scope="row">{{$lab -> LAB_CODIGO}}</td>
             <td scope="row">{{$lab -> LAB_NOMBRE}}</td>
             <td scope="row">{{$lab -> LAB_CAPACIDAD}}</td>
@@ -44,8 +52,11 @@
                     <a href="{{url('laboratorio/'.$lab->LAB_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
                 </div>
             </td>
+            </tr>
+            
+            @endforeach 
         </tbody>
-        @endforeach   
+          
 </table>
 <!-- BOTONES DE NAVEGACION -->
 <!-- <div class="clearfix">

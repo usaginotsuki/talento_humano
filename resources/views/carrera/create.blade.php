@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Crear Carrera'))
 
-<div class="jumbotron">
-    <h2>Crear Carrera</h2>
+<div class="container-fluid">
     @if($errors->any())
     <div class="alert alert-danger">
         @foreach($errors->all() as $error)
@@ -10,8 +10,6 @@
         @endforeach
     </div>
     @endif
-</div>
-<div class="container-fluid">
     <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p>
     <form action="{{url('/carrera/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -2,6 +2,7 @@
  Sistema de Gestion de Laboratorios - ESPE
  
  Author: Jerson Morocho
+         Barrera Erick - LLamuca Andrea
  Revisado por: Jerson Morocho
  -->
 
@@ -13,7 +14,7 @@
   <div class="card border-primary mb-3">
     <div class="card-header text-primary">Consultar</div>
     <div class="card-body text-primary">
-      <form action="{{ url('reporte/hojacontrol') }}" method="post">
+      <form action="{{ url('reporte/hoja/control') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
       
         <div class="row">
@@ -55,14 +56,17 @@
         <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" />
         <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO" />
         @endif
-  
+
+        @if(!empty($controles))
         <button type="submit" class="btn btn-info mb-2"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+        @endif    
       </form>
     </div>
   </div>
   <br>
 
-  <table id="ListTable" class="table table-hover table-bordered results">
+  @if(!empty($controles))
+  <table id="ListOC" class="table table-hover table-bordered results">
     <thead>
       <tr>
         <th scope="row">ORD</th>
@@ -85,5 +89,6 @@
       </tr>
       @endforeach
   </table>
+  @endif
 </div>
 @endsection

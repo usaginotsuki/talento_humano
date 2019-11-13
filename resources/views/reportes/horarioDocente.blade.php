@@ -1,8 +1,8 @@
 <!--
  Sistema de Gestion de Laboratorios - ESPE
  
- Author: Jerson Morocho
- Revisado por: Jerson Morocho
+ Author: Antony Andrade - Jonel Lopez
+ Revisado por: Antony Andrade - Jonel Lopez
  -->
 
 @extends('app')
@@ -24,7 +24,7 @@
                         </select>
                         <select class="selectpicker show-tick mb-3" title="Seleccione un Docente..." name="docente" data-live-search="true" data-width="100%">
                             @foreach ($docentes as $docente)
-                            <option value="{{ $docente->DOC_CODIGO }}">{{ $docente->DOC_NOMBRES }}</option>
+                            <option value="{{ $docente->DOC_CODIGO }}">{{$docente->DOC_TITULO}} {{$docente->DOC_APELLIDOS}} {{$docente->DOC_NOMBRES}}</option>
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>

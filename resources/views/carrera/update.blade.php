@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Actualizar Carrera'))
 
-<div class="jumbotron">
-    <h2>Actualizar Carrera</h2>
+<div class="container-fluid">
     @if($errors->any())
     <div class="alert alert-danger">
         @foreach($errors->all() as $error)
@@ -10,8 +10,6 @@
         @endforeach
     </div>
     @endif
-</div>
-<div class="container-fluid">
     <form action="{{url('/carrera/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="CAR_CODIGO" value="{{ $carrera->CAR_CODIGO }}">

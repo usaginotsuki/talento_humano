@@ -1,9 +1,15 @@
+<!-- 
+    Sistema de Gestion de Laboratorios - ESPE
+
+    Author: Antony Andrade - Jonel Lopez
+    Revisado por: Andrade - Jonel Lopez
+-->
+
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-<div class="container">
-<h2>Actualizar Parámetro</h2>
-<h3>CODIGO {{ $parametro->PAR_CODIGO }}</h3>
+@include('shared.title', array('titulo' => 'Actualizar Parámetro'))
+
+<div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>

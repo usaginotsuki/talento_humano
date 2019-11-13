@@ -1,10 +1,15 @@
+<!-- 
+    Sistema de Gestion de Laboratorios - ESPE
+
+    Author: Antony Andrade - Jonel Lopez
+    Revisado por: Andrade - Jonel Lopez
+-->
+
 @extends('app')
 @section('content')
-@include ('shared.navbar')
- <body >
+@include('shared.title', array('titulo' => 'Hora'))
 
-    <h2>Hora</h2>
-  <div class="container fluid" >
+<div class="container-fluid">
   @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -30,24 +35,26 @@
         </thead>
         <tbody>
         
-        
+
         @foreach ($horas as $hora)
             <tr>
                 <td scope="row">{{$hora -> HORA_CODIGO}}</td>
                 <td scope="row">{{$hora -> empresa->EMP_NOMBRE}}</td>
                 <td scope="row">{{$hora -> HORA_NOMBRE}}</td>
                 <td>
-                    <form action="{{url('/hora/'.$hora->HORA_CODIGO.'/destroy')}}" method="POST" class="float-right">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
-                    </form>
-                    <a href="{{url('hora/'.$hora->HORA_CODIGO.'/edit')}}" class="btn btn-primary mb-2 float-right"><span class="oi oi-pencil"></span></a>
-                    &nbsp;
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{url('hora/'.$hora->HORA_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        
+                        <form action="{{url('/hora/'.$hora->HORA_CODIGO.'/destroy')}}" method="POST" class="float-right">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
         <tbody>
      </table>
     </div >
-</body>
+</div>
 @endsection

@@ -1,5 +1,8 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Consola de Control'))
+
+
  <body >
         <div class="container">
                 <h2>Editar Control</h2>

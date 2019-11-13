@@ -1,9 +1,8 @@
  @extends('app')
 @section('content')
-@include ('shared.navbar')    
+@include('shared.title', array('titulo' => 'Evento Ocasional'))
 
 <div class="container-fluid">
-<h2>Evento Ocacional</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -15,7 +14,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('eventoocacional/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('ocasionales/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -38,15 +37,15 @@
         @foreach ($data as $eve)
             
             <tr>
-                <td scope="row">{{$eve-> CON_CODIGO}}</td>
-                <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
-                <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
-                <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
+                <td scope="row">{{$eve -> CON_CODIGO}}</td>
+                <td scope="row">{{$eve -> laboratorio -> LAB_NOMBRE}}</td>
+                <td scope="row">{{$eve -> materia -> MAT_NOMBRE}}</td>
+                <td scope="row">{{$eve -> docente -> DOC_NOMBRES}} {{$eve -> docente->DOC_APELLIDOS}}</td>
                 <td scope="row">{{$eve -> CON_DIA }}</td>
                 <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
                 <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
                 <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
-                <td scope="row">{{$eve-> CON_NOTA}}</td>
+                <td scope="row">{{$eve -> CON_NOTA}}</td>
             </tr>
             
         @endforeach   
