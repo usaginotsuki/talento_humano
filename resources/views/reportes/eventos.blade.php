@@ -7,19 +7,28 @@
         <div class="col">
             <form action="{{url('/reporte/ocasionales')}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+   
                 <div class="card border-primary mb-3">
                     <div class="card-header text-primary">Consultar</div>
                     <div class="card-body text-primary">
-                    <select class="form-control" id="PER_CODIGO" name="PER_CODIGO"  >
-                    @foreach ($periodos as $per)
-                      @if($per->PER_CODIGO==$periodoActual)
-                        <option value="{{$per->PER_CODIGO}}" selected="{{$per->PER_CODIGO}}">{{$per->PER_NOMBRE}}</option>
-                      @else
-                      <option value="{{$per->PER_CODIGO}}"  >{{$per->PER_NOMBRE}}</option>
-                      @endif
-                    @endforeach
-                  </select> 
+                        <span style="font-weight: 300;">Periodo</span>
+                        <select required class="form-control" id="PER_CODIGO" name="PER_CODIGO"  >
+                            @foreach ($periodos as $per)
+                            @if($per->PER_CODIGO==$periodoActual)
+                                <option value="{{$per->PER_CODIGO}}" selected="{{$per->PER_CODIGO}}">{{$per->PER_NOMBRE}}</option>
+                            @else
+                                <option value="{{$per->PER_CODIGO}}"  >{{$per->PER_NOMBRE}}</option>
+                            @endif
+                            @endforeach
+                        </select> 
                        
+                    </div>
+                    <div class="card-body text-primary">
+                        <span style="font-weight: 300;">Fecha Inicial</span>
+                        <input required  type="date" class="form-control"   id="fechaInicial" name="fechaInicial" value="{{$fechaInicial}}" ></input>                    </div>
+                    <div class="card-body text-primary">
+                        <span style="font-weight: 300;">Fecha Final</span> 
+                        <input required type="date" class="form-control" id="fechaFinal" name="fechaFinal" value="{{$fechaFinal}}" ></input>
                     </div>
                     <div class="card-body text-primary">
                     <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
@@ -41,7 +50,11 @@
                     </form>
                     <br>    
                     @if (isset($data))
-                      <button onclick="exportEventoOcasional()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+                        @if(count($data)>0)
+                             <a href="{{url('reporte/pdfevento/'.$periodoActual.'/'.$fechaInicial.'/'.$fechaFinal)}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
+                         @else
+                             <button disabled onclick="exportEventoOcasional()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+                        @endif
                     @else
                        <button disabled onclick="exportEventoOcasional()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif
@@ -68,14 +81,17 @@
             <span style="font-weight: 300;">EVENTO OCASIONAL</span>
         </span>
         <br>
-        <span class="h6" style="margin-right:150px;">PERIODO;
-        @if (isset($periodos[$periodoActual]))
-            <span style="font-weight: 300;">{{ $periodos[$periodoActual]->PER_NOMBRE }}</span>
+        <span class="h6" style="margin-right:150px;">PERIODO:{{$periodoActual}}
+        @if (count($data)>0)
+            <span style="font-weight: 300;">{{ $data[0]->PER_NOMBRE }}</span>
+        @else
+            <span style="font-weight: 300;">{{ $periodos[0]->PER_NOMBRE }}</span>
+
         @endif
-        </span>>
+        </span>
       
     </p>     
-    <table id="ListTable" class="table table-hover table-bordered results">
+    <table id="ListOC" class="table table-hover table-bordered results">
     <thead>
             <tr>
                 <th scope="row">ID</th>
@@ -90,25 +106,32 @@
             </tr>
         </thead>
         <tbody>
-        @if (isset($data))
-                @foreach ($data as $eve)
-                    
+            @if (count($data)>0))
+
+                    @foreach ($data as $eve)
+                        
+                        <tr>
+                            <td  scope="row">{{$eve-> CON_CODIGO}}</td>
+                            <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
+                            <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
+                            <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
+                            <td scope="row">{{$eve -> CON_DIA }}</td>
+                            <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
+                            <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
+                            <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
+                            <td scope="row">{{$eve-> CON_NOTA}}</td>
+                        </tr>
+                        
+                    @endforeach     
+            @else
+                <table align="center" >
                     <tr>
-                        <td scope="row">{{$eve-> CON_CODIGO}}</td>
-                        <td scope="row">{{$eve -> LAB_NOMBRE}}</td>
-                        <td scope="row">{{$eve -> MAT_NOMBRE}}</td>
-                        <td scope="row">{{$eve -> DOC_NOMBRE}}</td>
-                        <td scope="row">{{$eve -> CON_DIA }}</td>
-                        <td scope="row">{{$eve -> CON_HORA_ENTRADA}}</td>
-                        <td scope="row">{{$eve -> CON_HORA_SALIDA}}</td>
-                        <td scope="row">{{$eve -> CON_NUMERO_HORAS}}</td>
-                        <td scope="row">{{$eve-> CON_NOTA}}</td>
+                        <td scope="row"><h3>Valores no encontrados</h3></td>
                     </tr>
-                    
-                @endforeach     
-        @endif        
-        </tbody> 
-         </tbody>   
+                </table>
+            @endif        
+         
+    
         </tbody> 
 </table>
 
@@ -116,3 +139,4 @@
 </div>
 
 @endsection
+
