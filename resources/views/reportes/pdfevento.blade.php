@@ -41,99 +41,79 @@ p{
 </head>
 
 <body>
- <table>
-        <thead>
-            <tr>
-              <th scope="row" id="centrado"width="25%">  <img src="<?php echo $_SERVER["DOCUMENT_ROOT"].'/images/reportes/espelogo.png';?>"/>   </th>
-              <th scope="row" id="centrado"width="60%"><h3>UNIVERSIDAD DE LAS FUERZAS ARMADAS <h3><br>
-                                                      <h4>DEPARTAMENTO DE ELECTRICA Y ELECTRONICA</h4>
-                                                      <h6>LABORATORIO DE REDES E INFORMATICA</h6></th>
-              <th scope="row"width="15%">
-                <p>CÓDIGO: DCM.LB.11 <br>
-                VERSIÓN: 1.0 <br>
-                FECHA ÚLTIMA REVISIÓN: 08/06/2017     
-                </p></th>
-            </tr>
-        </thead>
- </table>
+<header &copy;>
+<div  >
+<img  style='height: 100%; width: 100%;' src="http://webltga.espe.edu.ec/sg-lab/images/encabezado.png"  >
+<div>
  <br>
- <table>
-        <thead>
+ <table border="0px">
+        <thead style="border:0 ">
             <tr>
-              <td scope="row" id="fondo"width="15%"> REPORTE: </td>
-              <td scope="row" id="centrado"width="35%"> REPORTE EVENTOS OCACIONALES </td>
-              <td scope="row" id="fondo"width="20%"> PERIODO: </td>
-              <td scope="row" id="centrado"width="30%"> $data[0]->PER_NOMBRE  </td>
+              <td scope="row"  width="20%"> <b>REPORTE</td>
+              <td scope="row" id="centrado"width="30%">: REPORTE EVENTOS OCACIONALES </td>
+              <td scope="row"  width="20%"> <b> </td>
+              <td scope="row" id="centrado"width="30%">:  </td>
             </tr>
         </thead>
+  </table>
+  <table border="0px">
+        <thead>
+            <tr>
+              <td scope="row"  width="20%"> <b>PERIODO</b> </td>
+              <td scope="row" width="30%">: {{$data[0]->PER_NOMBRE}}  </td>
+              <td scope="row" width="20%"> <b> FECHAS</b> </td>
+              <td scope="row" width="30%">: DE {{$fechaInicial}} AL{{$fechaFinal}}  </td>
+            </tr>
+        </thead>
+  </table>
+  <br>
+  </header>
+  <table align="center">
+            <tr>
+              <td style="text-align: center; vertical-align: middle;" scope="row" width="3.9%" >  <b>ORD</b> </td>
+              <td style="text-align: center; vertical-align: middle;" scope="row" width="10%" ><b>FECHA</b> </td>
+              <td style="text-align: center; vertical-align: middle;" scope="row"  width="15%"> <b>SALAS</b></td>
+              <td style="text-align: center; vertical-align: middle;" scope="row" width="23%" > <b>MATERIA</b> </td>
+              <td style="text-align: center; vertical-align: middle;" scope="row" width="20%" > <b>DOCENTE</b> </td>
+              <td style="text-align: center; vertical-align: middle;" scope="row" width="11%" > <b>HORAS</b> </td>             
+              <td style="text-align: center; vertical-align: middle;" scope="row" width="11%" > <b>NOTA</b> </td>
+              
+
+            </tr>
   </table>
   
   <table>
-            <tr>
-              <td scope="row" id="fondo"width="7.5%" > FECHA </td>
-             
-              <td scope="row" id="fondo" width="15%">
-                SALAS
-              </td>
-              <td scope="row" id="fondo"width="20%" > DOCENTE </td>
-              <td scope="row" id="fondo"width="23%" > MATERIA </td>
-              <td scope="row" id="fondo"width="7%" > NUMERO DE HORAS </td>
-              <td scope="row" id="fondo" width="9%">
-                <table id=internatabla>
-                  <tr>
-                    <td scope="row" id="fondo"width="100%"> Horario </td>
-                  </tr>
-                  <table id=internatabla>
-                    <tr>
-                       <td scope="row" id="fondo" width="50%"> INICIO </td>
-                        <td scope="row" id="fondo" width="50%"> FINAL </td>
-                    </tr>
-                  </table>
-                </table>
-              </td>
-              
-              <td scope="row" id="fondo"width="11%" > OBSERVACIONES </td>
-              
-
-            </tr>
-  </table>
-  <table>
          <tbody >
-       @foreach ($data as $con)
+        
+       @for ($i = 0; $i < count($data); $i++)
+       
         <tr>
-          <td scope="row" id="centrado"width="7.5%">{{$con -> CON_DIA}}</td>  
-          
-          
-          <td scope="row"id="centrado"width="15%">{{$con->LAB_NOMBRE}}</td>
-          
-          <td scope="row"id="centrado"width="20%">
-               {{$con -> DOC_NOMBRE}}
-          </td>
-          <td scope="row"id="centrado"width="23%">{{$con->MAT_NOMBRE}}<</td>
-          <td scope="row"id="centrado"width="7%">{{$con -> CON_NUMERO_HORAS}}</td> 
-          <td scope="row"id="centrado"width="4.5%">{{$con -> CON_HORA_ENTRADA}}</td> 
-          <td scope="row"id="centrado"width="4.5%">{{$con -> CON_HORA_SALIDA}}</td> 
-          
-          <td scope="row"id="centrado"width="11%">
-          {{$con -> CON_NOTA}}
-          </td>  
+          <td style="text-align: left; vertical-align: middle;" scope="row" id="centrado"width="3.9%">{{$i}}</td>
+          <td style="text-align: left; vertical-align: middle;" scope="row" id="centrado"width="10%">{{$data[$i] -> CON_DIA}}</td> 
+          <td style="text-align: left; vertical-align: middle;" scope="row"id="centrado"width="15%">{{$data[$i]->LAB_NOMBRE}}</td>
+          <td style="text-align: left; vertical-align: middle;" scope="row"id="centrado"width="23%"> {{$data[$i] -> MAT_NOMBRE}}</td>
+          <td style="text-align: left; vertical-align: middle;" scope="row"id="centrado"width="20%"> {{$data[$i] -> DOC_NOMBRE}}</td>
+          <td style="text-align: center; vertical-align: middle;" scope="row"id="centrado"width="11%">{{$data[$i] -> CON_NUMERO_HORAS}}</td>  
+          <td style="text-align: left; vertical-align: middle;" scope="row"id="centrado"width="11%">{{$data[$i] -> CON_NOTA}}</td>  
 
         </tr>
-        @endforeach   
+          
+        @endfor 
   
          </tbody>   
 </table>
-<br><br><br>
-<table>
+<br><br><br><br><br>
+<table border="0px">
  <tr>
-  <td scope="row">
-  <p>OBSERVACIONES GENERALES<br><br><br></p>
+ <td scope="row"  style="width:50%; height:auto;"  >
+    <p id="centrado"  style="font-size:13px"><B>REALIZADO POR</B><br><br><br></p>
+    <p id="centrado">
+    Ing. Edgar F. Montaluisa P. MSc. <br>
+    JEFE DEL LABORATORIO DE REDES E INFORMATICA
+    </p>
   </td>
-  <td scope="row"id="centrado">
-  <p>F.....................................................<br>
-  FIRMA....................................................<br>
-  &nbsp;RESPONSABLE DEL LABORATORIO
-  </p>
+  <td  scope="row"id="centrado">
+ 
   </td>
  </tr>
 </table>

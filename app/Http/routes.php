@@ -124,7 +124,7 @@ Route::post('reporte/horario/sala', 'ReportesController@horarioPorSalasPost');
 Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
 
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
-Route::get('reporte/pdfevento/{id}', 'ReportesController@pdfevento');
+Route::get('reporte/pdfevento/{id}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfevento');
 
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
 

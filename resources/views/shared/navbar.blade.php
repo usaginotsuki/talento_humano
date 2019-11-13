@@ -20,7 +20,7 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('horario')}}">Registrar Horario</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{url('ocasionales')}}">Evento Ocasional</a>
+        <a class="dropdown-item" href="{{url('ocasionales')}}">Evento Ocasional</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('control/consola')}}">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
