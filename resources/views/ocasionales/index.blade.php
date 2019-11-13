@@ -1,10 +1,8 @@
  @extends('app')
 @section('content')
-
-
+@include('shared.title', array('titulo' => 'Evento Ocasional'))
 
 <div class="container-fluid">
-<h2>Evento Ocasional</h2>
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>

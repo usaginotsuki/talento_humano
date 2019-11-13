@@ -1,9 +1,7 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Carreras'))
 
-<div class="jumbotron">
-    <h2>Carreras</h2>
-</div>
 <div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">

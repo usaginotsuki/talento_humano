@@ -7,8 +7,9 @@
 -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Campus'))
+
 <div class="container-fluid">
-    <h2>Campus</h2>
     <div class="row">
         <div class="col">
             <a href="{{url('campus/create')}}" class="btn btn-success mb-2">Nuevo</a>

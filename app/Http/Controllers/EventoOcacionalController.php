@@ -28,7 +28,7 @@ class EventoOcacionalController extends Controller {
 		$date = $date->format('Y-m-d');
 		//$control = Control::where('CON_DIA', $date)->get();
 		$data = Control::where('CON_DIA', $date)->get();
-		return view('eventoocacional.index', compact('data'));
+		return view('ocasionales.index', compact('data'));
 	}
 
 	/**
@@ -41,7 +41,7 @@ class EventoOcacionalController extends Controller {
 		$laboratorios=DB::select('select LAB_NOMBRE,LAB_CODIGO from laboratorio ORDER BY LAB_NOMBRE ASC;');
 		$materias=DB::select('select MAT_NOMBRE,MAT_CODIGO from materia ORDER BY MAT_NOMBRE ASC;');
 		$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
-		return view('eventoocacional.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
+		return view('ocasionales.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
 
 	/**
@@ -78,7 +78,5 @@ class EventoOcacionalController extends Controller {
 			->with('title', 'Evento Ocacional registrado!')
 			->with('subtitle', 'El registro del evento ocacional se ha realizado con éxito.');
 	}
-
-	
 
 }

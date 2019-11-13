@@ -1,9 +1,8 @@
 @extends('app')
 @section('content')
-
+@include('shared.title', array('titulo' => 'Crear Hora Evento Ocasional'))
 
 <div class="container-fluid">
-<h2>Crear Hora Evento Ocasional</h2>
     <form action="{{url('/ocasionales/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">

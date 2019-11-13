@@ -7,10 +7,9 @@
 -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Crear Docente'))
 
-<div class="container">
-    <h2>Crear Docente</h2>
-
+<div class="container-fluid">
     @if(isset($mensajes))
         <div class="alert alert-warning">
             {{ $mensajes }}

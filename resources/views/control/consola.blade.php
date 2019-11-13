@@ -1,6 +1,9 @@
 @extends('app')
 @section('content')
 @include ('shared.navbar')
+@include('shared.title', array('titulo' => 'Consola de Control'))
+
+
 <div class="container fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">

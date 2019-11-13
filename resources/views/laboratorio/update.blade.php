@@ -7,8 +7,8 @@
 @extends('app')
 @section('content')
 @include('shared.title', array('titulo' => 'Actualizar Laboratorio'))
-<div class="container-fluid">
     
+<div class="container-fluid">
     <form action="{{url('/laboratorio/update')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="LAB_CODIGO" value="{{ $laboratorio->LAB_CODIGO }}">

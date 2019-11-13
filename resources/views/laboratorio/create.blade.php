@@ -9,7 +9,6 @@
 @include('shared.title', array('titulo' => 'Crear Laboratorio'))
 
 <div class="container-fluid">
-    
     <form action="{{url('/laboratorio/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
  

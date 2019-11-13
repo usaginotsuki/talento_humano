@@ -7,6 +7,8 @@
 -->
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Materias'))
+
 <div class="container-fluid">
     <h2>Materias</h2>
     <div class="row">
