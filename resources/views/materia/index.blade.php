@@ -1,26 +1,20 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
 <div class="container-fluid">
     <h2>Materias</h2>
-    @if (session('title') && session('subtitle'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">{{ session('title') }}</h4>
-        <p>{{ session('subtitle') }}</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('materia/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('materia/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>       
         <div class="col"></div>
         <div class="col"></div>
-
-  
-
-
     </div>
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
@@ -36,9 +30,9 @@
         <tbody >
             @foreach ($materias as $mat)
             <tr>       
-                <td scope="row">{{$mat-> PER_CODIGO}}</td>
-                <td scope="row">{{$mat-> DOC_CODIGO}}</td>
-                <td scope="row">{{$mat-> CAR_CODIGO}}</td>  
+                <td scope="row">{{$periodo->PER_NOMBRE}}</td>
+                <td scope="row">{{$mat->docente->DOC_APELLIDOS.' '.$mat->docente->DOC_NOMBRES}}</td>
+                <td scope="row">{{$mat->carrera->CAR_NOMBRE}}</td>  
                 <td scope="row">{{$mat-> MAT_NRC}}</td>
                 <td scope="row">{{$mat-> MAT_NOMBRE}}</td>
                 <td>

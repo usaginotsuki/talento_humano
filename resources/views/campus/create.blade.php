@@ -7,7 +7,7 @@
 -->
 @extends('app')
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <h2>Crear Campus</h2>
 
     @if(isset($mensajes))

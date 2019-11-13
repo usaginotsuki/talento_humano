@@ -1,5 +1,11 @@
 <?php namespace App\Http\Controllers;
-
+/*
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+ */
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -21,15 +27,9 @@ class MateriaController extends Controller {
 	{
 
 		$periodoActual=Periodo::where('PER_ESTADO','1')->first();
-		$materias = Materia::select('MAT_CODIGO','DOC_CODIGO','CAR_CODIGO','MAT_NRC','MAT_NOMBRE')->where('PER_CODIGO',$periodoActual->PER_CODIGO)->get();
-		foreach ($materias as $mat) {
-			$carrera = Carrera::select('CAR_NOMBRE')->where('CAR_CODIGO',$mat->CAR_CODIGO)->first();
-			$docente = Docente::select('DOC_NOMBRES','DOC_APELLIDOS')->where('DOC_CODIGO',$mat->DOC_CODIGO)->first();
-			$mat->CAR_CODIGO=$carrera->CAR_NOMBRE;
-			$mat->DOC_CODIGO=$docente->DOC_APELLIDOS.' '.$docente->DOC_NOMBRES;
-			$mat->PER_CODIGO=$periodoActual->PER_NOMBRE;
-		}
-		return view ('materia.index',['materias' => $materias]);
+		$materias=Materia::with('carrera', 'docente')->where('PER_CODIGO',$periodoActual->PER_CODIGO)->get();
+	
+		return view ('materia.index',['materias' => $materias,'periodo'=>$periodoActual]);
 	}
 
 	/**
@@ -39,14 +39,14 @@ class MateriaController extends Controller {
 	 */
 	public function create()
 	{
-		$periodos = Periodo::codigoNombre()->get();
-		$docentes = Docente::codigoNombre()->get();
-		$carreras = Carrera::codigoNombre()->get();
-		return view('materia.create', [
-			'periodos' => $periodos,
-			'docentes' => $docentes,
-			'carreras' => $carreras
-		]);
+		$periodos= periodo::where('PER_ESTADO','1')->get();
+		$docentes= docente::All();
+		$docentesOrdenados=$docentes->sortBy('DOC_APELLIDOS');
+		$carreras= carrera::All()->sortBy('CAR_NOMBRE');
+		return view('materia.create')
+			->with('periodos',$periodos)
+			->with('docentes',$docentesOrdenados)
+			->with('carreras',$carreras);
 	}
 	/**
 	 * Store a newly created resource in storage.
@@ -56,24 +56,20 @@ class MateriaController extends Controller {
 	 */
 
 	public function store(Request $request)
-	{
-		if ($request['MAT_OCACIONAL'] === 'on') {
-			$request['MAT_OCACIONAL'] = 1;
-		} else {
-			$request['MAT_OCACIONAL'] = 0;
-		}
+	{       
 		$materiaValida = DB::table('materia')->where('MAT_NRC', $request->MAT_NRC)->where('PER_CODIGO', $request->PER_CODIGO)->get();
-		if (count($materiaValida) === 1) {
-			$periodos = Periodo::codigoNombre()->get();
-			$docentes = Docente::codigoNombre()->get();
-			$carreras = Carrera::codigoNombre()->get();
+		if (count($materiaValida) === 1){
+			$periodos= periodo::where('PER_ESTADO','1')->get();
+			$docentes= docente::All();
+			$docentesOrdenados=$docentes->sortBy('DOC_APELLIDOS');
+			$carreras= carrera::All()->sortBy('CAR_NOMBRE');
 			return view('materia.create')
-				->with('periodo',$periodos)
-				->with('docente',$docentes)
-				->with('carrera',$carreras)
-				->with('PER_CODIGO',$request->PER_CODIGO)
-				->with('DOC_CODIGO',$request->DOC_CODIGO)
-				->with('CAR_CODIGO',$request->CAR_CODIGO)
+	            ->with('periodos',$periodos)
+				->with('docentes',$docentesOrdenados)
+				->with('carreras',$carreras)
+	            ->with('PER_CODIGO',$request->PER_CODIGO)
+	            ->with('DOC_CODIGO',$request->DOC_CODIGO)
+	            ->with('CAR_CODIGO',$request->CAR_CODIGO)
 				->with('MAT_NRC',$request->MAT_NRC)
 				->with('MAT_NOMBRE',$request->MAT_NOMBRE)
 				->with('MAT_CREDITOS',$request->MAT_CREDITOS)
@@ -104,6 +100,17 @@ class MateriaController extends Controller {
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -111,19 +118,17 @@ class MateriaController extends Controller {
 	 */
 	public function edit($id)
 	{   
-		$periodos = Periodo::codigoNombre()->get();
-		$docentes = Docente::codigoNombre()->get();
-		$carreras = Carrera::codigoNombre()->get();
-		$materia = Materia::find($id);
-		return view('materia.update', [
-			'materia' => $materia,
-			'periodos' => $periodos,
-			'docentes' => $docentes,
-			'carreras' => $carreras
-		]);
+		$periodos= periodo::where('PER_ESTADO','1')->get();
+		$docentes= docente::All();
+		$docentesOrdenados=$docentes->sortBy('DOC_APELLIDOS');
+		$carreras= carrera::All()->sortBy('CAR_NOMBRE');
+		$materia= Materia::find($id);
+		return view('materia.update', ['materia' => $materia])
+			->with('periodos',$periodos)
+			->with('docentes',$docentesOrdenados)
+			->with('carreras',$carreras);
 	}
 
-	
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -144,12 +149,13 @@ class MateriaController extends Controller {
 		if (count($materiaValida) === 1){
 			if ($materiaValida->MAT_CODIGO === $materia->MAT_CODIGO){
 			}else{
-				$periodos = Periodo::codigoNombre()->get();
-				$docentes = Docente::codigoNombre()->get();
-				$carreras = Carrera::codigoNombre()->get();
+				$periodos= periodo::where('PER_ESTADO','1')->get();
+				$docentes= docente::All();
+				$docentesOrdenados=$docentes->sortBy('DOC_APELLIDOS');
+				$carreras= carrera::All()->sortBy('CAR_NOMBRE');
 				return view('materia.update', ['materia' => $materia])
 		            ->with('periodos',$periodos)
-					->with('docentes',$docentes)
+					->with('docentes',$docentesOrdenados)
 					->with('carreras',$carreras)
 		            ->with('PER_CODIGO',$request->PER_CODIGO)
 		            ->with('DOC_CODIGO',$request->DOC_CODIGO)
@@ -186,4 +192,5 @@ class MateriaController extends Controller {
 			->with('title', 'Materia eliminada!')
 			->with('subtitle', 'La eliminación de la materia se ha realizado con éxito.');
 	}
+
 }

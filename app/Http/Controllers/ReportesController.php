@@ -3,6 +3,7 @@
  * Sistema de Gestion de Laboratorios - ESPE
  * 
  * Author: Jerson Morocho
+ 		   Barrera Erick - LLamuca Andrea
  * Revisado por: Jerson Morocho
  */
 
