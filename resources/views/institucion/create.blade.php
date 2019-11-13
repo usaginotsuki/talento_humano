@@ -1,3 +1,10 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Daniel Lopez - Jipson Murillo
+ Revisado por: Daniel Lopez - Jipson Murillo
+ -->
+
 @extends('app')
 @section('content')
 @include('shared.title', array('titulo' => 'Crear Institución'))

@@ -10,7 +10,20 @@
 @include('shared.title', array('titulo' => 'Materias'))
 
 <div class="container-fluid">
-    <h2>Materias</h2>
+    @if (session('title') && session('subtitle'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ session('title') }}</h4>
+        <p>{{ session('subtitle') }}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    @if(isset($mensajes))
+        <div class="alert alert-warning">
+            {{ $mensajes }}
+        </div>
+    @endif
     <div class="row">
         <div class="col">
             <a href="{{url('materia/create')}}" class="btn btn-success mb-2">Nuevo</a>

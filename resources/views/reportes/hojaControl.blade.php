@@ -56,17 +56,16 @@
         <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" />
         <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO" />
         @endif
-  
 
-
-   @if(!empty($controles))
+        @if(!empty($controles))
         <button type="submit" class="btn btn-info mb-2"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
-   @endif    
+        @endif    
       </form>
     </div>
   </div>
   <br>
 
+  @if(!empty($controles))
   <table id="ListOC" class="table table-hover table-bordered results">
     <thead>
       <tr>

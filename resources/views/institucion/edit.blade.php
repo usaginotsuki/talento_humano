@@ -1,7 +1,13 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Daniel Lopez - Jipson Murillo
+ Revisado por: Daniel Lopez - Jipson Murillo
+ -->
+
 @extends('app')
 @section('content')
 @include('shared.title', array('titulo' => 'Actualizar Institución'))
-
 
 <div class="container-fluid">
     <form  action="{{url('institucion/update')}}"  method="post">

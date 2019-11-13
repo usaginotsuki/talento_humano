@@ -4,6 +4,7 @@
  Author: Lorena Perez-David Esparza
  Revisado por: Lorena Perez-David Esparza
  -->
+ 
 @extends('app')
 @section('content')
 @include('shared.title', array('titulo' => 'Actualizar Período'))

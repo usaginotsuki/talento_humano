@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
+@include('shared.title', array('titulo' => 'Evento Ocasional'))
 
 <div class="container-fluid">
-    <h2>Evento ocacional </h2>
     <div class="row">
         <div class="col">
             <form action="{{url('/reporte/ocasionales')}}" method="post">
