@@ -1,8 +1,9 @@
 @extends('app')
 @section('content')
-@include('shared.title', array('titulo' => 'Crear Hora Evento Ocasional'))
+
 
 <div class="container-fluid">
+<h2>Crear Hora Evento Ocasional</h2>
     <form action="{{url('/ocasionales/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
@@ -11,6 +12,7 @@
                     <label for="LAB_CODIGO">Sala</label>
                     <select type="input" class="form-control" id="LAB_CODIGO" name="LAB_CODIGO" placeholder="Laboratorio"  required>
                         @foreach ($laboratorios as $laboratorio)
+                        
                             <option value="{{$laboratorio->LAB_CODIGO}}">{{$laboratorio->LAB_NOMBRE}}</option>
                         @endforeach
                     </select> 
@@ -21,7 +23,7 @@
                     <label for="MAT_CODIGO">Materia</label>
                     <select type="input" class="form-control" id="MAT_CODIGO" name="MAT_CODIGO" placeholder="Materia"  required>
                         @foreach ($materias as $materia)
-                            <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}} {{$materia->MAT_NRC}}</option>
+                            <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}}</option>
                         @endforeach
                     </select> 
                 </div>
