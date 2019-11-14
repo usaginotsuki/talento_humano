@@ -21,7 +21,7 @@
                     <label for="MAT_CODIGO">Materia</label>
                     <select type="input" class="form-control" id="MAT_CODIGO" name="MAT_CODIGO" placeholder="Materia"  required>
                         @foreach ($materias as $materia)
-                            <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}} {{$materia->MAT_NRC}}</option>
+                            <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}} -- {{$materia->MAT_NRC}}</option>
                         @endforeach
                     </select> 
                 </div>

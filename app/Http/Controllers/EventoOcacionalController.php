@@ -48,7 +48,7 @@ class EventoOcacionalController extends Controller {
 		->orderBy('MAT_NOMBRE', 'asc')
         ->get();
 		//$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
-		return view('eventoocacional.create')->with('laboratorios', $laboratorios)->with('materias', $materias);
+		return view('ocasionales.create')->with('laboratorios', $laboratorios)->with('materias', $materias);
 	}
 
 	public function getDocente(Request $request, $id){
