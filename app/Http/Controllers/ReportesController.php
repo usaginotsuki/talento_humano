@@ -298,6 +298,8 @@ class ReportesController extends Controller {
         return $pdf->stream('ReporteControl.pdf');
 	}
 
+
+
 	public function pdfevento($id,$fechaIni,$fechaFin)
 	{ 
 		$periodos = Periodo::All();
