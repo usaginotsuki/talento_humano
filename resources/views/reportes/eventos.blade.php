@@ -58,6 +58,7 @@
                     @else
                        <button disabled onclick="exportEventoOcasional()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif
+  
                     <br>  <br>  
                 </div>
             </div>
@@ -82,12 +83,14 @@
         </span>
         <br>
         <span class="h6" style="margin-right:150px;">PERIODO:{{$periodoActual}}
-        @if (count($data)>0)
-            <span style="font-weight: 300;">{{ $data[0]->PER_NOMBRE }}</span>
-        @else
-            <span style="font-weight: 300;">{{ $periodos[0]->PER_NOMBRE }}</span>
-
-        @endif
+            @if (count($data)>0)
+                <span style="font-weight: 300;">{{ $data[0]->PER_NOMBRE }}</span>
+            @else
+                @if($periodoActual>count($periodos))
+                    <span style="font-weight: 300;">{{ $periodos[0]->PER_NOMBRE }}</span>      
+                @endif
+            @endif    
+            {{$sql}}
         </span>
       
     </p>     
