@@ -22,7 +22,7 @@
        <div class="col">
             <div class="form-group">
                  <label for="DOC_CEDULA">Cedula <span style="color:#FF0000";>*</span></label>
-                <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" placeholder="Cedula del docente" required>
+                <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" maxlength="10" placeholder="Cedula del docente" required pattern="[0-9]{10}">
             </div>
         </div>    
         <div class="col">
@@ -83,7 +83,7 @@
 
         
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2">Crear</button>
+        <button type="submit" class="btn btn-primary mb-2" onclick="validar()">Crear</button>
         <a href="{{url('docente')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
