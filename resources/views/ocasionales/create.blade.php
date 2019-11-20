@@ -11,7 +11,6 @@
                     <label for="LAB_CODIGO">Sala</label>
                     <select type="input" class="form-control" id="LAB_CODIGO" name="LAB_CODIGO" placeholder="Laboratorio"  required>
                         @foreach ($laboratorios as $laboratorio)
-                        
                             <option value="{{$laboratorio->LAB_CODIGO}}">{{$laboratorio->LAB_NOMBRE}}</option>
                         @endforeach
                     </select> 
@@ -22,7 +21,7 @@
                     <label for="MAT_CODIGO">Materia</label>
                     <select type="input" class="form-control" id="MAT_CODIGO" name="MAT_CODIGO" placeholder="Materia"  required>
                         @foreach ($materias as $materia)
-                            <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}}</option>
+                            <option value="{{$materia->MAT_CODIGO}}">{{$materia->MAT_NOMBRE}} -- {{$materia->MAT_NRC}}</option>
                         @endforeach
                     </select> 
                 </div>
@@ -35,11 +34,7 @@
                 <div class="form-group">
                     <label for="DOC_CODIGO">Docente</label>
                     <select type="input" class="form-control" id="DOC_CODIGO" name="DOC_CODIGO" placeholder="Docente"  required>
-                        @foreach ($docentes as $docente)
-                            @if (isset($docente->DOC_NOMBRE))
-                                 <option value="{{$docente->DOC_CODIGO}}">{{$docente->DOC_NOMBRE}}</option>
-                            @endif
-                        @endforeach
+                        <option value=""></option>
                     </select>
                 </div>
             </div>
