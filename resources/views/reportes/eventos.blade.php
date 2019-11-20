@@ -1,3 +1,4 @@
+
 @extends('app')
 @section('content')
 @include('shared.title', array('titulo' => 'Evento Ocasional'))
@@ -90,7 +91,7 @@
                     <span style="font-weight: 300;">{{ $periodos[0]->PER_NOMBRE }}</span>      
                 @endif
             @endif    
-            {{$sql}}
+
         </span>
       
     </p>     
@@ -137,7 +138,6 @@
     
         </tbody> 
 </table>
-
 
 </div>
 
