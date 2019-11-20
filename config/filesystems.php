@@ -28,6 +28,11 @@ return [
 	|
 	*/
 
+	'public' => [
+		'driver' => 'local',
+		'root' => storage_path('public/file'),
+		'visibility' => 'public',
+	],
 	'cloud' => 's3',
 
 	/*
