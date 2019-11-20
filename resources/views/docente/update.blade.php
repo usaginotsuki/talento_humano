@@ -60,8 +60,8 @@
            
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_CLAVE">Clave</label>
-                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}" required> 
+                    <label for="DOC_CLAVE">Clave<span style="color:#FF0000";>*</span></label>
+                    <input type="password" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}" required> 
                 </div>
             </div>
         
