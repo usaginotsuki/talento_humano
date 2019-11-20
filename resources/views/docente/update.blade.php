@@ -2,7 +2,7 @@
  * Sistema de Gestion de Laboratorios - ESPE
  *
  * Author: Barrera Erick - LLamuca Andrea
- * Revisado por: 
+ * Revisado por:Lorena Perez - David Esparza 
  *
 -->
 @extends('app')
@@ -51,7 +51,7 @@
             <div class="col">
                 <div class="form-group">
                       <label for="DOC_CORREO">Correo <span style="color:#FF0000";>*</span></label>
-                    <input type="text" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="{{ $docente->DOC_CORREO }}" required>
+                    <input type="email" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="{{ $docente->DOC_CORREO }}" required>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_CLAVE">Clave</label>
-                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}">
+                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}" required> 
                 </div>
             </div>
         
