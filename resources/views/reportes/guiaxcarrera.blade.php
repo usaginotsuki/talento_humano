@@ -62,10 +62,11 @@
 @if($guias != null )
 
     <table id="materiaCarreraTable" class="table table-hover table-bordered table-sm" style="text-align:center;">
-            @foreach ($guias as $gui)
+
+            @foreach ($materias as $mat)
                 <thead>
                     <tr class="d-flex">
-                        <th class="col" >{{$gui -> materias->MAT_NOMBRE}} (NRC: {{$gui -> materias->MAT_NRC}}) - Ing. {{$gui -> docentes->DOC_APELLIDOS}} {{$gui -> docentes->DOC_NOMBRES}}</th>
+                        <th class="col" >{{$mat->MAT_NOMBRE}} (NRC: {{$mat->MAT_NRC}}) - Ing. {{$mat -> docente->DOC_APELLIDOS}} {{$mat -> docente->DOC_NOMBRES}}</th>
                     </tr>
                     <tr class="d-flex">
                         <th class="col">GUIA</th>
@@ -76,19 +77,17 @@
                 </thead>
                 <tbody >
                     @foreach ($guias as $gui)
-                    <tr class="d-flex">
-                        <td class="col opts">{{$gui ->GUI_NUMERO}}</td>
-                        <td class="col opts">{{$gui ->GUI_FECHA}}</td>
-                        <td class="col opts">{{$gui ->GUI_TEMA}}</td>
-                        <td class="col opts">{{$gui ->GUI_DURACION}}</td>
-                    </tr>
+                        @if($gui==null)
+                        @else
+                            <tr class="d-flex">
+                                <td class="col opts">{{$gui}}</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>  
             @endforeach     
     </table>
-   <button onclick="#" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+   <button onclick="exportMateriaCarrerra()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
 @endif
-
-
 </div>
 @endsection

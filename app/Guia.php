@@ -14,8 +14,8 @@ class Guia extends Model {
 	public function scopeGuiasx($query, $periodo, $docente){
         return $query->where('PER_CODIGO',$periodo)->where('DOC_CODIGO',$docente);
 	}
-	public function scopeGuiasxCarrera($query, $periodo){
-        return $query->where('PER_CODIGO',$periodo);
+	public function scopeGuiasxCarrera($query, $materia){
+        return $query->where('MAT_CODIGO',$materia);
     }
 
 	public function docentes(){

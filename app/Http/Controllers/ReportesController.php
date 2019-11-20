@@ -266,8 +266,8 @@ class ReportesController extends Controller {
 		$guias=null;
 		
 		return view('reportes.guiaxcarrera', [
-			'periodos' => $periodos,
-			'carreras' => $carreras,
+			'periodos' => $periodos->reverse(),
+			'carreras' => $carreras->sortBy('CAR_NOMBRE'),
 			'valores'=>$request,
 			'guias'=>$guias
 		]);
@@ -279,14 +279,22 @@ class ReportesController extends Controller {
 		$carreras = Carrera::codigoNombre()->get();
 		
 		$materias=Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
-		$guias=Guia::guiasxCarrera($request['PER_CODIGO'])->get();
+		$j=0;
+		for($i=0;$i<sizeof($materias);$i++){
+			$guiasValor[$i]=Guia::guiasxCarrera($materias[$i]['MAT_CODIGO'])->get();
+			if ($guiasValor[$i]!="") {
+				$guias[$j]=$guiasValor[$i];
+				$j++;
+			}
+		}
+			dd($guias);
 		
 		return view('reportes.guiaxcarrera', [
 			'periodos' => $periodos->reverse(),
-			'carreras' => $carreras,
+			'carreras' => $carreras->sortBy('CAR_NOMBRE'),
 			'materias' => $materias,
-			'valores'=>$request,
-			'guias'=>$guias
+			'valores'=> $request,
+			'guias'=> $guias
 		]);
 	}
 
