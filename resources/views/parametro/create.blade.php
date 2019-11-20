@@ -1,8 +1,15 @@
+<!-- 
+    Sistema de Gestion de Laboratorios - ESPE
+
+    Author: Antony Andrade - Jonel Lopez
+    Revisado por: Andrade - Jonel Lopez
+-->
+
 @extends('app')
 @section('content')
-@include ('shared.navbar')
-<div class="container">
-    <h2>Crear Parámetro</h2>
+@include('shared.title', array('titulo' => 'Crear Parámetro'))
+
+<div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -25,6 +32,8 @@
                     </select> 
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="PAR_TODOS">Todos</label>

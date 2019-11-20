@@ -1,8 +1,10 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
 
-<div class="container">
+@include('shared.title', array('titulo' => 'Consola de Control'))
+
+
+<div class="container fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -58,7 +60,7 @@
                         <img src="{{URL::asset('images/consola/update.png')}}" >
                     </a>
                 </td>
-            
+
         </tbody>
         @endforeach 
 </table>

@@ -1,7 +1,15 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Mauro Morales - Jerson Morocho
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Actualizar Horario</h2>
+@include('shared.title', array('titulo' => 'Actualizar Horario'))
+
+<div class="container-fluid">
     <div class="card border-primary mb-3">
         <div class="card-header">Recomendaciones</div>
         <div class="card-body text-primary">

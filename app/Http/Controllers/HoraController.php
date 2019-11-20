@@ -40,9 +40,11 @@ class HoraController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		$HORA_INICIO = $request['HORA_INICIO'];
+		$HORA_FIN = $request['HORA_FIN'];
 		Hora::create([
 			'EMP_CODIGO' => $request['EMP_CODIGO'],
-			'HORA_NOMBRE' => $request['HORA_NOMBRE'],
+			'HORA_NOMBRE' => $HORA_INICIO.'-'.$HORA_FIN,
 		]);
 
 		return redirect('hora')
@@ -77,8 +79,9 @@ class HoraController extends Controller {
 	public function edit($id)
 	{
 		$hora =	Hora::find($id);
+		list($HORA_INICIO, $HORA_FIN) = explode("-", $hora->HORA_NOMBRE);
 		$empresas=empresa::all();
-		return view("hora.update", ["hora"=>$hora,"empresas"=>$empresas]);
+		return view("hora.update", ["hora"=>$hora,"HORA_INICIO"=>$HORA_INICIO,"HORA_FIN"=>$HORA_FIN,"empresas"=>$empresas]);
 	}
 
 	/**
@@ -90,7 +93,9 @@ class HoraController extends Controller {
 	public function update(Request $request)
 	{
 		$hora =	Hora::find( $request['HORA_CODIGO']);
-		$hora->fill($request->all());
+		$HORA_INICIO = $request['HORA_INICIO'];
+		$HORA_FIN = $request['HORA_FIN'];
+		$hora->fill(['EMP_CODIGO' => $request['EMP_CODIGO'],'HORA_NOMBRE' => $HORA_INICIO.'-'.$HORA_FIN]);
 		$hora->save();
 		return redirect('hora')
 			->with('title','Hora actualizada!')

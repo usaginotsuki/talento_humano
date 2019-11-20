@@ -2,9 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Laboratorio;
+use App\laboratorio;
 use App\Campus;
-use App\Empresa;
+use App\empresa;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +18,7 @@ class LaboratorioController extends Controller {
 	 */
 	public function index()
 	{
-		$laboratorios = Laboratorio::paginate(9);
+		$laboratorios = laboratorio::All();
 		return view('laboratorio.index', compact('laboratorios'));
 	}
 
@@ -29,8 +29,8 @@ class LaboratorioController extends Controller {
 	 */
 	public function create()
 	{
-		$campus=campus::all();
-		$empresas=empresa::all();
+		$campus=Campus::All();
+		$empresas=empresa::All();
 		return view('laboratorio.create',["campus"=>$campus],["empresas"=>$empresas]);
 	}
 
@@ -43,9 +43,11 @@ class LaboratorioController extends Controller {
 	public function store(Request $request)
 	{
 		//
-	Laboratorio::create([
+	laboratorio::create([
 			'LAB_NOMBRE' => $request['LAB_NOMBRE'], 
 			'LAB_CAPACIDAD' => $request['LAB_CAPACIDAD'], 
+			'CAM_CODIGO' => $request['CAM_CODIGO'], 
+			'EMP_CODIGO' => $request['EMP_CODIGO']
 		]);
 
 		return redirect('laboratorio')
@@ -61,10 +63,10 @@ class LaboratorioController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$laboratorio =	Laboratorio::find($id);
-		$campus=campus::all();
-		$empresas=empresa::all();
-		return view("laboratorio.update", ["laboratorio"=>$laboratorio,"campus"=>$campus,"empresas"=>$empresas]);
+		$laboratorios =	laboratorio::find($id);
+		$campus=Campus::All();
+		$empresas=empresa::All();
+		return view("laboratorio.update", ["laboratorio"=>$laboratorios,"campus"=>$campus,"empresas"=>$empresas]);
 	}
 
 	/**
@@ -75,9 +77,9 @@ class LaboratorioController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		$laboratorio =	Laboratorio::find( $request['LAB_CODIGO']);
-		$laboratorio->fill($request->all());
-		$laboratorio->save();
+		$laboratorios =	laboratorio::find( $request['LAB_CODIGO']);
+		$laboratorios->fill($request->all());
+		$laboratorios->save();
 		return redirect('laboratorio')
 			->with('title','Laboratorio actualizado!')
 			->with('subtitle','Se han actualizado correctamente los datos del laboratorio.');
@@ -91,7 +93,7 @@ class LaboratorioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Laboratorio::destroy($id);
+		laboratorio::destroy($id);
 		return redirect('laboratorio')
 			->with('title','Laboratorio eliminado!')
 			->with('subtitle','Se ha eliminado correctamente el laboratorio.');

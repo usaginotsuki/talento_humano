@@ -1,7 +1,15 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Docentes</h2>
+@include('shared.title', array('titulo' => 'Docentes'))
+
+<div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -13,22 +21,13 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('docente/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('docente/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
-        <div class="col">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">
-                        <span class="oi oi-magnifying-glass"></span>
-                    </span>
-                </div>
-                <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1">
-            </div>
-        </div>
+        
     </div>
     <span class="counter pull-right"></span>
-    <table class="table table-hover table-bordered results">
+    <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
                 <th>#</th>

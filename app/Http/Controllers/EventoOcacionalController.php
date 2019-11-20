@@ -7,6 +7,10 @@ use App\laboratorio;
 use App\materia;
 use App\docente;
 use App\Quotation;
+use App\Control;
+use DB;
+
+use Carbon\Carbon; 
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -20,8 +24,11 @@ class EventoOcacionalController extends Controller {
 	 */
 	public function index()
 	{
-		$eventoocacionales = EventoOcacional::All();
-		return view('eventoocacional.index', compact('eventoocacionales'));
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		//$control = Control::where('CON_DIA', $date)->get();
+		$data = Control::where('CON_DIA', $date)->get();
+		return view('ocasionales.index', compact('data'));
 	}
 
 	/**
@@ -31,11 +38,31 @@ class EventoOcacionalController extends Controller {
 	 */
 	public function create()
 	{
-		$laboratorios=laboratorio::all();
-		$materias=materia::all();
-		$docentes=docente::all();
-		
-		return view('eventoocacional.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
+		$laboratorios=DB::select('select LAB_NOMBRE,LAB_CODIGO from laboratorio ORDER BY LAB_NOMBRE ASC;');
+		$materias=DB::table('materia')
+        ->join('periodo', function($join)
+        {
+			$join->on('materia.PER_CODIGO', '=', 'periodo.PER_CODIGO')
+				 ->where('periodo.PER_ESTADO', '=', 1);	 
+		})
+		->orderBy('MAT_NOMBRE', 'asc')
+        ->get();
+		//$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
+		return view('ocasionales.create')->with('laboratorios', $laboratorios)->with('materias', $materias);
+	}
+
+	public function getDocente(Request $request, $id){
+		if($request->ajax()){
+			$docente=DB::table('materia')
+				->join('docente', 'materia.DOC_CODIGO','=','docente.DOC_CODIGO')
+				->select('docente.DOC_CODIGO','docente.DOC_NOMBRES','docente.DOC_APELLIDOS')
+				->where('materia.MAT_CODIGO',$id)
+				->get();
+			//$docentes = Docente::where('DOC_CODIGO', $id)->get();
+			//$docentes = Docente::docentes($id);
+			//$docentes = DB::select('SELECT * FROM docente where DOC_CODIGO = '+$id);
+			return Response()->json($docente);
+		}
 	}
 
 	/**
@@ -48,21 +75,21 @@ class EventoOcacionalController extends Controller {
 	{
 		EventoOcacional::create([
 			'CON_DIA' => $request['CON_DIA'],
-			'CON_EXTRA' => $request[NULL],
+			//'CON_EXTRA' => $request[NULL],
 			'CON_HORA_ENTRADA' => $request['CON_HORA_ENTRADA'],
 			'CON_HORA_SALIDA' => $request['CON_HORA_SALIDA'],
-			'CON_LAB_ABRE' => $request[NULL],
-			'CON_HORA_ENTRADA_R' => $request[NULL],
-			'CON_REG_FIRMA_ENTRADA' => $request[NULL],
-			'CON_HORA_SALIDA_R' => $request[NULL],
-			'CON_REG_FIRMA_SALIDA' => $request[NULL],
-			'CON_LAB_CIERRE' => $request[NULL],
-			'CON_OBSERVACIONES' => $request[NULL],
-			'CON_NUMERO_HORA' => $request['CON_NUMERO_HORA'],
+			//'CON_LAB_ABRE' => $request[NULL],
+			//'CON_HORA_ENTRADA_R' => $request[NULL],
+			//'CON_REG_FIRMA_ENTRADA' => $request[NULL],
+			//'CON_HORA_SALIDA_R' => $request[NULL],
+			//'CON_REG_FIRMA_SALIDA' => $request[NULL],
+			//'CON_LAB_CIERRE' => $request[NULL],
+			//'CON_OBSERVACIONES' => $request[NULL],
+			'CON_NUMERO_HORAS' => $request['CON_NUMERO_HORAS'],
 			'CON_NOTA' => $request['CON_NOTA'],
-			'CON_EXTRA' => $request[NULL],
-			'CON_GUIA' => $request[NULL],
-			'GUI_CODIGO' => $request[NULL],
+			//'CON_EXTRA' => $request[NULL],
+			//'CON_GUIA' => $request[NULL],
+			//'GUI_CODIGO' => $request[NULL],
 			'LAB_CODIGO' => $request['LAB_CODIGO'],
 			'MAT_CODIGO' => $request['MAT_CODIGO'],
 			'DOC_CODIGO' => $request['DOC_CODIGO'],
@@ -72,7 +99,5 @@ class EventoOcacionalController extends Controller {
 			->with('title', 'Evento Ocacional registrado!')
 			->with('subtitle', 'El registro del evento ocacional se ha realizado con éxito.');
 	}
-
-	
 
 }

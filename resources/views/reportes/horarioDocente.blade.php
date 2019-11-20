@@ -1,7 +1,15 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Antony Andrade - Jonel Lopez
+ Revisado por: Antony Andrade - Jonel Lopez
+ -->
+
 @extends('app')
-@section('content')    
-<div class="container">
-    <h2>Horario por Docente</h2>
+@section('content')
+@include('shared.title', array('titulo' => 'Reporte Horario por Docente'))
+
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <form action="{{url('/reporte/horario/docente')}}" method="post">
@@ -16,7 +24,7 @@
                         </select>
                         <select class="selectpicker show-tick mb-3" title="Seleccione un Docente..." name="docente" data-live-search="true" data-width="100%">
                             @foreach ($docentes as $docente)
-                            <option value="{{ $docente->DOC_CODIGO }}">{{ $docente->DOC_NOMBRES }}</option>
+                            <option value="{{ $docente->DOC_CODIGO }}">{{$docente->DOC_TITULO}} {{$docente->DOC_APELLIDOS}} {{$docente->DOC_NOMBRES}}</option>
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
@@ -49,17 +57,17 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <button onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @else
-                    <button disabled onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar PDF</button>
+                    <button disabled onclick="exportHorarioDocente()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif
                 </div>
             </div>
         </div>
     </div>
     <br>
+    
     <!-- horario -->
- 
     @if (isset($horario) && isset($profesor))
     <p id="sala">
        <span class="h4">REPORTE: &emsp;
@@ -70,7 +78,7 @@
             <span style="font-weight: 300;">{{ $horario->periodo->PER_NOMBRE }}</span>
         </span>
         <span class="h6">DOCENTE: &emsp;
-            <span style="font-weight: 300;"> </span>
+            <span style="font-weight: 300;">{{ $profesor->DOC_TITULO }} {{ $profesor->DOC_NOMBRES}} {{ $profesor->DOC_APELLIDOS }}</span>
         </span>
       
     </p>
@@ -134,5 +142,4 @@
     </div>
     @endif
 </div>
-
 @endsection

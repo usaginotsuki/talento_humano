@@ -1,14 +1,22 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Daniel Lopez - Jipson Murillo
+ Revisado por: Daniel Lopez - Jipson Murillo
+ -->
+
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Actualizar Institución</h2>
+@include('shared.title', array('titulo' => 'Actualizar Institución'))
+
+<div class="container-fluid">
     <form  action="{{url('institucion/update')}}"  method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="INS_CODIGO" value="{{ $institucion->INS_CODIGO }}">
         <div class="row"> 
             <div class="col">
                 <div class="form-group">
-                    <label for="INS_NOMBRE">Nombre Institucion</label>
+                    <label for="INS_NOMBRE">Nombre Institución</label>
                     <input type="text" class="form-control"  name="INS_NOMBRE" value="{{$institucion->INS_NOMBRE}}" required>
                 </div>
             </div>

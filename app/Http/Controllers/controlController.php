@@ -6,9 +6,12 @@ use App\Control;
 use App\Docente;
 use App\Laboratorio;
 use App\Materia;
-use Carbon\Carbon; 
 
 use Illuminate\Http\Request;
+use DB;
+use App\Quotation;
+
+use Carbon\Carbon; 
 
 class ControlController extends Controller {
 
@@ -17,29 +20,107 @@ class ControlController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$control = Control::all();
-		return view("control.index", ["controles" => $control]);
+		$fecha=$request->session()->get('fecha');
+		if($fecha==null){
+			$fecha=$request['CON_DIA'];
+		}
+		$controles= $this->listar($fecha);
+		return view('control.index', compact('controles'));
 	}
+
+
 
 	public function listar($fecha)
 	{
-		//
-		$date = Carbon::now();
-		$date = $date->format('Y-m-d');
+		if($fecha==null){
+			$fecha = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
+		}
+		$controles = DB::select('select laboratorio.LAB_NOMBRE,Count(*) as REGISTROS,control.CON_DIA from laboratorio,control where laboratorio.LAB_CODIGO=control.LAB_CODIGO and control.CON_DIA="'.$fecha.'" group by laboratorio.LAB_NOMBRE;' );
+		$controles["fecha"]=$fecha;
+		return $controles;
+	}
 
-		$control = control::where('CON_DIA', $date)
-			->get();
+	public function saber_dia($nombredia) {
+		$dias = array('DOMINGO','LUNES','MATES','MIERCOLES','JUEVES','VIERNES','SABADO');
+		$fecha = $dias[date('N', strtotime($nombredia))];
+		return $fecha;
+	}
+	
+	public function generar(Request $request)
+	{
+		$accion="";
+		$mensaje="";
+		$CON_FECHA = $request['CON_DIA'];
+		$dia=$this->saber_dia($CON_FECHA);
+		if ($dia!="SABADO" && $dia!="DOMINGO"){
+			$controles_guardados=DB::select('SELECT control.CON_CODIGO,control.CON_DIA FROM control WHERE control.CON_DIA="'.$CON_FECHA.'"');
+			$mensaje="Ya existen registro de esa fecha";
+			$accion='error';
+			if(empty($controles_guardados)){
+				$codigo_periodo=DB::select('SELECT periodo.PER_CODIGO FROM periodo WHERE "'.$CON_FECHA.'" BETWEEN periodo.PER_FECHA_INICIO AND periodo.PER_FECHA_FIN' );
+				$codigo_periodo=$codigo_periodo[0]->PER_CODIGO;
+				$opcional=" and materia.MAT_OCACIONAL=0";
 
-		//$control = control::all();
+				if($request['MAT_OCACIONAL']==1){
+					$opcional="";
+				}
+
+				$controles=array();
+				for($i=1;$i<13;$i++)
+				{
+					$aux_controles=DB::select('select materia.MAT_CODIGO, horario.HOR_HORA'.$i.' as HORA, horario.HOR_CODIGO, laboratorio.LAB_CODIGO, materia.DOC_CODIGO
+					from materia, horario, laboratorio,periodo,docente
+					where docente.DOC_CODIGO=materia.DOC_CODIGO and horario.PER_CODIGO=periodo.PER_CODIGO and periodo.PER_CODIGO=materia.PER_CODIGO  and horario.LAB_CODIGO=laboratorio.LAB_CODIGO and periodo.PER_CODIGO='.$codigo_periodo.' and horario.HOR_'.$dia.$i.'=materia.MAT_CODIGO'.$opcional );
+					foreach ($aux_controles as $con)
+					{
+						$con->ENTRADA=preg_split("/-/",$con->HORA)[0];
+						$con->SALIDA=preg_split("/-/",$con->HORA)[1];
+						array_push($controles,$con);
+					}
+				}
+				
+
+				$aux=0;
+
+				for ($i=0;$i<sizeof($controles);$i++)
+				{
+					$controles[$i]->CANT_HORAS=0;
+					for ($j=0;$j<sizeof($controles);$j++){
+						if($controles[$i]->MAT_CODIGO==$controles[$j]->MAT_CODIGO && $controles[$i]->LAB_CODIGO==$controles[$j]->LAB_CODIGO){
+							$controles[$i]->CANT_HORAS+=1;
+							if($controles[$i]->SALIDA==$controles[$j]->ENTRADA)
+							{
+								$controles[$j]->ENTRADA=$controles[$i]->ENTRADA;
+							}
+							if($controles[$j]->ENTRADA==$controles[$i]->ENTRADA){
+								$controles[$i]->SALIDA=$controles[$j]->SALIDA;
+							}
+						}
+					}
+					$controles[$i]->HORA="";
+				}
+				$controles=array_unique($controles,SORT_REGULAR);
+				
+				foreach($controles as $con){
+					DB::insert('insert into control (CON_DIA, CON_HORA_ENTRADA, CON_HORA_SALIDA, CON_NUMERO_HORAS,LAB_CODIGO, MAT_CODIGO, DOC_CODIGO, CON_EXTRA) values (?,?,?,?,?,?,?,?)', [$CON_FECHA,$con->ENTRADA,$con->SALIDA,$con->CANT_HORAS,$con->LAB_CODIGO,$con->MAT_CODIGO,$con->DOC_CODIGO,$request['MAT_OCACIONAL']]);
+				}
+				$accion='success';
+				$mensaje="Registros Generados";
+			}
+		}
+		else {
+			$accion="error";
+			$mensaje="No se puede generar horarios de un fin de semana";
+		}
+		return redirect('control')->with('fecha',$CON_FECHA)->with($accion,$mensaje);
 		
-		return view("control.consola", ["controles"=>$control]);
+		
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * Lo Siento
 	 * @return Response
 	 */
 	public function create()
@@ -83,6 +164,23 @@ class ControlController extends Controller {
 		return redirect('control');
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+
+	public function search(Request $request)
+	{
+	
+		return redirect('control');
+		//
+	}
+	public function show($id)
+	{
+		
+	}
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -144,5 +242,19 @@ class ControlController extends Controller {
 		$control = Control::find($id);
 		$control->delete();
 		return redirect('control');
+	}
+	public function consola(Request $request)
+	{
+		//
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		$control = Control::where('CON_DIA', $date)->get();
+		//$control =DB::table('control')->where('CON_DIA','$date')->get();
+		//print_r ($control);
+		//$control = control::all();
+		//$control = DB::select('SELECT * FROM control where CON_DIA = 2019-11-05');
+		//$control = DB::select('SELECT * FROM control where CON_DIA = :CON_DIA', ['CON_DIA' => '$date']);
+		return view("control.consola", ["controles"=>$control]);
+		
 	}
 }

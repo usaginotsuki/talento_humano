@@ -1,7 +1,15 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Mauro Morales - Jerson Morocho
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Salas</h2>
+@include('shared.title', array('titulo' => 'Salas'))
+
+<div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>

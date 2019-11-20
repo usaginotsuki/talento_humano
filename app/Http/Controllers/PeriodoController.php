@@ -1,9 +1,17 @@
 <?php namespace App\Http\Controllers;
-
+/* 
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+*/
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Periodo;
-
+use App\Materia;
+use App\Horario;
+use App\Guia;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -42,17 +50,14 @@ class PeriodoController extends Controller {
 		if ($request['PER_ESTADO'] === 'on') {
 			$estado = 1;
 		}
-		$fechas = $request['PER_FECHAS'];
-		list($start, $end) = preg_split('/ al /', $fechas);
-		$start = date_create($start);
-		$end = date_create($end);
+		
 		
 		Periodo::create([
-				'PER_NOMBRE' => 		$request['PER_NOMBRE'], 
-				'PER_ESTADO' => 		$estado,
-				'PER_HORAS_ATENCION' => $request['PER_HORAS_ATENCION'],
-				'PER_FECHA_INICIO' => 	date_format($start,"Y/m/d H:i:s"),
-				'PER_FECHA_FIN' => 		date_format($end,"Y/m/d H:i:s")
+			'PER_NOMBRE' => 		$request['PER_NOMBRE'], 
+			'PER_ESTADO' => 		$estado,
+			'PER_HORAS_ATENCION' => $request['PER_HORAS_ATENCION'],
+			'PER_FECHA_INICIO' => 	$request['PER_FECHA_INICIO'],
+			'PER_FECHA_FIN' => 		$request['PER_FECHA_FIN']
 			]);
 			
 		return redirect('periodo')
@@ -101,9 +106,19 @@ class PeriodoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Periodo::destroy($id);
-		return redirect('periodo')
-			->with('title', 'Periodo eliminado!')
-			->with('subtitle', 'La eliminación del periodo acádemico se ha realizado con éxito.');
+		$validaGuia=Guia::where('PER_CODIGO',$id)->first();
+        $validaMateria=Materia::where('PER_CODIGO',$id)->first();
+        $validaHorario=Horario::where('PER_CODIGO',$id)->first();
+        if(empty($validaGuia) && empty($validaMateria) && empty($validaHorario))
+		{
+			Periodo::destroy($id);
+			return redirect('periodo')
+				->with('title', 'Periodo eliminado!')
+				->with('subtitle', 'La eliminación del periodo acádemico se ha realizado con éxito.');
+		}else{
+			return redirect('periodo')
+				->with('title', 'Periodo NO eliminado!')
+				->with('subtitle', 'El registro del periodo no se a eliminado correctamente, el periodo tiene registros relacionados.');
+		}
 	}
 }

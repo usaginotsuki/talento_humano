@@ -1,7 +1,13 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Lorena Perez
+ Revisado por: Lorena Perez
+ -->
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Períodos</h2>
+@include('shared.title', array('titulo' => 'Períodos'))
+<div class="container-fluid">
     @if (session('title') && session('subtitle'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -13,7 +19,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('periodo/create')}}" class="btn btn-primary mb-2">Nuevo</a>
+            <a href="{{url('periodo/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>

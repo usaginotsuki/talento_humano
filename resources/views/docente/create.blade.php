@@ -1,65 +1,86 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+-->
 @extends('app')
 @section('content')
-<div class="container">
-    <h2>Crear Docente</h2>
+@include('shared.title', array('titulo' => 'Crear Docente'))
+
+<div class="container-fluid">
+    @if(isset($mensajes))
+        <div class="alert alert-warning">
+            {{ $mensajes }}
+        </div>
+    @endif   
+    <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p>
     <form action="{{url('/docente/store')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-        <div class="form-group">
-            <label for="DOC_CEDULA">Cedula</label>
-            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" placeholder="Cedula del docente" required>
+  <div class="row">
+       <div class="col">
+            <div class="form-group">
+                 <label for="DOC_CEDULA">Cedula <span style="color:#FF0000";>*</span></label>
+                <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" placeholder="Cedula del docente" required>
+            </div>
+        </div>    
+        <div class="col">
+                <div class="form-group">
+                     <label for="DOC_MIESPE">Mi Espe <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_MIESPE" name="DOC_MIESPE"  placeholder="Usuario de Mi espe" required>
+                </div>
         </div>
-        
-        <div class="row">
-            <div class="col">
+  </div>
+
+
+  <div class="row">
+       <div class="col">
                 <div class="form-group">
-                    <label for="DOC_MIESPE">Mi Espe</label>
-                    <input type="text" class="form-control" id="DOC_MIESPE" name="DOC_MIESPE" required>
+                    <label for="DOC_NOMBRES">Nombres <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_NOMBRES" name="DOC_NOMBRES"  placeholder="Nombres del docente" required>
                 </div>
-            </div>
+        </div>
+      
+
+       
+        <div class="col">
+                <div class="form-group">
+                     <label for="DOC_APELLIDOS">Apellidos <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_APELLIDOS" name="DOC_APELLIDOS"  placeholder="Apellidos del docente" required>
+                </div>
+        </div>
+     </div>   
+  <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_NOMBRES">Nombres</label>
-                    <input type="text" class="form-control" id="DOC_NOMBRES" name="DOC_NOMBRES" required>
+                     <label for="DOC_CORREO">Correo <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_CORREO" name="DOC_CORREO"  placeholder="Correo del docente" required>
                 </div>
             </div>
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="DOC_APELLIDOS">Apellidos</label>
-                    <input type="text" class="form-control" id="DOC_APELLIDOS" name="DOC_APELLIDOS" required>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="DOC_CORREO">Correo</label>
-                    <input type="text" class="form-control" id="DOC_CORREO" name="DOC_CORREO" required>
-                </div>
-            </div>
 
-        <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_CLAVE">Clave</label>
-                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" required>
+                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE"  placeholder="Clave del docente">
                 </div>
             </div>
+     </div>  
+     <div class="row">       
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_TITULO">Titulo</label>
-                    <input type="text" class="form-control" id="DOC_TITULO" name="DOC_TITULO" required>
+                   
+                    <label for="DOC_TITULO">Titulo </label>
+                    <input type="text" class="form-control" id="DOC_TITULO" name="DOC_TITULO"  placeholder="Titulo del docente">
                 </div>
             </div>
+             <div class="col">
+             <div class="form-group">
+              </div>  
+       </div> 
+      </div> 
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="DOC_TITULO">Titulo</label>
-                        <input type="input" class="form-control" id="DOC_TITULO" name="DOC_TITULO" min="0" max="15" required>
-                    </div>
-                </div>
-            </div>
         
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Crear</button>
