@@ -63,7 +63,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="DOC_CLAVE">Clave<span style="color:#FF0000";>*</span></label>
-                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE"  placeholder="Clave del docente" required>
+                    <input type="password" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE"  placeholder="Clave del docente" required>
                 </div>
             </div>
      </div>  
@@ -83,7 +83,7 @@
 
         
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2" onclick="validar()">Crear</button>
+        <button type="submit" id="docenteBoton" class="btn btn-primary mb-2" >Crear</button>
         <a href="{{url('docente')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>

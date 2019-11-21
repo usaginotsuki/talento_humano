@@ -1,4 +1,5 @@
-function validar() {
+$("#DOC_CEDULA").change(function(event){
+  
         var cad = document.getElementById("DOC_CEDULA").value.trim();
         var total = 0;
         var longitud = cad.length;
@@ -20,9 +21,13 @@ function validar() {
           if (cad.charAt(longitud-1) == total) {
             //document.getElementById("salida").innerHTML = ("Cedula Válida");
             alert("Cedula Válida");
+            
           }else{
             //document.getElementById("salida").innerHTML = ("Cedula Inválida");
             alert("Cedula Inválida");
+           
           }
         }
-      }
+      
+});
+
