@@ -62,14 +62,15 @@ th, td {
 
 @page { margin: 150px 50px; }
     #header { position: fixed; left: 58pt; top: -135px; right: 29pt;  background-color:; text-align: center;  font-family:sans-serif; font-size:11pt; }
-    
     #footer { position: fixed; left: 50pt; bottom: -235px; right: 29px; height: 150px; }
-    #footer .page:after { content: counter(page, upper-number); }
+    #footer .page:after {  counter-increment: pages; content: counter(page)  }
+    
 
 </style>
 </head>
 
 <body>
+
 <div id="header" > 
       <div  >
           <img  style='height: 100%; width: 100%;' src="http://webltga.espe.edu.ec/sg-lab/images/encabezado.png"  >
@@ -103,6 +104,22 @@ th, td {
         <hr style="size:1px;color:SILVER; "/>
 </div>
 
+<div id="footer"  >
+    <hr style="size:1px;color:SILVER;  margin-bottom:0px;" >
+  	<table border="0px" id="foot" >
+        <thead>
+            <tr>
+                      
+              <td scope="row" id="izquierda" width="33%"> <b> SG-LAB</b> </td>
+              <td scope="row" id="centrado" width="34%"> 
+              <b>Página </b> <b  class="page"></b> 
+              </td>
+              <td scope="row" id="derecha" width="33%"><b> {{$fechaActual}} <b>  </td>
+                      
+            </tr>
+        </thead>
+    </table>
+</div>
 
 
 <div class="page" id="margenes" >
@@ -151,22 +168,7 @@ th, td {
       </table>
     </div>  
 </div >
-<div id="footer" >
-    <hr style="size:1px;color:SILVER;  margin-bottom:0px;" >
-  	<table border="0px" id="foot" >
-        <thead>
-            <tr>
-                      
-              <td scope="row" id="izquierda" width="33%"> <b> SG-LAB</b> </td>
-              <td scope="row" id="centrado" width="34%"> 
-              <b>Página <b> <b  class="page"></b> /  <b  class="page"></b>
-              </td>
-              <td scope="row" id="derecha" width="33%"><b> {{$fechaActual}} <b>  </td>
-                      
-            </tr>
-        </thead>
-    </table>
-</div>
+
 </body>
 
 </html>
