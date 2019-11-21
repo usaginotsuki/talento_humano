@@ -20,7 +20,7 @@ $("#DOC_CEDULA").change(function(event){
 
           if (cad.charAt(longitud-1) == total) {
             //document.getElementById("salida").innerHTML = ("Cedula Válida");
-            alert("Cedula Válida");
+            
             
           }else{
             //document.getElementById("salida").innerHTML = ("Cedula Inválida");
