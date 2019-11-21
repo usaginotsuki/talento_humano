@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <label for="DOC_CEDULA">Cedula <span style="color:#FF0000";>*</span></label>
-            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" value="{{ $docente->DOC_CEDULA }}" required>
+            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" maxlength="10" value="{{ $docente->DOC_CEDULA }}" required pattern="[0-9]{10}">
         </div>
 
         <div class="row">
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+        <button type="submit" class="btn btn-primary mb-2" id="docenteBoton" >Actualizar</button>
         <a href="{{url('docente')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>

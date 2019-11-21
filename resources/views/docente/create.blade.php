@@ -83,7 +83,7 @@
 
         
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2" onclick="validar()">Crear</button>
+        <button type="submit" id="docenteBoton" class="btn btn-primary mb-2" >Crear</button>
         <a href="{{url('docente')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
