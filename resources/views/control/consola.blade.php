@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-@include ('shared.navbar')
+
 @include('shared.title', array('titulo' => 'Consola de Control'))
 
 

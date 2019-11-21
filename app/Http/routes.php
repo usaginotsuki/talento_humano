@@ -112,6 +112,7 @@ Route::get('periodo/{id}/destroy', 'PeriodoController@destroy');
 Route::post('periodo/store', 'PeriodoController@store');
 Route::post('periodo/update', 'PeriodoController@update');
 ///////////////////////////////////////////////////////////////////
+Route::get('docente/{id}','EventoOcacionalController@getDocente');
 Route::get('ocasionales','EventoOcacionalController@index');
 Route::get('ocasionales/create','EventoOcacionalController@create');
 Route::post('ocasionales/store', 'EventoOcacionalController@store');
@@ -146,6 +147,7 @@ Route::post('reporte/guia/docente', 'ReportesController@usoGuiasEntregadasPost')
 
 Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
+Route::get('reporte/carrera/pdfguia/{idperiodo}/{idcarrera}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfCarreraGuia');
 ///////////////////////////////////////////////////////////////////
 Route::get('guia/listarGuias/{id}', 'GuiaController@listarGuias');
 Route::get('guia/{id}/edit', 'GuiaController@edit');

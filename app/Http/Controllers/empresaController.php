@@ -65,8 +65,7 @@ class EmpresaController extends Controller {
 			'INS_CODIGO' => 				$request['INS_CODIGO'],
 		]);
 
-		return redirect('empresa')->with('title', 'Empresa registrada!')
-			->with('subtitle', 'El registro del empresa se ha realizado con éxito.');;
+		return redirect('empresa');
 	}
 
 	/**
@@ -104,8 +103,7 @@ class EmpresaController extends Controller {
 		$empresa =	empresa::find( $request['EMP_CODIGO']);
 		$empresa->fill($request->all());
 		$empresa->save();
-		return redirect('empresa')->with('title', 'Empresa actualizado!')
-			->with('subtitle', 'La información de la empresa se ha actualizado con éxito.');;
+		return redirect('empresa');
 	}
 
 	/**
@@ -117,7 +115,6 @@ class EmpresaController extends Controller {
 	public function destroy($id)
 	{
 		Empresa::destroy($id);
-		return redirect('empresa')->with('title', 'Empresa Eliminado!')
-			->with('subtitle', 'El registro de la empresa se ha eliminado con éxito.');
+		return redirect('empresa');
 	}
 }
