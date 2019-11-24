@@ -37,8 +37,8 @@ class Guia extends Model {
 
 	public $timestamps = false;
 
-		public function scopeReporte($query, $materiaId) {
-		return $query->select('DOC_CODIGO', 'MAT_CODIGO','LAB_CODIGO',
+	public function scopeReporte($query, $materiaId) {
+		return $query->select('GUI_CODIGO','DOC_CODIGO', 'MAT_CODIGO','LAB_CODIGO',
 	'PER_CODIGO', 'GUI_NUMERO', 'GUI_FECHA', 'GUI_TEMA')
 			->where('MAT_CODIGO', $materiaId);
 	

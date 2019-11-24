@@ -157,4 +157,5 @@ Route::get('guia/crearGuia', 'GuiaController@crearGuiaIndex');
 Route::get('guia/comboMateria/{id}', 'GuiaController@byPeriodoGet');
 Route::get('guia/comboGuia/{id}', 'GuiaController@byGuiaGet');
 Route::get('guia/controlGuiaLaboratoriocreate', 'GuiaController@controlGuiaLaboratoriocreate');
-Route::post('guia/store', 'GuiaController@store');
+Route::post('guia/createGuiaSeleccion', 'GuiaController@createGuiaSeleccion');
+Route::post('guia/guardarGuia', 'GuiaController@guardarGuia');

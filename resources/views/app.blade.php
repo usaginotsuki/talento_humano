@@ -57,6 +57,5 @@
   <script type="text/javascript" src="{{ URL::asset('js/jspdf.plugin.autotable.js') }}"></script>
   <script type="text/javascript" src="{{ URL::asset('js/jsReport.js') }}"></script>
   <script type="text/javascript" src="{{ URL::asset('js/combo.js') }}"></script> 
-  <script type="text/javascript" src="{{ URL::asset('js/primer.js') }}"></script>
   <script type="text/javascript" src="{{ URL::asset('js/dropdown.js') }}"></script> 
   <script type="text/javascript" src="{{ URL::asset('js/validarCedula.js') }}"></script> 

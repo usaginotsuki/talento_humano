@@ -37,5 +37,9 @@ class Control extends Model {
 	public function scopeCodigoNombre($query) {
 		return $query->select('CON_CODIGO', 'DOC_NOMBRES', 'DOC_APELLIDOS');
 	}
+	public function scopeFechaGuia($query, $materiaId) {
+		return $query->select('CON_DIA','CON_CODIGO')
+		->where('MAT_CODIGO',$materiaId)->whereNull('CON_GUIA')->whereNull('CON_EXTRA')->orderBy('CON_DIA','ASC')->limit(1);
+	}
 
 }
