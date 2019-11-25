@@ -23,7 +23,7 @@
     <div class="header-img" style="background-image:url({{URL::asset('images/principal/header.png')}})">
         <ul class="nav topnav float-right">
           <a type="button" class="btn btn-dark" href="{{url('/')}}">Inicio</a>
-          <a type="button" class="btn btn-dark" href="">Entrar</a>
+          <a type="button" class="btn btn-dark" href="{{url('/auth/login')}}">Entrar</a>
         </ul>
     </div>
   </header>
