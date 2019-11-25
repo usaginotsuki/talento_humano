@@ -4,17 +4,20 @@
  Author: Jerson Morocho
  Revisado por: DevOps
  -->
-
 <nav class="navbar navbar-expand-lg navbar-dark nav-color">
+@if(Auth::check())
+  
   <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Proceso
       </a>
+
       <div class="dropdown-menu">
         <a class="dropdown-item" href="{{url('docente')}}">Docente</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('periodo')}}">Periodo</a>
+
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('materia')}}">Materia</a>
         <div class="dropdown-divider"></div>
@@ -91,4 +94,6 @@
     </li>
    
   </ul>
+@endif
+
 </nav>

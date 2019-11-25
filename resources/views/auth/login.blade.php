@@ -25,7 +25,7 @@
                             <div class="form-group row">
                                 <label for="password"  class="col-lg-2 control-label"><h3 style="color: #ED7624">Clave*</h3></label>
                                 <div class="col-xs-4" >
-                                	<input type="email_address" size="30" class="form-control" name="email" id="email" required>
+                                	<input type="password" size="30" class="form-control" name="password" id="password" required>
                                 </div>
                             </div>
 
