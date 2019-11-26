@@ -55,7 +55,7 @@ class Guia extends Model {
 		->where('GUI_CODIGO',$guiaId);
 	}
 	public function scopeLastGuia($query, $matId) {
-		return $query->select('GUI_NUMERO','LAB_CODIGO','GUI_COORDINADOR')
-		->where('MAT_CODIGO',$matId)->orderBy('GUI_NUMERO','ASC');
+		return $query->select('GUI_NUMERO','LAB_CODIGO','GUI_COORDINADOR','GUI_FECHA')
+		->where('MAT_CODIGO',$matId)->orderBy('GUI_NUMERO','DESC');
 	}
 }

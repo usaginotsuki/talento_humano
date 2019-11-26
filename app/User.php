@@ -37,6 +37,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->belongsToMany('App\Role');
 	}
 
+	//verifica que el usuario tenga el rol
 	public function hasRole($role){
 		if($this->roles()->where('name',$role)->first()){
 			return true;
@@ -44,6 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return false;
 	}
 
+	//verifica cuando un usuario tiene varios roles
 	public function hasAnyRole($roles){
 		if(is_array($roles)){
 			foreach ($roles as $role) {
@@ -57,10 +59,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return false;
 	}
 
+	//valida si el usuario tiene autorizacion
 	public function authorizeRoles($roles){
 		if($this->hasAnyRole($roles))
 			return true;
 		abort(401, 'Accion no autorizada');
 
+	}
+
+	//valida que el rol pueda hacer la accion
+	public function hasAccion($rol,$item){
+		if ($this->roles->where('name',$rol)->first()->accions->where('name',$item)->first()) {
+			return true;
+		}
+		return false;
 	}
 }

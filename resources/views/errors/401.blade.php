@@ -230,3 +230,7 @@
 </div>
 </div>
 @endsection
+@section('js')
+<script type="text/javascript" src="{{ URL::asset('js/erro401.js') }}"></script> 
+@endsection
+

@@ -12,23 +12,35 @@
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Proceso
       </a>
-
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="{{url('docente')}}">Docente</a>
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
+      <a class="dropdown-item" href="{{url('docente')}}">Docente</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('periodo')}}">Periodo</a>
-
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('materia')}}">Materia</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('horario')}}">Registrar Horario</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('ocasionales')}}">Evento Ocasional</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('control/consola')}}">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('control')}}">Control</a>
         <div class="dropdown-divider"></div>
+      @endif
       </div>
     </li>
     <li class="nav-item dropdown">
@@ -36,20 +48,34 @@
         Reportes
       </a>
      <div class="dropdown-menu">
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/horario/sala')}}">Horarios de Sala</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/horario/docente')}}">Horario por Docente</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/hoja/control')}}">Hoja de Control</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/materia/carrera')}}">Materia por Carrera</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/ocasionales')}}">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/guia/carrera')}}">Guias por Carrera</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('reporte/guia/docente')}}">Uso con Guias Entregadas</a>
         <div class="dropdown-divider"></div>
+      @endif
       </div>
     </li>
 
@@ -70,26 +96,46 @@
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Institucion
       </a>
-     <div class="dropdown-menu">
+      <div class="dropdown-menu">
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/hora')}}">Hora</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/empresa')}}">Empresa</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/institucion')}}">Institución</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/laboratorio')}}">Laboratorio</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/parametro')}}">Parametro</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/carrera')}}">Carrera</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/control')}}">Control</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="/">Guias</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="/">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->hasAccion("Jefatura","docente"))
         <a class="dropdown-item" href="{{url('/campus')}}">Campus</a>
+      @endif
       </div>
     </li>
    

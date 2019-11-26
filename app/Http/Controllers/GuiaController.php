@@ -137,9 +137,27 @@ class GuiaController extends Controller {
    {
 	   /*obtener el codigo de la materia y buscar la primera guia que falte dentro de control*/
 	   $materia=session('MAT_CODIGO');
-	   $control = Control::fechaGuia($materia)->first();
+	   $guias=new Guia;
+	   //obtener el horario de la materia
+	   $laboratorio = Horario::horarioMateria($materia)->first();
+	   $last = Guia::lastGuia($materia)->first();
+	   /**Verifica si existe una guia anterior 
+		* Si existe Asigna el coordinador y el numero de guia (incrementa 1 del anterior), asigna el codigo de laboratorio
+		* No coordinador asigna vacio, empieza numero de guia 1 y asigna el codigo de laboratorio
+	    */
+		if (empty($last)) {
+			$guias->GUI_COORDINADOR="";
+			$guias->GUI_NUMERO=1;
+		}else{
+			$guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
+			$guias->GUI_NUMERO=$last->GUI_NUMERO+1;
+			$control = Control::fechaGuia($materia,$last->GUI_FECHA)->first();
+		}
+		$guias->LAB_CODIGO=$laboratorio->laboratorio->LAB_CODIGO;
 	   return view('guia.controlGuiaLaboratoriocreate',[
-		   'fecha'=>$control,
+	    	'guia' => $guias,
+			'fecha'=>$control,
+			'last'=>$last,
 	   ]);
    }
    /**Crea la guia Apartir de una Guia anterior */
@@ -149,13 +167,24 @@ class GuiaController extends Controller {
 	   $guiaId=$request->input('guiaCombo');
 	   /*obtener el codigo de la materia y buscar la primera guia que falte dentro de control*/
 	   $materia=session('MAT_CODIGO');
-	   $control = Control::fechaGuia($materia)->first();
 	   /*obtener el los datos de la guia anterior*/
 	   $guias = Guia::codigoNombre($guiaId)->first();
-	   $last = Guia::lastGuia($materia)->last();
-	   if (condition) {
-	   	# code...
+	   //obtener el horario de la materia
+	   $laboratorio = Horario::horarioMateria($materia)->first();
+	   $last = Guia::lastGuia($materia)->first();
+	   /**Verifica si existe una guia anterior 
+		* Si existe Asigna el coordinador y el numero de guia (incrementa 1 del anterior), asigna el codigo de laboratorio
+		* No coordinador asigna vacio, empieza numero de guia 1 y asigna el codigo de laboratorio
+	    */
+	   if (empty($last)) {
+		   $guias->GUI_COORDINADOR="";
+		   $guias->GUI_NUMERO=1;
+	   }else{
+		   $guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
+		   $guias->GUI_NUMERO=$last->GUI_NUMERO+1;
+		   $control = Control::fechaGuia($materia,$last->GUI_FECHA)->first();
 	   }
+	   $guias->LAB_CODIGO=$laboratorio->laboratorio->LAB_CODIGO;
 	   return view('guia.controlGuiaLaboratoriocreate', [
 		   'guia' => $guias,
 		   'fecha'=>$control,	
@@ -164,16 +193,21 @@ class GuiaController extends Controller {
 
    /*Guardar GUIA*/
    public function guardarGuia(Request $request){
-		$docente = session('DOC_CODIGO');
+	   //obtiene el id de docente 
+		$docenteId = session('DOC_CODIGO');
+		//busca el docente y crea el nombre con el titulo
+		$docente = Docente::find($docenteId);
+		$nombreDocente=$docente->DOC_TITULO." ".$docente->DOC_NOMBRES." ".$docente->DOC_APELLIDOS;
+		//obtiene materia y periodo id
 		$materia = session('MAT_CODIGO');
-		$laboratorio = Control::find($request['CON_CODIGO']);
 		$periodo = session('PER_CODIGO');
+		//asigna las variables a la guia y guarda
 		$guia=Guia::create([
-			'DOC_CODIGO' => $docente, 
+			'DOC_CODIGO' => $docenteId, 
 			'MAT_CODIGO' => $materia,
-			'LAB_CODIGO' => $laboratorio->LAB_CODIGO,
+			'LAB_CODIGO' => $request['LAB_CODIGO'],
 			'PER_CODIGO' => $periodo,
-			'GUI_NUMERO' => 1,
+			'GUI_NUMERO' => $request['GUI_NUMERO'],
 			'GUI_FECHA' => $request['GUI_FECHA'],
 			'GUI_TEMA' => $request['GUI_TEMA'],
 			'GUI_DURACION' => $request['GUI_DURACION'],
@@ -185,16 +219,12 @@ class GuiaController extends Controller {
 			'GUI_CONCLUSIONES' => $request['GUI_CONCLUSIONES'],
 			'GUI_RECOMENDACIONES' => $request['GUI_RECOMENDACIONES'],
 			'GUI_REFERENCIAS_BIBLIOGRAFICAS' => $request['GUI_REFERENCIAS_BIBLIOGRAFICAS'],
-			'GUI_ELABORADO' => $request['GUI_COORDINADOR'],
-			'GUI_APROBADO' => $request['GUI_COORDINADOR'],
-			'GUI_REGISTRADO' => 1,
+			'GUI_ELABORADO' => $nombreDocente,
+			'GUI_COORDINADOR' => $request['GUI_COORDINADOR'],
+			'GUI_REGISTRADO' => 0,
 			'GUI_INTRODUCCION' => $request['GUI_INTRODUCCION'],
 			
 		]);
-		$laboratorio->CON_GUIA=1;
-		$laboratorio->GUI_CODIGO=$guia->GUI_CODIGO;
-		$laboratorio->save();
-
 		return redirect('guia/listarGuias/'.$materia);
    }
 

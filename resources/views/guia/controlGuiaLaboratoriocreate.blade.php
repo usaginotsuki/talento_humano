@@ -4,15 +4,17 @@
 
 <div class="container">
     <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
-    
     <form class="form" id="form" action="{{url('/guia/guardarGuia')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" id="GUI_NUMERO" name="GUI_NUMERO" readonly value="@if(isset($guia)) {{$guia->GUI_NUMERO}} @endif">
+        <input type="hidden" id="LAB_CODIGO" name="LAB_CODIGO" readonly value="@if(isset($guia)) {{$guia->LAB_CODIGO}} @endif">
         <input type="hidden" name="CON_CODIGO" id="CON_CODIGO" value="@if(isset($fecha)) {{$fecha->CON_CODIGO}} @endif">
             <div class="form-group row">
                 <label for="GUI_FECHA"class="col-sm-2 col-form-label">Fecha<span style="color:#FF0000";>*</span></label>
                 <div class="col-sm-3">
                 @if(isset($fecha)) 
                     <input type="input" class="form-control" id="GUI_FECHA" name="GUI_FECHA" readonly value="{{$fecha->CON_DIA}} ">
+                    <span style="color:#FF0000";>Tiene Guias Atrasadas</span>
                 @else
                     <input type="date" class="form-control" id="GUI_FECHA" name="GUI_FECHA">
                 @endif
