@@ -145,12 +145,17 @@ class GuiaController extends Controller {
    /**Crea la guia Apartir de una Guia anterior */
    public function createGuiaSeleccion(Request $request)
    {
+   		//obtener el id de la guia
 	   $guiaId=$request->input('guiaCombo');
 	   /*obtener el codigo de la materia y buscar la primera guia que falte dentro de control*/
 	   $materia=session('MAT_CODIGO');
 	   $control = Control::fechaGuia($materia)->first();
-	   /*obtener el los ddatos de la guia anterior*/
+	   /*obtener el los datos de la guia anterior*/
 	   $guias = Guia::codigoNombre($guiaId)->first();
+	   $last = Guia::lastGuia($materia)->last();
+	   if (condition) {
+	   	# code...
+	   }
 	   return view('guia.controlGuiaLaboratoriocreate', [
 		   'guia' => $guias,
 		   'fecha'=>$control,	

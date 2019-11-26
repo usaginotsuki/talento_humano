@@ -12,13 +12,24 @@
                 	</div>
                 	<div class="alert alert-success">Los campos con <label style="color: #ED7624">*</label> son obligatorios
                 	</div>
+
                     <div class="card-body">
+                        @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <form class="form-horizontal" role="form" method="POST" action="{{url('/auth/login')}}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group row">
                                 <label for="email_address" class="col-lg-2 control-label text-md-left" ><h3 style="color: #ED7624">Usuario*</h3></label>
                                 <div class="col-xs-4">
-	                                <input type="text" size="30"  class="form-control"name="username" id="username" required>
+	                                <input type="text" size="30"  class="form-control"name="name" id="name" required>
                                 </div>
                             </div>
 

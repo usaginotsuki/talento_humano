@@ -28,7 +28,7 @@ class Materia extends Model {
 	}
 
 	public function scopeObtenerMateriaPorDocente($query, $periodo, $docente){
-		return $query->select('MAT_CODIGO', 'DOC_CODIGO', 'MAT_ABREVIATURA', 'MAT_OCACIONAL')->where('PER_CODIGO',$periodo)->where('DOC_CODIGO', $docente);
+		return $query->select('MAT_CODIGO', 'DOC_CODIGO', 'MAT_NOMBRE', 'MAT_OCACIONAL','MAT_NRC')->where('PER_CODIGO',$periodo)->where('DOC_CODIGO', $docente);
 	}
 
 	public function periodo(){

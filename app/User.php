@@ -15,8 +15,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var string
 	 */
-	protected $table = 'cruge_user';
-	protected $primaryKey = 'iduser';
+	protected $table = 'users';
+	protected $primaryKey = 'id';
 	public $timestamps = false;
 
 	/**
@@ -24,21 +24,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['iduser','username', 'email', 'password'];
+	protected $fillable = ['id','name', 'email', 'password'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password'];
+	protected $hidden = ['password','remember_token'];
 
 	public function roles(){
 		return $this->belongsToMany('App\Role');
 	}
 
 	public function hasRole($role){
-		if($this->roles()->where('parent',$role)->first()){
+		if($this->roles()->where('name',$role)->first()){
 			return true;
 		}
 		return false;

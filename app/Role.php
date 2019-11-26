@@ -3,12 +3,12 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model {
-	protected $table = 'cruge_authitemchild';
-	protected $primaryKey = 'parent';
-	protected $fillable = ['parent','child'];
+	protected $table = 'roles';
+	protected $primaryKey = 'id';
+	protected $fillable = ['id','name','description'];
 	public $timestamps = false;
 	
 	public function users(){
-		return $this->belongsToMany('App/User');
+		return $this->belongsToMany('App\User');
 	}
 }

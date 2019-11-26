@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -27,6 +28,7 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
 	 * @return void
 	 */
+	/*Verifica que puedan acceder al controlador solo los usuarios no logeados*/
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
 		$this->auth = $auth;
@@ -34,9 +36,47 @@ class AuthController extends Controller {
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
-
+	//Redirige al index
 	public function index()
 	{
 		return view('welcome');
+	}
+	//Registrar Usuario
+	public function postRegister(Request $request)
+	{
+		//Valida los campos de registrar
+		$validator = $this->registrar->validator($request->all());
+		// si existe errores retorna a la vista Registrar con los errores
+		if ($validator->fails())
+		{
+			$this->throwValidationException(
+				$request, $validator
+			);
+		}
+		//Crea el registro y autentifica
+		$this->auth->login($this->registrar->create($request->all()));
+		//Redirecciona a la pagina principal
+		return redirect($this->redirectPath());
+	}
+
+	public function postLogin(Request $request)
+	{
+		//valida los campos name y password como requeridos
+		$this->validate($request, [
+			'name' => 'required', 'password' => 'required',
+		]);
+		//asigna el name y password como credenciales
+		$credentials = $request->only('name', 'password');
+		//logea el usuario, si logea correctamente redirecciona al index
+		if ($this->auth->attempt($credentials, $request->has('remember')))
+		{
+			return redirect()->intended($this->redirectPath());
+		}
+		//si no logea correctamente muestra en pantalla el error
+		return redirect($this->loginPath())
+					->withInput($request->only('name', 'remember'))
+					->withErrors([
+						'name' => $this->getFailedLoginMessage(),
+					]);
 	}
 }
