@@ -197,7 +197,6 @@ class ReportesController extends Controller {
 	{
 		$periodos = Periodo::All()->reverse();
 		$periodoActual=$periodos[0]->PER_CODIGO;
-		
 		$fechaFinal= Carbon::now()->format('Y-m-d');
 
 		$fechaInicial=$fechaFinal;
@@ -264,10 +263,11 @@ class ReportesController extends Controller {
 
 		$request=null;
 		$guias=null;
+
 		
 		return view('reportes.guiaxcarrera', [
-			'periodos' => $periodos,
-			'carreras' => $carreras,
+			'periodos' => $periodos->sortByDesc('PER_CODIGO'),
+			'carreras' => $carreras->sortBy('CAR_NOMBRE'),
 			'valores'=>$request,
 			'guias'=>$guias
 		]);
@@ -277,17 +277,38 @@ class ReportesController extends Controller {
 	{
 		$periodos = Periodo::codigoNombre()->get();
 		$carreras = Carrera::codigoNombre()->get();
+
+		$periodoActual=Periodo::where('PER_CODIGO',$request->PER_CODIGO)->first();
+		$fechaInicial=$request['FECHA_INCIAL'];
+		$fechaFinal=$request['FECHA_FINAL'];
 		
 		$materias=Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
-		$guias=Guia::guiasxCarrera($request['PER_CODIGO'])->get();
-		
+		$j=0;
+		$guias=null;
+		for($i=0;$i<sizeof($materias);$i++){
+          
+			if($fechaInicial!="" && $fechaFinal!=""){
+			   $guiasValor[$i]=Guia::guiasxCarrera($materias[$i]['MAT_CODIGO'])->whereBetween('GUI_FECHA', [$fechaInicial, $fechaFinal])->get();
+			}else{
+                $request['FECHA_INCIAL']='INICIAL';
+                $request['FECHA_FINAL']='FINAL';
+                 $guiasValor[$i]=Guia::guiasxCarrera($materias[$i]['MAT_CODIGO'])->get();
+
+			}
+			if (sizeof($guiasValor[$i])!=0) {
+				$guias[$j]=$guiasValor[$i];
+				$j++;
+			}
+		}		
 		return view('reportes.guiaxcarrera', [
-			'periodos' => $periodos->reverse(),
-			'carreras' => $carreras,
+			'periodos' => $periodos->sortByDesc('PER_CODIGO'),
+			'carreras' => $carreras->sortBy('CAR_NOMBRE'),
 			'materias' => $materias,
-			'valores'=>$request,
-			'guias'=>$guias
-		]);
+			'valores'=> $request,
+			'guias'=> $guias])
+			->with('periodoActual',$periodoActual)
+			->with('fechaInicial',$fechaInicial)
+			->with('fechaFinal',$fechaFinal);
 	}
 
 	public function pdfcontrol(Request $request)
@@ -304,13 +325,46 @@ class ReportesController extends Controller {
 	{ 
 		$periodos = Periodo::All();
 		$periodoActual=$id;
+		$fechaActual= Carbon::now()->format('Y-m-d');
 		$fechaFinal=$fechaFin;
 		$fechaInicial=$fechaIni;
 
 		$data = DB::select('select  periodo.PER_NOMBRE as PER_NOMBRE, periodo.PER_CODIGO as PER_CODIGO , control.CON_CODIGO as  CON_CODIGO , laboratorio.LAB_NOMBRE as LAB_NOMBRE,materia.MAT_ABREVIATURA as MAT_NOMBRE,materia.MAT_CODIGO as MAT_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS)   as DOC_NOMBRE ,control.CON_DIA as CON_DIA,control.CON_HORA_ENTRADA as CON_HORA_ENTRADA , control.CON_HORA_SALIDA as CON_HORA_SALIDA, control.CON_NUMERO_HORAS as CON_NUMERO_HORAS, control.CON_NOTA as CON_NOTA, periodo.PER_NOMBRE as PER_NOMBRE   from control,materia,docente,periodo,laboratorio where control.LAB_CODIGO = laboratorio.LAB_CODIGO and control.MAT_CODIGO =materia.MAT_CODIGO and control.DOC_CODIGO = docente.DOC_CODIGO and materia.PER_CODIGO =periodo.PER_CODIGO and control.CON_EXTRA=1 and periodo.PER_CODIGO='.$periodoActual.' and control.CON_DIA  between \' '.$fechaInicial.'\''.' and \''.$fechaFinal.'\''.' order by control.CON_DIA ASC; ');
 		//$data =\Session::get('data');
 		
-		$pdf = PDF::loadView('reportes.pdfevento',compact('data','fechaInicial','fechaFinal'))->setPaper('a4');
+		$pdf = PDF::loadView('reportes.pdfevento',compact('data','fechaActual','fechaInicial','fechaFinal'))->setPaper('a4');
+		
+        return $pdf->stream('Reporte.pdf');
+	}
+
+
+	public function pdfCarreraGuia($idperiodo,$idcarrera,$fechaIni,$fechaFin)
+	{ 
+		$periodo=Periodo::find($idperiodo);
+		$carrera=Carrera::find($idcarrera);
+		$fechaFinal=$fechaFin;
+		$fechaInicial=$fechaIni;
+
+		$materias=Materia::materiasx($idperiodo,$idcarrera)->get();
+		$j=0;
+		$guias=null;
+		for($i=0;$i<sizeof($materias);$i++){
+			if($fechaInicial!="INICIAL" && $fechaFinal!="FINAL"){
+			   $guiasValor[$i]=Guia::guiasxCarrera($materias[$i]['MAT_CODIGO'])->whereBetween('GUI_FECHA', [$fechaInicial, $fechaFinal])->get();
+			}else{
+
+                 $guiasValor[$i]=Guia::guiasxCarrera($materias[$i]['MAT_CODIGO'])->get();
+
+			}
+			if (sizeof($guiasValor[$i])!=0) {
+				$guias[$j]=$guiasValor[$i];
+				$j++;
+			}
+		}		
+
+		//$data =\Session::get('data');
+		
+		$pdf = PDF::loadView('reportes.pdfcarreraGuias',compact('guias','periodo','carrera','fechaInicial','fechaFinal'))->setPaper('a4');
 		
         return $pdf->stream('Reporte.pdf');
 	}

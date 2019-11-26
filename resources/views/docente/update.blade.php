@@ -2,7 +2,7 @@
  * Sistema de Gestion de Laboratorios - ESPE
  *
  * Author: Barrera Erick - LLamuca Andrea
- * Revisado por: 
+ * Revisado por:Lorena Perez - David Esparza 
  *
 -->
 @extends('app')
@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <label for="DOC_CEDULA">Cedula <span style="color:#FF0000";>*</span></label>
-            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" value="{{ $docente->DOC_CEDULA }}" required>
+            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" maxlength="10" value="{{ $docente->DOC_CEDULA }}" required pattern="[0-9]{10}">
         </div>
 
         <div class="row">
@@ -51,7 +51,7 @@
             <div class="col">
                 <div class="form-group">
                       <label for="DOC_CORREO">Correo <span style="color:#FF0000";>*</span></label>
-                    <input type="text" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="{{ $docente->DOC_CORREO }}" required>
+                    <input type="email" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="{{ $docente->DOC_CORREO }}" required>
                 </div>
             </div>
         </div>
@@ -60,8 +60,8 @@
            
             <div class="col">
                 <div class="form-group">
-                    <label for="DOC_CLAVE">Clave</label>
-                    <input type="text" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}">
+                    <label for="DOC_CLAVE">Clave<span style="color:#FF0000";>*</span></label>
+                    <input type="password" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="{{ $docente->DOC_CLAVE }}" required> 
                 </div>
             </div>
         
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+        <button type="submit" class="btn btn-primary mb-2" id="docenteBoton" >Actualizar</button>
         <a href="{{url('docente')}}" class="btn btn-danger mb-2">Cancelar</a>
     </form>
 </div>
