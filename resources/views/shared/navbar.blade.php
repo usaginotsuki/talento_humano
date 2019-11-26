@@ -9,12 +9,16 @@
   
   <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
+    @if(Auth::user()->hasAccion("Jefatura","menu_procesa"))
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Proceso
       </a>
+      @endif
       <div class="dropdown-menu">
+        
       @if(Auth::user()->hasAccion("Jefatura","docente"))
-      <a class="dropdown-item" href="{{url('docente')}}">Docente</a>
+      
+      <a class="dropdown-item" href="{{url('docente')}}">{{Auth::user()->hasAccion("Jefatura","menu_procesa")}}</a>
         <div class="dropdown-divider"></div>
       @endif
       @if(Auth::user()->hasAccion("Jefatura","docente"))

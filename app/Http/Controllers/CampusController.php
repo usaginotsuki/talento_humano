@@ -132,6 +132,7 @@ class CampusController extends Controller {
 	}
 
 
+	//valida que este autenticado para acceder al controlador
 	public function __construct()
     {
         $this->middleware('auth');

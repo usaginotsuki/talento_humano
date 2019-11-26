@@ -63,14 +63,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function authorizeRoles($roles){
 		if($this->hasAnyRole($roles))
 			return true;
-		abort(401, 'Accion no autorizada');
-
+		return false;
 	}
 
 	//valida que el rol pueda hacer la accion
 	public function hasAccion($rol,$item){
-		if ($this->roles->where('name',$rol)->first()->accions->where('name',$item)->first()) {
-			return true;
+		$role=$this->roles->where('name',$rol)->first();
+		if (!empty($role)) {
+			$accion=$role->accions->where('name',$item)->first();
+			if (!empty($accion)) {
+				return $accion;			}
 		}
 		return false;
 	}
