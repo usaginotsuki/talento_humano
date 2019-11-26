@@ -126,7 +126,7 @@ Route::get('reporte/fechacontrol', 'ReportesController@fechaControl');
 
 Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
 Route::get('reporte/pdfevento/{id}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfevento');
-
+Route::get('reporte/pdfmateriadocente/{idperiodo}/{idcarrera}', 'ReportesController@pdfmateriadocente');
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
 
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocenteIndex');

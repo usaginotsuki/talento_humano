@@ -160,7 +160,7 @@ function exportGuiaCarrerra() {
     $('#guiaCarreraTable').addClass('export-table');
 
     doc.addImage(imgData, 'JPG', 25, 5, 160, 18);
-    doc.line(14, 25, 196, 25;
+    doc.line(14, 25, 196, 25);
     doc.fromHTML(carrera, 14, 25);
     doc.autoTable({
         html: '#guiaCarreraTable',

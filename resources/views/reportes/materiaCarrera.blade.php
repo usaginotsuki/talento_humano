@@ -17,8 +17,7 @@
         <div class="card border-primary mb-3">
           <div class="card-header text-primary">Consultar</div>
           <div class="card-body text-primary">
-            <select class="selectpicker show-tick mb-3" title="Seleccione un Periodo..." name="PER_CODIGO"
-              data-live-search="true" data-width="100%">
+            <select class="form-control" title="Seleccione un Periodo..." name="PER_CODIGO">
               @foreach ($periodos as $periodo)
               @if($periodo->PER_CODIGO==$valores['PER_CODIGO'])
               <option value="{{ $periodo->PER_CODIGO }}" selected>{{ $periodo->PER_NOMBRE }}</option>
@@ -27,7 +26,7 @@
               @endif
               @endforeach
             </select>
-            <select class="selectpicker show-tick mb-3" title="Seleccione una Carrera..." name="CAR_CODIGO"
+            <select class="form-control" title="Seleccione una Carrera..." name="CAR_CODIGO"
               data-live-search="true" data-width="100%">
               @foreach ($carreras as $carrera)
               @if($carrera->CAR_CODIGO == $valores['CAR_CODIGO'])
@@ -52,9 +51,7 @@
         <div class="card-body text-info">
           <h5 class="card-title">Descargar</h5>
           @if (isset($materias))
-          <button onclick="exportMateriaCarrerra()" class="btn btn-info">
-            <span class="oi oi-cloud-download"></span> Exportar a PDF
-          </button>
+          <a href="{{url('reporte/pdfmateriadocente/'.$periodox->PER_CODIGO.'/'.$carrerax->CAR_CODIGO.'')}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
           @else
           <button disabled class="btn btn-info">
             <span class="oi oi-cloud-download"></span> Exportar a PDF
@@ -106,7 +103,7 @@
         <td class="col opts">{{$mat ->MAT_CODIGO}}</td>
         <td class="col opts">{{$mat ->MAT_NOMBRE}}</td>
         <td class="col opts">{{$mat ->MAT_NRC}}</td>
-        <td class="col opts">{{$mat->docentes->DOC_NOMBRES.' '.$mat->docentes->DOC_APELLIDOS}}</td>
+        <td class="col opts">{{$mat->docente->DOC_NOMBRES.' '.$mat->docente->DOC_APELLIDOS}}</td>
         <td class="col opts">{{$mat ->MAT_CREDITOS}}</td>
         <td class="col opts">{{$mat ->MAT_NUM_EST}}</td>
         <td class="col opts">{{$mat ->MAT_ABREVIATURA}}</td>
