@@ -112,7 +112,7 @@ Route::get('periodo/{id}/destroy', 'PeriodoController@destroy');
 Route::post('periodo/store', 'PeriodoController@store');
 Route::post('periodo/update', 'PeriodoController@update');
 ///////////////////////////////////////////////////////////////////
-Route::get('docente/{id}','EventoOcacionalController@getDocente');
+Route::get('ocasionales/docente/{id}','EventoOcacionalController@getDocente');
 Route::get('ocasionales','EventoOcacionalController@index');
 Route::get('ocasionales/create','EventoOcacionalController@create');
 Route::post('ocasionales/store', 'EventoOcacionalController@store');

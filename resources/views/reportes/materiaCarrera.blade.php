@@ -17,7 +17,12 @@
         <div class="card border-primary mb-3">
           <div class="card-header text-primary">Consultar</div>
           <div class="card-body text-primary">
+<<<<<<< Updated upstream
             <select class="form-control" title="Seleccione un Periodo..." name="PER_CODIGO">
+=======
+            <select class="form-control" title="Seleccione un Periodo..." name="PER_CODIGO"
+              data-live-search="true" data-width="100%">
+>>>>>>> Stashed changes
               @foreach ($periodos as $periodo)
               @if($periodo->PER_CODIGO==$valores['PER_CODIGO'])
               <option value="{{ $periodo->PER_CODIGO }}" selected>{{ $periodo->PER_NOMBRE }}</option>
@@ -26,6 +31,10 @@
               @endif
               @endforeach
             </select>
+<<<<<<< Updated upstream
+=======
+            <br>
+>>>>>>> Stashed changes
             <select class="form-control" title="Seleccione una Carrera..." name="CAR_CODIGO"
               data-live-search="true" data-width="100%">
               @foreach ($carreras as $carrera)
@@ -36,7 +45,7 @@
               @endif
               @endforeach
             </select>
-
+            <br>
             <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span>
               Consultar
             </button>

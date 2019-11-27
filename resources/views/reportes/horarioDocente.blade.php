@@ -17,16 +17,18 @@
                 <div class="card border-primary mb-3">
                     <div class="card-header text-primary">Consultar</div>
                     <div class="card-body text-primary">
-                        <select class="selectpicker show-tick mb-3" title="Seleccione un Periodo..." name="periodo" data-live-search="true" data-width="100%">
+                        <select type="input" class="form-control" id="periodo" name="periodo" placeholder="Laboratorio"  required>
                             @foreach ($periodos as $periodo)
-                            <option value="{{ $periodo->PER_CODIGO }}">{{ $periodo->PER_NOMBRE }}</option>
+                                <option value="{{ $periodo->PER_CODIGO }}">{{ $periodo->PER_NOMBRE }}</option>
                             @endforeach
                         </select>
-                        <select class="selectpicker show-tick mb-3" title="Seleccione un Docente..." name="docente" data-live-search="true" data-width="100%">
+                        <br>
+                        <select type="input" class="form-control" id="docente" name="docente" placeholder="Laboratorio"  required>
                             @foreach ($docentes as $docente)
-                            <option value="{{ $docente->DOC_CODIGO }}">{{$docente->DOC_TITULO}} {{$docente->DOC_APELLIDOS}} {{$docente->DOC_NOMBRES}}</option>
+                                <option value="{{ $docente->DOC_CODIGO }}">{{$docente->DOC_TITULO}} {{$docente->DOC_APELLIDOS}} {{$docente->DOC_NOMBRES}}</option>
                             @endforeach
                         </select>
+                        <br>
                         <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
                     </div>
                 </div>
