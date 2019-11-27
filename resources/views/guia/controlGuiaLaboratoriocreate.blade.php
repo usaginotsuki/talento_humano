@@ -91,7 +91,7 @@
             <div class="form-group row">
                 <label for="GUI_DURACION"class="col-sm-2 col-form-label">Duracion<span style="color:#FF0000";>*</span></label>
                 <div class="col-sm-10">
-                        <input type="input" class="form-control" id="GUI_DURACION" name="GUI_DURACION"   value="@if(isset($guia)) {{$guia->GUI_DURACION}} @endif" required>
+                        <input type="number" class="form-control" id="GUI_DURACION" name="GUI_DURACION"   value="@if(isset($guia)) {{$guia->GUI_DURACION}} @endif" required>
                 </div>
             </div>
         <!-- Submit Button -->

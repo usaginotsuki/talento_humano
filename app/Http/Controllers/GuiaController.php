@@ -225,6 +225,7 @@ class GuiaController extends Controller {
 			'GUI_COORDINADOR' => $request['GUI_COORDINADOR'],
 			'GUI_REGISTRADO' => 0,
 			'GUI_INTRODUCCION' => $request['GUI_INTRODUCCION'],
+			'GUI_APROBADO' => 0,
 			
 		]);
 		return redirect('guia/listarGuias/'.$materia);
