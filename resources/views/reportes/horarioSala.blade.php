@@ -16,17 +16,20 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="card border-primary mb-3">
                     <div class="card-header text-primary">Consultar</div>
+                    
                     <div class="card-body text-primary">
-                        <select class="selectpicker show-tick mb-3" title="Seleccione un Periodo..." name="periodo" data-live-search="true" data-width="100%">
+                        <select class="form-control" title="Seleccione un Periodo..." name="periodo" data-live-search="true" data-width="100%">
                             @foreach ($periodos as $periodo)
                             <option value="{{ $periodo->PER_CODIGO }}">{{ $periodo->PER_NOMBRE }}</option>
                             @endforeach
                         </select>
-                        <select class="selectpicker show-tick mb-3" title="Seleccione una Sala..." name="laboratorio" data-live-search="true" data-width="100%">
+                        <br>
+                        <select class="form-control" title="Seleccione una Sala..." name="laboratorio" data-live-search="true" data-width="100%">
                             @foreach ($laboratorios as $laboratorio)
                             <option value="{{ $laboratorio->LAB_CODIGO }}">{{ $laboratorio->LAB_NOMBRE }}</option>
                             @endforeach
                         </select>
+                        <br>
                         <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
                     </div>
                 </div>
@@ -57,7 +60,7 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+                    <a href="{{url('reporte/pdfhorariosala/'.$periodox->PER_CODIGO.'/'.$Laboratoriox->LAB_CODIGO.'')}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
                     @else
                     <button disabled class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif
