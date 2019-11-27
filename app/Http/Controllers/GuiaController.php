@@ -148,6 +148,7 @@ class GuiaController extends Controller {
 		if (empty($last)) {
 			$guias->GUI_COORDINADOR="";
 			$guias->GUI_NUMERO=1;
+			$control=Control::fechaGuiaSin($materia)->first();
 		}else{
 			$guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
 			$guias->GUI_NUMERO=$last->GUI_NUMERO+1;
@@ -179,6 +180,7 @@ class GuiaController extends Controller {
 	   if (empty($last)) {
 		   $guias->GUI_COORDINADOR="";
 		   $guias->GUI_NUMERO=1;
+	    	$control=Control::fechaGuiaSin($materia)->first();
 	   }else{
 		   $guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
 		   $guias->GUI_NUMERO=$last->GUI_NUMERO+1;
