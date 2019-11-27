@@ -125,6 +125,8 @@ class ReportesController extends Controller {
 	{
 		$periodoId = $request->input('periodo');
 		$docenteId = $request->input('docente');
+		$periodox=Periodo::find($periodoId);
+		$Docentex=Docente::find($docenteId);
 		$periodos = Periodo::codigoNombre()->get();
 		$docentes = Docente::codigoNombre()->get();
 		$profesor = Docente::nombreDocente($docenteId)->first();
@@ -162,7 +164,8 @@ class ReportesController extends Controller {
 			'docentes' => $docentes,
 			'count' => $count,
 			'profesor' => $profesor,
-			'horario' => $horario
+			'horario' => $horario,'periodox' => $periodox,
+			'Docentex' => $Docentex
 		]);
 	}
 
@@ -400,6 +403,51 @@ class ReportesController extends Controller {
 		
         return $pdf->stream('Reporte.pdf');
 	}
+
+	public function pdfhorariodocente($idper,$iddoc)
+	{ 
+		$periodoId = $idper;
+		$docenteId = $iddoc;
+		$periodox=Periodo::find($idper);
+		$Docentex=Docente::find($iddoc);
+		$periodos = Periodo::codigoNombre()->get();
+		$docentes = Docente::codigoNombre()->get();
+		$profesor = Docente::nombreDocente($docenteId)->first();
+		$count = Horario::obtenerHorarioPorPeriodo($periodoId)->count();
+		$horario = Horario::obtenerHorarioPorPeriodo($periodoId)->first();
+		$materias = Materia::obtenerMateriaPorDocente($periodoId, $docenteId)->get();
+		$fechaActual= Carbon::now()->format('Y-m-d');
+
+		for ($x = 1; $x <= 13; $x++) {
+			foreach ($materias as $mat) {
+				$docente = $horario->laboratorio->LAB_NOMBRE;
+				if ($horario['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_LUNES_DOC'.$x] = $docente ;
+				}
+				if ($horario['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_MATES_DOC'.$x] = $docente ;
+				}
+				if ($horario['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_MIERCOLES_DOC'.$x] = $docente ;
+				}
+				if ($horario['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_JUEVES_DOC'.$x] = $docente ;
+				}
+				if ($horario['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_VIERNES_DOC'.$x] = $docente ;
+				}
+			}
+		}
+
+		$pdf = PDF::loadView('reportes.pdfhorariodocente',compact('periodos','docentes','count','horario','profesor','periodox','Docentex','fechaActual'))->setPaper('a4');
+		
+        return $pdf->stream('Reporte.pdf');
+	}	
 
 	public function pdfCarreraGuia($idperiodo,$idcarrera,$fechaIni,$fechaFin)
 	{ 
