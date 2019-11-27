@@ -16,6 +16,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="card border-primary mb-3">
                     <div class="card-header text-primary">Consultar</div>
+                    
                     <div class="card-body text-primary">
                         <select type="input" class="form-control" id="periodo" name="periodo" placeholder="Laboratorio"  required>
                             @foreach ($periodos as $periodo)
@@ -59,7 +60,7 @@
                         </div>
                     </form>
                     @if (isset($horario))
-                    <button onclick="exportHorarioSala()" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+                    <a href="{{url('reporte/pdfhorariosala/'.$periodox->PER_CODIGO.'/'.$Laboratoriox->LAB_CODIGO.'')}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
                     @else
                     <button disabled class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
                     @endif

@@ -43,7 +43,8 @@ class ReportesController extends Controller {
 	{
 		$periodoId = $request->input('periodo');
 		$laboratorioId = $request->input('laboratorio');
-
+		$periodox=Periodo::find($periodoId);
+		$Laboratoriox=Laboratorio::find($laboratorioId);
 		$periodos = Periodo::codigoNombre()->get();
 		$laboratorios = Laboratorio::codigoNombreCapacidad()->get();
 		$count = Horario::obtenerHorario($periodoId, $laboratorioId)->count();
@@ -80,7 +81,9 @@ class ReportesController extends Controller {
 			'periodos' => $periodos->reverse(),
 			'laboratorios' => $laboratorios,
 			'count' => $count,
-			'horario' => $horario
+			'horario' => $horario,
+			'periodox' => $periodox,
+			'Laboratoriox' => $Laboratoriox
 		]);
 	}
 
@@ -341,7 +344,7 @@ class ReportesController extends Controller {
         return $pdf->stream('Reporte.pdf');
 	}
 
-	public function pdfmateriadocente($idper,$idcar)
+	public function pdfmateriacarrera($idper,$idcar)
 	{ 
 		$periodos = Periodo::codigoNombre()->get();
 		$carreras = Carrera::codigoNombre()->get();
@@ -350,11 +353,53 @@ class ReportesController extends Controller {
 		$fechaActual= Carbon::now()->format('Y-m-d');
 		$carrerax=Carrera::find($idcar);
 		$periodox=Periodo::find($idper);
-		$pdf = PDF::loadView('reportes.pdfdocente',compact('materias','periodox','carrerax','fechaActual'))->setPaper('a4');
+		$pdf = PDF::loadView('reportes.pdfmateriacarrera',compact('materias','periodox','carrerax','fechaActual'))->setPaper('a4');
 		
         return $pdf->stream('Reporte.pdf');
 	}
+	public function pdfhorariosala($idper,$idlab)
+	{ 
+		$periodoId = $idper;
+		$laboratorioId = $idlab;
+		$periodox=Periodo::find($idper);
+		$laboratoriox=Laboratorio::find($idlab);
+		$periodos = Periodo::codigoNombre()->get();
+		$laboratorios = Laboratorio::codigoNombreCapacidad()->get();
+		$count = Horario::obtenerHorario($periodoId, $laboratorioId)->count();
+		$horario = Horario::obtenerHorario($periodoId, $laboratorioId)->first();
+		$materias = Materia::reporte($periodoId)->get();
+		$fechaActual= Carbon::now()->format('Y-m-d');
 
+		for ($x = 1; $x <= 13; $x++) {
+			foreach ($materias as $mat) {
+				$docente = $mat->docente->DOC_TITULO.' '.$mat->docente->DOC_NOMBRES.' '.$mat->docente->DOC_APELLIDOS;
+				if ($horario['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_LUNES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_MATES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_MIERCOLES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_JUEVES_DOC'.$x] = $docente;
+				}
+				if ($horario['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
+					$horario['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
+					$horario['HOR_VIERNES_DOC'.$x] = $docente;
+				}
+			}
+		}
+
+		$pdf = PDF::loadView('reportes.pdfhorariosala',compact('periodos','laboratorios','count','horario','periodox','laboratoriox','fechaActual'))->setPaper('a4');
+		
+        return $pdf->stream('Reporte.pdf');
+	}
 
 	public function pdfCarreraGuia($idperiodo,$idcarrera,$fechaIni,$fechaFin)
 	{ 
@@ -380,7 +425,6 @@ class ReportesController extends Controller {
 			}
 		}		
 
-		//$data =\Session::get('data');
 		
 		$pdf = PDF::loadView('reportes.pdfcarreraGuias',compact('guias','periodo','carrera','fechaInicial','fechaFinal'))->setPaper('a4');
 		

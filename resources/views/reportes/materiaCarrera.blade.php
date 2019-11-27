@@ -31,10 +31,7 @@
               @endif
               @endforeach
             </select>
-<<<<<<< Updated upstream
-=======
             <br>
->>>>>>> Stashed changes
             <select class="form-control" title="Seleccione una Carrera..." name="CAR_CODIGO"
               data-live-search="true" data-width="100%">
               @foreach ($carreras as $carrera)
@@ -60,7 +57,7 @@
         <div class="card-body text-info">
           <h5 class="card-title">Descargar</h5>
           @if (isset($materias))
-          <a href="{{url('reporte/pdfmateriadocente/'.$periodox->PER_CODIGO.'/'.$carrerax->CAR_CODIGO.'')}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
+          <a href="{{url('reporte/pdfmateriacarrera/'.$periodox->PER_CODIGO.'/'.$carrerax->CAR_CODIGO.'')}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
           @else
           <button disabled class="btn btn-info">
             <span class="oi oi-cloud-download"></span> Exportar a PDF
