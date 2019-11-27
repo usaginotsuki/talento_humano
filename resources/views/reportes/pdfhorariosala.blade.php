@@ -92,6 +92,7 @@ th, td {
                 <thead>
                     <tr>
                       <td scope="row"  width="4%"> <b>PERIODO</b> </td>
+                      
                       <td scope="row" width="10%">: {{$periodox->PER_NOMBRE}}  </td>
                       <td scope="row" id="derecha" width="5%"> <b> SALA</b> </td>
                       <td scope="row" id="izquierda" width="5%">: {{$horario->laboratorio->LAB_NOMBRE}}   </td>   
