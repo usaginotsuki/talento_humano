@@ -478,4 +478,11 @@ class ReportesController extends Controller {
 		
         return $pdf->stream('Reporte.pdf');
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

@@ -329,4 +329,10 @@ class ControlController extends Controller {
 		
 		return view("control.consola", ["controles"=>$controles]);
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

@@ -19,6 +19,7 @@ class CarreraController extends Controller {
 	{
 		$carreras = Carrera::All();
 		return view('carrera.index', compact('carreras'));
+	
 	}
 
 	/**
@@ -28,6 +29,7 @@ class CarreraController extends Controller {
 	 */
 	public function create()
 	{
+		
 		return view('carrera.create');
 	}
 
@@ -90,5 +92,11 @@ class CarreraController extends Controller {
 			->with('title','Carrera eliminada!')
 			->with('subtitle','Se ha eliminado correctamente la carrera.');
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 }
