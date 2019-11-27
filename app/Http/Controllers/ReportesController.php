@@ -32,10 +32,10 @@ class ReportesController extends Controller {
 	public function horarioPorSalasIndex()
 	{
 		$periodos = Periodo::codigoNombre()->get();
+		//$periodos = DB::table('periodo')->select('PER_CODIGO', 'PER_NOMBRE')->get();
 		$laboratorios = Laboratorio::codigoNombreCapacidad()->get();
-		
 		return view('reportes.horarioSala', [
-			'periodos' => $periodos->reverse(),
+			'periodos' => $periodos,
 			'laboratorios' => $laboratorios
 		]);
 	}

@@ -18,15 +18,15 @@
                     <div class="card-header text-primary">Consultar</div>
                     
                     <div class="card-body text-primary">
-                        <select class="form-control" title="Seleccione un Periodo..." name="periodo" data-live-search="true" data-width="100%">
+                        <select type="input" class="form-control" id="periodo" name="periodo" placeholder="Laboratorio"  required>
                             @foreach ($periodos as $periodo)
-                            <option value="{{ $periodo->PER_CODIGO }}">{{ $periodo->PER_NOMBRE }}</option>
+                                <option value="{{$periodo->PER_CODIGO}}">{{$periodo->PER_NOMBRE}}</option>
                             @endforeach
                         </select>
                         <br>
-                        <select class="form-control" title="Seleccione una Sala..." name="laboratorio" data-live-search="true" data-width="100%">
+                        <select type="input" class="form-control" id="laboratorio" name="laboratorio" placeholder="Laboratorio"  required>
                             @foreach ($laboratorios as $laboratorio)
-                            <option value="{{ $laboratorio->LAB_CODIGO }}">{{ $laboratorio->LAB_NOMBRE }}</option>
+                                <option value="{{$laboratorio->LAB_CODIGO }}">{{$laboratorio->LAB_NOMBRE}}</option>
                             @endforeach
                         </select>
                         <br>

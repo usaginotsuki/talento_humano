@@ -17,7 +17,8 @@
         <div class="card border-primary mb-3">
           <div class="card-header text-primary">Consultar</div>
           <div class="card-body text-primary">
-            <select class="form-control" title="Seleccione un Periodo..." name="PER_CODIGO">
+            <select class="form-control" title="Seleccione un Periodo..." name="PER_CODIGO"
+              data-live-search="true" data-width="100%">
               @foreach ($periodos as $periodo)
               @if($periodo->PER_CODIGO==$valores['PER_CODIGO'])
               <option value="{{ $periodo->PER_CODIGO }}" selected>{{ $periodo->PER_NOMBRE }}</option>
