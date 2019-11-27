@@ -6,8 +6,9 @@ use App\Control;
 use App\Docente;
 use App\Laboratorio;
 use App\Materia;
-
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
 use App\Quotation;
 
@@ -198,6 +199,12 @@ class ControlController extends Controller {
 		return view('control.edit')->with('control', $control)->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
 
+	public function docente($id){
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		$control = Control::where('CON_DIA', $date)->get();
+		return view("control.consola", ["controles"=>$control]);
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -230,6 +237,8 @@ class ControlController extends Controller {
 		return redirect('control');
 	}
 
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -249,12 +258,75 @@ class ControlController extends Controller {
 		$date = Carbon::now();
 		$date = $date->format('Y-m-d');
 		$control = Control::where('CON_DIA', $date)->get();
-		//$control =DB::table('control')->where('CON_DIA','$date')->get();
-		//print_r ($control);
-		//$control = control::all();
-		//$control = DB::select('SELECT * FROM control where CON_DIA = 2019-11-05');
-		//$control = DB::select('SELECT * FROM control where CON_DIA = :CON_DIA', ['CON_DIA' => '$date']);
 		return view("control.consola", ["controles"=>$control]);
 		
+	}
+
+	public function updateD(Request $request)
+	{
+		//
+		$control = Control::find( $request['CON_CODIGO']);
+		$doc = Docente::find($control->DOC_CODIGO);
+		$firma = $doc->DOC_MIESPE;
+		$time = time();
+		$hora = date("H:i:s", $time);
+		if ($control->CON_REG_FIRMA_ENTRADA == null) {
+				 	# code...
+			$control->CON_REG_FIRMA_ENTRADA = $firma;
+			$control->CON_HORA_ENTRADA_R = $hora;
+		}else{
+			$control->CON_HORA_SALIDA_R = $hora;
+			$control->CON_REG_FIRMA_SALIDA = $firma;
+		} 
+
+		$control->save();
+		
+		return redirect("control.consola");
+	}
+
+
+	public function updateL(Request $request)
+	{
+		//
+		$name = $request->name;
+		$control = Control::find( $request['CON_CODIGO']);
+		$doc = Docente::find($control->DOC_CODIGO);
+		$firma = $doc->DOC_MIESPE;
+		if ($control->CON_LAB_ABRE ==null) {
+					# code...
+			$control->CON_LAB_ABRE = $firma;
+		}else{
+			$control->CON_LAB_CIERRA = $firma;
+		}
+
+		$control->save();
+		
+		return redirect("control.consola");
+	}
+
+	public function filtroCampus(Request $request){
+		$campus = $request->input('campus');
+		$laboratorios = Laboratorio::filtrarCampus($campus)->get();
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		$controles =  array();
+		
+		for ($j=0; $j <sizeof($laboratorios) ; $j++) {
+			# code...
+			
+			$control = Control::where('CON_DIA', $date)->where('LAB_CODIGO', $laboratorios[$j]->LAB_CODIGO)->first();
+			
+			if ($control != null) {
+				# code...
+				array_push ( $controles , $control );
+			}else{
+				
+			}
+			
+		}
+		
+		echo sizeof($controles);
+		
+		return view("control.consola", ["controles"=>$controles]);
 	}
 }

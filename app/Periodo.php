@@ -23,4 +23,8 @@ class Periodo extends Model {
 	public function scopeCodigoNombre($query) {
 		return $query->select('PER_CODIGO', 'PER_NOMBRE')->orderBy('PER_CODIGO', 'DESC');
 	}
+
+	public function scopePeriodoActivo($query){
+		return $query->where('PER_ESTADO','1');
+	}
 }

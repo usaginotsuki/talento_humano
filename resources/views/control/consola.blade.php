@@ -18,9 +18,13 @@
         <br>
         <div class="col">
             <br>
-            <input type="checkbox" name="centro" value="centro"> Campus Centro
-            <input type="checkbox" name="belisario" value="belisario"> Campus Belisario Quevedo
-            <a href="{{url('control/consola')}}" class="btn btn-primary mb-2">Aplicar Filtro</a>
+            <form action="{{url('control/filtroCampus')}}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="radio" name="campus" value="1"> Campus Centro
+                <input type="radio" name="campus" value="2"> Campus Belisario Quevedo
+                <button  type="submit" class="btn btn-primary mb-2">Aplicar Filtro</button>
+            </form>
+            
         </div>
         <div class="col"><br>[admin]</div>
     </div>
@@ -43,22 +47,41 @@
             <td scope="row">{{$control -> materia->MAT_NOMBRE}} {{$control -> materia->MAT_NRC}}({{$control -> docente->DOC_MIESPE}})</td>
                 <td>
                     {{--*/$oca = $control->materia->MAT_OCACIONAL/*--}}
-                    <a href="{{url('')}}">
-                        <img src="{{URL::asset('images/consola/entrar.png')}}" onclick="this.src = cambia(this.src);">
-                    </a>
+                    <form action="{{url('control/updateD')}}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
+                        <input type="hidden" name="docente">
+                        @if($control -> CON_REG_FIRMA_ENTRADA == null)
+                            <button  type="submit" class="btn btn-success mb-2">Entrar</button>
+                        @endif
+                        @if($control -> CON_REG_FIRMA_ENTRADA != null)
+                            <button  type="submit" class="btn btn-danger mb-2">Salir</button>
+                        @endif
+                    </form>
+                   
+                    <!--
                     @if ($oca == '1')
                         <img src="{{URL::asset('images/consola/guiaON.png')}}" >
                     @endif
                     @if ($oca == '0')
                         <img src="{{URL::asset('images/consola/guiaN.png')}}" >
                     @endif
+                -->
                 </td>
                 <td></td>
                 <td>
-                    <img src="{{URL::asset('images/consola/entrar.png')}}" onclick="this.src = cambia2(this.src);">
-                    <a href="{{url('control/consola')}}">
-                        <img src="{{URL::asset('images/consola/update.png')}}" >
-                    </a>
+                    <form action="{{url('control/updateL')}}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
+                        <input type="hidden" name="laboratorista">
+                        @if($control -> CON_LAB_ABRE == null)
+                            <button  type="submit" class="btn btn-success mb-2">Entrar</button>
+                        @endif
+                        @if($control -> CON_LAB_ABRE != null)
+                            <button  type="submit" class="btn btn-danger mb-2">Cerrar</button>
+                        @endif
+                    </form>
+                    
                 </td>
 
         </tbody>

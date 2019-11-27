@@ -62,7 +62,7 @@ class GuiaController extends Controller {
             \Session(['DOC_CODIGO'=>$docentes ->DOC_CODIGO]);
             $periodos=Periodo::All();
            	$longitud = sizeof($periodos);
-           	$periodo = $periodos[$longitud - 2];
+           	$periodo = Periodo::periodoActivo()->first();
             $materias=Materia::where('DOC_CODIGO', $docentes ->DOC_CODIGO)->where('PER_CODIGO',$periodo->PER_CODIGO)->get();
 			$count = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->count();
 			$horario = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->first();
