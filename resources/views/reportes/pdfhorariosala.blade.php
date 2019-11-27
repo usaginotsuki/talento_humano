@@ -82,7 +82,7 @@ th, td {
                 <thead >
                     <tr>
                       <td scope="row"  width="4%"> <b>REPORTE</td>
-                      <td scope="row" id="izquierda"width="30%">: MATERIAS POR DOCENTE </td>
+                      <td scope="row" id="izquierda"width="30%">: HORARIO POR SALA </td>
                     
                     
                     </tr>
@@ -92,15 +92,12 @@ th, td {
                 <thead>
                     <tr>
                       <td scope="row"  width="4%"> <b>PERIODO</b> </td>
-                      <td scope="row" width="9%">: {{$periodox->PER_NOMBRE}}  </td>
-                  
-                    
+                      <td scope="row" width="10%">: {{$periodox->PER_NOMBRE}}  </td>
                       <td scope="row" id="derecha" width="5%"> <b> SALA</b> </td>
-                   
-                      <td scope="row" id="izquierda" width="5%">: {{$laboratoriox->CAR_NOMBRE}}   </td>  
-                      <td scope="row" id="derecha" width="5%"> <b> CARRERA</b> </td>
-                      <td scope="row" id="izquierda" width="5%">: {{$laboratoriox->CAR_NOMBRE}}   </td> 
-                  
+                      <td scope="row" id="izquierda" width="5%">: {{$horario->laboratorio->LAB_NOMBRE}}   </td>   
+                      <td scope="row" id="derecha" width="5%"> <b> CAPACIDAD</b> </td>
+                      <td scope="row" id="izquierda" width="5%">: {{ $horario->laboratorio->LAB_CAPACIDAD }} PCs   </td> 
+     
                                          
                     </tr>
                 </thead>
