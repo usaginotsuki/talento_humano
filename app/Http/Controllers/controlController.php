@@ -281,7 +281,7 @@ class ControlController extends Controller {
 
 		$control->save();
 		
-		return redirect("control.consola");
+		return redirect("control/consola");
 	}
 
 
@@ -301,7 +301,7 @@ class ControlController extends Controller {
 
 		$control->save();
 		
-		return redirect("control.consola");
+		return redirect("control/consola");
 	}
 
 	public function filtroCampus(Request $request){
