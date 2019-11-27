@@ -1,7 +1,7 @@
 $("#MAT_CODIGO").change(function(event){
 
     $.ajax({
-      url: "/docente/"+event.target.value,
+      url: "docente/"+event.target.value,
       type: "GET",
       dataType: "json",
       error: function(element){
