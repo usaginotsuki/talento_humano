@@ -117,4 +117,11 @@ class EmpresaController extends Controller {
 		Empresa::destroy($id);
 		return redirect('empresa');
 	}
+	
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

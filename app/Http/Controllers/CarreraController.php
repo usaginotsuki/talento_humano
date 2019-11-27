@@ -19,6 +19,7 @@ class CarreraController extends Controller {
 	{
 		$carreras = Carrera::All();
 		return view('carrera.index', compact('carreras'));
+	
 	}
 
 	/**
@@ -28,6 +29,7 @@ class CarreraController extends Controller {
 	 */
 	public function create()
 	{
+		
 		return view('carrera.create');
 	}
 

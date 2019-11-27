@@ -100,4 +100,11 @@ class EventoOcacionalController extends Controller {
 			->with('subtitle', 'El registro del evento ocacional se ha realizado con éxito.');
 	}
 
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
 }

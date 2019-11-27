@@ -867,4 +867,11 @@ class HorarioController extends Controller {
 			->with('title', 'Horario eliminado!')
 			->with('subtitle', 'La eliminación del horario se ha realizado con éxito.');
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }
