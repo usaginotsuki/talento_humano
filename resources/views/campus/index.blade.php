@@ -35,9 +35,11 @@
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
-        @foreach ($campus as $cam)
+        
         <tbody>
-            <td scope="row">{{$cam -> CAM_CODIGO}}</td>
+            @foreach ($campus as $cam)
+            <tr>
+                <td scope="row">{{$cam -> CAM_CODIGO}}</td>
             <td scope="row">{{$cam -> CAM_NOMBRE}}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -45,8 +47,11 @@
                     <a href="{{url('campus/'.$cam->CAM_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
                 </div>
             </td>
+            </tr>
+            
+            @endforeach  
         </tbody>
-        @endforeach   
+         
 </table>
 </div>
 @endsection

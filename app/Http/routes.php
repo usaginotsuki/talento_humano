@@ -48,6 +48,9 @@ Route::get('control/{id}/destroy','ControlController@destroy');
 Route::post('control/store', 'ControlController@store');
 Route::post('control/update', 'ControlController@update');
 Route::post('control/generar', 'ControlController@generar');
+Route::post('control/updateD', 'ControlController@updateD');
+Route::post('control/updateL', 'ControlController@updateL');
+Route::post('control/filtroCampus', 'ControlController@filtroCampus');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');

@@ -60,7 +60,9 @@ class GuiaController extends Controller {
            return view ('guias.login')->with('title', 'Auntenticación incorrecta!')->with('subtitle', 'Ingrese el usuario y clave correctas.');
 		}else {            
             \Session(['DOC_CODIGO'=>$docentes ->DOC_CODIGO]);
-            $periodo=Periodo::All()->last();
+            $periodos=Periodo::All();
+           	$longitud = sizeof($periodos);
+           	$periodo = Periodo::periodoActivo()->first();
             $materias=Materia::where('DOC_CODIGO', $docentes ->DOC_CODIGO)->where('PER_CODIGO',$periodo->PER_CODIGO)->get();
 			$count = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->count();
 			$horario = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->first();
