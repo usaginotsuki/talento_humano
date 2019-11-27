@@ -68,6 +68,8 @@
         Institucion
       </a>
      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/horario')}}">horario</a>
+        <div class="dropdown-divider"></div>  
         <a class="dropdown-item" href="{{url('/hora')}}">Hora</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('/empresa')}}">Empresa</a>
