@@ -70,9 +70,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function hasAccion($rol,$item){
 		$role=$this->roles->where('name',$rol)->first();
 		if (!empty($role)) {
-			$accion=$role->accions->where('name',$item)->first();
-			if (!empty($accion)) {
-				return $accion;			}
+			if ($role->accions->where('name',$item)->first()) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	public function authorizeAccion($roles,$accion){
+		if(is_array($roles)){
+			foreach ($roles as $role) {
+				return $this->hasAccion($role,$accion);
+			}
+		}else{
+			if($this->hasRole($roles)){
+				return true;
+			}
 		}
 		return false;
 	}
