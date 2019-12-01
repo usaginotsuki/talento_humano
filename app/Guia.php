@@ -58,4 +58,8 @@ class Guia extends Model {
 		return $query->select('GUI_NUMERO','LAB_CODIGO','GUI_COORDINADOR','GUI_FECHA')
 		->where('MAT_CODIGO',$matId)->orderBy('GUI_FECHA','DESC');
 	}
+
+	public function scopeGuiasParaControl($query, $fecha, $docente, $materia){
+		return $query->where('DOC_CODIGO',$docente)->where('MAT_CODIGO',$materia)->where('GUI_FECHA',$fecha);
+	}
 }
