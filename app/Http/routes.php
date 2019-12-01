@@ -13,6 +13,7 @@ Route::get('/', 'WelcomeController@index');
 Route::get('guias/login', 'GuiaController@login');
 Route::get('guias/cerrarsession', 'GuiaController@cerrarsession');
 Route::post('login/validar', 'GuiaController@validar');
+
 ///////////////////////////////////////////////////////////////////
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -167,3 +168,18 @@ Route::post('guia/guardarGuia', 'GuiaController@guardarGuia');
 //////////////////////////////////Routes AUTH
 Route::get('home', 'LoginController@index');
 
+//////////////////////////Routes SolicitudLogin//////////////////////////
+Route::get('solicitudLogin/cerrarsession', 'SolicitudController@cerrarsession');
+Route::post('login/validar', 'SolicitudController@validar');
+Route::get('solicitudLogin/login', 'SolicitudController@login');
+/////////////////////////Routes Solicitud///////////////////////////////
+Route::get('solicitud/listarGuiasSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
+Route::get('solicitud/{id}/edit', 'SolicitudController@edit');
+Route::get('solicitud/{id}/destroy', 'SolicitudController@destroy');
+Route::post('solicitud/update', 'SolicitudController@update');
+Route::get('solicitud/crearSolicitud', 'SolicitudController@crearSolicitudIndex');
+Route::get('solicitud/comboMateria/{id}', 'SolicitudController@byPeriodoGet');
+Route::get('solicitud/comboGuia/{id}', 'SolicitudController@bySolicitudGet');
+Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
+Route::post('solicitud/createSolicitudSeleccion', 'SolicitudController@createSolicitudSeleccion');
+Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');
