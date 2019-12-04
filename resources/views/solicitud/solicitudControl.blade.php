@@ -1,27 +1,21 @@
 @extends('app')
 @section('content')   
-<div class="jumbotron">
-    @if (!empty($guias_terminadas)) 
-<h2>Guias: {{$guias_terminadas[0] -> MAT_ABREVIATURA}} </h2>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    @endif
-            <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entrega - Por favor, Realice el detalle al final de esta pantalla</h4>
- </div>        
-
 </div>
 <div class="container">
     <div class="col">
-                <a href="{{url('solicitud/crearSolicitud')}}" class="btn btn-primary mb-2">Crear Solicitud</a>
+                <a href="{{url('solicitud/controlSolicitudLaboratoriocreate')}}" class="btn btn-primary mb-2">Crear Solicitud</a>
     </div>
     <table   class="table table-hover table-bordered results">
             <thead>
                 <tr>
-                    <th scope="row">Guías Número</th>
-                    <th scope="row">Fecha</th>
+                    <th scope="row">Solicitud Número</th>
+                    <th scope="row">Fecha de Uso</th>
                     <th scope="row">Tema</th>
                     <th scope="row">Laboratorio</th>
                     <th scope="row"></th>
                     <th scope="row"></th>
+                    <th scope="row"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -38,13 +32,13 @@
                     </td> 
                     @if($guias_terminadas[$i]->GUI_REGISTRADO==1) 
                         <td scope="row">
-                            <span class="badge badge-success">Entregada</span>
+                            <span class="badge badge-success">Aprobado</span>
                         </td>
                         <td scope="row">
                         </td>
                     @else
                         <td scope="row">
-                            <span class="badge badge-danger">Pendiente</span>
+                            <span class="badge badge-danger">No Aprobado</span>
                         </td>
                         {{--*/$valido=0/*--}}
                         @for ($j=$i+1;$j<=sizeof($guias_terminadas)-1;$j++)
@@ -75,10 +69,10 @@
     <table id="ListTable" class="table table-hover table-bordered results">
         <thead>
             <tr>
-                <th colspan="6">DETALLE DE ASIGNACION Y USO DE LABORATORIO</th>
+                <th colspan="6">DETALLE DE SOLICITUD DE LABORATORIO</th>
             </tr>
             <tr>
-                <th scope="row">FECHA</th>
+                <th scope="row">FECHA DE USO</th>
                 <th scope="row">TIPO</th>
                 <th scope="row">HORAS ASIGNADAS</th>
                 <th scope="row">HORA ENTRADA</th>

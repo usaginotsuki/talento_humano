@@ -167,6 +167,10 @@ Route::post('guia/createGuiaSeleccion', 'GuiaController@createGuiaSeleccion');
 Route::post('guia/guardarGuia', 'GuiaController@guardarGuia');
 //////////////////////////////////Routes AUTH
 Route::get('home', 'LoginController@index');
+/////////////////////////Routes Solicitud///////////////////////////////
+Route::get('solicitud/listarSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
+Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
+Route::post('solicitud/horarioFecha', 'SolicitudController@obtenerHorario');
 
 //////////////////////////Routes SolicitudLogin//////////////////////////
 Route::get('solicitudLogin/cerrarsession', 'SolicitudController@cerrarsession');

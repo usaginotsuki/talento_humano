@@ -4,10 +4,7 @@
 @endsection
 @section('content')
 <div class="container container-main bg-white">
-	<a href="{{url('/guias/login')}}" ><img src="{{URL::asset('images/principal/icono_guia.png')}}"> </a>
-
-	<button type="button" class="button button4"><a href="{{url('/solicitudLogin/login')}}" ><img src="{{URL::asset('images/principal/solicitud.png')}}"> </a></button>
-	
+	<a href="{{url('/guias/login')}}" ><img src="{{URL::asset('images/principal/icono_guia.png')}}"> </a>	
     <img src="{{URL::asset('images/principal/espe.png')}}" >
 </div>
 
