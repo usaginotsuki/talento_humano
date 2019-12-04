@@ -91,6 +91,13 @@ Route::get('laboratorio/{id}/destroy', 'LaboratorioController@destroy');
 Route::post('laboratorio/store', 'LaboratorioController@store');
 Route::post('laboratorio/update', 'LaboratorioController@update');
 ///////////////////////////////////////////////////////////////////
+Route::get('objeto', 'ObjetoRecuperadoController@index');
+Route::get('objeto/create', 'ObjetoRecuperadoController@create');
+Route::get('objeto/{id}/edit', 'ObjetoRecuperadoController@edit');
+Route::get('objeto/{id}/destroy', 'ObjetoRecuperadoController@destroy');
+Route::post('objeto/store', 'ObjetoRecuperadoController@store');
+Route::post('objeto/update', 'ObjetoRecuperadoController@update');
+
 Route::get('materia', 'MateriaController@index');
 Route::get('materia/create', 'MateriaController@create');
 Route::get('materia/{id}/edit', 'MateriaController@edit');
