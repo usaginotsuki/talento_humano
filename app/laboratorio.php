@@ -36,4 +36,8 @@ class Laboratorio extends Model {
 		return $query->select('LAB_CODIGO', 'LAB_NOMBRE', 'LAB_CAPACIDAD');
 	}
 
+	public function scopeFiltrarCampus($query,$campus){
+		return $query->select('LAB_CODIGO', 'LAB_NOMBRE', 'LAB_CAPACIDAD')->where('CAM_CODIGO',$campus);
+	}
+
 }

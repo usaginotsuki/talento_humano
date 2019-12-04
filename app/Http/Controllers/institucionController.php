@@ -85,4 +85,10 @@ class InstitucionController extends Controller {
 
 		return redirect('institucion');
 	}
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

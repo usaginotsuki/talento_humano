@@ -48,6 +48,9 @@ Route::get('control/{id}/destroy','ControlController@destroy');
 Route::post('control/store', 'ControlController@store');
 Route::post('control/update', 'ControlController@update');
 Route::post('control/generar', 'ControlController@generar');
+Route::post('control/updateD', 'ControlController@updateD');
+Route::post('control/updateL', 'ControlController@updateL');
+Route::post('control/filtroCampus', 'ControlController@filtroCampus');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');
@@ -135,6 +138,7 @@ Route::post('reporte/pdfcontrol', 'ReportesController@pdfcontrol');
 Route::get('reporte/pdfevento/{id}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfevento');
 Route::get('reporte/pdfmateriacarrera/{idperiodo}/{idcarrera}', 'ReportesController@pdfmateriacarrera');
 Route::get('reporte/pdfhorariosala/{idperiodo}/{idlaboratorio}', 'ReportesController@pdfhorariosala');
+Route::get('reporte/pdfhorariodocente/{idperiodo}/{iddocente}', 'ReportesController@pdfhorariodocente');
 Route::post('reporte/actualizarControl', 'ReportesController@actualizarControl');
 
 Route::get('reporte/horario/docente', 'ReportesController@horarioPorDocenteIndex');
@@ -165,4 +169,8 @@ Route::get('guia/crearGuia', 'GuiaController@crearGuiaIndex');
 Route::get('guia/comboMateria/{id}', 'GuiaController@byPeriodoGet');
 Route::get('guia/comboGuia/{id}', 'GuiaController@byGuiaGet');
 Route::get('guia/controlGuiaLaboratoriocreate', 'GuiaController@controlGuiaLaboratoriocreate');
-Route::post('guia/store', 'GuiaController@store');
+Route::post('guia/createGuiaSeleccion', 'GuiaController@createGuiaSeleccion');
+Route::post('guia/guardarGuia', 'GuiaController@guardarGuia');
+//////////////////////////////////Routes AUTH
+Route::get('home', 'LoginController@index');
+

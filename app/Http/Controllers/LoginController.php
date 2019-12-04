@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-class WelcomeController extends Controller {
+class LoginController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ class WelcomeController extends Controller {
 	 */
 	public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 	/**
 	 * Show the application welcome screen to the user.
@@ -30,11 +30,6 @@ class WelcomeController extends Controller {
 	public function index()
 	{
 		return view('welcome');
-	}
-
-	public function auth()
-	{
-		return view('auth.login');
 	}
 
 }

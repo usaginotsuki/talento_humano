@@ -121,4 +121,11 @@ class PeriodoController extends Controller {
 				->with('subtitle', 'El registro del periodo no se a eliminado correctamente, el periodo tiene registros relacionados.');
 		}
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

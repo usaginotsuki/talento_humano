@@ -99,4 +99,11 @@ class LaboratorioController extends Controller {
 			->with('subtitle','Se ha eliminado correctamente el laboratorio.');
 	}
 
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
 }

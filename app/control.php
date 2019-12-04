@@ -37,5 +37,15 @@ class Control extends Model {
 	public function scopeCodigoNombre($query) {
 		return $query->select('CON_CODIGO', 'DOC_NOMBRES', 'DOC_APELLIDOS');
 	}
+	//busca la fecha de control que aun no tenga guia validando la fecha mayor que la ultima guia creada
+	public function scopeFechaGuia($query, $materiaId,$fecha) {
+		return $query->select('CON_DIA','CON_CODIGO')
+		->where('MAT_CODIGO',$materiaId)->where('CON_DIA','>',$fecha)->whereNull('CON_GUIA')->whereNull('CON_EXTRA')->orderBy('CON_DIA','ASC')->limit(1);
+	}
+	//busca la fecha de control que aun no tenga guia
+	public function scopeFechaGuiaSin($query, $materiaId) {
+		return $query->select('CON_DIA','CON_CODIGO')
+		->where('MAT_CODIGO',$materiaId)->whereNull('CON_GUIA')->whereNull('CON_EXTRA')->orderBy('CON_DIA','ASC')->limit(1);
+	}
 
 }
