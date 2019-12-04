@@ -15,7 +15,7 @@ class Solicitud extends Model {
 	 */
 	public function detalleSolicitud() {
 
-		return $this->hasMany('App\DetalleSolicitud');
+		return $this->hasMany('App\DetalleSolicitud','SOL_CODIGO');
 
 	}
 	/**
@@ -47,6 +47,6 @@ class Solicitud extends Model {
 	* @return Solicitudes
 	*/
 	public function scopeAllSolicitudes($query,$docenteId, $materiaId) {
-		return $query->select('SOL_NUMERO')->where('MAT_CODIGO',$materiaId)->where('MAT_CODIGO',$materiaId)->orderBy('SOL_NUMERO','DESC');
+		return $query->where('MAT_CODIGO',$materiaId)->where('MAT_CODIGO',$materiaId)->orderBy('SOL_NUMERO','DESC');
 	}
 }

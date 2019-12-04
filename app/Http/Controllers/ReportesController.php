@@ -21,6 +21,7 @@ use App\Campus;
 use App\Guia;
 use App\EventoOcacional;
 use App\Session;
+use App\Solicitud;
 
 use PDF;
 use DB;
@@ -475,6 +476,17 @@ class ReportesController extends Controller {
 
 		
 		$pdf = PDF::loadView('reportes.pdfcarreraGuias',compact('guias','periodo','carrera','fechaInicial','fechaFinal'))->setPaper('a4');
+		
+        return $pdf->stream('Reporte.pdf');
+	}
+	public function pdfSolicitud($id)
+	{ 
+		$solicitud = Solicitud::find($id);
+		$solicitud->laboratorio->empresa->materiales;
+		$solicitud->detalleSolicitud;
+		$solicitud->docente;
+		$solicitud->materia;
+		$pdf = PDF::loadView('reportes.pdfsolicitud',compact('solicitud'))->setPaper('a4');
 		
         return $pdf->stream('Reporte.pdf');
 	}

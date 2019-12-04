@@ -66,42 +66,48 @@ p{
               <td scope="row" id="fondo"width="15%"> DEPARTAMENTO: </td>
               <td scope="row" id="centrado"width="35%"> Eléctrica y Electronica: </td>
               <td scope="row" id="fondo"width="20%"> CARRERA: </td>
-              <td scope="row" id="centrado"width="30%"> </td>
+              <td scope="row" id="centrado"width="30%"> SOFTWARE</td>
             </tr>
         </thead>
   </table>
   <table>
             <tr>
               <td scope="row" id="fondo"width="15%" > NOMBRE DE LABORATORIO: </td>
-              
-              <td scope="row" id="centrado"width="57%">
-              @if(!empty($controles)) 
-              {{$controles[0]->EMP_NOMBRE}}
+              <td scope="row" id="centrado"width="57%"> Redes e Informatica [
+              @if(!empty($solicitud)) 
+              {{$solicitud->laboratorio->LAB_NOMBRE}}
               @endif
+              ]
                </td>
             
               <td scope="row" id="fondo"width="15%"> CODIGO DEL LAB: </td>
               <td scope="row" id="centrado"width="13%">
-               @if(!empty($controles)) 
-              {{$controles[0]->LAB_CODIGO}}
-              @endif</td>
+              </td>
             </tr>
   </table>
   <table >
             <tr>
               <td scope="row" id="fondo"width="15%" > FECHA DE SOLICITUD :</td>
-              <td scope="row" id="fondo1"width="25%"></td>
+              <td scope="row" id="fondo1"width="25%">@if(!empty($solicitud)) 
+              {{$solicitud->SOL_FECHA}}
+              @endif</td>
               <td scope="row" id="fondo"width="10%" > FECHA DE USO :</td>
-              <td scope="row" id="fondo1" width="22%"></td>
+              <td scope="row" id="fondo1" width="22%">@if(!empty($solicitud)) 
+              {{$solicitud->SOL_FECHA_USO}}
+              @endif
+              </td>
               <td scope="row" id="fondo"width="15%" > HORARIO DE USO :</td>
-              <td scope="row" id="fondo1" width="13%"></td>
+              <td scope="row" id="fondo1" width="13%">@if(!empty($solicitud)) 
+              {{$solicitud->SOL_HORARIO_USO}}
+              @endif
+              </td>
             </tr>
 
   </table>
   <table >
           <tr>
             <td scope="row" id="fondo"width="15%" > AREA DE OCUPACIÓN:</td>
-            <td scope="row" id="fondo1"width="35 %"> NOMBRE USUARIO:</td
+            <td scope="row" id="fondo"width="35 %"> NOMBRE USUARIO:</td>
             <td scope="row" id="fondo"width="22%" > NRC:</td>
             <td scope="row" id="fondo"width="28%" > TIPO DE USUARIO:</td>
           </tr>
@@ -109,13 +115,19 @@ p{
   <table >
           <tr>
             <td scope="row" id="fondo"width="5%" > Doc.</td>
-            <td scope="row" id="fondo1" width="2.5%"></td>
+            <td scope="row" id="centrado" width="2.5%"> X </td>
             <td scope="row" id="fondo1"width="5%"> Inv.</td>
             <td scope="row" id="fondo1" width="2.5%"></td>
-            <td scope="row" id="fondo1" width="35%"></td>
-            <td scope="row" id="fondo1" width="22%"></td>
+            <td scope="row" id="centrado" width="35%">@if(!empty($solicitud)) 
+            {{$solicitud->docente->DOC_TITULO}} {{$solicitud->docente->DOC_NOMBRES}} {{$solicitud->docente->DOC_APELLIDOS}}
+              @endif
+              </td>
+            <td scope="row" id="centrado" width="22%">@if(!empty($solicitud)) 
+              {{$solicitud->materia->MAT_NRC}}
+              @endif
+              </td>
             <td scope="row" id="fondo"width="6%"> Doc.</td>
-            <td scope="row" id="fondo1" width="3%"></td>
+            <td scope="row" id="centrado" width="3%"> X </td>
             <td scope="row" id="fondo"width="6%"> Inv.</td>
             <td scope="row" id="fondo1" width="3.5%"></td>
             <td scope="row" id="fondo"width="6%"> Est.</td>
@@ -125,19 +137,31 @@ p{
   <table >
           <tr>
             <td scope="row" id="fondo"width="12.5%" > ASIGNATURA:</td>
-            <td scope="row" id="fondo1" width="37.5%"></td>
+            <td scope="row" id="centrado" width="37.5%">@if(!empty($solicitud)) 
+              {{$solicitud->materia->MAT_NOMBRE}}
+              @endif</td>
             <td scope="row" id="fondo"width="11%" > NIVEL:</td>
-            <td scope="row" id="fondo1" width="11%"></td>
+            <td scope="row" id="centrado" width="11%">@if(!empty($solicitud)) 
+              {{$solicitud->materia->MAT_NIVEL}}
+              @endif
+              </td>
             <td scope="row" id="fondo"width="9%"> PRÁCTICA N°:</td>
-            <td scope="row" id="fondo1" width="6%"></td>
+            <td scope="row" id="centrado" width="6%">@if(!empty($solicitud)) 
+              {{$solicitud->SOL_NUMERO}}
+              @endif
+              </td>
             <td scope="row" id="fondo"width="9.5%"> N° USUARIOS:</td> 
-            <td scope="row" id="fondo1" width="3.5%"></td>
+            <td scope="row" id="centrado" width="3.5%">@if(!empty($solicitud)) 
+              {{$solicitud->materia->MAT_NUM_EST}}
+              @endif</td>
           </tr>
   </table>
   <table >
           <tr>
             <td scope="row" id="fondo"width="15%" > TEMA DE PRÁCTICA/PROYECTO :</td>
-            <td scope="row" id="fondo1" width="85%"></td>
+            <td scope="row" id="fondo1" width="85%">@if(!empty($solicitud)) 
+              {{$solicitud->SOL_TEMA_PRACTICA}}
+              @endif</td>
           </tr>
   </table>
     <table >
@@ -148,16 +172,27 @@ p{
           </tr>
   </table>
       <table >
+      @if(!empty($solicitud->laboratorio->empresa->materiales))
+      @foreach ($solicitud->laboratorio->empresa->materiales as $material)
           <tr>
-            <td scope="row" id="fondo1"width="12.5%" >A</td>
-            <td scope="row" id="fondo1" width="59.5%"></td>
-            <td scope="row" id="fondo1"width="28%"></td>
+            <td scope="row" id="fondo1"width="12.5%" >{{$material->MAT_CANTIDAD}}</td>
+            <td scope="row" id="fondo1" width="59.5%">{{$material->MAT_DETALLE}}</td>
+            <td scope="row" id="fondo1"width="28%">{{$material->MAT_OBSERVACION}}</td>
           </tr>
+      @endforeach
+      @endif
+      @foreach ($solicitud->detalleSolicitud as $detalle)
+          <tr>
+            <td scope="row" id="fondo1"width="12.5%" >{{$detalle->DETSOL_CANTIDAD}}</td>
+            <td scope="row" id="fondo1" width="59.5%">{{$detalle->DETSOL_DETALLE}}</td>
+            <td scope="row" id="fondo1"width="28%">{{$detalle->DETSOL_OBSERVACION}}</td>
+          </tr>
+      @endforeach
   </table>
 <br><br><br>
 <table>
  <tr>
-  <td scope="row" width="33%">
+  <td scope="row" width="13%">
     &nbsp; &nbsp; &nbsp;SOLICITANTE:
     <br>
     <br>
@@ -165,23 +200,28 @@ p{
     <br>
     &nbsp; &nbsp; &nbsp;....................................................................................................<br>
     <br>
-    &nbsp; &nbsp; &nbsp;Nombre.......................................................................................<br>
+    &nbsp; &nbsp; &nbsp;<center>@if(!empty($solicitud)) 
+    {{$solicitud->docente->DOC_TITULO}} {{$solicitud->docente->DOC_NOMBRES}} {{$solicitud->docente->DOC_APELLIDOS}}
+              @endif</center><br>
     <center>DOCENTE</center>
     </p>
   </td>
-  <td scope="row" width="33%">
+  <td scope="row" width="13%">
     &nbsp; &nbsp; &nbsp;AUTORIZADO POR:
     <br>
     <br>
     <br>
     <br>
     &nbsp; &nbsp; &nbsp;....................................................................................................<br>
-    <center>{{}}</center>
-    &nbsp; &nbsp; &nbsp;Nombre.......................................................................................<br>
+    <br>
+    &nbsp; &nbsp; &nbsp; <center>@if(!empty($solicitud)) 
+    {{$solicitud->laboratorio->empresa->EMP_FIRMA_JEFE}}
+              @endif</center>
+              <br>
     <center>COORDINADOR DEL LABORATORIO</center>
     </p>
   </td>
-  <td scope="row" width="34%">
+  <td scope="row" width="14%">
     &nbsp; &nbsp; &nbsp;ENTREGADO POR:
     <br>
     <br>

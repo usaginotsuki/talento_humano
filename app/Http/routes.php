@@ -154,6 +154,8 @@ Route::post('reporte/guia/docente', 'ReportesController@usoGuiasEntregadasPost')
 Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
 Route::get('reporte/carrera/pdfguia/{idperiodo}/{idcarrera}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfCarreraGuia');
+Route::get('reporte/pdfSolicitud/{id}', 'ReportesController@pdfSolicitud');
+
 ///////////////////////////////////////////////////////////////////
 Route::get('guia/listarGuias/{id}', 'GuiaController@listarGuias');
 Route::get('guia/{id}/edit', 'GuiaController@edit');
@@ -170,20 +172,13 @@ Route::get('home', 'LoginController@index');
 /////////////////////////Routes Solicitud///////////////////////////////
 Route::get('solicitud/listarSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
 Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
-Route::post('solicitud/horarioFecha', 'SolicitudController@obtenerHorario');
+Route::get('solicitud/horarioFecha/{fecha}', 'SolicitudController@obtenerHorario');
 
-//////////////////////////Routes SolicitudLogin//////////////////////////
-Route::get('solicitudLogin/cerrarsession', 'SolicitudController@cerrarsession');
-Route::post('login/validar', 'SolicitudController@validar');
-Route::get('solicitudLogin/login', 'SolicitudController@login');
 /////////////////////////Routes Solicitud///////////////////////////////
 Route::get('solicitud/listarGuiasSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
 Route::get('solicitud/{id}/edit', 'SolicitudController@edit');
 Route::get('solicitud/{id}/destroy', 'SolicitudController@destroy');
 Route::post('solicitud/update', 'SolicitudController@update');
 Route::get('solicitud/crearSolicitud', 'SolicitudController@crearSolicitudIndex');
-Route::get('solicitud/comboMateria/{id}', 'SolicitudController@byPeriodoGet');
-Route::get('solicitud/comboGuia/{id}', 'SolicitudController@bySolicitudGet');
 Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
-Route::post('solicitud/createSolicitudSeleccion', 'SolicitudController@createSolicitudSeleccion');
 Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');

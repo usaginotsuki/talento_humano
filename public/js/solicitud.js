@@ -1,22 +1,29 @@
- $.ajaxSetup({
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf_token"]').attr('content')
-        }
-    });
 
 $("#SOL_FECHA_USO").change(function(event){
   var data = $("#SOL_FECHA_USO").val();
-  console.log($("#SOL_FECHA_USO").val());
     $.ajax({
-      url: "horarioFecha",
-      type: "POST",
-      data: {fecha:data,_method: 'PATCH'},
+      url: "horarioFecha/"+data,
+      type: "GET",
       dataType: "json",
       error: function(element){
         console.log(element.type);
       }, 
       success: function(respuesta){
         console.log(respuesta)
+        $("#SOL_NOMBRELAB").val("");
+        $("#LAB_CODIGO").val("");
+        $("#SOL_HORARIO_USO").val("");
+
+        if ($.isEmptyObject(respuesta)) {
+          alert("No tiene Horas disponible en Horario");
+        }else{
+          $("#SOL_NOMBRELAB").val("Redes e Informatica ["+respuesta.laboratorio.LAB_NOMBRE+"]");
+          $("#LAB_CODIGO").val(respuesta.LAB_CODIGO);
+          $("#SOL_HORARIO_USO").val(respuesta.horaUso);
+          
+          
+
+        }
       }
     });
 });

@@ -27,4 +27,9 @@ class Empresa extends Model {
 		return $this->hasMany('App\Parametro');
 
 	}
+	public function materiales() {
+
+		return $this->hasMany('App\MaterialLaboratorio',"EMP_CODIGO");
+
+	}
 }
