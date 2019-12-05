@@ -50,8 +50,8 @@ p{
         <thead>
             <tr>
               <th scope="row" id="centrado"width="25%">  <img src="<?php echo $_SERVER["DOCUMENT_ROOT"].'/images/reportes/espelogo.png';?>"/>   </th>
-              <th scope="row" id="centrado"width="60%"><h2>SOLICITUD DE USO DE LABORATORIO<h2></th>
-              <th scope="row"width="15%">
+              <th scope="row" id="centrado"width="55%"><h2>SOLICITUD DE USO DE LABORATORIO<h2></th>
+              <th scope="row"width="20%">
                 <p>CÓDIGO: DCM.LB.11 <br>
                 VERSIÓN: 1.0 <br>
                 FECHA ÚLTIMA REVISIÓN: 08/06/2017     
@@ -192,44 +192,38 @@ p{
 <br><br><br>
 <table>
  <tr>
-  <td scope="row" width="13%">
+  <td scope="row" width="33%">
     &nbsp; &nbsp; &nbsp;SOLICITANTE:
     <br>
     <br>
     <br>
-    <br>
-    &nbsp; &nbsp; &nbsp;....................................................................................................<br>
-    <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;............................................................<br>
     &nbsp; &nbsp; &nbsp;<center>@if(!empty($solicitud)) 
     {{$solicitud->docente->DOC_TITULO}} {{$solicitud->docente->DOC_NOMBRES}} {{$solicitud->docente->DOC_APELLIDOS}}
-              @endif</center><br>
-    <center>DOCENTE</center>
+              @endif
+            DOCENTE</center>  
     </p>
   </td>
-  <td scope="row" width="13%">
+  <td scope="row" width="33%">
     &nbsp; &nbsp; &nbsp;AUTORIZADO POR:
     <br>
     <br>
     <br>
-    <br>
-    &nbsp; &nbsp; &nbsp;....................................................................................................<br>
-    <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;............................................................<br>
     &nbsp; &nbsp; &nbsp; <center>@if(!empty($solicitud)) 
     {{$solicitud->laboratorio->empresa->EMP_FIRMA_JEFE}}
-              @endif</center>
-              <br>
-    <center>COORDINADOR DEL LABORATORIO</center>
+              @endif
+            COORDINADOR DEL LABORATORIO</center>
+    
     </p>
   </td>
-  <td scope="row" width="14%">
+  <td scope="row" width="34%">
     &nbsp; &nbsp; &nbsp;ENTREGADO POR:
     <br>
     <br>
     <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;.................................................................<br>
     <br>
-    &nbsp; &nbsp; &nbsp;....................................................................................................<br>
-    <br>
-    &nbsp; &nbsp; &nbsp;Nombre.......................................................................................<br>
     <center>RESPONSABLE DEL LABORATORIO</center>
     </p>
   </td>

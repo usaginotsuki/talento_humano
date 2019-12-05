@@ -23,14 +23,14 @@
                 <label for="SOL_NOMBRELAB"class="col-sm-2 col-form-label">Nombre del Laboratorio<span style="color:#FF0000";>*</span></label>
                 <div class="col-sm-6">
                     <input type="hidden" class="form-control" id="LAB_CODIGO" name="LAB_CODIGO">
-                    <input type="input" readonly class="form-control" id="SOL_NOMBRELAB" name="SOL_NOMBRELAB" required>
+                    <input type="input" onkeypress="return false" class="form-control" id="SOL_NOMBRELAB" name="SOL_NOMBRELAB" required>
                 </div>
             </div>
             
             <div class="form-group row">
                 <label for="SOL_HORARIO_USO"class="col-sm-2 col-form-label">Horario de uso<span style="color:#FF0000";>*</span></label>
                 <div class="col-sm-6">
-                    <input type="input" readonly class="form-control" id="SOL_HORARIO_USO" name="SOL_HORARIO_USO" required>
+                    <input type="input" onkeypress="return false" class="form-control" id="SOL_HORARIO_USO" name="SOL_HORARIO_USO" required>
                 </div>
             </div>
             <div class="form-group row">    
