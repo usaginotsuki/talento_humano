@@ -30,17 +30,24 @@
         <a class="dropdown-item" href="{{url('horario')}}">Registrar Horario</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"	
-menu_proceso_AgregarHorasControl"))
-        <a class="dropdown-item" href="{{url('ocasionales')}}">Evento Ocasional</a>
+      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_GenerarControl"))
+        <a class="dropdown-item" href="{{url('control')}}">Generar Control</a>
+        <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_AgregarHorasControl"))
+        <a class="dropdown-item" href="{{url('ocasionales')}}">Eventos Ocasionales</a>
         <div class="dropdown-divider"></div>
       @endif
       @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_ControlLaboratorio"))
         <a class="dropdown-item" href="{{url('control/consola')}}">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_GenerarControl"))
-        <a class="dropdown-item" href="{{url('control')}}">Control</a>
+      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_RegistrarGuiaAnterior"))
+        <a class="dropdown-item" href="{{url('control')}}">Registrar Guia Anterior</a>
+        <div class="dropdown-divider"></div>
+      @endif
+      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_ObjetosRecuperados"))
+        <a class="dropdown-item" href="{{url('objeto')}}">Objetos Recuperados</a>
         <div class="dropdown-divider"></div>
       @endif
       </div>
@@ -64,18 +71,22 @@ menu_proceso_AgregarHorasControl"))
         <a class="dropdown-item" href="{{url('reporte/hoja/control')}}">Hoja de Control</a>
         <div class="dropdown-divider"></div>
       @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_MateriasCarrera"))
-        <a class="dropdown-item" href="{{url('reporte/materia/carrera')}}">Materia por Carrera</a>
-        <div class="dropdown-divider"></div>
-      @endif
     @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_EventosOcasionales"))
         <a class="dropdown-item" href="{{url('reporte/ocasionales')}}">Eventos ocasionales</a>
+        <div class="dropdown-divider"></div>
+    @endif
+    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_MateriasCarrera"))
+        <a class="dropdown-item" href="{{url('reporte/materia/carrera')}}">Materia por Carrera</a>
         <div class="dropdown-divider"></div>
       @endif
     @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_GuiasCarreras"))
         <a class="dropdown-item" href="{{url('reporte/guia/carrera')}}">Guias por Carrera</a>
         <div class="dropdown-divider"></div>
       @endif
+    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_GuiasPendientes"))
+        <a class="dropdown-item" href="{{url('reporte/guia/docente')}}">Guias Pendientes</a>
+        <div class="dropdown-divider"></div>
+    @endif
     @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_GuiasEntregadas"))
         <a class="dropdown-item" href="{{url('reporte/guia/docente')}}">Uso con Guias Entregadas</a>
         <div class="dropdown-divider"></div>
@@ -104,8 +115,7 @@ menu_proceso_AgregarHorasControl"))
         Institucion
       </a>
      <div class="dropdown-menu">
-        <a class="dropdown-item" href="{{url('/horario')}}">horario</a>
-        <div class="dropdown-divider"></div>  
+
         <a class="dropdown-item" href="{{url('/hora')}}">Hora</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('/empresa')}}">Empresa</a>
@@ -121,8 +131,6 @@ menu_proceso_AgregarHorasControl"))
         <a class="dropdown-item" href="{{url('/control')}}">Control</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/">Guias</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url('/campus')}}">Campus</a>
       </div>
