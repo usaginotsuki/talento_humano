@@ -1,8 +1,6 @@
 @extends('app')
 @section('content')
-
 @include('shared.title', array('titulo' => 'Consola de Control'))
-
 
 <div class="container fluid">
     @if (session('title') && session('subtitle'))
@@ -13,6 +11,11 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    @endif
+     @if(session('mensajes'))
+        <div class="alert alert-warning">
+            {{ session('mensajes') }}
+        </div>
     @endif
     <div class="row">
         <br>
@@ -36,39 +39,54 @@
                 <th scope="col">HORA SALIDA</th>
                 <th scope="col">SALA</th>
                 <th scope="col">MATERIA</th>
-                <th scope="col" colspan="3">GUIA</th>
+                <th scope="col" colspan="4">GUIA</th>
             </tr>
         </thead>
         @foreach ($controles as $control)
         <tbody>
+            @if($control -> CON_REG_FIRMA_ENTRADA == null or $control -> CON_LAB_ABRE == null or $control -> CON_REG_FIRMA_SALIDA == null or $control -> CON_LAB_CIERRA == null)
             <td scope="row">{{$control -> CON_HORA_ENTRADA}}</td>
             <td scope="row">{{$control -> CON_HORA_SALIDA}}</td>
             <td scope="row">{{$control -> laboratorio->LAB_NOMBRE}}</td>
             <td scope="row">{{$control -> materia->MAT_NOMBRE}} {{$control -> materia->MAT_NRC}}({{$control -> docente->DOC_MIESPE}})</td>
-                <td>
-                    {{--*/$oca = $control->materia->MAT_OCACIONAL/*--}}
+                <td >
                     <form action="{{url('control/updateD')}}" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
                         <input type="hidden" name="docente">
                         @if($control -> CON_REG_FIRMA_ENTRADA == null)
                             <button  type="submit" class="btn btn-success mb-2">Entrar</button>
+                            
+
                         @endif
-                        @if($control -> CON_REG_FIRMA_ENTRADA != null)
+                        @if($control -> CON_REG_FIRMA_ENTRADA != null and $control -> CON_REG_FIRMA_SALIDA == null)
                             <button  type="submit" class="btn btn-danger mb-2">Salir</button>
                         @endif
                     </form>
-                   
-                    <!--
-                    @if ($oca == '1')
-                        <img src="{{URL::asset('images/consola/guiaON.png')}}" >
-                    @endif
-                    @if ($oca == '0')
-                        <img src="{{URL::asset('images/consola/guiaN.png')}}" >
-                    @endif
-                -->
                 </td>
-                <td></td>
+                    
+                <td>
+                    @if($control -> CON_REG_FIRMA_ENTRADA == null)
+                        @if($control -> CON_EXTRA == null)
+                                <p><span style="font-size:xx-large";>**</span></p>
+                        @endif
+                        @if($control -> CON_EXTRA != null)
+                            <p><span style="font-size:xx-large";>O</span></p>
+                        @endif
+                    @endif
+                    @if($control -> CON_REG_FIRMA_ENTRADA != null and $control -> CON_REG_FIRMA_SALIDA == null)
+                        <form action="{{url('control/updatePorGuia')}}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
+                            @if($control -> CON_GUIA == null)
+                                <button  type="submit" class="btn btn-light"><span style="color:#FF0000; font-size:xx-large";>P</span></button>
+                            @endif
+                            @if($control -> CON_GUIA != null)
+                                <button  type="submit" class="btn btn-light"><span style="color:#00FF00; font-size:xx-large"; >E</span></button>
+                            @endif
+                        </form>
+                    @endif
+                </td>
                 <td>
                     <form action="{{url('control/updateL')}}" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -77,13 +95,22 @@
                         @if($control -> CON_LAB_ABRE == null)
                             <button  type="submit" class="btn btn-success mb-2">Entrar</button>
                         @endif
-                        @if($control -> CON_LAB_ABRE != null)
+                        @if($control -> CON_LAB_ABRE != null and $control -> CON_LAB_CIERRA == null)
                             <button  type="submit" class="btn btn-danger mb-2">Cerrar</button>
                         @endif
                     </form>
                     
                 </td>
-
+                <td>
+                    <form action="{{url('control/nota')}}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
+                       
+                         <button  type="submit" class="btn btn-light"><span class="oi oi-pencil"></span></button>
+                         
+                    </form>
+                </td>
+            @endif
         </tbody>
         @endforeach 
 </table>

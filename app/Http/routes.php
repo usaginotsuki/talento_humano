@@ -52,6 +52,9 @@ Route::post('control/generar', 'ControlController@generar');
 Route::post('control/updateD', 'ControlController@updateD');
 Route::post('control/updateL', 'ControlController@updateL');
 Route::post('control/filtroCampus', 'ControlController@filtroCampus');
+Route::post('control/updatePorGuia', 'ControlController@updatePorGuia');
+Route::post('control/nota', 'ControlController@nota');
+Route::post('control/updateNonta', 'ControlController@updateNonta');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');
