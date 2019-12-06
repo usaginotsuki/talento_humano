@@ -42,6 +42,15 @@
                         </td>
                     
                     @endif
+
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+
+                            <a href="{{url('solicitud/'.$solicitud->SOL_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                            <a href="{{url('solicitud/'.$solicitud->SOL_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                        </div>
+                   </td>
+                     
                 </tr>    
                 @endforeach
             @endif

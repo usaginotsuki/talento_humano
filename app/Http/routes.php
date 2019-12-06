@@ -175,6 +175,7 @@ Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@c
 Route::get('solicitud/horarioFecha/{fecha}', 'SolicitudController@obtenerHorario');
 
 /////////////////////////Routes Solicitud///////////////////////////////
+Route::get('solicitud','SolicitudController@index');
 Route::get('solicitud/listarGuiasSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
 Route::get('solicitud/{id}/edit', 'SolicitudController@edit');
 Route::get('solicitud/{id}/destroy', 'SolicitudController@destroy');
