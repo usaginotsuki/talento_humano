@@ -183,3 +183,8 @@ Route::post('solicitud/update', 'SolicitudController@update');
 Route::get('solicitud/crearSolicitud', 'SolicitudController@crearSolicitudIndex');
 Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
 Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');
+
+/////////////////////////////Routes User //////////////////////////////////////
+Route::get('user/create', 'UserController@create');
+Route::post('user/store', 'UserController@store');
+
