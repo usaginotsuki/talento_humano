@@ -38,9 +38,9 @@
 						 <div class="col">
 			                <div class="form-group">
 			                    <label for="name">Rol <span style="color:#FF0000";>*</span></label>
-			                    <select class="form-control" id="name" name="name" >
+			                    <select class="form-control" id="role" name="role" >
 			                        @foreach ($role as $rols)
-                        				<option value="{{$rols->name}}">{{$rols->name}}</option>
+                        				<option value="{{$rols->id}}">{{$rols->name}}</option>
                        				@endforeach
 			                    </select> 
 			                </div>
