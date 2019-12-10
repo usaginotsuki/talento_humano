@@ -196,5 +196,6 @@ Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud'
 
 /////////////////////////////Routes User //////////////////////////////////////
 Route::get('user/create', 'UserController@create');
+Route::get('user', 'UserController@index');
 Route::post('user/store', 'UserController@store');
 

@@ -137,6 +137,26 @@
     </li>
    
   </ul>
+@if(Auth::user()->authorizeAccion(['Admin'],"menu_admin"))
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        Administrar
+      </a>
+     <div class="dropdown-menu">
+       @if(Auth::user()->authorizeAccion(['Admin'],"menu_admin_roles"))
+        <a class="dropdown-item" href="{{url('/roles')}}">Roles</a>
+      @endif
+        @if(Auth::user()->authorizeAccion(['Admin'],"menu_admin_users"))
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{url('/user')}}">Usuarios</a>
+      @endif
+
+        
+      </div>
+    </li>
+    @endif
 @endif
+
 
 </nav>
