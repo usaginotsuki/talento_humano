@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Control;
 use App\Docente;
+use App\Guia;
 use App\Laboratorio;
 use App\Materia;
 use Illuminate\Http\RedirectResponse;
@@ -335,4 +336,51 @@ class ControlController extends Controller {
     {
         $this->middleware('auth');
     }
+
+    public function updatePorGuia(Request $request)
+	{
+		//
+		$control = Control::find( $request['CON_CODIGO']);
+		echo $control->CON_DIA;
+		echo "/";
+		echo $control->DOC_CODIGO;
+		echo "/";
+		echo $control->MAT_CODIGO;
+		echo "/";
+		$guia = Guia::guiasParaControl($control->CON_DIA, $control->DOC_CODIGO, $control->MAT_CODIGO)->first();
+		if ($guia != null) {
+			# code...
+			//echo $guia[0]->GUI_CODIGO;
+			if ($control->CON_GUIA == null) {
+					# code...
+				$control->GUI_CODIGO = $guia->GUI_CODIGO;
+				$control->CON_GUIA = 1;
+				$guia->GUI_REGISTRADO = 1;
+			}else{
+				$control->GUI_CODIGO = null;
+				$control->CON_GUIA = null;
+				$guia->GUI_REGISTRADO = 0;
+			}
+			$guia->save();
+			$control->save();
+			return redirect("control/consola")->with('title', 'EXITO!')
+			->with('subtitle', 'El registro de la guia se ha realizado con exito');	
+		}else{
+			return redirect("control/consola")->with('mensajes','No existe guia');	
+		}
+
+	}
+
+	public function nota(Request $request){
+		$control = Control::find( $request['CON_CODIGO']);
+		return view("control/nota", ["control"=>$control]);
+	}
+
+	public function updateNonta(Request $request){
+		$control = Control::find( $request['CON_CODIGO']);
+		$control->CON_NOTA = $request['CON_NOTA'];
+		$control->save();
+			return redirect("control/consola")->with('title', 'EXITO!')
+			->with('subtitle', 'El registro de la nota se completo con exito');
+	}
 }

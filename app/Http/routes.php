@@ -13,6 +13,7 @@ Route::get('/', 'WelcomeController@index');
 Route::get('guias/login', 'GuiaController@login');
 Route::get('guias/cerrarsession', 'GuiaController@cerrarsession');
 Route::post('login/validar', 'GuiaController@validar');
+
 ///////////////////////////////////////////////////////////////////
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -51,6 +52,9 @@ Route::post('control/generar', 'ControlController@generar');
 Route::post('control/updateD', 'ControlController@updateD');
 Route::post('control/updateL', 'ControlController@updateL');
 Route::post('control/filtroCampus', 'ControlController@filtroCampus');
+Route::post('control/updatePorGuia', 'ControlController@updatePorGuia');
+Route::post('control/nota', 'ControlController@nota');
+Route::post('control/updateNonta', 'ControlController@updateNonta');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');
@@ -160,6 +164,8 @@ Route::post('reporte/guia/docente', 'ReportesController@usoGuiasEntregadasPost')
 Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
 Route::get('reporte/carrera/pdfguia/{idperiodo}/{idcarrera}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfCarreraGuia');
+Route::get('reporte/pdfSolicitud/{id}', 'ReportesController@pdfSolicitud');
+
 ///////////////////////////////////////////////////////////////////
 Route::get('guia/listarGuias/{id}', 'GuiaController@listarGuias');
 Route::get('guia/{id}/edit', 'GuiaController@edit');
@@ -173,4 +179,17 @@ Route::post('guia/createGuiaSeleccion', 'GuiaController@createGuiaSeleccion');
 Route::post('guia/guardarGuia', 'GuiaController@guardarGuia');
 //////////////////////////////////Routes AUTH
 Route::get('home', 'LoginController@index');
+/////////////////////////Routes Solicitud///////////////////////////////
+Route::get('solicitud/listarSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
+Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
+Route::get('solicitud/horarioFecha/{fecha}', 'SolicitudController@obtenerHorario');
 
+/////////////////////////Routes Solicitud///////////////////////////////
+Route::get('solicitud','SolicitudController@index');
+Route::get('solicitud/listarGuiasSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
+Route::get('solicitud/{id}/edit', 'SolicitudController@edit');
+Route::get('solicitud/{id}/destroy', 'SolicitudController@destroy');
+Route::post('solicitud/update', 'SolicitudController@update');
+Route::get('solicitud/crearSolicitud', 'SolicitudController@crearSolicitudIndex');
+Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
+Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');
