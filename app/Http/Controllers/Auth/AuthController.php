@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
@@ -41,6 +42,13 @@ class AuthController extends Controller {
 	{
 		return view('welcome');
 	}
+	public function getRegister()
+	{
+		$role= Role::all();
+		return view('auth.register',[
+			'role' => $role
+		]);
+	}
 	//Registrar Usuario
 	public function postRegister(Request $request)
 	{
@@ -55,6 +63,7 @@ class AuthController extends Controller {
 		}
 		//Crea el registro y autentifica
 		$this->auth->login($this->registrar->create($request->all()));
+		
 		//Redirecciona a la pagina principal
 		return redirect($this->redirectPath());
 	}
