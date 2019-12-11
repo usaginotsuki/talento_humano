@@ -1,15 +1,13 @@
 <!--
  Sistema de Gestion de Laboratorios - ESPE
- 
- Author: Lorena Perez-David Esparza
- Revisado por: Lorena Perez-David Esparza
+
  -->
 @extends('app')
 @section('content')
 @include('shared.title', array('titulo' => 'Crear Laboratorio'))
 
 <div class="container-fluid">
-    <form action="{{url('/objeto/store')}}" method="POST">
+    <form action="{{url('/objeto/store')}}" method="POST" enctype="multipart/form-data"> 
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
      
             <div class="container-fluid">
@@ -21,9 +19,6 @@
                             <input type="text" class="form-control" id="OBR_NOMBRE" name="OBR_NOMBRE" placeholder="Nombre del Objeto" required>
                         </div>
                     </div>
-                   
-            
-                 
                 </div>
                 <div class="row">
                     <div class="col">
@@ -56,12 +51,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="OBR_IMAGEN">Imagen<span style="color:#FF0000";>*</span></label>
-                            <input type="file"  class="form-control" id="OBR_IMAGEN" name="OBR_IMAGEN" accept="image/jpeg, image/png" required>
+                            <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
+                            <input type="file"  class="form-control" id="image" name="image" accept="image/*" required>
                         </div>
                     </div>
                     <div class="col">
-                      
                         <div class="form-group">
                             <label for="OBR_ESTADO">Estado Objeto<span style="color:#FF0000";>*</span></label>
                             <select type="input" class="form-control" id="OBR_ESTADO" name="OBR_ESTADO" placeholder="Campus"  required>
@@ -82,23 +76,21 @@
                             </select> 
                         </div>
                     </div>
-
-                <div class="col">
-                    <div class="form-group">
-                        <label for="EMP_CODIGO">Empresa<span style="color:#FF0000";>*</span></label>
-                        <select type="input" class="form-control" id="EMP_CODIGO" name="EMP_CODIGO" placeholder="Empresa"  required>
-                            @foreach ($empresas as $emp)
-                                    <option value="{{$emp->EMP_CODIGO}}">{{$emp->EMP_NOMBRE}}</option>
-                            @endforeach
-                        </select> 
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="EMP_CODIGO">Empresa<span style="color:#FF0000";>*</span></label>
+                            <select type="input" class="form-control" id="EMP_CODIGO" name="EMP_CODIGO" placeholder="Empresa"  required>
+                                @foreach ($empresas as $emp)
+                                        <option value="{{$emp->EMP_CODIGO}}">{{$emp->EMP_NOMBRE}}</option>
+                                @endforeach
+                            </select> 
+                        </div>
                     </div>
                 </div>
-            </div>
-             <!-- Submit Button -->
+                <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary mb-2">Crear</button>
                 <a href="{{url('objeto')}}" class="btn btn-danger mb-2">Cancelar</a>
             </div>
-            
     </form>
 </div>
 @endsection

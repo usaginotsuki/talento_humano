@@ -136,7 +136,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
-
+		'Intervention\Image\ImageServiceProvider',
 
 
          
@@ -151,7 +151,6 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-
 	],
 
 	/*
@@ -199,7 +198,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-		'PDF' 		=> 'Barryvdh\DomPDF\Facade'
+		'PDF' 		=> 'Barryvdh\DomPDF\Facade',
+		'Image'     => 'Intervention\Image\Facades\Image',
 	],
 
 ];

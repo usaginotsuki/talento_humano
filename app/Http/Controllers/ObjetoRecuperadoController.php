@@ -8,6 +8,8 @@ use App\empresa;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Input;
+use Image;
 
 class ObjetoRecuperadoController extends Controller {
 
@@ -42,18 +44,24 @@ class ObjetoRecuperadoController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-
+		$file = Input::file('image');
+		$random = str_random(10);
+		$nombre = $random.'-'.$file->getClientOriginalName();
+		$path = public_path('uploads/'.$nombre);
+		$url = '/uploads/'.$nombre;
+		$image = Image::make($file->getRealPath());
 		ObjetoRecuperado::create([
 			'EMP_CODIGO' => $request['EMP_CODIGO'], 
 			'PER_CODIGO' => $request['PER_CODIGO'], 
 			'OBR_NOMBRE' => $request['OBR_NOMBRE'], 
 			'OBR_DESCRIPCION' => $request['OBR_DESCRIPCION'],
-			'OBR_FECHA_RECEPCION' => $request['OBR_OBSERVACION'],
-			'OBR_IMAGEN' => $request['OBR_IMAGEN'],
+			'OBR_FECHA_RECEPCION' => $request['OBR_FECHA_RECEPCION'],
+			'OBR_IMAGEN' => $url,
 			'OBR_ESTADO' => $request['OBR_ESTADO'],
+			'OBR_OBSERVACION' => $request['OBR_OBSERVACION'],
 			'OBR_FECHA_ENTREGA' => $request['OBR_FECHA_ENTREGA']
 		]);
-
+		$image->save($path);
 		return redirect('objeto')
 			->with('title','Objeto Registrado!')
 			->with('subtitle','Se ha registrado correctamente el Objeto.');
@@ -81,8 +89,28 @@ class ObjetoRecuperadoController extends Controller {
 	 */
 	public function update(Request $request)
 	{
+		
 		$ObjetoRecuperado =	ObjetoRecuperado::find( $request['OBR_CODIGO']);
-		$ObjetoRecuperado->fill($request->all());
+		//
+		$file = Input::file('image');
+		$random = str_random(10);
+		$nombre = $random.'-'.$file->getClientOriginalName();
+		$path = public_path('uploads/'.$nombre);
+		$url = '/uploads/'.$nombre;
+		$image = Image::make($file->getRealPath());
+		//
+		$ObjetoRecuperado->fill(
+			['EMP_CODIGO' => $request['EMP_CODIGO'], 
+			'PER_CODIGO' => $request['PER_CODIGO'], 
+			'OBR_NOMBRE' => $request['OBR_NOMBRE'], 
+			'OBR_DESCRIPCION' => $request['OBR_DESCRIPCION'],
+			'OBR_FECHA_RECEPCION' => $request['OBR_FECHA_RECEPCION'],
+			'OBR_IMAGEN' => $url,
+			'OBR_ESTADO' => $request['OBR_ESTADO'],
+			'OBR_OBSERVACION' => $request['OBR_OBSERVACION'],
+			'OBR_FECHA_ENTREGA' => $request['OBR_FECHA_ENTREGA']]
+		);
+		$image->save($path);
 		$ObjetoRecuperado->save();
 		return redirect('objeto')
 			->with('title','Objeto actualizado!')
