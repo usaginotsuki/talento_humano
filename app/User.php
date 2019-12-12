@@ -79,9 +79,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 
 	public function authorizeAccion($roles,$accion){
+		$autorizar=false;
 		if(is_array($roles)){
 			foreach ($roles as $role) {
-				return $this->hasAccion($role,$accion);
+				$autorizar= $this->hasAccion($role,$accion);
+				if($autorizar==true){
+					return true;
+				}
 			}
 		}else{
 			if($this->hasRole($roles)){
@@ -89,5 +93,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			}
 		}
 		return false;
+	}
+
+	public function getRole(){
+		return $this->roles()->first();
 	}
 }

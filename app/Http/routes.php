@@ -195,7 +195,12 @@ Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@c
 Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');
 
 /////////////////////////////Routes User //////////////////////////////////////
-Route::get('user/create', 'UserController@create');
+Route::get('user/create', 'UserController@getRegister');
+Route::post('user/postCreate', 'UserController@postRegister');
 Route::get('user', 'UserController@index');
-Route::post('user/store', 'UserController@store');
+/////////////////////////////Routes Role //////////////////////////////////////
+Route::get('role/create', 'RoleController@create');
+Route::post('role/postCreate', 'RoleController@store');
+Route::get('role', 'RoleController@index');
+
 

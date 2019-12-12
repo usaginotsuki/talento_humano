@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{url('/user/store')}}">
+					<form class="form-horizontal" role="form" method="POST" action="/user/postCreate">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
@@ -37,10 +37,10 @@
 
 						 <div class="col">
 			                <div class="form-group">
-			                    <label for="rol">Rol <span style="color:#FF0000";>*</span></label>
-			                    <select class="form-control" id="rol" name="rol" >
+			                    <label for="name">Rol <span style="color:#FF0000";>*</span></label>
+			                    <select class="form-control" id="role" name="role" >
 			                        @foreach ($role as $rols)
-                        				<option value="{{$rols->name}}">{{$rols->name}}</option>
+                        				<option value="{{$rols->id}}">{{$rols->name}}</option>
                        				@endforeach
 			                    </select> 
 			                </div>
