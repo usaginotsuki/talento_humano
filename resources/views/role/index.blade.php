@@ -35,7 +35,10 @@
                 <td scope="row">{{$role->name}}</td>
                 <td scope="row">{{$role->description}}</td>
                 <td>
-                    
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{url('role/'.$role->id.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <a href="{{url('role/'.$role->id.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                    </div>
                 </td>
             </tr>
         @endforeach   

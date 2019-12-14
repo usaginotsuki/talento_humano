@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id','name', 'email', 'password'];
+	protected $fillable = ['id','name', 'email', 'password','role_id','EMP_CODIGO'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -33,69 +33,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password','remember_token'];
 
-	public function roles(){
-		return $this->belongsToMany('App\Role');
+	public function role(){
+		return $this->belongsTo('App\Role','role_id');
 	}
-
-	//verifica que el usuario tenga el rol
-	public function hasRole($role){
-		if($this->roles()->where('name',$role)->first()){
-			return true;
-		}
-		return false;
-	}
-
-	//verifica cuando un usuario tiene varios roles
-	public function hasAnyRole($roles){
-		if(is_array($roles)){
-			foreach ($roles as $role) {
-				return true;
-			}
-		}else{
-			if($this->hasRole($roles)){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	//valida si el usuario tiene autorizacion
-	public function authorizeRoles($roles){
-		if($this->hasAnyRole($roles))
-			return true;
-		return false;
+	public function empresa(){
+		return $this->belongsTo('App\Empresa','EMP_CODIGO');
 	}
 
 	//valida que el rol pueda hacer la accion
-	public function hasAccion($rol,$item){
-		$role=$this->roles->where('name',$rol)->first();
-		if (!empty($role)) {
-			if ($role->accions->where('name',$item)->first()) {
+	public function authorizeAccion($item){
+		if($this->role->accions->where('name',$item)->first()){
 				return true;
-			}
-
 		}
 		return false;
-	}
-
-	public function authorizeAccion($roles,$accion){
-		$autorizar=false;
-		if(is_array($roles)){
-			foreach ($roles as $role) {
-				$autorizar= $this->hasAccion($role,$accion);
-				if($autorizar==true){
-					return true;
-				}
-			}
-		}else{
-			if($this->hasRole($roles)){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public function getRole(){
-		return $this->roles()->first();
 	}
 }

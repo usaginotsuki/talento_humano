@@ -25,14 +25,6 @@ class DocenteController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		if (!($request->user()->hasRole('Jefatura')||$request->user()->hasRole('Laboratorista'))) {
-			abort(401, 'Accion no autorizada');
-		}
-
-		
-		
-
-
 		$docentes = Docente::All();
 		return view('docente.index', compact('docentes'));
 	}
@@ -44,10 +36,6 @@ class DocenteController extends Controller {
 	 */
 	public function create(Request $request)
 	{
-		if (!($request->user()->hasRole('Jefatura')||$request->user()->hasRole('Laboratorista'))) {
-			abort(401, 'Accion no autorizada');
-		}
-		//
 		return view('docente.create');
 	}
 
@@ -95,10 +83,6 @@ class DocenteController extends Controller {
 	 */
 	public function edit(Request $request,$id)
 	{
-		if (!($request->user()->hasRole('Jefatura')||$request->user()->hasRole('Laboratorista'))) {
-			abort(401, 'Accion no autorizada');
-		}
-		//
 		$docente= Docente::find($id);
 		return view('docente.update', ['docente' => $docente]);
 	}

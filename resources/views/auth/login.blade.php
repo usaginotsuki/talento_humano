@@ -39,17 +39,11 @@
                                 <label for="password"  class="col-lg-2 control-label"><h3 style="color: #ED7624">Clave*</h3></label>
                                 <div class="col-xs-4" >
                                 	<input type="password" size="30" class="form-control" name="password" id="password" required>
-                                     <a href="{{url('/user/create')}}">
-                                            <span class="oi oi-register">
-                                                Registrarse
-                                            </span>
-                                        </a>
                                 </div>
                             </div>
 
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" ">Ingresar	
-								</button>
+                                <button type="submit" class="btn btn-primary">Ingresar</button>
                             </div>                    
                     	</form>
                     </div>

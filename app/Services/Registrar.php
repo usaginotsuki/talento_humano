@@ -21,6 +21,12 @@ class Registrar implements RegistrarContract {
 			'password' => 'required|confirmed|min:6',
 		]);
 	}
+	public function validatorPassword(array $data)
+	{
+		return Validator::make($data, [
+			'password' => 'required|confirmed|min:6',
+		]);
+	}
 
 	/**
 	 * Create a new user instance after a valid registration.
@@ -34,8 +40,9 @@ class Registrar implements RegistrarContract {
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
+			'role_id' => $data['role'],
+			'EMP_CODIGO' => $data['empresa'],
 		]);
-		$user->roles()->attach($data['role']);
 		return $user;
 	}
 
