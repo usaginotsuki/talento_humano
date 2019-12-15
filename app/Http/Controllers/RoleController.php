@@ -12,8 +12,9 @@ class RoleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
+		$request->user()->authorizeRole('menu_admin_roles');
 		$roles = Role::all();
         $title = 'Listado de roles';
         return view('role.index', [
@@ -27,8 +28,10 @@ class RoleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
+		$request->user()->authorizeRole('menu_admin_roles');
+
 		return view('role.create');
 	}
 
@@ -148,8 +151,9 @@ class RoleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Request $request,$id)
 	{
+		$request->user()->authorizeRole('menu_admin_roles');
 		$role= Role::find($id);
 		return view('role.update', [
 			'role' => $role,
@@ -263,8 +267,9 @@ class RoleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(Request $request,$id)
 	{
+		$request->user()->authorizeRole('menu_admin_roles');
 		try {
 			Role::destroy($id);
 			return redirect('role')
@@ -277,5 +282,8 @@ class RoleController extends Controller {
 		}
 		
 	}
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

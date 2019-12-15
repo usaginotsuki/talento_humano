@@ -40,11 +40,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->belongsTo('App\Empresa','EMP_CODIGO');
 	}
 
-	//valida que el rol pueda hacer la accion
+	//valida que el rol pueda hacer la accion y retorna True o false
 	public function authorizeAccion($item){
 		if($this->role->accions->where('name',$item)->first()){
 				return true;
 		}
 		return false;
+	}
+	//valida que el rol pueda hacer la accion y manda un error si no tiene
+	public function authorizeRole($item){
+		if($this->role->accions->where('name',$item)->first()){
+				return true;
+		}
+		abort(401, 'Accion no autorizada');
 	}
 }
