@@ -68,29 +68,34 @@ class GuiaController extends Controller {
 			session(['PER_CODIGO'=>$periodo->PER_CODIGO]);
             $materias=Materia::where('DOC_CODIGO', $docentes ->DOC_CODIGO)->where('PER_CODIGO',$periodo->PER_CODIGO)->get();
 			$count = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->count();
-			$horario = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->first();
-			for ($x = 1; $x <= 13; $x++) {
-				foreach ($materias as $mat) {
-					$docente = $horario->laboratorio->LAB_NOMBRE;
-					if ($horario['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_LUNES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_MATES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_MIERCOLES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_JUEVES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_VIERNES_DOC'.$x] = $docente ;
+			$horario = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->get();
+			$horario_docente= new Horario;
+			for ($ind=0; $ind<=$count-1;$ind++) {
+				for ($x = 1; $x <= 13; $x++){
+					foreach ($materias as $mat) {
+						$horario_docente['HOR_HORA'.$x]= $horario[$ind]['HOR_HORA'.$x];
+							if ($horario[$ind]['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_LUNES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+							if ($horario[$ind]['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_MATES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+
+							if ($horario[$ind]['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_MIERCOLES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+							if ($horario[$ind]['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_JUEVES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+
+							if ($horario[$ind]['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_VIERNES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
 					}
 				}
 			}
@@ -99,7 +104,7 @@ class GuiaController extends Controller {
 				'docente' => $docentes,
 				'count' => $count
 			])->with('materias',$materias)
-			->with('horario',$horario);         
+			->with('horario_docente',$horario_docente);         
 		}		
 	}
 
