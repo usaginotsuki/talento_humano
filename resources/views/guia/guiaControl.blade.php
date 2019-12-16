@@ -10,6 +10,15 @@
 
 </div>
 <div class="container">
+@if (session('title') && session('subtitle'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">{{ session('title') }}</h4>
+            <p>{{ session('subtitle') }}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="col">
                 <a href="{{url('guia/crearGuia')}}" class="btn btn-primary mb-2">Crear Guías</a>
     </div>
