@@ -9,7 +9,7 @@
             <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entregar y {{$por_crear}} Guias Pendientes por Crear - Por favor, Revice el detalle al final de esta pantalla</h4>
  </div>        
 </div>
-<div class="container">
+<div class="container-fluid">
 @if (session('title') && session('subtitle'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h4 class="alert-heading">{{ session('title') }}</h4>
@@ -21,6 +21,7 @@
     @endif
     <div class="col">
                 <a href="{{url('guia/crearGuia')}}" class="btn btn-primary mb-2">Crear Guías</a>
+                
     </div>
     <table   class="table table-hover table-bordered results">
             <thead>

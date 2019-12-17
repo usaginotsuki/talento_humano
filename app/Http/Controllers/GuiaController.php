@@ -45,8 +45,8 @@ class GuiaController extends Controller {
 	{
 		$materia = session('MAT_CODIGO');
 		$guia = Guia::find($request['GUI_CODIGO']);
-		//$guia->fill($request->all());
-		//$guia->save();
+		$guia->fill($request->all());
+		$guia->save();
 		return redirect('guia/listarGuias/'.$materia)
 			->with('title', 'Guia actualizado!')
 			->with('subtitle', 'La actualización del Guia se ha realizado con éxito.');

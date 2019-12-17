@@ -12,7 +12,7 @@
                 <br>
                     <center><h4>Crear una Guia Vacia</h4></center>
                 <br>
-                <button href="{{url('guia/controlGuiaLaboratoriocreate')}}" class="btn btn-primary"><span class="oi oi-clipboard"></span>Crear</button>
+                <a href="{{url('guia/controlGuiaLaboratoriocreate')}}" class="btn btn-primary"><span class="oi oi-clipboard"></span>Crear</a>
             </div>
         </div>
         <div class="col">

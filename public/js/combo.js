@@ -21,8 +21,8 @@ $("#periodo").change(function(event){
             +respuesta[i].MAT_NOMBRE+" - "+respuesta[i].MAT_NRC+"</option>");
           }
         }else{
-          alert("No tiene materias en el periodo "+ event.target.options[event.target.selectedIndex].text)
           document.getElementById('btn_cGuia').disabled=true;
+          alert("No tiene materias en el periodo "+ event.target.options[event.target.selectedIndex].text)
         }
       }
     });
@@ -42,8 +42,8 @@ $("#materiaCombo").change(function(event){
       .end()
       
      if(respuesta.length<=0){
+       document.getElementById('btn_cGuia').disabled=true;
       alert("No tiene guias");
-      document.getElementById('btn_cGuia').disabled=true;
      }
       for(i = 0; i<respuesta.length; i++){
           $("#guiaCombo").append("<option value='"+respuesta[i].GUI_CODIGO+"'>"
