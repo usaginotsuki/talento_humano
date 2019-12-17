@@ -8,86 +8,86 @@
 @if(Auth::check())
   
   <ul class="navbar-nav mr-auto">
-  @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso"))
+  @if(Auth::user()->authorizeAccion("menu_proceso"))
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Procesos
       </a>
       <div class="dropdown-menu">
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_Docente"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_Docente"))
       <a class="dropdown-item" href="{{url('docente')}}">Docente</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_Periodo"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_Periodo"))
         <a class="dropdown-item" href="{{url('periodo')}}">Periodo</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_Materia"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_Materia"))
         <a class="dropdown-item" href="{{url('materia')}}">Materia</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_Horario"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_Horario"))
         <a class="dropdown-item" href="{{url('horario')}}">Registrar Horario</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_GenerarControl"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_GenerarControl"))
         <a class="dropdown-item" href="{{url('control')}}">Generar Control</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_AgregarHorasControl"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_AgregarHorasControl"))
         <a class="dropdown-item" href="{{url('ocasionales')}}">Eventos Ocasionales</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_ControlLaboratorio"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_ControlLaboratorio"))
         <a class="dropdown-item" href="{{url('control/consola')}}">Control Laboratorio</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_RegistrarGuiaAnterior"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_RegistrarGuiaAnterior"))
         <a class="dropdown-item" href="{{url('control')}}">Registrar Guia Anterior</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_proceso_ObjetosRecuperados"))
+      @if(Auth::user()->authorizeAccion("menu_proceso_ObjetosRecuperados"))
         <a class="dropdown-item" href="{{url('objeto')}}">Objetos Recuperados</a>
         <div class="dropdown-divider"></div>
       @endif
       </div>
     </li>
     @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reportes"))
+    @if(Auth::user()->authorizeAccion("menu_reportes"))
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         Reportes
       </a>
      <div class="dropdown-menu">
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_Horarios"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_Horarios"))
         <a class="dropdown-item" href="{{url('reporte/horario/sala')}}">Horarios de Sala</a>
         <div class="dropdown-divider"></div>
       @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_HorarioDocente"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_HorarioDocente"))
         <a class="dropdown-item" href="{{url('reporte/horario/docente')}}">Horario por Docente</a>
         <div class="dropdown-divider"></div>
       @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_HojaDeControl"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_HojaDeControl"))
         <a class="dropdown-item" href="{{url('reporte/hoja/control')}}">Hoja de Control</a>
         <div class="dropdown-divider"></div>
       @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_EventosOcasionales"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_EventosOcasionales"))
         <a class="dropdown-item" href="{{url('reporte/ocasionales')}}">Eventos ocasionales</a>
         <div class="dropdown-divider"></div>
     @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_MateriasCarrera"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_MateriasCarrera"))
         <a class="dropdown-item" href="{{url('reporte/materia/carrera')}}">Materia por Carrera</a>
         <div class="dropdown-divider"></div>
       @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_GuiasCarreras"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_GuiasCarreras"))
         <a class="dropdown-item" href="{{url('reporte/guia/carrera')}}">Guias por Carrera</a>
         <div class="dropdown-divider"></div>
       @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_GuiasPendientes"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_GuiasPendientes"))
         <a class="dropdown-item" href="{{url('reporte/guia/docente')}}">Guias Pendientes</a>
         <div class="dropdown-divider"></div>
     @endif
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_reporte_GuiasEntregadas"))
+    @if(Auth::user()->authorizeAccion("menu_reporte_GuiasEntregadas"))
         <a class="dropdown-item" href="{{url('reporte/guia/docente')}}">Uso con Guias Entregadas</a>
         <div class="dropdown-divider"></div>
       @endif
@@ -95,7 +95,7 @@
     </li>
     @endif
 
-    @if(Auth::user()->authorizeAccion(['Jefatura','Laboratorista'],"menu_estadisticas"))
+    @if(Auth::user()->authorizeAccion("menu_estadisticas"))
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -135,28 +135,28 @@
         <a class="dropdown-item" href="{{url('/campus')}}">Campus</a>
       </div>
     </li>
-   
-  </ul>
-@if(Auth::user()->authorizeAccion(['Admin'],"menu_admin"))
+    @if(Auth::user()->authorizeAccion("menu_admin"))
 
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        Administrar
-      </a>
-     <div class="dropdown-menu">
-       @if(Auth::user()->authorizeAccion(['Admin'],"menu_admin_roles"))
-        <a class="dropdown-item" href="{{url('/roles')}}">Roles</a>
-      @endif
-        @if(Auth::user()->authorizeAccion(['Admin'],"menu_admin_users"))
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('/user')}}">Usuarios</a>
-      @endif
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+    Administrar
+  </a>
+ <div class="dropdown-menu">
+   @if(Auth::user()->authorizeAccion("menu_admin_roles"))
+    <a class="dropdown-item" href="{{url('/role')}}">Roles</a>
+  @endif
+    @if(Auth::user()->authorizeAccion("menu_admin_users"))
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{{url('/user')}}">Usuarios</a>
+  @endif
 
-        
-      </div>
-    </li>
-    @endif
+    
+  </div>
+</li>
 @endif
+@endif
+  </ul>
+
 
 
 </nav>

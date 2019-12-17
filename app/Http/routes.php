@@ -195,7 +195,20 @@ Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@c
 Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');
 
 /////////////////////////////Routes User //////////////////////////////////////
-Route::get('user/create', 'UserController@create');
+Route::get('user/create', 'UserController@getRegister');
+Route::post('user/postCreate', 'UserController@postRegister');
 Route::get('user', 'UserController@index');
-Route::post('user/store', 'UserController@store');
+Route::get('user/{id}/edit', 'UserController@edit');
+Route::get('user/{id}/destroy', 'UserController@destroy');
+Route::post('user/update', 'UserController@update');
+Route::get('user/{id}/changePassword', 'UserController@changePassword');
+Route::post('user/updatePassword', 'UserController@updatePassword');
+/////////////////////////////Routes Role //////////////////////////////////////
+Route::get('role/create', 'RoleController@create');
+Route::post('role/postCreate', 'RoleController@store');
+Route::get('role', 'RoleController@index');
+Route::get('role/{id}/edit', 'RoleController@edit');
+Route::get('role/{id}/destroy', 'RoleController@destroy');
+Route::post('role/update', 'RoleController@update');
+
 
