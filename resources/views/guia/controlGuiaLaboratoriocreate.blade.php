@@ -2,7 +2,7 @@
 @section('content')
 @include('shared.title', array('titulo' => 'Crear GUIA'))
 
-<div class="container">
+<div class="container-fluid">
     <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
     <form class="form" id="form" action="{{url('/guia/guardarGuia')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
