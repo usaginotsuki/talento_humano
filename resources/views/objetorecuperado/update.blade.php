@@ -9,7 +9,7 @@
 @include('shared.title', array('titulo' => 'Actualizar Laboratorio'))
     
 <div class="container-fluid">
-    <form action="{{url('/objeto/update')}}" method="POST">
+    <form action="{{url('/objeto/update')}}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="OBR_CODIGO" value="{{ $objeto->OBR_CODIGO }}">
 
@@ -57,8 +57,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="OBR_IMAGEN">Imagen<span style="color:#FF0000";>*</span></label>
-                            <input type="file"  class="form-control" id="OBR_IMAGEN" name="OBR_IMAGEN" accept="image/jpeg, image/png" value="{{ $objeto->OBR_IMAGEN }}" required>
+                            <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
+                            </br>
+                            <img src="{{$objeto -> OBR_IMAGEN}}" width="100" height="100"/>
+                            </br>
+                            <input type="file"  class="form-control" id="image" name="image" accept="image/*" value="{{ $objeto->OBR_IMAGEN }}" required>
                         </div>
                     </div>
                     <div class="col">

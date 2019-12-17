@@ -26,18 +26,17 @@
         <div class="col"></div>
     </div>
 
-    <table class="table table-hover table-bordered results" id="ListTable">
+    <table class="table table-hover table-bordereds" id="ListTable">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">NOMBRE</th>
-                <th scope="col">DESCRIPCION</th>
-                <th scope="col">OBSERVACION</th>
-                <th scope="col">OBR_FECHA_RECEPCION</th>
-                <th scope="col">OBR_FECHA_ENTREGA</th>
-                <th scope="col">OBR_ESTADO</th>
+                <th scope="col">FECHA_RECEPCION</th>
+                <th scope="col">FECHA_ENTREGA</th>
+                <th scope="col">ESTADO</th>
                 <th scope="col">PERIODO</th>
                 <th scope="col">EMPRESA</th>
+                <th scope="col">IMAGEN</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
@@ -45,35 +44,33 @@
         <tbody>
         @foreach ($objeto as $obj)
             <tr>
-            <td scope="row">{{$obj -> OBR_CODIGO}}</td>
-            <td scope="row">{{$obj -> OBR_NOMBRE}}</td>
-            <td scope="row">{{$obj -> OBR_DESCRIPCION}}</td>
-            <td scope="row">{{$obj -> OBR_OBSERVACION}}</td>
-            <td scope="row">{{$obj -> OBR_FECHA_RECEPCION}}</td>
-            <td scope="row">{{$obj -> OBR_FECHA_ENTREGA}}</td>
-            <td scope="row">
-                    @if ($obj->OBR_ESTADO === 0)
-                        <span class="badge badge-danger">DAÑADO</span>
-                    @elseif ($obj->OBR_ESTADO !== 0)
-                        <span class="badge badge-primary">FUNCIONAL</span>
-                    @endif
-            </td>
-            <td scope="row">{{$obj -> periodo->PER_NOMBRE}}</td>
-            <td scope="row">{{$obj -> empresa->EMP_NOMBRE}}</td>
-            <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="{{url('objeto/'.$obj->OBR_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                    <a href="{{url('objeto/'.$obj->OBR_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
-                </div>
-            </td>
+                <td scope="row">{{$obj -> OBR_CODIGO}}</td>
+                <td scope="row">{{$obj -> OBR_NOMBRE}}</td>
+                <td scope="row">{{$obj -> OBR_FECHA_RECEPCION}}</td>
+                <td scope="row">{{$obj -> OBR_FECHA_ENTREGA}}</td>
+                <td scope="row">
+                        @if ($obj->OBR_ESTADO === 0)
+                            <span class="badge badge-danger">DAÑADO</span>
+                        @elseif ($obj->OBR_ESTADO !== 0)
+                            <span class="badge badge-primary">FUNCIONAL</span>
+                        @endif
+                </td>
+                <td scope="row">{{$obj -> periodo->PER_NOMBRE}}</td>
+                <td scope="row">{{$obj -> empresa->EMP_NOMBRE}}</td>
+                <td scope="row"><img src="{{$obj -> OBR_IMAGEN}}" width="100" height="100"/></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{url('objeto/'.$obj->OBR_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <a href="{{url('objeto/'.$obj->OBR_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                    </div>
+                </td>
             </tr>
             
-            @endforeach 
+        @endforeach 
         </tbody>
-          
-</table>
-<!-- BOTONES DE NAVEGACION -->
-<!-- <div class="clearfix">
+    </table>
+    <!-- BOTONES DE NAVEGACION -->
+    <!-- <div class="clearfix">
     <ul class="pagination">
         <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
         <li class="page-item"><a href="#" class="page-link">1</a></li>
