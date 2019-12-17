@@ -165,6 +165,7 @@ Route::get('reporte/guia/carrera', 'ReportesController@guiasPorCarrera');
 Route::post('reporte/guia/carrera', 'ReportesController@guiasPorCarreraPost');
 Route::get('reporte/carrera/pdfguia/{idperiodo}/{idcarrera}/{fechaInicial}/{fechaFinal}', 'ReportesController@pdfCarreraGuia');
 Route::get('reporte/pdfSolicitud/{id}', 'ReportesController@pdfSolicitud');
+Route::get('reporte/pdfGuia/{id}', 'ReportesController@pdfGuia');
 
 ///////////////////////////////////////////////////////////////////
 Route::get('guia/listarGuias/{id}', 'GuiaController@listarGuias');

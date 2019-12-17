@@ -43,7 +43,7 @@
                     <td scope="row">{{$guias_terminadas[$i] -> GUI_TEMA}}</td> 
                     <td scope="row">{{$guias_terminadas[$i] -> LAB_NOMBRE}}</td>
                     <td scope="row">
-                        <a href="" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
+                        <a href="{{url('reporte/pdfGuia/'.$guias_terminadas[$i]->GUI_CODIGO)}}" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
                     </td> 
                     @if($guias_terminadas[$i]->GUI_REGISTRADO==1) 
                         <td scope="row">
