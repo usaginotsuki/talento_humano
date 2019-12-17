@@ -48,41 +48,31 @@
         <tbody>
             @for ($x = 1; $x <= 13; $x++)
             <tr class="d-flex">
-                <td class="col">{{ $horario['HOR_HORA'.$x] }}</td>
-                <td class="col opts">
-                    @if ($horario['HOR_LUNES_DOC'.$x] != 0 || $horario['HOR_LUNES_DOC'.$x] != NULL)
-                    {{ $horario['HOR_LUNES'.$x] }} <span class="text-{{ $horario['HOR_LUNES'.$x.'_OPC'] }}"></span>
+                <td class="col">{{ $horario_docente['HOR_HORA'.$x] }}</td>
+                <td class="col">
+                    {{ $horario_docente['HOR_LUNES'.$x] }}
                     <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_LUNES_DOC'.$x] }}</b>
-                    @endif
+                    {{ $horario_docente['LAB_LUNES'.$x] }}
                 </td>
-                <td class="col opts">
-                    @if ($horario['HOR_MATES_DOC'.$x] != 0 || $horario['HOR_MATES_DOC'.$x] != NULL)
-                    {{ $horario['HOR_MATES'.$x] }} <span class="text-{{ $horario['HOR_MARTES'.$x.'_OPC'] }}"></span>
+                <td class="col">
+                    {{ $horario_docente['HOR_MATES'.$x] }}
                     <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_MATES_DOC'.$x] }}</b>
-                    @endif
+                    {{ $horario_docente['LAB_MATES'.$x] }}
                 </td>
-                <td class="col opts">
-                    @if ($horario['HOR_MIERCOLES_DOC'.$x] != 0 || $horario['HOR_MIERCOLES_DOC'.$x] != NULL)
-                    {{ $horario['HOR_MIERCOLES'.$x] }} <span class="text-{{ $horario['HOR_MIERCOLES'.$x.'_OPC'] }}"></span>
+                <td class="col">
+                    {{ $horario_docente['HOR_MIERCOLES'.$x] }}
                     <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_MIERCOLES_DOC'.$x] }}</b>
-                    @endif
+                    {{ $horario_docente['LAB_MIERCOLES'.$x] }}
                 </td>
-                <td class="col opts">
-                    @if ($horario['HOR_JUEVES_DOC'.$x] != 0 || $horario['HOR_JUEVES_DOC'.$x] != NULL)
-                    {{ $horario['HOR_JUEVES'.$x] }} <span class="text-{{ $horario['HOR_JUEVES'.$x.'_OPC'] }}"></span>
+                <td class="col">
+                    {{ $horario_docente['HOR_JUEVES'.$x] }}
                     <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_JUEVES_DOC'.$x] }}</b>
-                    @endif
+                    {{ $horario_docente['LAB_JUEVES'.$x] }}
                 </td>
-                <td class="col opts">
-                    @if ($horario['HOR_VIERNES_DOC'.$x] != 0 || $horario['HOR_VIERNES_DOC'.$x] != NULL)
-                    {{ $horario['HOR_VIERNES'.$x] }} <span class="text-{{ $horario['HOR_VIERNES'.$x.'_OPC'] }}"></span>
+                <td class="col">
+                    {{ $horario_docente['HOR_VIERNES'.$x] }}
                     <br>
-                    <b class="small font-weight-bold">{{ $horario['HOR_VIERNES_DOC'.$x] }}</b>
-                    @endif
+                    {{ $horario_docente['LAB_VIERNES'.$x] }}
                 </td>
             </tr>
             @endfor

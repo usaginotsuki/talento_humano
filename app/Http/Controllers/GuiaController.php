@@ -16,37 +16,47 @@ class GuiaController extends Controller {
 	//listar las guias de la materia de Docente logeado
 	public function listarGuias($id)
 	{
-		     session(['MAT_CODIGO'=>$id]);
+		    session(['MAT_CODIGO'=>$id]);
 			$materia=$id;	
 			$guias_terminadas=DB::select('select guia.GUI_REGISTRADO, guia.GUI_CODIGO,materia.MAT_ABREVIATURA, guia.GUI_NUMERO,guia.GUI_FECHA, guia.GUI_TEMA, laboratorio.LAB_NOMBRE from laboratorio,guia,materia where materia.MAT_CODIGO=guia.MAT_CODIGO and laboratorio.LAB_CODIGO=guia.LAB_CODIGO and guia.MAT_CODIGO='.$materia );
-			$guias_pendientes=DB::select('select control.CON_DIA,control.CON_EXTRA,control.CON_HORA_ENTRADA, control.CON_HORA_SALIDA,control.CON_NUMERO_HORAS,control.CON_GUIA from control where control.MAT_CODIGO='.$materia);
+			$guias_pendientes=DB::select('select materia.MAT_ABREVIATURA, control.CON_DIA,control.CON_EXTRA,control.CON_HORA_ENTRADA, control.CON_HORA_SALIDA,control.CON_NUMERO_HORAS,control.CON_GUIA from control, materia where control.MAT_CODIGO='.$materia.' and materia.MAT_CODIGO=control.MAT_CODIGO');
 			$pendietes=0;
+			$creadas=0;
+			foreach ($guias_terminadas as $ter ){
+				if ($ter->GUI_REGISTRADO!=1){
+					$creadas++;
+				}
+			}
 			foreach ($guias_pendientes as $pen ){
 				if ($pen->CON_GUIA!=1 & $pen->CON_EXTRA!=1 ){
 					$pendietes++;
 				}
 			}
-			return view('guia.guiaControl')->with('guias_terminadas', $guias_terminadas)->with('guias_pendientes', $guias_pendientes)->with('pendientes',$pendietes);
+			$por_crear=$pendietes-$creadas;
+			return view('guia.guiaControl')->with('guias_terminadas', $guias_terminadas)->with('guias_pendientes', $guias_pendientes)->with('pendientes',$pendietes)->with('por_crear',$por_crear);
 	}
 	public function edit($id)
 	{
 		$guia= Guia::find($id);
-		return view('guia.update', ['guia' => $guia]);
+		
+		return view('guia.updateGuia', ['guia' => $guia]);
 	}
 	public function update(Request $request)
 	{
+		$materia = session('MAT_CODIGO');
 		$guia = Guia::find($request['GUI_CODIGO']);
-		$guia->fill($request->all());
-		$guia->save();
-		return redirect('guia')
-			->with('title', 'Guia actualizada!')
-			->with('subtitle', 'La información de la guia se ha actualizado con éxito.');
+		//$guia->fill($request->all());
+		//$guia->save();
+		return redirect('guia/listarGuias/'.$materia)
+			->with('title', 'Guia actualizado!')
+			->with('subtitle', 'La actualización del Guia se ha realizado con éxito.');
 	}
+	
 	public function destroy($id)
 	{
-		$guia = Guia::destroy($id);
-		DB::update('UPDATE CONTROL SET control.CON_GUIA=NULL WHERE control.CON_GUIA='.$id);
-		return redirect('guia')
+		$materia = session('MAT_CODIGO');
+		Guia::destroy($id);
+		return redirect('guia/listarGuias/'.$materia)
 			->with('title', 'Guia Eliminado!')
 			->with('subtitle', 'El registro de la Guia se ha eliminado con éxito.');
 	}
@@ -65,29 +75,34 @@ class GuiaController extends Controller {
 			session(['PER_CODIGO'=>$periodo->PER_CODIGO]);
             $materias=Materia::where('DOC_CODIGO', $docentes ->DOC_CODIGO)->where('PER_CODIGO',$periodo->PER_CODIGO)->get();
 			$count = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->count();
-			$horario = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->first();
-			for ($x = 1; $x <= 13; $x++) {
-				foreach ($materias as $mat) {
-					$docente = $horario->laboratorio->LAB_NOMBRE;
-					if ($horario['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_LUNES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_MATES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_MIERCOLES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_JUEVES_DOC'.$x] = $docente ;
-					}
-					if ($horario['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
-						$horario['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
-						$horario['HOR_VIERNES_DOC'.$x] = $docente ;
+			$horario = Horario::obtenerHorarioPorPeriodo($periodo->PER_CODIGO)->get();
+			$horario_docente= new Horario;
+			for ($ind=0; $ind<=$count-1;$ind++) {
+				for ($x = 1; $x <= 13; $x++){
+					foreach ($materias as $mat) {
+						$horario_docente['HOR_HORA'.$x]= $horario[$ind]['HOR_HORA'.$x];
+							if ($horario[$ind]['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_LUNES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+							if ($horario[$ind]['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_MATES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+
+							if ($horario[$ind]['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_MIERCOLES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+							if ($horario[$ind]['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_JUEVES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
+
+							if ($horario[$ind]['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
+								$horario_docente['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
+								$horario_docente['LAB_VIERNES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+							}
 					}
 				}
 			}
@@ -96,7 +111,7 @@ class GuiaController extends Controller {
 				'docente' => $docentes,
 				'count' => $count
 			])->with('materias',$materias)
-			->with('horario',$horario);         
+			->with('horario_docente',$horario_docente);         
 		}		
 	}
 
