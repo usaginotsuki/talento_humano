@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')   
 <div class="jumbotron">
-    @if (!empty($guias_terminadas)) 
-<h2>Guias: {{$guias_terminadas[0] -> MAT_ABREVIATURA}} </h2>
+    @if (!empty($guias_pendientes)) 
+<h2>Guias: {{$guias_pendientes[0] -> MAT_ABREVIATURA}} </h2>
     @endif
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     
