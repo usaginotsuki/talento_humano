@@ -1,13 +1,13 @@
 @extends('app')
 @section('content')   
 <div class="jumbotron">
-    @if (!empty($guias_terminadas)) 
-<h2>Guias: {{$guias_terminadas[0] -> MAT_ABREVIATURA}} </h2>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @if (!empty($guias_pendientes)) 
+<h2>Guias: {{$guias_pendientes[0] -> MAT_ABREVIATURA}} </h2>
     @endif
-            <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entrega - Por favor, Realice el detalle al final de esta pantalla</h4>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    
+            <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entregar y {{$por_crear}} Guias Pendientes por Crear - Por favor, Revice el detalle al final de esta pantalla</h4>
  </div>        
-
 </div>
 <div class="container">
 @if (session('title') && session('subtitle'))
