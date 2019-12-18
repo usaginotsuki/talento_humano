@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('css')
+  <link href="{{ URL::asset('css/button.css') }}" rel='stylesheet' type='text/css' />
+@endsection
 @section('content')
 @include('shared.title', array('titulo' => 'Crear Rol'))
 
@@ -43,233 +45,257 @@
 			            </div>
 
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu estadisticas</label>
+							<label class="col-md-5 control-label">Menu estadisticas</label>
 							<div class="input-group-text">
 							<input type="checkbox"  aria-label="Checkbox for following text input" name="1">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu estadisticas MateriasCarrera</label>
+							<label class="col-md-5 control-label">Menu estadisticas Materias Carrera</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="2">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoDeDocentes</label>
+							<label class="col-md-5 control-label">Menu estadisticas uso de Docentes</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="3">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoEfectivoSalas</label>
+							<label class="col-md-5 control-label">Menu estadisticas uso efectivo salas</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="4">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoPorCarrera</label>
+							<label class="col-md-5 control-label">Menu estadisticas Uso Por Carrera</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="5">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoPorSala</label>
+							<label class="col-md-5 control-label">Menu estadisticas Uso Por Sala</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="6">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoPorSalaCarrera</label>
+							<label class="col-md-5 control-label">Menu estadisticas Uso Por Sala Carrera</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="7">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoPor_CarreraSemestre</label>
+							<label class="col-md-5 control-label">Menu estadisticas Uso Por Carrera Semestre</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="8">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_estadisticas_UsoPor_Semestre</label>
+							<label class="col-md-5 control-label">Menu estadisticas Us Por Semestre</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="9">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso</label>
+							<label class="col-md-5 control-label">Menu proceso</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="14">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_AgregarHorasControl</label>
+							<label class="col-md-5 control-label">Menu proceso Agregar Horas Control</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="15">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Carrera</label>
+							<label class="col-md-5 control-label">Menu proceso Carrera</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="16">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_ControlLaboratorio</label>
+							<label class="col-md-5 control-label">Menu proceso ControlLaboratorio</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="17">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Docente</label>
+							<label class="col-md-5 control-label">Menu proceso Docente</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="18">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Control</label>
+							<label class="col-md-5 control-label">Menu proceso Control</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="41">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_GenerarControl</label>
+							<label class="col-md-5 control-label">Menu proceso Generar Control</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="19">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Guias</label>
+							<label class="col-md-5 control-label">Menu proceso Guias</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="20">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Horario</label>
+							<label class="col-md-5 control-label">Menu proceso Horario</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="21">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Laboratorio</label>
+							<label class="col-md-5 control-label">Menu proceso Laboratorio</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="22">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Materia</label>
+							<label class="col-md-5 control-label">Menu proceso Materia</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="23">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_Periodo</label>
+							<label class="col-md-5 control-label">Menu proceso Periodo</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="24">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_proceso_RegistrarGuiaAnterior</label>
+							<label class="col-md-5 control-label">Menu proceso Registrar Guia Anterior</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="25">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reportes</label>
+							<label class="col-md-5 control-label">Menu reportes</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="26">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_EventosOcasionales</label>
+							<label class="col-md-5 control-label">Menu reporte Eventos Ocasionales</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="27">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_GuiasCarreras</label>
+							<label class="col-md-5 control-label">Menu reporte Guias Carreras</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="28">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_GuiasEntregadas</label>
+							<label class="col-md-5 control-label">Menu reporte Guias Entregadas</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="29">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_GuiasPendientes</label>
+							<label class="col-md-5 control-label">Menu reporte Guias Pendientes</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="30">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_HojaDeControl</label>
+							<label class="col-md-5 control-label">Menu reporte Hoja de Control</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="31">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_HorarioDocente</label>
+							<label class="col-md-5 control-label">Menu reporte Horario Docente</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="32">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_Horarios</label>
+							<label class="col-md-5 control-label">Menu reporte Horarios</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="33">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_InformeSuficiencia</label>
+							<label class="col-md-5 control-label">Menu reporte Informe Suficiencia</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="34">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_MateriasCarrera</label>
+							<label class="col-md-5 control-label">Menu reporte Materias Carrera</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="35">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_NotasPorSala</label>
+							<label class="col-md-5 control-label">Menu reporte Notas Por Sala</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="36">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_ObservacionesPorSala</label>
+							<label class="col-md-5 control-label">Menu reporte Observaciones por Sala</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="37">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_UsoPorCarrera</label>
+							<label class="col-md-5 control-label">Menu reporte Uso Por Carrera</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="38">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_UsoPorDocente</label>
+							<label class="col-md-5 control-label">Menu reporte Uso Por Docente</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="39">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-5 control-label">menu_reporte_UsoPorDocenteResumen</label>
+							<label class="col-md-5 control-label">Menu reporte Uso Por Docente Resumen</label>
 							<div class="input-group-text">
 							<input type="checkbox" aria-label="Checkbox for following text input" name="40">
 							</div>
 						</div>
+						<div class="form-group row">
+							<label class="col-md-5 control-label">Menu Proceso Control</label>
+							<div class="input-group-text">
+							<input type="checkbox" aria-label="Checkbox for following text input" name="41">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-5 control-label">Menu Administrador</label>
+							<div class="input-group-text">
+							<input type="checkbox" aria-label="Checkbox for following text input" name="42">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-5 control-label">Menu Administrador roles</label>
+							<div class="input-group-text">
+							<input type="checkbox" aria-label="Checkbox for following text input" name="43">
+							</div>
+						</div>
+						<div class="form-group row">	
+							<label class="col-md-5 control-label">Menu Administrador usuarios</label>
+							<div class="input-group-text">
+							<input type="checkbox" aria-label="Checkbox for following text input" name="44">
+							</div>
+						</div>
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" class="button1">
 									Register
 								</button>
-								<a href="{{url('role')}}" class="btn btn-danger mb-2">Cancelar</a>
+								<a href="{{url('role')}}" class="button2">Cancelar</a>
 							</div>
 						</div>
 

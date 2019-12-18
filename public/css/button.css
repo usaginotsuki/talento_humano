@@ -6,4 +6,31 @@
     box-shadow: initial 0 -7px #E0E0E0;
 
 }
+.button1{
+  background-color: #047DF9 ; 
+  border: none;
+  color: white;
+  padding: 5px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.button2{	
+	  background-color: #FF5733; 
+  border: none;
+  color: white;
+  padding: 5px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  }
+
 .button4 {border-radius: 25px;}

@@ -39,7 +39,7 @@
 						 <div class="col">
 			                <div class="form-group">
 			                    <label for="name">Rol <span style="color:#FF0000";>*</span></label>
-			                    <select class="col-md-6 form-control" id="role" name="role" >
+			                    <select class="col-md-5 form-control" id="role" name="role" >
 			                        @foreach ($role as $rols)
                         				<option value="{{$rols->id}}">{{$rols->name}}</option>
                        				@endforeach
@@ -49,7 +49,7 @@
 						<div class="col">
 			                <div class="form-group">
 			                    <label for="name">Empresa <span style="color:#FF0000";>*</span></label>
-			                    <select class="col-md-6 form-control" id="empresa" name="empresa" >
+			                    <select class="col-md-5 form-control" id="empresa" name="empresa" >
 			                        @foreach ($empresas as $empresa)
                         				<option value="{{$empresa->EMP_CODIGO}}">{{$empresa->EMP_NOMBRE}}</option>
                        				@endforeach
