@@ -18,7 +18,7 @@
 							</ul>
 						</div>
 					@endif
-					<form class="form-horizontal" role="form" method="POST" action="/user/updatePassword">
+					<form class="form-horizontal" role="form" method="POST" action="{{url('/user/updatePassword')}}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="id" id="id" value="{{ $user->id }}">
 						<div class="form-group">
