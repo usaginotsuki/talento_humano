@@ -14,7 +14,7 @@
         <div class="form-group row">
                 <label for="GUI_FECHA"class="col-sm-2 col-form-label">Fecha<span style="color:#FF0000";>*</span></label>
                 <div class="col-sm-3">
-                    <input type="input" class="form-control" id="GUI_FECHA" name="GUI_FECHA" value="{{$guia->GUI_FECHA}}" required >
+                    <input type="input" class="form-control" id="GUI_FECHA" name="GUI_FECHA" value="{{$guia->GUI_FECHA}}" required disabled >
                 </div>
             </div>
             <div class="form-group row">

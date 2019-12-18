@@ -21,7 +21,7 @@ $("#periodo").change(function(event){
             +respuesta[i].MAT_NOMBRE+" - "+respuesta[i].MAT_NRC+"</option>");
           }
         }else{
-          document.getElementById('btn_cGuia').disabled=true;
+          
           alert("No tiene materias en el periodo "+ event.target.options[event.target.selectedIndex].text)
         }
       }
@@ -40,7 +40,6 @@ $("#materiaCombo").change(function(event){
       $("#guiaCombo").find('option')
       .remove()
       .end()
-      
      if(respuesta.length<=0){
        document.getElementById('btn_cGuia').disabled=true;
       alert("No tiene guias");
