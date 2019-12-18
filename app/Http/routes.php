@@ -55,6 +55,7 @@ Route::post('control/filtroCampus', 'ControlController@filtroCampus');
 Route::post('control/updatePorGuia', 'ControlController@updatePorGuia');
 Route::post('control/nota', 'ControlController@nota');
 Route::post('control/updateNonta', 'ControlController@updateNonta');
+Route::post('control/updatePorSolicitud', 'ControlController@updatePorSolicitud');
 ///////////////////////////////////////////////////////////////////
 Route::get('docente', 'DocenteController@index');
 Route::get('docente/create', 'DocenteController@create');

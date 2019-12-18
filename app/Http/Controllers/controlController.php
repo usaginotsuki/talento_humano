@@ -7,6 +7,7 @@ use App\Docente;
 use App\Guia;
 use App\Laboratorio;
 use App\Materia;
+use App\Solicitud;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -257,8 +258,11 @@ class ControlController extends Controller {
 	{
 		//
 		$date = Carbon::now();
+		$empresa = $request->user()->empresa->EMP_CODIGO;
+	
 		$date = $date->format('Y-m-d');
-		$control = Control::where('CON_DIA', $date)->get();
+		//$control = Control::where('CON_DIA', $date)->get();
+		$control = Control::filtroEmpresa($date,$empresa)->get();
 		return view("control.consola", ["controles"=>$control]);
 		
 	}
@@ -268,7 +272,7 @@ class ControlController extends Controller {
 		//
 		$control = Control::find( $request['CON_CODIGO']);
 		$doc = Docente::find($control->DOC_CODIGO);
-		$firma = $doc->DOC_MIESPE;
+		$firma = $request->user()->name;
 		$time = time();
 		$hora = date("H:i:s", $time);
 		if ($control->CON_REG_FIRMA_ENTRADA == null) {
@@ -292,7 +296,7 @@ class ControlController extends Controller {
 		$name = $request->name;
 		$control = Control::find( $request['CON_CODIGO']);
 		$doc = Docente::find($control->DOC_CODIGO);
-		$firma = $doc->DOC_MIESPE;
+		$firma = $request->user()->name;
 		if ($control->CON_LAB_ABRE ==null) {
 					# code...
 			$control->CON_LAB_ABRE = $firma;
@@ -341,12 +345,6 @@ class ControlController extends Controller {
 	{
 		//
 		$control = Control::find( $request['CON_CODIGO']);
-		echo $control->CON_DIA;
-		echo "/";
-		echo $control->DOC_CODIGO;
-		echo "/";
-		echo $control->MAT_CODIGO;
-		echo "/";
 		$guia = Guia::guiasParaControl($control->CON_DIA, $control->DOC_CODIGO, $control->MAT_CODIGO)->first();
 		if ($guia != null) {
 			# code...
@@ -382,5 +380,30 @@ class ControlController extends Controller {
 		$control->save();
 			return redirect("control/consola")->with('title', 'EXITO!')
 			->with('subtitle', 'El registro de la nota se completo con exito');
+	}
+	 public function updatePorSolicitud(Request $request)
+	{
+		//
+		$control = Control::find( $request['CON_CODIGO']);
+		$solicitud = Solicitud::solParaControl($control->CON_DIA, $control->DOC_CODIGO, $control->MAT_CODIGO)->first();
+		if ($solicitud != null) {
+			# code...
+			//echo $guia[0]->GUI_CODIGO;
+			if ($control->SOL_CODIGO == null) {
+					# code...
+				$control->SOL_CODIGO = $solicitud->SOL_CODIGO;
+				$solicitud->SOL_ESTODO = 1;
+			}else{
+				$control->SOL_CODIGO = null;
+				$solicitud->SOL_ESTODO = 0;
+			}
+			$solicitud->save();
+			$control->save();
+			return redirect("control/consola")->with('title', 'EXITO!')
+			->with('subtitle', 'El registro de la solicitud se ha realizado con exito');	
+		}else{
+			return redirect("control/consola")->with('mensajes','No existe solicitud');	
+		}
+
 	}
 }

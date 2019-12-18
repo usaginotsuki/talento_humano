@@ -132,7 +132,7 @@ class SolicitudController extends Controller {
 		 'SOL_TEMA_PRACTICA' => $request['SOL_TEMA_PRACTICA'],
 		 'SOL_NUMERO' => $numero,
 		 'SOL_HORARIO_USO' => $request['SOL_HORARIO_USO'],
-		 'SOL_APROBADA' => 0,
+		 'SOL_ESTADO' => 0,
 
 		
 	 ]);

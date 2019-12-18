@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Solicitud extends Model {
 	protected $table = 'solicitud';
 	protected $primaryKey = 'SOL_CODIGO';		
-	protected $fillable = ['SOL_CODIGO', 'DOC_CODIGO', 'MAT_CODIGO', 'LAB_CODIGO', 'SOL_FECHA', 'SOL_FECHA_USO', 'SOL_TEMA_PRACTICA', 'SOL_NUMERO', 'SOL_HORARIO_USO'];
+	protected $fillable = ['SOL_CODIGO', 'DOC_CODIGO', 'MAT_CODIGO', 'LAB_CODIGO', 'SOL_FECHA', 'SOL_FECHA_USO', 'SOL_TEMA_PRACTICA', 'SOL_NUMERO', 'SOL_HORARIO_USO','SOL_ESTADO'];
 	public $timestamps = false;
 
 	/**
@@ -48,5 +48,9 @@ class Solicitud extends Model {
 	*/
 	public function scopeAllSolicitudes($query,$docenteId, $materiaId) {
 		return $query->where('MAT_CODIGO',$materiaId)->where('MAT_CODIGO',$materiaId)->orderBy('SOL_NUMERO','DESC');
+	}
+
+	public function scopeSolParaControl($query, $fecha, $docente, $materia){
+		return $query->where('DOC_CODIGO',$docente)->where('MAT_CODIGO',$materia)->where('SOL_FECHA',$fecha);
 	}
 }
