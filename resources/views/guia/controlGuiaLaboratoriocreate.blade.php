@@ -2,7 +2,7 @@
 @section('content')
 @include('shared.title', array('titulo' => 'Crear GUIA'))
 
-<div class="container">
+<div class="container-fluid">
     <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
     <form class="form" id="form" action="{{url('/guia/guardarGuia')}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -67,7 +67,7 @@
             <div class="form-group row">
                 <label for="GUI_CONCLUSIONES"class="col-sm-2 col-form-label">Concluciones</label>
                 <div class="col-sm-10">
-                        <input type="input" class="form-control" id="GUI_CONCLUSIONES" name="GUI_CONCLUSIONES" value="@if(isset($guia)) {{$guia->GUI_CONCLUCIONES}} @endif">
+                        <input type="input" class="form-control" id="GUI_CONCLUSIONES" name="GUI_CONCLUSIONES" value="@if(isset($guia)) {{$guia->GUI_CONCLUSIONES}} @endif">
                 </div>
             </div>
             <div class="form-group row">

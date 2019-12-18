@@ -10,7 +10,7 @@ $("#periodo").change(function(event){
         $("#guiaCombo").find('option')
       .remove()
       .end()
-      .append('<option value="0">---------------------------Seleccione---------------------------</option>');
+      .append('<option value="0">------Seleccione------</option>');
         $("#materiaCombo").find('option')
         .remove()
         .end()
@@ -21,6 +21,7 @@ $("#periodo").change(function(event){
             +respuesta[i].MAT_NOMBRE+" - "+respuesta[i].MAT_NRC+"</option>");
           }
         }else{
+          
           alert("No tiene materias en el periodo "+ event.target.options[event.target.selectedIndex].text)
         }
       }
@@ -39,14 +40,18 @@ $("#materiaCombo").change(function(event){
       $("#guiaCombo").find('option')
       .remove()
       .end()
-      .append('<option value="0">---------------------------Seleccione---------------------------</option>');
      if(respuesta.length<=0){
+       document.getElementById('btn_cGuia').disabled=true;
       alert("No tiene guias");
      }
       for(i = 0; i<respuesta.length; i++){
           $("#guiaCombo").append("<option value='"+respuesta[i].GUI_CODIGO+"'>"
               +respuesta[i].GUI_NUMERO+" : "+respuesta[i].GUI_TEMA+"</option>");
+              if((i+1)==respuesta.length){
+                document.getElementById('btn_cGuia').disabled=false;
+              } 
       }
+      
     }
   });
 });
