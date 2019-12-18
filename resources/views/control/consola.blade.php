@@ -29,7 +29,7 @@
             </form>
             
         </div>
-        <div class="col"><br>[admin]</div>
+        <div class="col"><br>[{{Auth::user()->name}}]</div>
     </div>
     <span class="counter pull-right"></span>
     <table class="table table-hover table-bordered results">
@@ -74,7 +74,7 @@
                             <p><span style="font-size:xx-large";>O</span></p>
                         @endif
                     @endif
-                    @if($control -> CON_REG_FIRMA_ENTRADA != null and $control -> CON_REG_FIRMA_SALIDA == null)
+                    @if($control -> CON_REG_FIRMA_ENTRADA != null and $control -> CON_REG_FIRMA_SALIDA == null and $control -> CON_EXTRA == null)
                         <form action="{{url('control/updatePorGuia')}}" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
@@ -83,6 +83,18 @@
                             @endif
                             @if($control -> CON_GUIA != null)
                                 <button  type="submit" class="btn btn-light"><span style="color:#00FF00; font-size:xx-large"; >E</span></button>
+                            @endif
+                        </form>
+                    @endif
+                    @if($control -> CON_REG_FIRMA_ENTRADA != null and $control -> CON_REG_FIRMA_SALIDA == null and $control -> CON_EXTRA != null)
+                        <form action="{{url('control/updatePorSolicitud')}}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="CON_CODIGO" value="{{ $control->CON_CODIGO }}">
+                            @if($control -> SOL_CODIGO == null)
+                                <button  type="submit" class="btn btn-light"><span style="color:#FF0000; font-size:xx-large";>O</span></button>
+                            @endif
+                            @if($control -> SOL_CODIGO != null)
+                                <button  type="submit" class="btn btn-light"><span style="color:#00FF00; font-size:xx-large"; >O</span></button>
                             @endif
                         </form>
                     @endif

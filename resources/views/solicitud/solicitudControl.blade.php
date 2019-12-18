@@ -30,7 +30,7 @@
                     <td scope="row">
                         <a href="{{url('reporte/pdfSolicitud/'.$solicitud->SOL_CODIGO)}}" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
                     </td> 
-                    @if($solicitud->SOL_APROBADA==1) 
+                    @if($solicitud->SOL_ESTADO==1) 
                         <td scope="row">
                             <span class="badge badge-success">Aprobado</span>
                         </td>
