@@ -128,7 +128,13 @@ class RoleController extends Controller {
 			$role->accions()->attach(40);
 		}if($request['41'] === 'on') {
 			$role->accions()->attach(41);
-		}
+		}if($request['42'] === 'on') {
+			$role->accions()->attach(42);
+		}if($request['43'] === 'on') {
+			$role->accions()->attach(43);
+		}if($request['44'] === 'on') {
+			$role->accions()->attach(44);
+		}	
 		return redirect('role')
 			->with('title', 'Role registrado!')
 			->with('subtitle', 'El registro del role se ha realizado con éxito.');
@@ -253,6 +259,12 @@ class RoleController extends Controller {
 			$acciones[]=40;
 		}if($request['41'] === 'on') {
 			$acciones[]=41;
+		}if($request['42'] === 'on') {
+			$acciones[]=42;
+		}if($request['43'] === 'on') {
+			$acciones[]=43;
+		}if($request['44'] === 'on') {
+			$acciones[]=44;
 		}
 		$role->accions()->sync($acciones);
 		$role->save();
