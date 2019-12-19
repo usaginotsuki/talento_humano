@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\ObjetoRecuperado;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -29,7 +31,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('welcome');
+		$objeto = ObjetoRecuperado::All();
+		return view('welcome',compact('objeto'));
 	}
 
 	public function auth()

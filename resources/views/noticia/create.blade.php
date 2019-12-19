@@ -4,10 +4,10 @@
  -->
 @extends('app')
 @section('content')
-@include('shared.title', array('titulo' => 'Crear Objeto'))
+@include('shared.title', array('titulo' => 'Crear Noticia'))
 
 <div class="container-fluid">
-    <form action="{{url('/objeto/store')}}" method="POST" enctype="multipart/form-data"> 
+    <form action="{{url('/noticia/store')}}" method="POST" enctype="multipart/form-data"> 
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
      
             <div class="container-fluid">
@@ -15,36 +15,39 @@
                 <div class="row" >
                     <div class="col">
                         <div class="form-group">
-                            <label for="OBR_NOMBRE">Nombre<span style="color:#FF0000";>*</span></label>
-                            <input type="text" class="form-control" id="OBR_NOMBRE" name="OBR_NOMBRE" placeholder="Nombre del Objeto" required>
+                            <label for="NOT_NOMBRE">Nombre<span style="color:#FF0000";>*</span></label>
+                            <input type="text" class="form-control" id="NOT_NOMBRE" name="NOT_NOMBRE" placeholder="Nombre Noticia" required>
                         </div>
+                       
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="OBR_DESCRIPCION">Descripcion<span style="color:#FF0000";>*</span></label>
-                            <input type="text" class="form-control" id="OBR_DESCRIPCION" name="OBR_DESCRIPCION"  required>
+                            <label for="NOT_TITULO">Titulo<span style="color:#FF0000";>*</span></label>
+                            <input type="text" class="form-control" id="NOT_TITULO" name="NOT_TITULO" placeholder="Titulo" required>
                         </div>
                     </div>
                     <div class="col">
+                        
                         <div class="form-group">
-                            <label for="OBR_OBSERVACION">Observacion<span style="color:#FF0000";></span></label>
-                        <input type="text" class="form-control" id="OBR_OBSERVACION" name="OBR_OBSERVACION"  >
+                            <label for="NOT_DESCRIPCION">Descripcion<span style="color:#FF0000";>*</span></label>
+                            <input type="text" class="form-control" id="NOT_DESCRIPCION" name="NOT_DESCRIPCION"  required>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="OBR_FECHA_RECEPCION">Fecha Recepcion<span style="color:#FF0000";>*</span></label>
-                            <input type="date" class="form-control" id="OBR_FECHA_RECEPCION" name="OBR_FECHA_RECEPCION"  required>
+                            <label for="NOT_FECHA_INICIO">Fecha Inicio<span style="color:#FF0000";>*</span></label>
+                            <input type="date" class="form-control" id="NOT_FECHA_INICIO" name="NOT_FECHA_INICIO"  required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="OBR_FECHA_ENTREGA">Fecha Entrega<span style="color:#FF0000";></span></label>
-                        <input type="date" class="form-control" id="OBR_FECHA_ENTREGA" name="OBR_FECHA_ENTREGA"  >
+                            <label for="NOT_FECHA_FIN">Fecha Fin<span style="color:#FF0000";></span></label>
+                        <input type="date" class="form-control" id="NOT_FECHA_FIN" name="NOT_FECHA_FIN" required >
                         </div>
                     </div>
                 </div>
@@ -55,15 +58,7 @@
                             <input type="file"  class="form-control" id="image" name="image" accept="image/*" required>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="OBR_ESTADO">Estado Objeto<span style="color:#FF0000";>*</span></label>
-                            <select type="input" class="form-control" id="OBR_ESTADO" name="OBR_ESTADO" placeholder="Campus"  required>
-                                 <option value="0">DAÑADO</option>
-                                 <option value="1">FUNCIONAL</option>
-                            </select> 
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col">
@@ -89,7 +84,7 @@
                 </div>
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary mb-2">Crear</button>
-                <a href="{{url('objeto')}}" class="btn btn-danger mb-2">Cancelar</a>
+                <a href="{{url('noticia')}}" class="btn btn-danger mb-2">Cancelar</a>
             </div>
     </form>
 </div>

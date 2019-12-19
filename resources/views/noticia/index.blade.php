@@ -6,7 +6,7 @@
  -->
 @extends('app')
 @section('content')
-@include('shared.title', array('titulo' => 'Objetos Recuperados'))
+@include('shared.title', array('titulo' => 'Noticia'))
 
 <div class="container-fluid">
     @if (session('title') && session('subtitle'))
@@ -20,7 +20,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <a href="{{url('objeto/create')}}" class="btn btn-success mb-2">Nuevo</a>
+            <a href="{{url('noticia/create')}}" class="btn btn-success mb-2">Nuevo</a>
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -30,10 +30,9 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">NOMBRE</th>
-                <th scope="col">FECHA_RECEPCION</th>
-                <th scope="col">FECHA_ENTREGA</th>
-                <th scope="col">ESTADO</th>
+                <th scope="col">TITULO</th>
+                <th scope="col">FECHA INICION</th>
+                <th scope="col">FECHA FIN</th>
                 <th scope="col">PERIODO</th>
                 <th scope="col">EMPRESA</th>
                 <th scope="col">IMAGEN</th>
@@ -42,26 +41,19 @@
         </thead>
         
         <tbody>
-        @foreach ($objeto as $obj)
+        @foreach ($noticias as $not)
             <tr>
-                <td scope="row">{{$obj -> OBR_CODIGO}}</td>
-                <td scope="row">{{$obj -> OBR_NOMBRE}}</td>
-                <td scope="row">{{$obj -> OBR_FECHA_RECEPCION}}</td>
-                <td scope="row">{{$obj -> OBR_FECHA_ENTREGA}}</td>
-                <td scope="row">
-                        @if ($obj->OBR_ESTADO === 0)
-                            <span class="badge badge-danger">DAÑADO</span>
-                        @elseif ($obj->OBR_ESTADO !== 0)
-                            <span class="badge badge-primary">FUNCIONAL</span>
-                        @endif
-                </td>
-                <td scope="row">{{$obj -> periodo->PER_NOMBRE}}</td>
-                <td scope="row">{{$obj -> empresa->EMP_NOMBRE}}</td>
-                <td scope="row"><img src="{{$obj -> OBR_IMAGEN}}" width="100" height="100"/></td>
+                <td scope="row">{{$not -> NOT_CODIGO}}</td>
+                <td scope="row">{{$not -> NOT_TITULO}}</td>
+                <td scope="row">{{$not -> NOT_FECHA_INICIO}}</td>
+                <td scope="row">{{$not -> NOT_FECHA_FIN}}</td>
+                <td scope="row">{{$not -> periodo->PER_NOMBRE}}</td>
+                <td scope="row">{{$not -> empresa->EMP_NOMBRE}}</td>
+                <td scope="row"><img src="{{$not -> NOT_IMAGEN}}" width="100" height="100"/></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{url('objeto/'.$obj->OBR_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
-                        <a href="{{url('objeto/'.$obj->OBR_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                        <a href="{{url('noticia/'.$not->NOT_CODIGO.'/edit')}}" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <a href="{{url('noticia/'.$not->NOT_CODIGO.'/destroy')}}" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
                     </div>
                 </td>
             </tr>

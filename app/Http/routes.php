@@ -105,7 +105,14 @@ Route::get('objeto/{id}/edit', 'ObjetoRecuperadoController@edit');
 Route::get('objeto/{id}/destroy', 'ObjetoRecuperadoController@destroy');
 Route::post('objeto/store', 'ObjetoRecuperadoController@store');
 Route::post('objeto/update', 'ObjetoRecuperadoController@update');
-
+///////////////////////////////////////////////////////////////////
+Route::get('noticia', 'NoticiaController@index');
+Route::get('noticia/create', 'NoticiaController@create');
+Route::get('noticia/{id}/edit', 'NoticiaController@edit');
+Route::get('noticia/{id}/destroy', 'NoticiaController@destroy');
+Route::post('noticia/store', 'NoticiaController@store');
+Route::post('noticia/update', 'NoticiaController@update');
+///////////////////////////////////////////////////////////////////
 Route::get('materia', 'MateriaController@index');
 Route::get('materia/create', 'MateriaController@create');
 Route::get('materia/{id}/edit', 'MateriaController@edit');

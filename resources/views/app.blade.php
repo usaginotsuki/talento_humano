@@ -14,9 +14,12 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="{{ URL::asset('css/index.css') }}" rel='stylesheet' type='text/css' />
   <link href="{{ URL::asset('css/table.css') }}" rel='stylesheet' type='text/css' />
-
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
-
+  <!--
+  <link href="{{ URL::asset('css/slicebox.css') }}" rel='stylesheet' type="text/css"/>
+	<link href="{{ URL::asset('css/demo.css') }}" rel='stylesheet' type="text/css" />
+	<link href="{{ URL::asset('css/custom.css') }}" rel='stylesheet' type="text/css"/>
+	<script type="text/javascript" src="{{ URL::asset('js/modernizr.custom.46884.js') }}"></script>
+  -->
 </head>
 <body>
   <header>
@@ -63,4 +66,58 @@
   <script type="text/javascript" src="{{ URL::asset('js/combo.js') }}"></script> 
   <script type="text/javascript" src="{{ URL::asset('js/dropdown.js') }}"></script> 
   <script type="text/javascript" src="{{ URL::asset('js/validarCedula.js') }}"></script> 
+  <!--
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ URL::asset('js/jquery.slicebox.js') }} "></script>
+  <script type="text/javascript">
+			$(function() {
+				
+				var Page = (function() {
+
+					var $navArrows = $( '#nav-arrows' ).hide(),
+						$shadow = $( '#shadow' ).hide(),
+						slicebox = $( '#sb-slider' ).slicebox( {
+							onReady : function() {
+
+								$navArrows.show();
+								$shadow.show();
+
+							},
+							orientation : 'r',
+							cuboidsRandom : true
+						} ),
+						
+						init = function() {
+
+							initEvents();
+							
+						},
+						initEvents = function() {
+
+							// add navigation events
+							$navArrows.children( ':first' ).on( 'click', function() {
+
+								slicebox.next();
+								return false;
+
+							} );
+
+							$navArrows.children( ':last' ).on( 'click', function() {
+								
+								slicebox.previous();
+								return false;
+
+							} );
+
+						};
+
+						return { init : init };
+
+				})();
+
+				Page.init();
+
+			});
+		</script>
+		-->
   @yield('js')

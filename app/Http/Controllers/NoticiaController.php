@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\ObjetoRecuperado;
+use App\Noticia;
 use App\Periodo;
 use App\empresa;
 
@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Input;
 use Image;
 
-class ObjetoRecuperadoController extends Controller {
+class NoticiaController extends Controller {
 
 	//valida que este autenticado para acceder al controlador
 	public function __construct()
@@ -24,10 +24,11 @@ class ObjetoRecuperadoController extends Controller {
 	 *
 	 * @return Response
 	 */
+
 	public function index()
 	{
-		$objeto = ObjetoRecuperado::All();
-		return view('objetorecuperado.index', compact('objeto'));
+		$noticias = Noticia::All();
+		return view('noticia.index', compact('noticias'));
 	}
 
 	/**
@@ -39,7 +40,7 @@ class ObjetoRecuperadoController extends Controller {
 	{
 		$periodo=Periodo::All();
 		$empresas=empresa::All();
-		return view('objetorecuperado.create',["periodo"=>$periodo],["empresas"=>$empresas]);
+		return view('Noticia.create',["periodo"=>$periodo],["empresas"=>$empresas]);
 	}
 
 	/**
@@ -56,21 +57,20 @@ class ObjetoRecuperadoController extends Controller {
 		$path = public_path('uploads/'.$nombre);
 		$url = '/uploads/'.$nombre;
 		$image = Image::make($file->getRealPath());
-		ObjetoRecuperado::create([
+		Noticia::create([
 			'EMP_CODIGO' => $request['EMP_CODIGO'], 
 			'PER_CODIGO' => $request['PER_CODIGO'], 
-			'OBR_NOMBRE' => $request['OBR_NOMBRE'], 
-			'OBR_DESCRIPCION' => $request['OBR_DESCRIPCION'],
-			'OBR_FECHA_RECEPCION' => $request['OBR_FECHA_RECEPCION'],
-			'OBR_IMAGEN' => $url,
-			'OBR_ESTADO' => $request['OBR_ESTADO'],
-			'OBR_OBSERVACION' => $request['OBR_OBSERVACION'],
-			'OBR_FECHA_ENTREGA' => $request['OBR_FECHA_ENTREGA']
+			'NOT_NOMBRE' => $request['NOT_NOMBRE'], 
+			'NOT_TITULO' => $request['NOT_TITULO'], 
+			'NOT_DESCRIPCION' => $request['NOT_DESCRIPCION'],
+			'NOT_FECHA_INICIO' => $request['NOT_FECHA_INICIO'],
+			'NOT_IMAGEN' => $url,
+			'NOT_FECHA_FIN' => $request['NOT_FECHA_FIN']
 		]);
 		$image->save($path);
-		return redirect('objeto')
-			->with('title','Objeto Registrado!')
-			->with('subtitle','Se ha registrado correctamente el Objeto.');
+		return redirect('noticia')
+			->with('title','Noticia Registrado!')
+			->with('subtitle','Se ha registrado correctamente La Noticia.');
 	}
 
 	/**
@@ -81,10 +81,10 @@ class ObjetoRecuperadoController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$ObjetoRecuperado =	ObjetoRecuperado::find($id);
+		$noticia =	Noticia::find($id);
 		$periodo=Periodo::All();
 		$empresas=empresa::All();
-		return view("objetorecuperado.update", ["objeto"=>$ObjetoRecuperado,"periodo"=>$periodo,"empresas"=>$empresas]);
+		return view("noticia.update", ["noticia"=>$noticia,"periodo"=>$periodo,"empresas"=>$empresas]);
 	}
 
 	/**
@@ -96,7 +96,7 @@ class ObjetoRecuperadoController extends Controller {
 	public function update(Request $request)
 	{
 		
-		$ObjetoRecuperado =	ObjetoRecuperado::find( $request['OBR_CODIGO']);
+		$noticia =	Noticia::find( $request['NOT_CODIGO']);
 		//
 		$file = Input::file('image');
 		$random = str_random(10);
@@ -105,22 +105,23 @@ class ObjetoRecuperadoController extends Controller {
 		$url = '/uploads/'.$nombre;
 		$image = Image::make($file->getRealPath());
 		//
-		$ObjetoRecuperado->fill(
-			['EMP_CODIGO' => $request['EMP_CODIGO'], 
+		$noticia->fill(
+			[
+			'EMP_CODIGO' => $request['EMP_CODIGO'], 
 			'PER_CODIGO' => $request['PER_CODIGO'], 
-			'OBR_NOMBRE' => $request['OBR_NOMBRE'], 
-			'OBR_DESCRIPCION' => $request['OBR_DESCRIPCION'],
-			'OBR_FECHA_RECEPCION' => $request['OBR_FECHA_RECEPCION'],
-			'OBR_IMAGEN' => $url,
-			'OBR_ESTADO' => $request['OBR_ESTADO'],
-			'OBR_OBSERVACION' => $request['OBR_OBSERVACION'],
-			'OBR_FECHA_ENTREGA' => $request['OBR_FECHA_ENTREGA']]
+			'NOT_NOMBRE' => $request['NOT_NOMBRE'], 
+			'NOT_TITULO' => $request['NOT_TITULO'], 
+			'NOT_DESCRIPCION' => $request['NOT_DESCRIPCION'],
+			'NOT_FECHA_INICIO' => $request['NOT_FECHA_INICIO'],
+			'NOT_IMAGEN' => $path,
+			'NOT_FECHA_FIN' => $request['NOT_FECHA_FIN']
+			]
 		);
 		$image->save($path);
-		$ObjetoRecuperado->save();
-		return redirect('objeto')
-			->with('title','Objeto actualizado!')
-			->with('subtitle','Se han actualizado correctamente los datos del Objeto.');
+		$noticia->save();
+		return redirect('noticia')
+			->with('title','Noticia actualizado!')
+			->with('subtitle','Se han actualizado correctamente los datos de la noticia.');
 	}
 
 	/**
@@ -131,10 +132,10 @@ class ObjetoRecuperadoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		ObjetoRecuperado::destroy($id);
-		return redirect('objeto')
-			->with('title','Objeto eliminado!')
-			->with('subtitle','Se ha eliminado correctamente el Objeto.');
+		Noticia::destroy($id);
+		return redirect('noticia')
+			->with('title','Noticia eliminada!')
+			->with('subtitle','Se ha eliminado correctamente la Noticia.');
 	}
 
 }
