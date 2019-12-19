@@ -9,8 +9,10 @@ use App\Periodo;
 use App\Session;
 use App\Horario;
 use App\Control;
+use App\Empresa;
 use Illuminate\Http\Request;
 use DB;
+use PDF;
 use App\Quotation;
 class GuiaController extends Controller {
 	//listar las guias de la materia de Docente logeado
@@ -84,24 +86,29 @@ class GuiaController extends Controller {
 							if ($horario[$ind]['HOR_LUNES'.$x] == $mat->MAT_CODIGO) {
 								$horario_docente['HOR_LUNES'.$x] = $mat->MAT_ABREVIATURA;
 								$horario_docente['LAB_LUNES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+								$horario_docente["HOR_LUNES".$x."_OPC"]=$horario[$ind]["HOR_LUNES".$x."_OPC"];
 							}
 							if ($horario[$ind]['HOR_MATES'.$x] == $mat->MAT_CODIGO) {
 								$horario_docente['HOR_MATES'.$x] = $mat->MAT_ABREVIATURA;
 								$horario_docente['LAB_MATES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+								$horario_docente["HOR_MATES".$x."_OPC"]=$horario[$ind]["HOR_MATES".$x."_OPC"];
 							}
 
 							if ($horario[$ind]['HOR_MIERCOLES'.$x] == $mat->MAT_CODIGO) {
 								$horario_docente['HOR_MIERCOLES'.$x] = $mat->MAT_ABREVIATURA;
 								$horario_docente['LAB_MIERCOLES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+								$horario_docente["HOR_MIERCOLES".$x."_OPC"]=$horario[$ind]["HOR_MIERCOLES".$x."_OPC"];
 							}
 							if ($horario[$ind]['HOR_JUEVES'.$x] == $mat->MAT_CODIGO) {
 								$horario_docente['HOR_JUEVES'.$x] = $mat->MAT_ABREVIATURA;
 								$horario_docente['LAB_JUEVES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+								$horario_docente["HOR_JUEVES".$x."_OPC"]=$horario[$ind]["HOR_JUEVES".$x."_OPC"];
 							}
 
 							if ($horario[$ind]['HOR_VIERNES'.$x] == $mat->MAT_CODIGO) {
 								$horario_docente['HOR_VIERNES'.$x] = $mat->MAT_ABREVIATURA;
 								$horario_docente['LAB_VIERNES'.$x] = $horario[$ind]->laboratorio->LAB_NOMBRE;
+								$horario_docente["HOR_VIERNES".$x."_OPC"]=$horario[$ind]["HOR_VIERNES".$x."_OPC"];
 							}
 					}
 				}
@@ -246,4 +253,21 @@ class GuiaController extends Controller {
 		return redirect('guia/listarGuias/'.$materia);
    }
 
+   public function pdfGuia($id){
+	$guia = Guia::find($id);
+	$materia = Materia::find($guia->MAT_CODIGO);
+	$periodo = Periodo::find($guia->PER_CODIGO);
+	$laboratorio = Laboratorio::find($guia->LAB_CODIGO);
+	$docente = Docente::find($guia->DOC_CODIGO);
+	$empresa = Empresa::find($laboratorio->EMP_CODIGO);
+	$guia["MAT_NOMBRE"] = $materia->MAT_NOMBRE; 
+	$guia["MAT_CODIGO"]= $materia->MAT_CODIGO_BANNER;
+	$guia["MAT_NRC"]= $materia->MAT_NRC;
+	$guia["PER_NOMBRE"] = $periodo->PER_NOMBRE;
+	$guia["EMP_NOMBRE"]= $empresa->EMP_NOMBRE;
+	$guia["LAB_NOMBRE"] = $laboratorio->LAB_NOMBRE;
+	$guia["DOC_NOMBRE"] = $docente->DOC_TITULO." ".$docente->DOC_NOMBRES." ".$docente->DOC_APELLIDOS;
+	$pdf = PDF::loadView('reportes.pdfguia',compact('guia'))->setPaper('a4');
+	return $pdf->stream('Reporte.pdf');
+}
 }

@@ -498,21 +498,5 @@ class ReportesController extends Controller {
         $this->middleware('auth');
 	}
 	
-	public function pdfGuia($id){
-		$guia = Guia::find($id);
-		$materia = Materia::find($guia->MAT_CODIGO);
-		$periodo = Periodo::find($guia->PER_CODIGO);
-		$laboratorio = Laboratorio::find($guia->LAB_CODIGO);
-		$docente = Docente::find($guia->DOC_CODIGO);
-		$empresa = Empresa::find($laboratorio->EMP_CODIGO);
-		$guia["MAT_NOMBRE"] = $materia->MAT_NOMBRE; 
-		$guia["MAT_CODIGO"]= $materia->MAT_CODIGO_BANNER;
-		$guia["MAT_NRC"]= $materia->MAT_NRC;
-		$guia["PER_NOMBRE"] = $periodo->PER_NOMBRE;
-		$guia["EMP_NOMBRE"]= $empresa->EMP_NOMBRE;
-		$guia["LAB_NOMBRE"] = $laboratorio->LAB_NOMBRE;
-		$guia["DOC_NOMBRE"] = $docente->DOC_TITULO." ".$docente->DOC_NOMBRES." ".$docente->DOC_APELLIDOS;
-		$pdf = PDF::loadView('reportes.pdfguia',compact('guia'))->setPaper('a4');
-		return $pdf->stream('Reporte.pdf');
-	}
+
 }

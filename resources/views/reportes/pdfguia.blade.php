@@ -148,7 +148,7 @@ p{
               <td scope="row" id="fondo" ><br> CONCLUSIONES:  </td>
             </tr>
             <tr>
-              <td scope="row" id="centrado"><br>{{$guia->CONCLUSIONES}}</td>
+              <td scope="row" id="centrado"><br>{{$guia->GUI_CONCLUSIONES}}</td>
             </tr>
             <tr>
               <td scope="row" id="fondo" ><br> RECOMENDACIONES: </td>
