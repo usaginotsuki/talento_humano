@@ -35,7 +35,11 @@
 		],
 		"runserve": 
 		[
-			"php -c config/php.ini artisan serve"
+			"php -c php.ini artisan serve"
+		],
+		"update2": 
+		[
+			"php -c php.ini composer.phar update"
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
