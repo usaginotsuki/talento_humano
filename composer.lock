@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "020c25f91e29e77df14fd307c06f4270",
+    "content-hash": "803178d7093a0021b6189f3665e80a1c",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2485,6 +2485,50 @@
                 "instantiate"
             ],
             "time": "2015-06-14T21:17:01+00:00"
+        },
+        {
+            "name": "mmieluch/laravel-serve-custom-ini",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmieluch/laravel-serve-custom-ini.git",
+                "reference": "38e547b8496a6123fe63be0901a07fd798537ad7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmieluch/laravel-serve-custom-ini/zipball/38e547b8496a6123fe63be0901a07fd798537ad7",
+                "reference": "38e547b8496a6123fe63be0901a07fd798537ad7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.0.x|5.1.x|5.2.x",
+                "illuminate/support": "5.0.x|5.1.x|5.2.x",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mmieluch\\LaravelServeCustomIni\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Mieluch",
+                    "email": "michal.mieluch@bluefroglondon.com"
+                }
+            ],
+            "description": "Replaces Laravel's \"serve\" command with an equivalent allowing the developer to specify his custom php.ini file. Comes in handy when serving locally and in need of quickly toggling Xdebug.",
+            "keywords": [
+                "Xdebug",
+                "cli",
+                "laravel",
+                "serve"
+            ],
+            "time": "2016-02-16T15:55:11+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
