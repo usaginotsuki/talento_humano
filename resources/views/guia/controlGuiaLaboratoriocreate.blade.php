@@ -67,7 +67,7 @@
             <div class="form-group row">
                 <label for="GUI_CONCLUSIONES"class="col-sm-2 col-form-label">Concluciones</label>
                 <div class="col-sm-10">
-                        <input type="input" class="form-control" id="GUI_CONCLUSIONES" name="GUI_CONCLUSIONES" value="@if(isset($guia)) {{$guia->GUI_CONCLUCIONES}} @endif">
+                        <input type="input" class="form-control" id="GUI_CONCLUSIONES" name="GUI_CONCLUSIONES" value="@if(isset($guia)) {{$guia->GUI_CONCLUSIONES}} @endif">
                 </div>
             </div>
             <div class="form-group row">
