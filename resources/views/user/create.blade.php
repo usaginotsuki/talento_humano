@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<strong>Whoops!</strong> hay algunos problemas con tus datos.<br><br>
 							<ul>
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
@@ -23,14 +23,21 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Name <span style="color:#FF0000";>*</span></label>
+							<label class="col-md-4 control-label">Username <span style="color:#FF0000";>*</span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="name" value="{{ old('name') }}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address <span style="color:#FF0000";>*</span></label>
+							<label class="col-md-4 control-label">Nombre <span style="color:#FF0000";>*</span></label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="nameComplete" value="{{ old('nameComplete') }}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">E-Mail <span style="color:#FF0000";>*</span></label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
 							</div>
@@ -40,6 +47,7 @@
 			                <div class="form-group">
 			                    <label for="name">Rol <span style="color:#FF0000";>*</span></label>
 			                    <select class="col-md-6 form-control" id="role" name="role" >
+									<option value="0">Seleccione</option>
 			                        @foreach ($role as $rols)
                         				<option value="{{$rols->id}}">{{$rols->name}}</option>
                        				@endforeach
@@ -50,6 +58,7 @@
 			                <div class="form-group">
 			                    <label for="name">Empresa <span style="color:#FF0000";>*</span></label>
 			                    <select class="col-md-6 form-control" id="empresa" name="empresa" >
+									<option value="0">Seleccione</option>
 			                        @foreach ($empresas as $empresa)
                         				<option value="{{$empresa->EMP_CODIGO}}">{{$empresa->EMP_NOMBRE}}</option>
                        				@endforeach

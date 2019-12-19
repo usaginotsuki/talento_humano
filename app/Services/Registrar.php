@@ -19,6 +19,8 @@ class Registrar implements RegistrarContract {
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
+			'empresa' =>'required|not_in:0',
+			'role' =>'required|not_in:0',
 		]);
 	}
 	public function validatorPassword(array $data)
@@ -42,6 +44,7 @@ class Registrar implements RegistrarContract {
 			'password' => bcrypt($data['password']),
 			'role_id' => $data['role'],
 			'EMP_CODIGO' => $data['empresa'],
+			'nameComplete' => $data['nameComplete'],
 		]);
 		return $user;
 	}
