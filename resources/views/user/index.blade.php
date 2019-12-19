@@ -28,6 +28,7 @@
                 <th scope="col">EMAIL</th>
                 <th scope="col">ROLE</th>
                 <th scope="col">EMPRESA</th>
+                <th scope="col">NOMBRE COMPLETO</th> 
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,8 @@
                 <td scope="row">{{$user->email}}</td>
                 <td scope="row">{{$user->role->name}}</td>
                 <td scope="row">{{$user->empresa->EMP_NOMBRE}}</td>
+                <td scope="row">{{$user->nameComplete}}</td>
+
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{url('user/'.$user->id.'/changePassword')}}" class="btn btn-success mb-2"><span class="oi oi-key"></span></a>
