@@ -7,9 +7,12 @@
 @include('shared.title', array('titulo' => 'Crear Noticia'))
 
 <div class="container-fluid">
+<div align="center">
+    <img src="{{URL::asset('images/icons/imgicon.png')}}" alt="seleccione una imagen" id="pic" width="100" height="100" />
+ </div>
     <form action="{{url('/noticia/store')}}" method="POST" enctype="multipart/form-data"> 
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-     
+        <input type="hidden" class="form-control" id="IMAGE_TEXT" name="IMAGE_TEXT"  >
             <div class="container-fluid">
                 <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
                 <div class="row" >
@@ -55,7 +58,8 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
-                            <input type="file"  class="form-control" id="image" name="image" accept="image/*" required>
+                            <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*"  >
+
                         </div>
                     </div>
                     
@@ -89,3 +93,4 @@
     </form>
 </div>
 @endsection
+<script type="text/javascript" src="{{ URL::asset('js/base64image.js') }}"></script> 

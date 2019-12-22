@@ -8,8 +8,11 @@
 
 <div class="container-fluid">
     <form action="{{url('/objeto/store')}}" method="POST" enctype="multipart/form-data"> 
+    <div align="center">
+    <img src="{{URL::asset('images/icons/imgicon.png')}}" alt="seleccione una imagen" id="pic" width="100" height="100" />
+    </div>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-     
+        <input type="hidden" class="form-control" id="IMAGE_TEXT" name="IMAGE_TEXT"  >
             <div class="container-fluid">
                 <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
                 <div class="row" >
@@ -52,18 +55,10 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
-                            <input type="file"  class="form-control" id="image" name="image" accept="image/*" required>
+                            <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" " >
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="OBR_ESTADO">Estado Objeto<span style="color:#FF0000";>*</span></label>
-                            <select type="input" class="form-control" id="OBR_ESTADO" name="OBR_ESTADO" placeholder="Campus"  required>
-                                 <option value="0">DAÑADO</option>
-                                 <option value="1">FUNCIONAL</option>
-                            </select> 
-                        </div>
-                    </div>
+                   
                 </div>
                 <div class="row">
                     <div class="col">
@@ -94,3 +89,4 @@
     </form>
 </div>
 @endsection
+<script type="text/javascript" src="{{ URL::asset('js/base64image.js') }}"></script> 

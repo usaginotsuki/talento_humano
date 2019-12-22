@@ -10,9 +10,18 @@
     
 <div class="container-fluid">
     <form action="{{url('/objeto/update')}}" method="POST" enctype="multipart/form-data">
+    <div align="center">
+    
+    @if(isset($objeto->OBR_IMAGEN))
+    <img src="{{$objeto -> OBR_IMAGEN}}"  alt="Seleccione una imagen" id="pic" width="100" height="100" />
+    @else
+         <img src="{{URL::asset('images/icons/imgicon.png')}}"  id="pic" width="100" height="100" />
+    @endif   
+        </div>
+    </div>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="OBR_CODIGO" value="{{ $objeto->OBR_CODIGO }}">
-
+        <input type="hidden" class="form-control" id="IMAGE_TEXT" name="IMAGE_TEXT" value="{{ $objeto->OBR_IMAGEN }}"  >
         <div class="container-fluid">
                 <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
                 <div class="row" >
@@ -58,32 +67,14 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
-                            </br>
-                            <img src="{{$objeto -> OBR_IMAGEN}}" width="100" height="100"/>
-                            </br>
-                            <input type="file"  class="form-control" id="image" name="image" accept="image/*" value="{{ $objeto->OBR_IMAGEN }}" required>
+                            @if(isset($objeto->OBR_IMAGEN))
+                                <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" value="{{ $objeto->OBR_IMAGEN }}" >
+                            @else
+                                <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" value="{{ $objeto->OBR_IMAGEN }}" required >
+                             @endif               
                         </div>
                     </div>
-                    <div class="col">
-                      
-                        <div class="form-group">
-                            <label for="OBR_ESTADO">Estado Objeto<span style="color:#FF0000";>*</span></label>
-                            <select type="input" class="form-control" id="OBR_ESTADO" name="OBR_ESTADO" placeholder="Campus"  required>
-                                    @if($objeto->OBR_ESTADO == 0)
-                                        <option value="0" selected>DAÑADO</option>
-                                        <option value="1" >FUNCIONAL</option>
-                                    @else
-                                        @if($objeto->OBR_ESTADO == 1)
-                                        
-                                            <option value="1" selected>FUNCIONAL</option>
-                                            <option value="0" >DAÑADO</option>
-                                        @endif
-                                    @endif
-                                 
-                                
-                            </select> 
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col">
@@ -129,3 +120,4 @@
     </form>
 </div>
 @endsection
+<script type="text/javascript" src="{{ URL::asset('js/base64image.js') }}"></script> 

@@ -51,12 +51,7 @@ class NoticiaController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$file = Input::file('image');
-		$random = str_random(10);
-		$nombre = $random.'-'.$file->getClientOriginalName();
-		$path = public_path('uploads/'.$nombre);
-		$url = '/uploads/'.$nombre;
-		$image = Image::make($file->getRealPath());
+		
 		Noticia::create([
 			'EMP_CODIGO' => $request['EMP_CODIGO'], 
 			'PER_CODIGO' => $request['PER_CODIGO'], 
@@ -64,10 +59,10 @@ class NoticiaController extends Controller {
 			'NOT_TITULO' => $request['NOT_TITULO'], 
 			'NOT_DESCRIPCION' => $request['NOT_DESCRIPCION'],
 			'NOT_FECHA_INICIO' => $request['NOT_FECHA_INICIO'],
-			'NOT_IMAGEN' => $url,
+			'NOT_IMAGEN' => $request['IMAGE_TEXT'],
 			'NOT_FECHA_FIN' => $request['NOT_FECHA_FIN']
 		]);
-		$image->save($path);
+		
 		return redirect('noticia')
 			->with('title','Noticia Registrado!')
 			->with('subtitle','Se ha registrado correctamente La Noticia.');
@@ -97,13 +92,7 @@ class NoticiaController extends Controller {
 	{
 		
 		$noticia =	Noticia::find( $request['NOT_CODIGO']);
-		//
-		$file = Input::file('image');
-		$random = str_random(10);
-		$nombre = $random.'-'.$file->getClientOriginalName();
-		$path = public_path('uploads/'.$nombre);
-		$url = '/uploads/'.$nombre;
-		$image = Image::make($file->getRealPath());
+		
 		//
 		$noticia->fill(
 			[
@@ -113,11 +102,10 @@ class NoticiaController extends Controller {
 			'NOT_TITULO' => $request['NOT_TITULO'], 
 			'NOT_DESCRIPCION' => $request['NOT_DESCRIPCION'],
 			'NOT_FECHA_INICIO' => $request['NOT_FECHA_INICIO'],
-			'NOT_IMAGEN' => $path,
+			'NOT_IMAGEN' => $request['IMAGE_TEXT'],
 			'NOT_FECHA_FIN' => $request['NOT_FECHA_FIN']
 			]
 		);
-		$image->save($path);
 		$noticia->save();
 		return redirect('noticia')
 			->with('title','Noticia actualizado!')

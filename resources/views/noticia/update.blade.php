@@ -10,9 +10,17 @@
     
 <div class="container-fluid">
     <form action="{{url('/noticia/update')}}" method="POST" enctype="multipart/form-data">
+    <div align="center">
+         @if(isset($noticia->NOT_IMAGEN))
+         <img src="{{$noticia -> NOT_IMAGEN}}"  id="pic" width="100" height="100" />
+         @else
+         <img src="{{URL::asset('images/icons/imgicon.png')}}"  id="pic" width="100" height="100" />
+         @endif   
+    </div>
+  
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="NOT_CODIGO" value="{{ $noticia->NOT_CODIGO }}">
-
+        <input type="hidden" class="form-control" id="IMAGE_TEXT" name="IMAGE_TEXT" value="{{ $noticia->NOT_IMAGEN }}"  >
         <div class="container-fluid">
                 <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
                
@@ -51,10 +59,11 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
-                            </br>
-                            <img src="{{$noticia -> NOT_IMAGEN}}" width="100" height="100"/>
-                            </br>
-                            <input type="file"  class="form-control" id="image" name="image" accept="image/*" value="{{ $noticia->NOT_IMAGEN }}" required>
+                            @if(isset($noticia->NOT_IMAGEN))
+                                <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" value="{{ $noticia->NOT_IMAGEN }}" >
+                            @else
+                                <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" value="{{ $noticia->NOT_IMAGEN }}" required >
+                             @endif   
                         </div>
                     </div>
 
@@ -103,3 +112,4 @@
     </form>
 </div>
 @endsection
+<script type="text/javascript" src="{{ URL::asset('js/base64image.js') }}"></script> 

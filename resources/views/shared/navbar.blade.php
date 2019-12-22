@@ -46,10 +46,10 @@
         <a class="dropdown-item" href="{{url('control')}}">Registrar Guia Anterior</a>
         <div class="dropdown-divider"></div>
       @endif
-      @if(Auth::user()->authorizeAccion("menu_proceso_ObjetosRecuperados"))
-        <a class="dropdown-item" href="{{url('objeto')}}">Objetos Recuperados</a>
+      <a class="dropdown-item" href="{{url('objeto')}}">Objetos Recuperados</a>
         <div class="dropdown-divider"></div>
-      @endif
+      <a class="dropdown-item" href="{{url('noticia')}}">Noticia</a>
+        <div class="dropdown-divider"></div>
       </div>
     </li>
     @endif
