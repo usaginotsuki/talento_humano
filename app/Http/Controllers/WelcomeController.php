@@ -2,6 +2,8 @@
 
 use App\ObjetoRecuperado;
 use App\Noticia;
+use App\Empresa;
+use App\Periodo;
 use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
@@ -35,12 +37,10 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		//$objetos = ObjetoRecuperado::All();
 		$objetos = DB::table('objeto_recuperado')
 					->where('OBR_FECHA_ENTREGA', '=', '0000-00-00')
 					->limit(3)
                     ->get();
-		//$noticias = Noticia::All();
 		$date = Carbon::now();
 		$noticias = DB::table('noticia')
 					->where("NOT_FECHA_INICIO","<=",$date)
@@ -48,6 +48,21 @@ class WelcomeController extends Controller {
 					->limit(6)
                     ->get();
 		return view('welcome',['objetos' => $objetos, 'noticias'=>$noticias]);
+	}
+
+	public function noticiadetail($id)
+	{
+		$noticia =	Noticia::find($id);
+		$empresas = Empresa::All();
+		$periodos = Periodo::All();
+		return view('homeview.noticiadetail',['empresas' => $empresas, 'noticia'=>$noticia,'periodos'=>$periodos]);
+	}
+	public function objetodetail($id)
+	{
+		$objeto =	ObjetoRecuperado::find($id);
+		$empresas = Empresa::All();
+		$periodos = Periodo::All();
+		return view('homeview.objetodetail',['empresas' => $empresas, 'objeto'=>$objeto,'periodos'=>$periodos]);
 	}
 
 	public function auth()

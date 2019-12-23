@@ -45,7 +45,7 @@
                         <img class="noticia" src="{{$noticia -> NOT_IMAGEN}}" width="150" height="100" />
                         <h3>{{$noticia -> NOT_TITULO}}</h3>
                         <p>{{$noticia -> NOT_DESCRIPCION}}</p>
-                        <a class="readmore" href="#">leer mas</a>
+                        <a class="readmore" href="{{url('/noticiadetail/'.$noticia->NOT_CODIGO.'')}}">leer mas</a>
                     </div>    
                     @empty
 
@@ -58,7 +58,8 @@
                     @forelse($objetos as $objeto) 
                         <div class="single_cat_right_content editorial"> 
                             <img class="noticia" src="{{$objeto -> OBR_IMAGEN}}"  />
-                            <h3>{{$objeto -> OBR_NOMBRE}}</h3>
+                            <a class="readmore" href="{{url('/objetodetail/'.$noticia->NOT_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
+                            
                         </div> 
                     @empty
 
