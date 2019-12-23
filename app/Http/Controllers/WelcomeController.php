@@ -1,6 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\ObjetoRecuperado;
+use App\Noticia;
+use Illuminate\Support\Facades\DB;
+
+use Carbon\Carbon;
 
 class WelcomeController extends Controller {
 
@@ -31,13 +35,26 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		$objeto = ObjetoRecuperado::All();
-		return view('welcome',compact('objeto'));
+		//$objetos = ObjetoRecuperado::All();
+		$objetos = DB::table('objeto_recuperado')
+					->where('OBR_FECHA_ENTREGA', '=', '0000-00-00')
+					->limit(3)
+                    ->get();
+		//$noticias = Noticia::All();
+		$date = Carbon::now();
+		$noticias = DB::table('noticia')
+					->where("NOT_FECHA_INICIO","<=",$date)
+					->where("NOT_FECHA_FIN",">=",$date)
+					->limit(6)
+                    ->get();
+		return view('welcome',['objetos' => $objetos, 'noticias'=>$noticias]);
 	}
 
 	public function auth()
 	{
-		return view('auth.login');
+		$objetos = ObjetoRecuperado::All();
+		$noticias = Noticia::All();
+		return view('auth.login',['objetos' => $objetos, 'noticias'=>$noticias]);
 	}
 
 }
