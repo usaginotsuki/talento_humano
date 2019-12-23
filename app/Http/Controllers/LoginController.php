@@ -1,5 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\ObjetoRecuperado;
+use App\Noticia;
+use Illuminate\Support\Facades\DB;
+
+use Carbon\Carbon;
+
 class LoginController extends Controller {
 
 	/*
@@ -29,7 +35,17 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
-		return view('welcome');
+		$objetos = DB::table('objeto_recuperado')
+					->where('OBR_FECHA_ENTREGA', '=', '0000-00-00')
+					->limit(3)
+                    ->get();
+		$date = Carbon::now();
+		$noticias = DB::table('noticia')
+					->where("NOT_FECHA_INICIO","<=",$date)
+					->where("NOT_FECHA_FIN",">=",$date)
+					->limit(6)
+                    ->get();
+		return view('welcome',['objetos' => $objetos, 'noticias'=>$noticias]);
 	}
 
 }

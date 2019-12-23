@@ -67,9 +67,7 @@ class WelcomeController extends Controller {
 
 	public function auth()
 	{
-		$objetos = ObjetoRecuperado::All();
-		$noticias = Noticia::All();
-		return view('auth.login',['objetos' => $objetos, 'noticias'=>$noticias]);
+		return view('auth.login');
 	}
 
 }
