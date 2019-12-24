@@ -136,7 +136,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
-		'Intervention\Image\ImageServiceProvider',
+
 
          
 		/*

@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
-
 use App\ObjetoRecuperado;
 use App\Noticia;
+use App\Empresa;
+use App\Periodo;
 use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
@@ -46,6 +47,20 @@ class LoginController extends Controller {
 					->limit(6)
                     ->get();
 		return view('welcome',['objetos' => $objetos, 'noticias'=>$noticias]);
+	}
+	public function noticiadetail($id)
+	{
+		$noticia =	Noticia::find($id);
+		$empresas = Empresa::All();
+		$periodos = Periodo::All();
+		return view('homeview.noticiadetail',['empresas' => $empresas, 'noticia'=>$noticia,'periodos'=>$periodos]);
+	}
+	public function objetodetail($id)
+	{
+		$objeto =	ObjetoRecuperado::find($id);
+		$empresas = Empresa::All();
+		$periodos = Periodo::All();
+		return view('homeview.objetodetail',['empresas' => $empresas, 'objeto'=>$objeto,'periodos'=>$periodos]);
 	}
 
 }
