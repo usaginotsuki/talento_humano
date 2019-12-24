@@ -65,9 +65,9 @@
                             <img class="noticia" src="{{$objeto -> OBR_IMAGEN}}"  />
                            
                             @if(Auth::check())
-                                <a class="readmore" href="{{url('home/objetodetail/'.$noticia->NOT_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
+                                <a class="readmore" href="{{url('home/objetodetail/'.$objeto->OBR_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
                             @else
-                                <a class="readmore" href="{{url('/objetodetail/'.$noticia->NOT_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
+                                <a class="readmore" href="{{url('/objetodetail/'.$objeto->OBR_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
                             @endif
                         </div> 
                     @empty
