@@ -25,13 +25,13 @@
         <div class="col"></div>
         <div class="col"></div>
     </div>
-
+    <div><h6><b>Noticias: </b> {{$empresa->EMP_NOMBRE}}</h6></div>
     <table class="table table-hover table-bordereds" id="ListTable">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">TITULO</th>
-                <th scope="col">FECHA INICION</th>
+                <th scope="col">FECHA INICIO</th>
                 <th scope="col">FECHA FIN</th>
                 <th scope="col">PERIODO</th>
                 <th scope="col">EMPRESA</th>
