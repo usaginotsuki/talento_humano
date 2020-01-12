@@ -47,5 +47,7 @@ class Materia extends Model {
 	public function scopeCodigoNombre($query) {
 		return $query->select('MAT_CODIGO', 'MAT_NOMBRE', 'MAT_NRC');
 	}
+
+
 	
 }

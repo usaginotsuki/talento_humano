@@ -22,9 +22,12 @@ class PeriodoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$periodos = Periodo::All();
+		$empresa = $request->user()->empresa->EMP_CODIGO;
+		echo $empresa;
+		$periodos = Periodo::filtroEmpresa($empresa);
+		echo sizeof($periodos);
 		return view('periodo.index', compact('periodos'));
 	}
 
@@ -47,6 +50,7 @@ class PeriodoController extends Controller {
 	public function store(Request $request)
 	{
 		$estado = 0;
+		$empresa = $request->user()->empresa->EMP_CODIGO;
 		if ($request['PER_ESTADO'] === 'on') {
 			$estado = 1;
 		}
@@ -57,7 +61,8 @@ class PeriodoController extends Controller {
 			'PER_ESTADO' => 		$estado,
 			'PER_HORAS_ATENCION' => $request['PER_HORAS_ATENCION'],
 			'PER_FECHA_INICIO' => 	$request['PER_FECHA_INICIO'],
-			'PER_FECHA_FIN' => 		$request['PER_FECHA_FIN']
+			'PER_FECHA_FIN' => 		$request['PER_FECHA_FIN'],
+			'EMP_CODIGO' => 		$empresa
 			]);
 			
 		return redirect('periodo')
