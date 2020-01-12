@@ -5,6 +5,7 @@ use App\Guia;
 use App\Docente;
 use App\Laboratorio;
 use App\Materia;
+use App\Carrera;
 use App\Periodo;
 use App\Session;
 use App\Horario;
@@ -200,11 +201,11 @@ class GuiaController extends Controller {
 		* No coordinador asigna vacio, empieza numero de guia 1 y asigna el codigo de laboratorio
 	    */
 	   if (empty($last)) {
-		   $guias->GUI_COORDINADOR="";
+		 //  $guias->GUI_COORDINADOR="";
 		   $guias->GUI_NUMERO=1;
 	    	$control=Control::fechaGuiaSin($materia)->first();
 	   }else{
-		   $guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
+		   //$guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
 		   $guias->GUI_NUMERO=$last->GUI_NUMERO+1;
 		   $control = Control::fechaGuia($materia,$last->GUI_FECHA)->first();
 	   }
@@ -260,9 +261,12 @@ class GuiaController extends Controller {
 	$laboratorio = Laboratorio::find($guia->LAB_CODIGO);
 	$docente = Docente::find($guia->DOC_CODIGO);
 	$empresa = Empresa::find($laboratorio->EMP_CODIGO);
+	$carrera=Carrera::find($materia->CAR_CODIGO);
+	$guia["CAR_NOMBRE"] = $carrera->CAR_NOMBRE; 
 	$guia["MAT_NOMBRE"] = $materia->MAT_NOMBRE; 
 	$guia["MAT_CODIGO"]= $materia->MAT_CODIGO_BANNER;
 	$guia["MAT_NRC"]= $materia->MAT_NRC;
+	$guia["MAT_NIVEL"]= $materia->MAT_NIVEL;
 	$guia["PER_NOMBRE"] = $periodo->PER_NOMBRE;
 	$guia["EMP_NOMBRE"]= $empresa->EMP_NOMBRE;
 	$guia["LAB_NOMBRE"] = $laboratorio->LAB_NOMBRE;
