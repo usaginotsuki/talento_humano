@@ -115,7 +115,7 @@
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
-        <a href="{{url('objeto')}}" class="btn btn-danger mb-2">Cancelar</a>
+        <a href="{{url('noticia')}}" class="btn btn-danger mb-2">Cancelar</a>
     </div>
 </form>
 @endsection

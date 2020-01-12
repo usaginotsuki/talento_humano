@@ -46,7 +46,13 @@ class NoticiaController extends Controller {
 		$empid= $request->user()->empresa->EMP_CODIGO;
 		$empresa  = Empresa::find($empid);
 		$empresas  = Empresa::All();
-		return view('Noticia.create',["periodo"=>$periodo,"periodos"=>$periodos],["empresas"=>$empresas,"empresa"=>$empresa])->with('date',$date);
+		return view('noticia.create', [
+			"periodo" => $periodo,
+			"periodos" => $periodos
+		], [
+			"empresas" => $empresas,
+			"empresa" => $empresa
+		])->with('date',$date);
 	}
 
 	/**
