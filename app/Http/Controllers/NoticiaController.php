@@ -70,8 +70,8 @@ class NoticiaController extends Controller {
 		]);
 		
 		return redirect('noticia')
-			->with('title','Noticia Registrado!')
-			->with('subtitle','Se ha registrado correctamente La Noticia.');
+			->with('title','Noticia Registrada!')
+			->with('subtitle','Se ha añadido correctamente la noticia.');
 	}
 
 	/**
@@ -115,8 +115,8 @@ class NoticiaController extends Controller {
 		);
 		$noticia->save();
 		return redirect('noticia')
-			->with('title','Noticia actualizado!')
-			->with('subtitle','Se han actualizado correctamente los datos de la noticia.');
+			->with('title','Noticia actualizada!')
+			->with('subtitle','Se ha actualizado correctamente el contenido de la noticia.');
 	}
 
 	/**
@@ -130,7 +130,7 @@ class NoticiaController extends Controller {
 		Noticia::destroy($id);
 		return redirect('noticia')
 			->with('title','Noticia eliminada!')
-			->with('subtitle','Se ha eliminado correctamente la Noticia.');
+			->with('subtitle','Se ha eliminado correctamente la noticia.');
 	}
 
 }
