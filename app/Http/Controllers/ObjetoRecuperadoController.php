@@ -69,7 +69,7 @@ class ObjetoRecuperadoController extends Controller {
 		]);
 		return redirect('objeto')
 			->with('title','Objeto Registrado!')
-			->with('subtitle','Se ha registrado correctamente el Objeto.');
+			->with('subtitle','Se ha añadido correctamente el objeto recuperado.');
 	}
 
 	/**
@@ -112,7 +112,7 @@ class ObjetoRecuperadoController extends Controller {
 		$ObjetoRecuperado->save();
 		return redirect('objeto')
 			->with('title','Objeto actualizado!')
-			->with('subtitle','Se han actualizado correctamente los datos del Objeto.');
+			->with('subtitle','Se han actualizado correctamente los datos del objeto recuperado.');
 	}
 
 	/**
@@ -126,7 +126,7 @@ class ObjetoRecuperadoController extends Controller {
 		ObjetoRecuperado::destroy($id);
 		return redirect('objeto')
 			->with('title','Objeto eliminado!')
-			->with('subtitle','Se ha eliminado correctamente el Objeto.');
+			->with('subtitle','Se ha eliminado correctamente el objeto recuperado.');
 	}
 
 }
