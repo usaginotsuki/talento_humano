@@ -1,9 +1,17 @@
 <?php namespace App\Http\Controllers;
-
+/* 
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+*/
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Periodo;
-
+use App\Materia;
+use App\Horario;
+use App\Guia;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -98,9 +106,26 @@ class PeriodoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Periodo::destroy($id);
-		return redirect('periodo')
-			->with('title', 'Periodo eliminado!')
-			->with('subtitle', 'La eliminación del periodo acádemico se ha realizado con éxito.');
+		$validaGuia=Guia::where('PER_CODIGO',$id)->first();
+        $validaMateria=Materia::where('PER_CODIGO',$id)->first();
+        $validaHorario=Horario::where('PER_CODIGO',$id)->first();
+        if(empty($validaGuia) && empty($validaMateria) && empty($validaHorario))
+		{
+			Periodo::destroy($id);
+			return redirect('periodo')
+				->with('title', 'Periodo eliminado!')
+				->with('subtitle', 'La eliminación del periodo acádemico se ha realizado con éxito.');
+		}else{
+			return redirect('periodo')
+				->with('title', 'Periodo NO eliminado!')
+				->with('subtitle', 'El registro del periodo no se a eliminado correctamente, el periodo tiene registros relacionados.');
+		}
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

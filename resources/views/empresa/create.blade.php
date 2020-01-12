@@ -15,9 +15,14 @@
             {{ $mensajes }}
         </div>
     @endif 
+    <div align="center">
+        <img src="{{URL::asset('images/icons/imgicon.png')}}" alt="seleccione una imagen" id="pic" width="500" height="200" />
+    </div>
     <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p> 
     <form action="{{url('/empresa/store')}}" method="post">
+    
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" class="form-control" id="IMAGE_TEXT" name="IMAGE_TEXT"  >
         <div class="row"> 
             <div class="col">
                 <div class="form-group">
@@ -86,7 +91,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="EMP_IMAGEN_ENCABEZADO">Imagen Encabezado <span style="color:#FF0000";>*</span></label>
-                    <input type="text"  class="form-control" name="EMP_IMAGEN_ENCABEZADO" required>
+                    <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*"  >
                 </div>
             </div>
 
@@ -137,3 +142,4 @@
     </form>
 </div> 
 @endsection
+<script type="text/javascript" src="{{ URL::asset('js/base64image.js') }}"></script> 

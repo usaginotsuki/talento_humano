@@ -196,4 +196,33 @@ class Horario extends Model {
 	{
 		return $query->where('PER_CODIGO', $periodoId);
 	}
+
+	//Retorna el horario de la materia
+	public function scopeHorarioMateria($query, $materiaId)
+	{
+		return $query->where('HOR_LUNES1', $materiaId)->orWhere('HOR_LUNES2',$materiaId)->orWhere('HOR_LUNES3',$materiaId)
+		->orWhere('HOR_LUNES4',$materiaId)->orWhere('HOR_LUNES5',$materiaId)->orWhere('HOR_LUNES6',$materiaId)->orWhere('HOR_LUNES7',$materiaId)
+		->orWhere('HOR_LUNES8',$materiaId)->orWhere('HOR_LUNES9',$materiaId)->orWhere('HOR_LUNES10',$materiaId)->orWhere('HOR_LUNES11',$materiaId)
+		->orWhere('HOR_LUNES12',$materiaId)->orWhere('HOR_LUNES13',$materiaId)->orWhere('HOR_MATES1',$materiaId)->orWhere('HOR_MATES2',$materiaId)
+		->orWhere('HOR_MATES3',$materiaId)->orWhere('HOR_MATES4',$materiaId)->orWhere('HOR_MATES5',$materiaId)->orWhere('HOR_MATES6',$materiaId)
+		->orWhere('HOR_MATES7',$materiaId)->orWhere('HOR_MATES8',$materiaId)->orWhere('HOR_MATES9',$materiaId)->orWhere('HOR_MATES10',$materiaId)
+		->orWhere('HOR_MATES11',$materiaId)->orWhere('HOR_MATES12',$materiaId)->orWhere('HOR_MATES13',$materiaId)->orWhere('HOR_MIERCOLES1',$materiaId)
+		->orWhere('HOR_MIERCOLES2',$materiaId)->orWhere('HOR_MIERCOLES3',$materiaId)->orWhere('HOR_MIERCOLES4',$materiaId)->orWhere('HOR_MIERCOLES5',$materiaId)
+		->orWhere('HOR_MIERCOLES6',$materiaId)->orWhere('HOR_MIERCOLES7',$materiaId)->orWhere('HOR_MIERCOLES8',$materiaId)->orWhere('HOR_MIERCOLES9',$materiaId)
+		->orWhere('HOR_MIERCOLES10',$materiaId)->orWhere('HOR_MIERCOLES11',$materiaId)->orWhere('HOR_MIERCOLES12',$materiaId)->orWhere('HOR_MIERCOLES13',$materiaId)
+		->orWhere('HOR_JUEVES1',$materiaId)->orWhere('HOR_JUEVES2',$materiaId)->orWhere('HOR_JUEVES3',$materiaId)->orWhere('HOR_JUEVES4',$materiaId)
+		->orWhere('HOR_JUEVES5',$materiaId)->orWhere('HOR_JUEVES6',$materiaId)->orWhere('HOR_JUEVES7',$materiaId)->orWhere('HOR_JUEVES8',$materiaId)
+		->orWhere('HOR_JUEVES9',$materiaId)->orWhere('HOR_JUEVES10',$materiaId)->orWhere('HOR_JUEVES11',$materiaId)->orWhere('HOR_JUEVES12',$materiaId)
+		->orWhere('HOR_JUEVES13',$materiaId)->orWhere('HOR_VIERNES1',$materiaId)->orWhere('HOR_VIERNES2',$materiaId)->orWhere('HOR_VIERNES3',$materiaId)
+		->orWhere('HOR_VIERNES4',$materiaId)->orWhere('HOR_VIERNES5',$materiaId)->orWhere('HOR_VIERNES6',$materiaId)->orWhere('HOR_VIERNES7',$materiaId)
+		->orWhere('HOR_VIERNES8',$materiaId)->orWhere('HOR_VIERNES9',$materiaId)->orWhere('HOR_VIERNES10',$materiaId)->orWhere('HOR_VIERNES11',$materiaId)
+		->orWhere('HOR_VIERNES12',$materiaId)->orWhere('HOR_VIERNES13',$materiaId);
+	}
+	public function scopeObtenerHorarioOcacionalMateria($query, $materiaId,$dia,$opcional)
+	{
+		return $query->where('HOR_'.$dia."1", $materiaId)->where('HOR_'.$opcional."1_OPC", 1)->orWhere('HOR_'.$dia."2", $materiaId)->where('HOR_'.$opcional."2_OPC", 1)->orWhere('HOR_'.$dia."3", $materiaId)->where('HOR_'.$opcional."3_OPC", 1)->orWhere('HOR_'.$dia."4", $materiaId)->where('HOR_'.$opcional."4_OPC", 1)
+		->orWhere('HOR_'.$dia."5", $materiaId)->where('HOR_'.$opcional."5_OPC", 1)->orWhere('HOR_'.$dia."6", $materiaId)->where('HOR_'.$opcional."6_OPC", 1)->orWhere('HOR_'.$dia."7", $materiaId)->where('HOR_'.$opcional."7_OPC", 1)->orWhere('HOR_'.$dia."8", $materiaId)->where('HOR_'.$opcional."8_OPC", 1)
+		->orWhere('HOR_'.$dia."9", $materiaId)->where('HOR_'.$opcional."9_OPC", 1)->orWhere('HOR_'.$dia."10", $materiaId)->where('HOR_'.$opcional."10_OPC", 1)->orWhere('HOR_'.$dia."11", $materiaId)->where('HOR_'.$opcional."11_OPC", 1)->orWhere('HOR_'.$dia."12", $materiaId)->where('HOR_'.$opcional."12_OPC", 1)
+		->orWhere('HOR_'.$dia."13", $materiaId)->where('HOR_'.$opcional."13_OPC", 1);
+	}
 }

@@ -39,9 +39,30 @@ class EventoOcacionalController extends Controller {
 	public function create()
 	{
 		$laboratorios=DB::select('select LAB_NOMBRE,LAB_CODIGO from laboratorio ORDER BY LAB_NOMBRE ASC;');
-		$materias=DB::select('select MAT_NOMBRE,MAT_CODIGO from materia ORDER BY MAT_NOMBRE ASC;');
-		$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
-		return view('ocasionales.create')->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
+		$materias=DB::table('materia')
+        ->join('periodo', function($join)
+        {
+			$join->on('materia.PER_CODIGO', '=', 'periodo.PER_CODIGO')
+				 ->where('periodo.PER_ESTADO', '=', 1);	 
+		})
+		->orderBy('MAT_NOMBRE', 'asc')
+        ->get();
+		//$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
+		return view('ocasionales.create')->with('laboratorios', $laboratorios)->with('materias', $materias);
+	}
+
+	public function getDocente(Request $request, $id){
+		if($request->ajax()){
+			$docente=DB::table('materia')
+				->join('docente', 'materia.DOC_CODIGO','=','docente.DOC_CODIGO')
+				->select('docente.DOC_CODIGO','docente.DOC_NOMBRES','docente.DOC_APELLIDOS')
+				->where('materia.MAT_CODIGO',$id)
+				->get();
+			//$docentes = Docente::where('DOC_CODIGO', $id)->get();
+			//$docentes = Docente::docentes($id);
+			//$docentes = DB::select('SELECT * FROM docente where DOC_CODIGO = '+$id);
+			return Response()->json($docente);
+		}
 	}
 
 	/**
@@ -78,5 +99,12 @@ class EventoOcacionalController extends Controller {
 			->with('title', 'Evento Ocacional registrado!')
 			->with('subtitle', 'El registro del evento ocacional se ha realizado con éxito.');
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 
 }

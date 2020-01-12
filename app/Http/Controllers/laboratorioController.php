@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\laboratorio;
 use App\Campus;
 use App\empresa;
+use App\control;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -93,10 +94,25 @@ class LaboratorioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		laboratorio::destroy($id);
-		return redirect('laboratorio')
-			->with('title','Laboratorio eliminado!')
-			->with('subtitle','Se ha eliminado correctamente el laboratorio.');
+		$validaControl = control::where('LAB_CODIGO',$id)->first();
+		
+		if (count($validaControl) === 1) {
+			return redirect('laboratorio')
+				->with('title','Laboratorio NO eliminado!')
+				->with('subtitle','El registro del laboratorio no se a eliminado correctamente, el laboratorio tiene registros relacionados.');
+		}else{
+			laboratorio::destroy($id);
+			return redirect('laboratorio')
+				->with('title','Laboratorio eliminado!')
+				->with('subtitle','Se ha eliminado correctamente el laboratorio.');
+		}
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 
 }

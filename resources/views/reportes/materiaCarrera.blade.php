@@ -17,7 +17,7 @@
         <div class="card border-primary mb-3">
           <div class="card-header text-primary">Consultar</div>
           <div class="card-body text-primary">
-            <select class="selectpicker show-tick mb-3" title="Seleccione un Periodo..." name="PER_CODIGO"
+            <select class="form-control" title="Seleccione un Periodo..." name="PER_CODIGO"
               data-live-search="true" data-width="100%">
               @foreach ($periodos as $periodo)
               @if($periodo->PER_CODIGO==$valores['PER_CODIGO'])
@@ -27,7 +27,8 @@
               @endif
               @endforeach
             </select>
-            <select class="selectpicker show-tick mb-3" title="Seleccione una Carrera..." name="CAR_CODIGO"
+            <br>
+            <select class="form-control" title="Seleccione una Carrera..." name="CAR_CODIGO"
               data-live-search="true" data-width="100%">
               @foreach ($carreras as $carrera)
               @if($carrera->CAR_CODIGO == $valores['CAR_CODIGO'])
@@ -37,7 +38,7 @@
               @endif
               @endforeach
             </select>
-
+            <br>
             <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span>
               Consultar
             </button>
@@ -52,9 +53,7 @@
         <div class="card-body text-info">
           <h5 class="card-title">Descargar</h5>
           @if (isset($materias))
-          <button onclick="exportMateriaCarrerra()" class="btn btn-info">
-            <span class="oi oi-cloud-download"></span> Exportar a PDF
-          </button>
+          <a href="{{url('reporte/pdfmateriacarrera/'.$periodox->PER_CODIGO.'/'.$carrerax->CAR_CODIGO.'')}}" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
           @else
           <button disabled class="btn btn-info">
             <span class="oi oi-cloud-download"></span> Exportar a PDF
@@ -64,6 +63,8 @@
       </div>
     </div>
   </div>
+
+
 
   @if($materias != null )
   <p id="carrera">
@@ -87,31 +88,32 @@
       @endforeach
     </span>
   </p>
-
   <table id="materiaCarreraTable" class="table table-hover table-bordered table-sm">
     <thead>
       <tr class="d-flex">
-        <th class="col">ORD</th>
-        <th class="col">MATERIA</th>
-        <th class="col">NRC</th>
-        <th class="col">DOCENTE</th>
-        <th class="col">CREDITOS</th>
-        <th class="col">ESTUDIANTES</th>
-        <th class="col">ABREVIATURA</th>
+        <th class="col" style="text-align: center;">ORD</th>
+        <th class="col" style="text-align: center;">MATERIA</th>
+        <th class="col" style="text-align: center;">NRC</th>
+        <th class="col" style="text-align: center;">DOCENTE</th>
+        <th class="col" style="text-align: center;">CREDITOS</th>
+        <th class="col" style="text-align: center;">ESTUDIANTES</th>
+        <th class="col" style="text-align: center;">ABREVIATURA</th>
       </tr>
     </thead>
     <tbody>
-      @foreach ($materias as $mat)
+ <input type="hidden" value="{{$cont=1}}">
+@foreach ($materias as $mat )
       <tr class="d-flex">
-        <td class="col opts">{{$mat ->MAT_CODIGO}}</td>
-        <td class="col opts">{{$mat ->MAT_NOMBRE}}</td>
-        <td class="col opts">{{$mat ->MAT_NRC}}</td>
-        <td class="col opts">{{$mat->docentes->DOC_NOMBRES.' '.$mat->docentes->DOC_APELLIDOS}}</td>
-        <td class="col opts">{{$mat ->MAT_CREDITOS}}</td>
-        <td class="col opts">{{$mat ->MAT_NUM_EST}}</td>
+        <td class="col opts" style="text-align: center;">{{$cont++}}</td>
+        <td class="col opts" >{{$mat ->MAT_NOMBRE}}</td>
+        <td class="col opts" style="text-align: center;">{{$mat ->MAT_NRC}}</td>
+        <td class="col opts">{{$mat->docente->DOC_NOMBRES.' '.$mat->docente->DOC_APELLIDOS}}</td>
+        <td class="col opts" style="text-align: center;">{{$mat ->MAT_CREDITOS}}</td>
+        <td class="col opts" style="text-align: center;">{{$mat ->MAT_NUM_EST}}</td>
         <td class="col opts">{{$mat ->MAT_ABREVIATURA}}</td>
       </tr>
       @endforeach
+  
     </tbody>
   </table>
   @endif

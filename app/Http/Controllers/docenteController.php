@@ -9,14 +9,13 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Docente;
-
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use DB;
 use  App\Guia;
 use  App\Materia;
 use  App\Control;
-
+use Auth;
 class DocenteController extends Controller {
 
 	/**
@@ -24,7 +23,7 @@ class DocenteController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		$docentes = Docente::All();
 		return view('docente.index', compact('docentes'));
@@ -35,9 +34,8 @@ class DocenteController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
-		//
 		return view('docente.create');
 	}
 
@@ -83,9 +81,8 @@ class DocenteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Request $request,$id)
 	{
-		//
 		$docente= Docente::find($id);
 		return view('docente.update', ['docente' => $docente]);
 	}
@@ -143,4 +140,10 @@ class DocenteController extends Controller {
 			->with('subtitle', 'El registro del docente no se a eliminado correctamente, el docente tiene registros relacionados.');
 		}
 	}
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

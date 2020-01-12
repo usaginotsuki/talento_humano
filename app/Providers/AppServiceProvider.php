@@ -1,7 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Role;
 class AppServiceProvider extends ServiceProvider {
 
 	/**

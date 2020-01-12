@@ -1,17 +1,27 @@
 @extends('app')
 @section('content')   
 <div class="jumbotron">
-    @if (!empty($guias_terminadas)) 
-<h2>Guias: {{$guias_terminadas[0] -> MAT_ABREVIATURA}} </h2>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @if (!empty($guias_pendientes)) 
+<h2>Guias: {{$guias_pendientes[0] -> MAT_ABREVIATURA}} </h2>
     @endif
-            <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entrega - Por favor, Realice el detalle al final de esta pantalla</h4>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    
+            <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entregar y {{$por_crear}} Guias Pendientes por Crear - Por favor, Revice el detalle al final de esta pantalla</h4>
  </div>        
-
 </div>
-<div class="container">
+<div class="container-fluid">
+@if (session('title') && session('subtitle'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">{{ session('title') }}</h4>
+            <p>{{ session('subtitle') }}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="col">
                 <a href="{{url('guia/crearGuia')}}" class="btn btn-primary mb-2">Crear Guías</a>
+                
     </div>
     <table   class="table table-hover table-bordered results">
             <thead>
@@ -34,7 +44,7 @@
                     <td scope="row">{{$guias_terminadas[$i] -> GUI_TEMA}}</td> 
                     <td scope="row">{{$guias_terminadas[$i] -> LAB_NOMBRE}}</td>
                     <td scope="row">
-                        <a href="" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
+                        <a href="{{url('guia/pdfGuia/'.$guias_terminadas[$i]->GUI_CODIGO)}}" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
                     </td> 
                     @if($guias_terminadas[$i]->GUI_REGISTRADO==1) 
                         <td scope="row">

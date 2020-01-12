@@ -2,7 +2,7 @@
     Sistema de Gestion de Laboratorios - ESPE
 
     Author: Antony Andrade - Jonel Lopez
-    Revisado por: Andrade - Jonel Lopez
+    Revisado por: Juan Aquino - Jonel Lopez
 -->
 
 @extends('app')
@@ -46,9 +46,9 @@
                 <td scope="row">{{$par->PAR_TODOS}}</td>
                 <td scope="row">{{$par->empresa->EMP_NOMBRE}}</td>
                 <td scope="row">
-                    @if ($par->PAR_SINO === '0')
+                    @if ($par->PAR_SINO === 0)
                         <span class="badge badge-danger">NO</span>
-                    @elseif ($par->PAR_SINO !== '0')
+                    @elseif ($par->PAR_SINO !== 0)
                         <span class="badge badge-primary">SI</span>
                     @endif
                 </td>

@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\User;
+use App\Role;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -18,6 +19,14 @@ class Registrar implements RegistrarContract {
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
+			'empresa' =>'required|not_in:0',
+			'role' =>'required|not_in:0',
+		]);
+	}
+	public function validatorPassword(array $data)
+	{
+		return Validator::make($data, [
+			'password' => 'required|confirmed|min:6',
 		]);
 	}
 
@@ -29,11 +38,15 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return User::create([
+		$user= User::create([
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
+			'role_id' => $data['role'],
+			'EMP_CODIGO' => $data['empresa'],
+			'nameComplete' => $data['nameComplete'],
 		]);
+		return $user;
 	}
 
 }

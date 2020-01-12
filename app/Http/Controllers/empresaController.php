@@ -58,15 +58,14 @@ class EmpresaController extends Controller {
 			'EMP_PIE_LAB' => 				$request['EMP_PIE_LAB'],
 			'EMP_ESTADO' => 				$estado,
 			'EMP_RELACION_SUFICIENCIA' => 	$request['EMP_RELACION_SUFICIENCIA'],
-			'EMP_IMAGEN_ENCABEZADO' => 		$request['EMP_IMAGEN_ENCABEZADO'],
+			'EMP_IMAGEN_ENCABEZADO' => 		$request['IMAGE_TEXT'],
 			'EMP_IMAGEN_ENCABEZADO2' => 	$request['EMP_IMAGEN_ENCABEZADO2'],
 			'EMP_AUX1' => 					$request['EMP_AUX1'],
 			'EMP_AUX2' => 					$request['EMP_AUX2'],
 			'INS_CODIGO' => 				$request['INS_CODIGO'],
 		]);
 
-		return redirect('empresa')->with('title', 'Empresa registrada!')
-			->with('subtitle', 'El registro del empresa se ha realizado con éxito.');;
+		return redirect('empresa');
 	}
 
 	/**
@@ -98,14 +97,27 @@ class EmpresaController extends Controller {
 		if ($request['EMP_ESTADO'] === 'on') {
 			$request['EMP_ESTADO'] = 1;
 		} else {
-			$request['EMP_ESTADO'] = 0;
+			$request['EMP_ESTADO']= 0;
 		}
-
 		$empresa =	empresa::find( $request['EMP_CODIGO']);
-		$empresa->fill($request->all());
+		$empresa->fill([
+            'EMP_NOMBRE' => 				$request['EMP_NOMBRE'],
+            'EMP_FIRMA_DEE' => 				$request['EMP_FIRMA_DEE'],
+            'EMP_PIE_DEE' => 				$request['EMP_PIE_DEE'],
+			'EMP_FIRMA_JEFE' => 			$request['EMP_FIRMA_JEFE'],
+			'EMP_PIE_JEFE' => 				$request['EMP_PIE_JEFE'],
+			'EMP_FIRMA_LAB' => 				$request['EMP_FIRMA_LAB'],
+			'EMP_PIE_LAB' => 				$request['EMP_PIE_LAB'],
+			'EMP_ESTADO' => 				$request['EMP_ESTADO'],
+			'EMP_RELACION_SUFICIENCIA' => 	$request['EMP_RELACION_SUFICIENCIA'],
+			'EMP_IMAGEN_ENCABEZADO' => 		$request['IMAGE_TEXT'],
+			'EMP_IMAGEN_ENCABEZADO2' => 	$request['EMP_IMAGEN_ENCABEZADO2'],
+			'EMP_AUX1' => 					$request['EMP_AUX1'],
+			'EMP_AUX2' => 					$request['EMP_AUX2'],
+			'INS_CODIGO' => 				$request['INS_CODIGO'],
+		]);
 		$empresa->save();
-		return redirect('empresa')->with('title', 'Empresa actualizado!')
-			->with('subtitle', 'La información de la empresa se ha actualizado con éxito.');;
+		return redirect('empresa');
 	}
 
 	/**
@@ -117,7 +129,13 @@ class EmpresaController extends Controller {
 	public function destroy($id)
 	{
 		Empresa::destroy($id);
-		return redirect('empresa')->with('title', 'Empresa Eliminado!')
-			->with('subtitle', 'El registro de la empresa se ha eliminado con éxito.');
+		return redirect('empresa');
 	}
+	
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

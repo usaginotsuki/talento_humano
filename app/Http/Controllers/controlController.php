@@ -4,10 +4,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Control;
 use App\Docente;
+use App\Guia;
 use App\Laboratorio;
 use App\Materia;
-
+use App\Solicitud;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
 use App\Quotation;
 
@@ -22,7 +25,11 @@ class ControlController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		$controles= $this->listar($request['CON_DIA']);
+		$fecha=$request->session()->get('fecha');
+		if($fecha==null){
+			$fecha=$request['CON_DIA'];
+		}
+		$controles= $this->listar($fecha);
 		return view('control.index', compact('controles'));
 	}
 
@@ -46,62 +53,69 @@ class ControlController extends Controller {
 	
 	public function generar(Request $request)
 	{
-		
+		$accion="";
+		$mensaje="";
 		$CON_FECHA = $request['CON_DIA'];
 		$dia=$this->saber_dia($CON_FECHA);
-		$controles_guardados=DB::select('SELECT control.CON_CODIGO,control.CON_DIA FROM control WHERE control.CON_DIA="'.$CON_FECHA.'"');
-		$mensaje="Ya existen registro de esa fecha";
-		$accion='error';
-		if(empty($controles_guardados)){
-			$codigo_periodo=DB::select('SELECT periodo.PER_CODIGO FROM periodo WHERE "'.$CON_FECHA.'" BETWEEN periodo.PER_FECHA_INICIO AND periodo.PER_FECHA_FIN' );
-			$codigo_periodo=$codigo_periodo[0]->PER_CODIGO;
-			$opcional=" and materia.MAT_OCACIONAL=0";
+		if ($dia!="SABADO" && $dia!="DOMINGO"){
+			$controles_guardados=DB::select('SELECT control.CON_CODIGO,control.CON_DIA FROM control WHERE control.CON_DIA="'.$CON_FECHA.'"');
+			$mensaje="Ya existen registro de esa fecha";
+			$accion='error';
+			if(empty($controles_guardados)){
+				$codigo_periodo=DB::select('SELECT periodo.PER_CODIGO FROM periodo WHERE "'.$CON_FECHA.'" BETWEEN periodo.PER_FECHA_INICIO AND periodo.PER_FECHA_FIN' );
+				$codigo_periodo=$codigo_periodo[0]->PER_CODIGO;
+				$opcional=" and materia.MAT_OCACIONAL=0";
 
-			if($request['MAT_OCACIONAL']==1){
-				$opcional="";
-			}
-
-			$controles=array();
-			for($i=1;$i<13;$i++)
-			{
-				$aux_controles=DB::select('select materia.MAT_CODIGO, horario.HOR_HORA'.$i.' as HORA, horario.HOR_CODIGO, laboratorio.LAB_CODIGO, materia.DOC_CODIGO
-				from materia, horario, laboratorio,periodo,docente
-				where docente.DOC_CODIGO=materia.DOC_CODIGO and horario.PER_CODIGO=periodo.PER_CODIGO and periodo.PER_CODIGO=materia.PER_CODIGO  and horario.LAB_CODIGO=laboratorio.LAB_CODIGO and periodo.PER_CODIGO='.$codigo_periodo.' and horario.HOR_'.$dia.$i.'=materia.MAT_CODIGO'.$opcional );
-				foreach ($aux_controles as $con)
-				{
-					$con->ENTRADA=preg_split("/-/",$con->HORA)[0];
-					$con->SALIDA=preg_split("/-/",$con->HORA)[1];
-					array_push($controles,$con);
+				if($request['MAT_OCACIONAL']==1){
+					$opcional="";
 				}
-			}
-			
 
-			$aux=0;
-
-			for ($i=0;$i<sizeof($controles);$i++)
-			{
-				$controles[$i]->CANT_HORAS=0;
-				for ($j=0;$j<sizeof($controles);$j++){
-					if($controles[$i]->MAT_CODIGO==$controles[$j]->MAT_CODIGO && $controles[$i]->LAB_CODIGO==$controles[$j]->LAB_CODIGO){
-						$controles[$i]->CANT_HORAS+=1;
-						if($controles[$i]->SALIDA==$controles[$j]->ENTRADA)
-						{
-							$controles[$j]->ENTRADA=$controles[$i]->ENTRADA;
-						}
-						if($controles[$j]->ENTRADA==$controles[$i]->ENTRADA){
-							$controles[$i]->SALIDA=$controles[$j]->SALIDA;
-						}
+				$controles=array();
+				for($i=1;$i<13;$i++)
+				{
+					$aux_controles=DB::select('select materia.MAT_CODIGO, horario.HOR_HORA'.$i.' as HORA, horario.HOR_CODIGO, laboratorio.LAB_CODIGO, materia.DOC_CODIGO
+					from materia, horario, laboratorio,periodo,docente
+					where docente.DOC_CODIGO=materia.DOC_CODIGO and horario.PER_CODIGO=periodo.PER_CODIGO and periodo.PER_CODIGO=materia.PER_CODIGO  and horario.LAB_CODIGO=laboratorio.LAB_CODIGO and periodo.PER_CODIGO='.$codigo_periodo.' and horario.HOR_'.$dia.$i.'=materia.MAT_CODIGO'.$opcional );
+					foreach ($aux_controles as $con)
+					{
+						$con->ENTRADA=preg_split("/-/",$con->HORA)[0];
+						$con->SALIDA=preg_split("/-/",$con->HORA)[1];
+						array_push($controles,$con);
 					}
 				}
-				$controles[$i]->HORA="";
+				
+
+				$aux=0;
+
+				for ($i=0;$i<sizeof($controles);$i++)
+				{
+					$controles[$i]->CANT_HORAS=0;
+					for ($j=0;$j<sizeof($controles);$j++){
+						if($controles[$i]->MAT_CODIGO==$controles[$j]->MAT_CODIGO && $controles[$i]->LAB_CODIGO==$controles[$j]->LAB_CODIGO){
+							$controles[$i]->CANT_HORAS+=1;
+							if($controles[$i]->SALIDA==$controles[$j]->ENTRADA)
+							{
+								$controles[$j]->ENTRADA=$controles[$i]->ENTRADA;
+							}
+							if($controles[$j]->ENTRADA==$controles[$i]->ENTRADA){
+								$controles[$i]->SALIDA=$controles[$j]->SALIDA;
+							}
+						}
+					}
+					$controles[$i]->HORA="";
+				}
+				$controles=array_unique($controles,SORT_REGULAR);
+				
+				foreach($controles as $con){
+					DB::insert('insert into control (CON_DIA, CON_HORA_ENTRADA, CON_HORA_SALIDA, CON_NUMERO_HORAS,LAB_CODIGO, MAT_CODIGO, DOC_CODIGO, CON_EXTRA) values (?,?,?,?,?,?,?,?)', [$CON_FECHA,$con->ENTRADA,$con->SALIDA,$con->CANT_HORAS,$con->LAB_CODIGO,$con->MAT_CODIGO,$con->DOC_CODIGO,$request['MAT_OCACIONAL']]);
+				}
+				$accion='success';
+				$mensaje="Registros Generados";
 			}
-			$controles=array_unique($controles,SORT_REGULAR);
-			
-			foreach($controles as $con){
-				DB::insert('insert into control (CON_DIA, CON_HORA_ENTRADA, CON_HORA_SALIDA, CON_NUMERO_HORAS,LAB_CODIGO, MAT_CODIGO, DOC_CODIGO, CON_EXTRA) values (?,?,?,?,?,?,?,?)', [$CON_FECHA,$con->ENTRADA,$con->SALIDA,$con->CANT_HORAS,$con->LAB_CODIGO,$con->MAT_CODIGO,$con->DOC_CODIGO,$request['MAT_OCACIONAL']]);
-			}
-			$accion='success';
-			$mensaje="Registros Generados";
+		}
+		else {
+			$accion="error";
+			$mensaje="No se puede generar horarios de un fin de semana";
 		}
 		return redirect('control')->with('fecha',$CON_FECHA)->with($accion,$mensaje);
 		
@@ -187,6 +201,12 @@ class ControlController extends Controller {
 		return view('control.edit')->with('control', $control)->with('laboratorios', $laboratorios)->with('materias', $materias)->with('docentes', $docentes);
 	}
 
+	public function docente($id){
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		$control = Control::where('CON_DIA', $date)->get();
+		return view("control.consola", ["controles"=>$control]);
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -219,6 +239,8 @@ class ControlController extends Controller {
 		return redirect('control');
 	}
 
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -236,14 +258,152 @@ class ControlController extends Controller {
 	{
 		//
 		$date = Carbon::now();
+		$empresa = $request->user()->empresa->EMP_CODIGO;
+	
 		$date = $date->format('Y-m-d');
-		$control = Control::where('CON_DIA', $date)->get();
-		//$control =DB::table('control')->where('CON_DIA','$date')->get();
-		//print_r ($control);
-		//$control = control::all();
-		//$control = DB::select('SELECT * FROM control where CON_DIA = 2019-11-05');
-		//$control = DB::select('SELECT * FROM control where CON_DIA = :CON_DIA', ['CON_DIA' => '$date']);
+		//$control = Control::where('CON_DIA', $date)->get();
+		$control = Control::filtroEmpresa($date,$empresa)->get();
 		return view("control.consola", ["controles"=>$control]);
 		
+	}
+
+	public function updateD(Request $request)
+	{
+		//
+		$control = Control::find( $request['CON_CODIGO']);
+		$doc = Docente::find($control->DOC_CODIGO);
+		$firma = $request->user()->name;
+		$time = time();
+		$hora = date("H:i:s", $time);
+		if ($control->CON_REG_FIRMA_ENTRADA == null) {
+				 	# code...
+			$control->CON_REG_FIRMA_ENTRADA = $firma;
+			$control->CON_HORA_ENTRADA_R = $hora;
+		}else{
+			$control->CON_HORA_SALIDA_R = $hora;
+			$control->CON_REG_FIRMA_SALIDA = $firma;
+		} 
+
+		$control->save();
+		
+		return redirect("control/consola");
+	}
+
+
+	public function updateL(Request $request)
+	{
+		//
+		$name = $request->name;
+		$control = Control::find( $request['CON_CODIGO']);
+		$doc = Docente::find($control->DOC_CODIGO);
+		$firma = $request->user()->name;
+		if ($control->CON_LAB_ABRE ==null) {
+					# code...
+			$control->CON_LAB_ABRE = $firma;
+		}else{
+			$control->CON_LAB_CIERRA = $firma;
+		}
+
+		$control->save();
+		
+		return redirect("control/consola");
+	}
+
+	public function filtroCampus(Request $request){
+		$campus = $request->input('campus');
+		$laboratorios = Laboratorio::filtrarCampus($campus)->get();
+		$date = Carbon::now();
+		$date = $date->format('Y-m-d');
+		$controles =  array();
+		
+		for ($j=0; $j <sizeof($laboratorios) ; $j++) {
+			# code...
+			
+			$control = Control::where('CON_DIA', $date)->where('LAB_CODIGO', $laboratorios[$j]->LAB_CODIGO)->first();
+			
+			if ($control != null) {
+				# code...
+				array_push ( $controles , $control );
+			}else{
+				
+			}
+			
+		}
+		
+		echo sizeof($controles);
+		
+		return view("control.consola", ["controles"=>$controles]);
+	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function updatePorGuia(Request $request)
+	{
+		//
+		$control = Control::find( $request['CON_CODIGO']);
+		$guia = Guia::guiasParaControl($control->CON_DIA, $control->DOC_CODIGO, $control->MAT_CODIGO)->first();
+		if ($guia != null) {
+			# code...
+			//echo $guia[0]->GUI_CODIGO;
+			if ($control->CON_GUIA == null) {
+					# code...
+				$control->GUI_CODIGO = $guia->GUI_CODIGO;
+				$control->CON_GUIA = 1;
+				$guia->GUI_REGISTRADO = 1;
+			}else{
+				$control->GUI_CODIGO = null;
+				$control->CON_GUIA = null;
+				$guia->GUI_REGISTRADO = 0;
+			}
+			$guia->save();
+			$control->save();
+			return redirect("control/consola")->with('title', 'EXITO!')
+			->with('subtitle', 'El registro de la guia se ha realizado con exito');	
+		}else{
+			return redirect("control/consola")->with('mensajes','No existe guia');	
+		}
+
+	}
+
+	public function nota(Request $request){
+		$control = Control::find( $request['CON_CODIGO']);
+		return view("control/nota", ["control"=>$control]);
+	}
+
+	public function updateNonta(Request $request){
+		$control = Control::find( $request['CON_CODIGO']);
+		$control->CON_NOTA = $request['CON_NOTA'];
+		$control->save();
+			return redirect("control/consola")->with('title', 'EXITO!')
+			->with('subtitle', 'El registro de la nota se completo con exito');
+	}
+	 public function updatePorSolicitud(Request $request)
+	{
+		//
+		$control = Control::find( $request['CON_CODIGO']);
+		$solicitud = Solicitud::solParaControl($control->CON_DIA, $control->DOC_CODIGO, $control->MAT_CODIGO)->first();
+		if ($solicitud != null) {
+			# code...
+			//echo $guia[0]->GUI_CODIGO;
+			if ($control->SOL_CODIGO == null) {
+					# code...
+				$control->SOL_CODIGO = $solicitud->SOL_CODIGO;
+				$solicitud->SOL_ESTODO = 1;
+			}else{
+				$control->SOL_CODIGO = null;
+				$solicitud->SOL_ESTODO = 0;
+			}
+			$solicitud->save();
+			$control->save();
+			return redirect("control/consola")->with('title', 'EXITO!')
+			->with('subtitle', 'El registro de la solicitud se ha realizado con exito');	
+		}else{
+			return redirect("control/consola")->with('mensajes','No existe solicitud');	
+		}
+
 	}
 }

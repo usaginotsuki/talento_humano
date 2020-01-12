@@ -193,4 +193,11 @@ class MateriaController extends Controller {
 			->with('subtitle', 'La eliminación de la materia se ha realizado con éxito.');
 	}
 
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
 }

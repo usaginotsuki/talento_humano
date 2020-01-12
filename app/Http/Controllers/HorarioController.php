@@ -18,11 +18,14 @@ class HorarioController extends Controller {
 	 *
 	 * @return view "carrera.index" & $carreras
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$laboratorios = Laboratorio::All();		
+		$idempresa=$request->user()->empresa->EMP_CODIGO;
+		$laboratorios = Laboratorio::where('EMP_CODIGO',$idempresa)->get();		
 		// la condicion es que se verifique si ya 
 		// hay un elemento con PER_CODIGO y LAB_CODIGO existente
+        
+
 		$periodo = Periodo::where('PER_ESTADO', 1)
 		->select('PER_CODIGO')
 		->first();
@@ -44,7 +47,7 @@ class HorarioController extends Controller {
 			}
 		}
 		
-		return view('horario.index', compact('laboratorios'));
+		return view('horario.index', compact('laboratorios','idempresa'));
 	}
 
 	/**
@@ -867,4 +870,11 @@ class HorarioController extends Controller {
 			->with('title', 'Horario eliminado!')
 			->with('subtitle', 'La eliminación del horario se ha realizado con éxito.');
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }

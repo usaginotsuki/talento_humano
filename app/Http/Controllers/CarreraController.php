@@ -4,6 +4,7 @@ use App\Http\Requests\CarreraStoreRequest;
 use App\Http\Requests\CarreraUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Carrera;
+use App\Materia;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,7 @@ class CarreraController extends Controller {
 	{
 		$carreras = Carrera::All();
 		return view('carrera.index', compact('carreras'));
+	
 	}
 
 	/**
@@ -28,6 +30,7 @@ class CarreraController extends Controller {
 	 */
 	public function create()
 	{
+		
 		return view('carrera.create');
 	}
 
@@ -85,10 +88,24 @@ class CarreraController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Carrera::destroy($id);
-		return redirect('carrera')
-			->with('title','Carrera eliminada!')
-			->with('subtitle','Se ha eliminado correctamente la carrera.');
+		$validaMateria = Materia::where('CAR_CODIGO',$id)->first();
+		
+		if (count($validaMateria) === 1) {
+			return redirect('carrera')
+				->with('title','Carrera NO eliminada!')
+				->with('subtitle','El registro de la carrera no se a eliminado correctamente, la carrera tiene registros relacionados.');
+		}else{
+			Carrera::destroy($id);
+			return redirect('carrera')
+				->with('title','Carrera eliminada!')
+				->with('subtitle','Se ha eliminado correctamente la carrera.');
+		}
 	}
+
+	//valida que este autenticado para acceder al controlador
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 }
