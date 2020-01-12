@@ -24,10 +24,12 @@ class ObjetoRecuperadoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$objeto = ObjetoRecuperado::All();
-		return view('objetorecuperado.index', compact('objeto'));
+		$empid= $request->user()->empresa->EMP_CODIGO;
+		$objeto = ObjetoRecuperado::where('EMP_CODIGO',$empid)->get();
+		$empresa  = Empresa::find($empid);
+		return view('objetorecuperado.index', compact('objeto'),compact('empresa'));
 	}
 
 	/**
@@ -35,11 +37,14 @@ class ObjetoRecuperadoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
-		$periodo=Periodo::All();
-		$empresas=empresa::All();
-		return view('objetorecuperado.create',["periodo"=>$periodo],["empresas"=>$empresas]);
+		$periodos=Periodo::All()->reverse();
+		$periodo=Periodo::where('PER_ESTADO','1')->first();
+		$empid= $request->user()->empresa->EMP_CODIGO;
+		$empresa  = Empresa::find($empid);
+		$empresas  = Empresa::All();
+		return view('objetorecuperado.create',["periodo"=>$periodo,"periodos"=>$periodos],["empresas"=>$empresas,"empresa"=>$empresa]);
 	}
 
 	/**
@@ -73,12 +78,15 @@ class ObjetoRecuperadoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Request $request,$id)
 	{
 		$ObjetoRecuperado =	ObjetoRecuperado::find($id);
-		$periodo=Periodo::All();
-		$empresas=empresa::All();
-		return view("objetorecuperado.update", ["objeto"=>$ObjetoRecuperado,"periodo"=>$periodo,"empresas"=>$empresas]);
+		$empid= $request->user()->empresa->EMP_CODIGO;
+		$periodos=Periodo::All()->reverse();
+		$periodo=Periodo::where('PER_ESTADO','1')->first();
+		$empresa  = Empresa::find($empid);
+		$empresas  = Empresa::All();
+		return view("objetorecuperado.update", ["objeto"=>$ObjetoRecuperado,"periodos"=>$periodos],["empresas"=>$empresas,"empresa"=>$empresa])->with('periodo',$periodo);
 	}
 
 	/**

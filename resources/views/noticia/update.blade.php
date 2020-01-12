@@ -21,6 +21,15 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="NOT_CODIGO" value="{{ $noticia->NOT_CODIGO }}">
         <input type="hidden" class="form-control" id="IMAGE_TEXT" name="IMAGE_TEXT" value="{{ $noticia->NOT_IMAGEN }}"  >
+        <br>
+        <div class="card border-primary mb-3">
+            <div class="card-header">Recomendaciones</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title">Imagen</h5>
+                    <p class="card-text">Se recomienda seleccionar imagenes con una dimensión de la imagen a 200x200 y fondo blanco.</p>
+                </div>
+            </div>
+        </div>   
         <div class="container-fluid">
                 <p><h6>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h6></p>
                
@@ -32,10 +41,16 @@
                         </div>
                     </div>
                     <div class="col">
-                        
                         <div class="form-group">
-                            <label for="NOT_DESCRIPCION">Descripcion<span style="color:#FF0000";>*</span></label>
-                            <input type="text" class="form-control" id="NOT_DESCRIPCION" name="NOT_DESCRIPCION" value="{{ $noticia->NOT_DESCRIPCION }}"  required>
+                            <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
+                            @if(isset($noticia->NOT_IMAGEN))
+                            <input type="file" onchange="getbase64image(this)"  style="display:none;" class="form-control" id="image" name="image" accept="image/*"  ><br> 
+                            <a href="javascript:document.getElementById('image').click(); " class="btn btn-primary mb-2">Cambiar Imagen</a>
+                            @else
+                                <input type="file" onchange="getbase64image(this)"  style="display:none;" class="form-control" id="image" name="image" accept="image/*"  ><br> 
+                                <a href="javascript:document.getElementById('image').click(); " class="btn btn-primary mb-2">Agregar Imagen</a>
+                             @endif   
+                         
                         </div>
                     </div>
                     
@@ -43,27 +58,9 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="NOT_FECHA_INICIO">Fecha Inicio<span style="color:#FF0000";>*</span></label>
-                            <input type="date" class="form-control" id="NOT_FECHA_INICIO" name="NOT_FECHA_INICIO"  value="{{ $noticia->NOT_FECHA_INICIO }}" required>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="NOT_FECHA_FIN">Fecha Fin<span style="color:#FF0000";></span></label>
-                        <input type="date" class="form-control" id="NOT_FECHA_FIN" name="NOT_FECHA_FIN"  value="{{ $noticia->NOT_FECHA_FIN
-                         }}"  required >
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="image">Imagen<span style="color:#FF0000";>*</span></label>
-                            @if(isset($noticia->NOT_IMAGEN))
-                                <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" value="{{ $noticia->NOT_IMAGEN }}" >
-                            @else
-                                <input type="file" onchange="getbase64image(this)" class="form-control" id="image" name="image" accept="image/*" value="{{ $noticia->NOT_IMAGEN }}" required >
-                             @endif   
+                            <label for="NOT_DESCRIPCION">Descripcion<span style="color:#FF0000";>*</span></label>
+                            <textarea type="text" maxlength="460"  class="form-control" id="NOT_DESCRIPCION" name="NOT_DESCRIPCION"  required >{{$noticia->NOT_DESCRIPCION}}</textarea>
+                           
                         </div>
                     </div>
 
@@ -71,14 +68,33 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
+                            <label for="NOT_FECHA_INICIO">Fecha Inicio<span style="color:#FF0000";>*</span></label>
+                            <input type="date" class="form-control" id="NOT_FECHA_INICIO" name="NOT_FECHA_INICIO"  onchange="validarDateNoticias()"  value="{{ $noticia->NOT_FECHA_INICIO }}" required>
+                            <input type="date" class="form-control" style="display:none;" id="f1" name="f1" value="{{ $noticia->NOT_FECHA_INICIO }}"  >
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="NOT_FECHA_FIN">Fecha Fin<span style="color:#FF0000";></span></label>
+                            <input type="date" class="form-control" id="NOT_FECHA_FIN" name="NOT_FECHA_FIN" onchange="validarDateNoticias()"   value="{{ $noticia->NOT_FECHA_FIN}}"  required >
+                            <input type="date" class="form-control" style="display:none;" id="f2" name="f2" value="{{ $noticia->NOT_FECHA_FIN }}"  >
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
                             <label for="PER_CODIGO">Periodo<span style="color:#FF0000";>*</span></label>
                             <select type="input" class="form-control" id="PER_CODIGO" name="PER_CODIGO" placeholder="Campus"  required>
-                            @foreach ($periodo as $per)
-                                    @if($per->PER_CODIGO == $noticia->PER_CODIGO)
-                                        <option value="{{$per->PER_CODIGO}}" selected>{{$per->PER_NOMBRE}}</option>
-                                    @else
-                                        <option  value="{{$per->PER_CODIGO}}">{{$per->PER_NOMBRE}}</option>
-                                    @endif
+                            @foreach ($periodos as $per)
+                                @if($per->PER_CODIGO==$periodo->PER_CODIGO)
+                                    <option  selected value="{{$per->PER_CODIGO}}">{{$per->PER_NOMBRE}}</option>
+                                @else
+                                    <option  value="{{$per->PER_CODIGO}}">{{$per->PER_NOMBRE}}</option>
+                                @endif    
                                   
                             @endforeach
                             </select> 
@@ -90,13 +106,9 @@
                         <label for="EMP_CODIGO">Empresa<span style="color:#FF0000";>*</span></label>
                         <select type="input" class="form-control" id="EMP_CODIGO" name="EMP_CODIGO" placeholder="Empresa"  required>
                             @foreach ($empresas as $emp)
-                                    @if($emp->EMP_CODIGO == $noticia->EMP_CODIGO)
-                                        <option value="{{$emp->EMP_CODIGO}}" selected>{{$emp->EMP_NOMBRE}}</option>
-                                    @else
-                                        <option  value="{{$emp->EMP_CODIGO}}">{{$emp->EMP_NOMBRE}}</option>
-                                    @endif
- 
-                                    
+                                @if($emp->EMP_CODIGO==$empresa->EMP_CODIGO)
+                                    <option value="{{$empresa->EMP_CODIGO}} " selected >{{$empresa->EMP_NOMBRE}}</option>
+                                @endif
                             @endforeach
                         </select> 
                     </div>

@@ -25,7 +25,7 @@
         <div class="col"></div>
         <div class="col"></div>
     </div>
-
+    <div><h6><b>Objetos Recuperados: </b> {{$empresa->EMP_NOMBRE}}</h6></div>
     <table class="table table-hover table-bordereds" id="ListTable">
         <thead>
             <tr>
