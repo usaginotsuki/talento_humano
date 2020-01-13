@@ -1,7 +1,4 @@
-
-
-
-function validarDateNoticias(){
+function validarDateNoticias() {
 
   fecha1= document.getElementById("NOT_FECHA_INICIO").value;
   fecha2= document.getElementById("NOT_FECHA_FIN").value;

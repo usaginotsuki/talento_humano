@@ -171,10 +171,9 @@ class ReportesController extends Controller {
 		]);
 	}
 
-	public function materiaPorCarrera()
-	{
+	public function materiaPorCarrera() {
 		$periodos = Periodo::codigoNombre()->get();
-		$carreras = Carrera::codigoNombre()->get();
+		$carreras = Carrera::codigoNombre()->get()->sortBy('CAR_NOMBRE');
 
 		$request = null;
 		$materias = null;
@@ -187,17 +186,13 @@ class ReportesController extends Controller {
 		]);
 	}
 
-    public function materiaPorCarreraPost(Request $request)
-	{
+  public function materiaPorCarreraPost(Request $request) {
 		$periodos = Periodo::codigoNombre()->get();
-		$carreras = Carrera::codigoNombre()->get();
-	    $materias = Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
-		$carreraSearch=Carrera::find($request['CAR_CODIGO']);
-		$periodoSearch=Periodo::find($request['PER_CODIGO']);
-		$periodos = $periodos->reverse();
+		$carreras = Carrera::codigoNombre()->get()->sortBy('CAR_NOMBRE');
+	  $materias = Materia::materiasx($request['PER_CODIGO'],$request['CAR_CODIGO'])->get();
+		$carreraSearch = Carrera::find($request['CAR_CODIGO']);
+		$periodoSearch = Periodo::find($request['PER_CODIGO']);
 		$valores  = $request; 
-
-
 		return view('reportes.materiaCarrera', [
 			'periodos' => $periodos,
 			'carreras' => $carreras,
@@ -225,7 +220,6 @@ class ReportesController extends Controller {
 
 	public function eventosOcasionalesPost(Request $request)
 	{
-		 
 		$periodos = Periodo::All()->reverse();
 		$periodoActual=$request['PER_CODIGO'];
 		$fechaFinal=$request['fechaFinal'];
@@ -353,15 +347,17 @@ class ReportesController extends Controller {
 	{ 
 		$periodos = Periodo::codigoNombre()->get();
 		$carreras = Carrera::codigoNombre()->get();
-	    $materias = Materia::materiasx($idper,$idcar)->get();
+		$materias = Materia::materiasx($idper,$idcar)->get();
 		$periodos = $periodos->reverse();
-		$fechaActual= Carbon::now()->format('Y-m-d');
-		$carrerax=Carrera::find($idcar);
-		$periodox=Periodo::find($idper);
-		$pdf = PDF::loadView('reportes.pdfmateriacarrera',compact('materias','periodox','carrerax','fechaActual'))->setPaper('a4');
+		$fechaActual = Carbon::now()->format('Y-m-d');
+		$carrerax = Carrera::find($idcar);
+		$periodox = Periodo::find($idper);
+		$empresa = Empresa::find($periodox->EMP_CODIGO);
+		$pdf = PDF::loadView('reportes.pdfmateriacarrera', compact('materias','periodox','carrerax','fechaActual','empresa'))->setPaper('a4');
 		
-        return $pdf->stream('Reporte.pdf');
+		return $pdf->stream('Reporte.pdf');
 	}
+
 	public function pdfhorariosala($idper,$idlab)
 	{ 
 		$periodoId = $idper;

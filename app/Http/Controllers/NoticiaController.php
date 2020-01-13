@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Input;
 use Image;
 use Carbon\Carbon; 
+
 class NoticiaController extends Controller {
 
 	//valida que este autenticado para acceder al controlador
@@ -105,7 +106,7 @@ class NoticiaController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		$noticia =	Noticia::find( $request['NOT_CODIGO']);
+		$noticia = Noticia::find( $request['NOT_CODIGO']);
 		//
 		$noticia->fill(
 			[
