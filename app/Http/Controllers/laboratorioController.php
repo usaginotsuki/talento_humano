@@ -52,6 +52,7 @@ class LaboratorioController extends Controller {
 		]);
 
 		return redirect('laboratorio')
+			->with('alert', 'alert-success')
 			->with('title','Laboratorio creado!')
 			->with('subtitle','Se ha creado correctamente el laboratorio.');
 	}
@@ -82,6 +83,7 @@ class LaboratorioController extends Controller {
 		$laboratorios->fill($request->all());
 		$laboratorios->save();
 		return redirect('laboratorio')
+			->with('alert', 'alert-success')
 			->with('title','Laboratorio actualizado!')
 			->with('subtitle','Se han actualizado correctamente los datos del laboratorio.');
 	}
