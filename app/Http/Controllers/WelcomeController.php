@@ -39,13 +39,15 @@ class WelcomeController extends Controller {
 	{
 		$objetos = DB::table('objeto_recuperado')
 					->where('OBR_FECHA_ENTREGA', '=', '0000-00-00')
-                    ->get();
+					->orderBy('OBR_CODIGO', 'DESC')
+					->get();
 		$date = Carbon::now();
 		$noticias = DB::table('noticia')
 					->where("NOT_FECHA_INICIO","<=",$date)
 					->where("NOT_FECHA_FIN",">=",$date)
-                    ->get();
-		return view('welcome',['objetos' => $objetos, 'noticias'=>$noticias]);
+					->orderBy('NOT_CODIGO', 'DESC')
+					->get();
+		return view('welcome',['objetos' => $objetos, 'noticias' => $noticias]);
 	}
 
 	public function noticiadetail($id)

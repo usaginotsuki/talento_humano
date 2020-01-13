@@ -13,7 +13,7 @@ Route::get('/', 'WelcomeController@index');
 Route::get('/noticiadetail/{id}', 'WelcomeController@noticiadetail');
 Route::get('/objetodetail/{id}', 'WelcomeController@objetodetail');
 Route::get('guias/login', 'GuiaController@login');
-Route::get('guias/cerrarsession', 'GuiaController@cerrarsession');
+Route::get('guias/logout', 'GuiaController@logout');
 Route::post('login/validar', 'GuiaController@validar');
 
 ///////////////////////////////////////////////////////////////////

@@ -13,7 +13,8 @@
         <div class="card-header">Recomendaciones</div>
         <div class="card-body text-primary">
             <p class="card-text">- Se recomienda seleccionar imagenes con una dimensión de la imagen a 200x200 y fondo blanco.</p>
-            <p class="card-text">- Los campos con <span class="text-danger">*</span> son obligatorios</p>
+            <p class="card-text">- Los campos con <span class="text-danger">*</span> son obligatorios.</p>
+            <p class="card-text">- Dejar la fecha de entrega en blanco si el objeto aún no se ha entregado.</p>
         </div>
     </div>
 </div>

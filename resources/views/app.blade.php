@@ -30,18 +30,13 @@
 <body>
   <header>
     <div class="header-img" style="background-image:url({{URL::asset('images/principal/header.png')}})">
-        <ul class="nav topnav float-right">
+        <ul class="btn-group nav topnav float-right" role="group">
           <a type="button" class="btn btn-dark btn-xs" href="{{url('/')}}">Inicio</a>
           @if(Auth::check())
           <a type="button" class="btn btn-dark btn-xs" href="{{url('/auth/logout')}}">Salir</a>
           @else
           <a type="button" class="btn btn-dark btn-xs" href="{{url('/auth/login')}}">Entrar</a>
           @endif
-        </ul>
-        <br>
-        <br>
-        <ul class="nav topnav float-right">
-          <a href="{{url('/guias/login')}}" ><img class="guia" src="{{URL::asset('images/principal/icono_guia.png')}}"> </a>
         </ul>
     </div>
   </header>

@@ -25,7 +25,10 @@
         <div class="col"></div>
         <div class="col"></div>
     </div>
-    <div><h6><b>Objetos Recuperados: </b> {{$empresa->EMP_NOMBRE}}</h6></div>
+    <p class="h3" style="color: #ED7624">
+        Materia: <span class="font-weight-normal">{{ $empresa->EMP_NOMBRE }}</span>
+    </p>
+    
     <table class="table table-hover table-bordereds" id="ListTable">
         <thead>
             <tr>

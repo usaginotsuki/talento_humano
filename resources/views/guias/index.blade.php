@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="jumbotron">
-<h2 ><pre style="color: #ED7624">Periodo:{{$periodo->PER_NOMBRE}}     Docente:{{$docente->DOC_TITULO}} {{$docente->DOC_NOMBRES}} {{$docente->DOC_APELLIDOS}}</pre></h2>
+    <h2><pre style="color: #ED7624">Periodo:{{$periodo->PER_NOMBRE}}     Docente:{{$docente->DOC_TITULO}} {{$docente->DOC_NOMBRES}} {{$docente->DOC_APELLIDOS}}</pre></h2>
 </div>
 <div class="container">
     @if(!empty($materias))
