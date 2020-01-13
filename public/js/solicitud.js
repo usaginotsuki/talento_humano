@@ -20,9 +20,6 @@ $("#SOL_FECHA_USO").change(function(event){
           $("#SOL_NOMBRELAB").val("Redes e Informatica ["+respuesta.laboratorio.LAB_NOMBRE+"]");
           $("#LAB_CODIGO").val(respuesta.LAB_CODIGO);
           $("#SOL_HORARIO_USO").val(respuesta.horaUso);
-          
-          
-
         }
       }
     });

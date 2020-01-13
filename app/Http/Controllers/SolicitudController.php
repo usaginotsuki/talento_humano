@@ -17,19 +17,20 @@ use App\Quotation;
 class SolicitudController extends Controller {
 	public function index()
 	{
-		$solicitud= Solicitud::all();
-		return view("solicitud.solicitudControl", compact('solicitud'));
+		$solicitud = Solicitud::all();
+		return view("solicitud.index", compact('solicitud'));
 	}
 
 	//listar las Solicitudes de la materia de Docente logeado
-	public function listarGuiasSolicitud($id)
+	public function listRequests($id)
 	{
-		    session(['MAT_CODIGO'=>$id]);
-			$materia=$id;
-			$docente=session('DOC_CODIGO');	
-			$solicitudes=Solicitud::allSolicitudes($docente,$materia)->get();
-			return view('solicitud.solicitudControl',['solicitudes'=>$solicitudes]);
+		    session(['MAT_CODIGO' => $id]);
+			$materia = $id;
+			$docente = session('DOC_CODIGO');	
+			$solicitudes = Solicitud::allSolicitudes($docente,$materia)->get();
+			return view('solicitud.index', ['solicitudes' => $solicitudes]);
 	}
+
 	public function edit($id)
 	{
 		$solicitud= Solicitud::find($id);
@@ -42,6 +43,7 @@ class SolicitudController extends Controller {
 			"detalleSolicitud" => $detalleSolicitud,
 			"materia" => $materia]);
 	}
+
 	public function update(Request $request)
 	{
 
@@ -50,16 +52,17 @@ class SolicitudController extends Controller {
 		$solicitud->save();
 		return redirect('solicitud');
 	}
+
 	public function destroy($id)
 	{
 		$solicitud = Solicitud::destroy($id);
 		DB::update('UPDATE CONTROL SET control.CON_SOLICITUD=NULL WHERE control.CON_SOLICITUD='.$id);
-		return redirect('solicitud.solicitudControl')
+		return redirect('solicitud.index')
 			->with('title', 'Solicitud Eliminado!')
 			->with('subtitle', 'El registro de la solicitud se ha eliminado con éxito.');
 	}
 
-/**Obtines las materias del docente del periodo seleccionado */
+	/**Obtines las materias del docente del periodo seleccionado */
 	public function obtenerHorario(Request $request,$fecha){
 		if($request->ajax()){
 			$horaUso="";
@@ -98,18 +101,18 @@ class SolicitudController extends Controller {
 		}
 	}
 
-   public function controlSolicitudLaboratoriocreate()
+   public function create()
    {
    		/*obtener fecha actual del sistema*/
    		$fechaSistema = Carbon::now()->toDateString();
    		$materia=Materia::find(session('MAT_CODIGO'));
-	   return view('solicitud.controlSolicitudLaboratoriocreate',[
+	   return view('solicitud.create',[
 	    	'fecha' => $fechaSistema,
 	    	'materia'=> $materia,
 	   ]);
    }
    /*Guardar Solicitud*/
-   public function guardarSolicitud(Request $request){
+  public function store(Request $request){
 	//obtiene el id de docente 
 	$numero=1;
 	 $docenteId = session('DOC_CODIGO');
@@ -146,7 +149,7 @@ class SolicitudController extends Controller {
 			'DETSOL_OBSERVACION' => $request['DETSOL_OBSERVACION'],
 		]);
 	 }
-	 return redirect('solicitud/listarSolicitud/'.$materia);
+	 return redirect('solicitud/'.$materia.'/index');
 }
 
 }

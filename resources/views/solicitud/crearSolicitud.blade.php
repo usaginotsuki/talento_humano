@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col">
             <div class="card border-primary mb-3">
-                    <a href="{{url('solocitud/controlSolicitudLaboratoriocreate')}}" class="btn btn-primary mb-2">Crear solicitud Vacia</a>
+                    <a href="{{url('solocitud/create')}}" class="btn btn-primary mb-2">Crear solicitud Vacia</a>
             </div>
         </div>
 
