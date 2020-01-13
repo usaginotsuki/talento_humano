@@ -20,17 +20,7 @@
 @endsection
 @section('content')
 <div class="container container-main bg-white">
-    <div class="center">
-        <div class="slider_area">
-            <div class="slider">
-                <ul class="bxslider">
-                    <li><img class="slider" src="{{URL::asset('images/principal/espe.png')}}"  title="Sistema De Control De Laboratorios" /></li>
-                    <li><img class="slider" src="{{URL::asset('images/principal/laboratorio.jpg')}}"  title="Sistema De Control De Laboratorios" /></li>
-                    <li><img class="slider" src="{{URL::asset('images/principal/laboratorio_petroquimica.jpg')}}"  title="Sistema De Control De Laboratorios" /></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <img src="{{URL::asset('images/principal/espe.png')}}" >
 </div>
 
 <div class="container container-main bg-white">
@@ -39,10 +29,9 @@
             <div class="left_coloum floatleft">
                 <div class="single_left_coloum_wrapper">
                     <h2 class="title">Noticias</h2>
-                    <a class="more" href="#">mas</a>
                     @forelse($noticias as $noticia)
                     <div class="single_left_coloum floatleft">
-                        <img class="noticia" src="{{$noticia -> NOT_IMAGEN}}" width="150" height="100" />
+                        <img class="noticia" src="{{$noticia -> NOT_IMAGEN}}"/>
                         <h3>{{$noticia -> NOT_TITULO}}</h3>
                         <p>{{$noticia -> NOT_DESCRIPCION}}</p>
                         
@@ -57,32 +46,28 @@
                     @endforelse  
                 </div>
             </div>
-            <div class="right_coloum floatright">
-                <div class="single_right_coloum">
-                    <h2 class="title">Objetos Perdidos</h2>
-                    @forelse($objetos as $objeto) 
-                        <div class="single_cat_right_content editorial"> 
-                            <img class="noticia" src="{{$objeto -> OBR_IMAGEN}}"  />
-                           
-                            @if(Auth::check())
-                                <a class="readmore" href="{{url('home/objetodetail/'.$objeto->OBR_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
-                            @else
-                                <a class="readmore" href="{{url('/objetodetail/'.$objeto->OBR_CODIGO.'')}}"><h3>{{$objeto -> OBR_NOMBRE}}</h3></a>
-                            @endif
-                        </div> 
+        </div>
+        
+    </div>
+    <div class="content_area">
+        <div class="main_content floatright">
+            <div class="left_coloum floatright">
+                <div class="single_left_coloum_wrapper">
+                    <h2 class="title">Objetos Recuperados En El Laboratorio</h2>
+                    @forelse($objetos as $objeto)
+                    <div class="single_left_coloum floatright">
+                        <img class="noticia" src="{{$objeto ->  OBR_IMAGEN}}"/>
+                        <h3>{{$objeto -> OBR_NOMBRE}}</h3>
+                        <p>{{$objeto -> OBR_DESCRIPCION}}</p>
+                        
+                    </div>    
                     @empty
 
-                    @endforelse
+                    @endforelse  
                 </div>
             </div>
         </div>
-        <div class="sidebar floatright">
-            <div class="single_sidebar">
-                <center>
-                    <a href="{{url('/guias/login')}}" aling="left"><img src="{{URL::asset('images/principal/icono_guia.png')}}"> </a>
-                </center>
-            </div>
-        </div>
+        
     </div>
 </div>
 
