@@ -42,15 +42,15 @@ class EventoOcacionalController extends Controller {
 	{
 		$empresa = $request->user()->empresa->EMP_CODIGO;
 		$laboratorios=DB::select('select LAB_NOMBRE,LAB_CODIGO from laboratorio where EMP_CODIGO ='.$empresa.' ORDER BY LAB_NOMBRE ASC ;');
-		$materias=DB::table('materia')
-        ->join('periodo', function($join)
-        {
-			$join->on('materia.PER_CODIGO', '=', 'periodo.PER_CODIGO')
-				 ->where('periodo.PER_ESTADO', '=', 1);	 
-		})
-		->orderBy('MAT_NOMBRE', 'asc')
-        ->get();
-		//$docentes=DB::select('select docente.DOC_CODIGO as DOC_CODIGO, concat(docente.DOC_TITULO," ",docente.DOC_NOMBRES," ",docente.DOC_APELLIDOS) AS DOC_NOMBRE from docente ORDER BY DOC_NOMBRE ASC;');
+		$periodos = Periodo::filtroEmpresa($empresa)->get();
+		foreach ($periodos as $per) {
+			# code...
+			if ($per->PER_ESTADO == 1) {
+				$periodo = $per->PER_CODIGO;
+				# code...
+			}
+		}
+		$materias= materia::filtroEmpresa($periodo)->get();
 		return view('ocasionales.create')->with('laboratorios', $laboratorios)->with('materias', $materias);
 	}
 
