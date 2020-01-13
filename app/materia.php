@@ -49,7 +49,7 @@ class Materia extends Model {
 	}
 
 	public function scopeFiltroEmpresa($query, $periodo) {
-		return $query->where('PER_CODIGO',$periodo);
+		return $query->where('PER_CODIGO',$periodo)->orderBy('MAT_NOMBRE','ASC');
 	}
 	
 }
