@@ -122,7 +122,7 @@ class GuiaController extends Controller {
 		}		
 	}
 
-	public function cerrarsession()
+	public function logout()
 	{
            session()->forget('DOC_CODIGO');
            return view ('guias.login');
