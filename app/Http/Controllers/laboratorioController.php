@@ -98,11 +98,13 @@ class LaboratorioController extends Controller {
 		
 		if (count($validaControl) === 1) {
 			return redirect('laboratorio')
-				->with('title','Laboratorio NO eliminado!')
-				->with('subtitle','El registro del laboratorio no se a eliminado correctamente, el laboratorio tiene registros relacionados.');
+				->with('alert', 'alert-danger')
+				->with('title','Laboratorio no eliminado!')
+				->with('subtitle','El registro del laboratorio no se ha eliminado, el laboratorio tiene registros relacionados.');
 		}else{
 			laboratorio::destroy($id);
 			return redirect('laboratorio')
+				->with('alert', 'alert-success')
 				->with('title','Laboratorio eliminado!')
 				->with('subtitle','Se ha eliminado correctamente el laboratorio.');
 		}
