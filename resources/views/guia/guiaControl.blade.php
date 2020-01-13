@@ -1,13 +1,19 @@
 @extends('app')
 @section('content')   
 <div class="jumbotron">
-    @if (!empty($guias_pendientes)) 
-<h2>Guias: {{$guias_pendientes[0] -> MAT_ABREVIATURA}} </h2>
-    @endif
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+<h2><span style="color:#ED7624"> Guias: {{$materia_guia[0] -> MAT_ABREVIATURA}} </span></h2>
     
-            <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entregar y {{$por_crear}} Guias Pendientes por Crear - Por favor, Revice el detalle al final de esta pantalla</h4>
- </div>        
+@if ($pendientes>0) 
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading"><b>ADVERTENCIA:</b> Existen {{$pendientes}}  Guías Pendiente de Entregar  
+        @if ($por_crear > 0)
+            y {{$por_crear}} Guias Pendientes por Crear 
+        @endif 
+        - Por favor, Revice el detalle al final de esta pantalla 
+        </h4>
+    </div>    
+ @endif    
 </div>
 <div class="container-fluid">
 @if (session('title') && session('subtitle'))
@@ -20,8 +26,8 @@
         </div>
     @endif
     <div class="col">
-                <a href="{{url('guia/crearGuia')}}" class="btn btn-primary mb-2">Crear Guías</a>
-                
+                <a href="{{url('guia/crearGuia')}}" class="btn btn-primary mb-2">Crear Guías</a>  
+                <a href="{{url('guia/regresarListarGuia/'.$materia_guia[0]->DOC_CODIGO)}}" class="btn btn-primary mb-2 float-center">Regresar a la lista de Materias</a>  &nbsp 
     </div>
     <table   class="table table-hover table-bordered results">
             <thead>
@@ -102,7 +108,7 @@
                 <td scope="row">{{$guiap -> CON_DIA}}</td>
                 <td scope="row">
                     @if ($guiap -> CON_EXTRA!==1)
-                        HORA
+                        HORARIO
                     @else
                         <b>OCASIONAL</b>
                     @endif
@@ -111,7 +117,7 @@
                 <td scope="row">{{$guiap -> CON_HORA_ENTRADA}}</td>
                 <td scope="row">{{$guiap -> CON_HORA_SALIDA}}</td> 
                 <td scope="row">
-                    @if($guiap ->CON_EXTRA==1)
+                    @if($guiap ->CON_EXTRA==1 || $guiap->CON_REG_FIRMA_ENTRADA==null)
                         ****
                     @else
                         @if ($guiap -> CON_GUIA!==1)

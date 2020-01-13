@@ -5,6 +5,7 @@ use App\Guia;
 use App\Docente;
 use App\Laboratorio;
 use App\Materia;
+use App\Carrera;
 use App\Periodo;
 use App\Session;
 use App\Horario;
@@ -21,7 +22,8 @@ class GuiaController extends Controller {
 		    session(['MAT_CODIGO'=>$id]);
 			$materia=$id;	
 			$guias_terminadas=DB::select('select guia.GUI_REGISTRADO, guia.GUI_CODIGO,materia.MAT_ABREVIATURA, guia.GUI_NUMERO,guia.GUI_FECHA, guia.GUI_TEMA, laboratorio.LAB_NOMBRE from laboratorio,guia,materia where materia.MAT_CODIGO=guia.MAT_CODIGO and laboratorio.LAB_CODIGO=guia.LAB_CODIGO and guia.MAT_CODIGO='.$materia );
-			$guias_pendientes=DB::select('select materia.MAT_ABREVIATURA, control.CON_DIA,control.CON_EXTRA,control.CON_HORA_ENTRADA, control.CON_HORA_SALIDA,control.CON_NUMERO_HORAS,control.CON_GUIA from control, materia where control.MAT_CODIGO='.$materia.' and materia.MAT_CODIGO=control.MAT_CODIGO');
+			$guias_pendientes=DB::select('select materia.MAT_ABREVIATURA, control.CON_DIA,control.CON_EXTRA,control.CON_HORA_ENTRADA, control.CON_HORA_SALIDA,control.CON_NUMERO_HORAS,control.CON_GUIA,control.CON_REG_FIRMA_ENTRADA from control, materia where control.MAT_CODIGO='.$materia.' and materia.MAT_CODIGO=control.MAT_CODIGO');
+			$materia_guia=DB::select('select materia.MAT_ABREVIATURA, materia.DOC_CODIGO from materia where materia.MAT_CODIGO='.$materia);
 			$pendietes=0;
 			$creadas=0;
 			foreach ($guias_terminadas as $ter ){
@@ -30,12 +32,12 @@ class GuiaController extends Controller {
 				}
 			}
 			foreach ($guias_pendientes as $pen ){
-				if ($pen->CON_GUIA!=1 & $pen->CON_EXTRA!=1 ){
+				if ($pen->CON_GUIA!=1 & $pen->CON_EXTRA!=1 & $pen->CON_REG_FIRMA_ENTRADA!=null ){
 					$pendietes++;
 				}
 			}
 			$por_crear=$pendietes-$creadas;
-			return view('guia.guiaControl')->with('guias_terminadas', $guias_terminadas)->with('guias_pendientes', $guias_pendientes)->with('pendientes',$pendietes)->with('por_crear',$por_crear);
+			return view('guia.guiaControl')->with('guias_terminadas', $guias_terminadas)->with('guias_pendientes', $guias_pendientes)->with('pendientes',$pendietes)->with('por_crear',$por_crear)->with('materia_guia',$materia_guia);
 	}
 	public function edit($id)
 	{
@@ -122,6 +124,12 @@ class GuiaController extends Controller {
 		}		
 	}
 
+	public function regresarListarGuia($doc_id){
+		$docente=Docente::where('DOC_CODIGO',$doc_id)->first();
+		$requestObj = new Request(array('usuario' =>$docente->DOC_MIESPE, 'clave'=>$docente->DOC_CLAVE));
+		return $this->validar($requestObj);
+	}
+
 	public function cerrarsession()
 	{
            session()->forget('DOC_CODIGO');
@@ -133,8 +141,10 @@ class GuiaController extends Controller {
 	}
 	public function crearGuiaIndex(){
 		$periodos = Periodo::codigoNombre()->get();
+		$materia_guia=DB::select('select materia.MAT_ABREVIATURA from materia where materia.MAT_CODIGO='.session('MAT_CODIGO'));
 		return view('guia.crearGuia', [
-			'periodos' => $periodos
+			'periodos' => $periodos,
+			'materia' => $materia_guia[0]->MAT_ABREVIATURA
 		]);
 	}
 
@@ -200,11 +210,11 @@ class GuiaController extends Controller {
 		* No coordinador asigna vacio, empieza numero de guia 1 y asigna el codigo de laboratorio
 	    */
 	   if (empty($last)) {
-		   $guias->GUI_COORDINADOR="";
+		 //  $guias->GUI_COORDINADOR="";
 		   $guias->GUI_NUMERO=1;
 	    	$control=Control::fechaGuiaSin($materia)->first();
 	   }else{
-		   $guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
+		   //$guias->GUI_COORDINADOR=$last->GUI_COORDINADOR;
 		   $guias->GUI_NUMERO=$last->GUI_NUMERO+1;
 		   $control = Control::fechaGuia($materia,$last->GUI_FECHA)->first();
 	   }
@@ -260,9 +270,12 @@ class GuiaController extends Controller {
 	$laboratorio = Laboratorio::find($guia->LAB_CODIGO);
 	$docente = Docente::find($guia->DOC_CODIGO);
 	$empresa = Empresa::find($laboratorio->EMP_CODIGO);
+	$carrera=Carrera::find($materia->CAR_CODIGO);
+	$guia["CAR_NOMBRE"] = $carrera->CAR_NOMBRE; 
 	$guia["MAT_NOMBRE"] = $materia->MAT_NOMBRE; 
 	$guia["MAT_CODIGO"]= $materia->MAT_CODIGO_BANNER;
 	$guia["MAT_NRC"]= $materia->MAT_NRC;
+	$guia["MAT_NIVEL"]= $materia->MAT_NIVEL;
 	$guia["PER_NOMBRE"] = $periodo->PER_NOMBRE;
 	$guia["EMP_NOMBRE"]= $empresa->EMP_NOMBRE;
 	$guia["LAB_NOMBRE"] = $laboratorio->LAB_NOMBRE;
