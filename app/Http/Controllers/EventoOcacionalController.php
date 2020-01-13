@@ -81,26 +81,16 @@ class EventoOcacionalController extends Controller {
 		$cruce = Control::cruceHoras($request['LAB_CODIGO'],$request['CON_HORA_ENTRADA'],$request['CON_HORA_SALIDA'],$request['CON_DIA'])->first();
 
 		$duplicado = Control::duplicado($request['MAT_CODIGO'],$request['CON_HORA_ENTRADA'],$request['CON_HORA_SALIDA'],$request['CON_DIA'])->first();
-		if($cruce != null and $duplicado != null){
-			if($cruce->CON_EXTRA != 1 and $duplicado->CON_EXTRA != 1){
+			if($cruce == null and $duplicado == null){
 				echo "aqui";
 				EventoOcacional::create([
 				'CON_DIA' => $request['CON_DIA'],
-				//'CON_EXTRA' => $request[NULL],
 				'CON_HORA_ENTRADA' => $request['CON_HORA_ENTRADA'],
 				'CON_HORA_SALIDA' => $request['CON_HORA_SALIDA'],
-				//'CON_LAB_ABRE' => $request[NULL],
-				//'CON_HORA_ENTRADA_R' => $request[NULL],
-				//'CON_REG_FIRMA_ENTRADA' => $request[NULL],
-				//'CON_HORA_SALIDA_R' => $request[NULL],
-				//'CON_REG_FIRMA_SALIDA' => $request[NULL],
-				//'CON_LAB_CIERRE' => $request[NULL],
-				//'CON_OBSERVACIONES' => $request[NULL],
+
 				'CON_NUMERO_HORAS' => $request['CON_NUMERO_HORAS'],
 				'CON_NOTA' => $request['CON_NOTA'],
 				'CON_EXTRA' => 1,
-				//'CON_GUIA' => $request[NULL],
-				//'GUI_CODIGO' => $request[NULL],
 				'LAB_CODIGO' => $request['LAB_CODIGO'],
 				'MAT_CODIGO' => $request['MAT_CODIGO'],
 				'DOC_CODIGO' => $request['DOC_CODIGO'],
@@ -114,11 +104,6 @@ class EventoOcacionalController extends Controller {
 				->with('title', 'Evento Ocacional registrado!')
 				->with('subtitle', 'Cruce de horas u horas duplicadas.');
 			}
-		}else{
-			return redirect('ocasionales')
-			->with('title', 'Evento Ocacional registrado!')
-			->with('subtitle', 'Error.');
-		}
 	}
 
 	//valida que este autenticado para acceder al controlador
