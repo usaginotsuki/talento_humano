@@ -48,6 +48,8 @@ class Materia extends Model {
 		return $query->select('MAT_CODIGO', 'MAT_NOMBRE', 'MAT_NRC');
 	}
 
-
+	public function scopeFiltroEmpresa($query, $periodo) {
+		return $query->where('PER_CODIGO',$periodo);
+	}
 	
 }

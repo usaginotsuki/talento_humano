@@ -25,9 +25,7 @@ class PeriodoController extends Controller {
 	public function index(Request $request)
 	{
 		$empresa = $request->user()->empresa->EMP_CODIGO;
-		echo $empresa;
-		$periodos = Periodo::filtroEmpresa($empresa);
-		echo sizeof($periodos);
+		$periodos = Periodo::filtroEmpresa($empresa)->get();
 		return view('periodo.index', compact('periodos'));
 	}
 
