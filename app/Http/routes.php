@@ -12,9 +12,9 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('/noticiadetail/{id}', 'WelcomeController@noticiadetail');
 Route::get('/objetodetail/{id}', 'WelcomeController@objetodetail');
-Route::get('guias/login', 'GuiaController@login');
-Route::get('guias/logout', 'GuiaController@logout');
-Route::post('login/validar', 'GuiaController@validar');
+Route::get('guias_y_solicitudes/login', 'GuiaController@login');
+Route::get('guias_y_solicitudes/logout', 'GuiaController@logout');
+Route::post('guias_y_solicitudes', 'GuiaController@index');
 
 ///////////////////////////////////////////////////////////////////
 Route::controllers([
@@ -201,13 +201,13 @@ Route::get('solicitud/crearSolicitud', 'SolicitudController@crearSolicitudIndex'
 Route::post('solicitud/update', 'SolicitudController@update');
 Route::post('solicitud/store', 'SolicitudController@store');
 /////////////////////////////////////////////////////////////////
-Route::get('user/create', 'UserController@getRegister');
-Route::post('user/postCreate', 'UserController@postRegister');
 Route::get('user', 'UserController@index');
+Route::get('user/create', 'UserController@getRegister');
 Route::get('user/{id}/edit', 'UserController@edit');
 Route::get('user/{id}/destroy', 'UserController@destroy');
-Route::post('user/update', 'UserController@update');
 Route::get('user/{id}/changePassword', 'UserController@changePassword');
+Route::post('user/postCreate', 'UserController@postRegister');
+Route::post('user/update', 'UserController@update');
 Route::post('user/updatePassword', 'UserController@updatePassword');
 /////////////////////////////////////////////////////////////////
 Route::get('role/create', 'RoleController@create');
