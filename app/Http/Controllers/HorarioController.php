@@ -18,19 +18,22 @@ class HorarioController extends Controller {
 	 *
 	 * @return view "carrera.index" & $carreras
 	 */
-	public function index()
-	{
-		$laboratorios = Laboratorio::All();		
+	public function index(Request $request) {
+		$idempresa = $request->user()->empresa->EMP_CODIGO;
+		$laboratorios = Laboratorio::where('EMP_CODIGO',$idempresa)->get();		
 		// la condicion es que se verifique si ya 
 		// hay un elemento con PER_CODIGO y LAB_CODIGO existente
+
 		$periodo = Periodo::where('PER_ESTADO', 1)
-		->select('PER_CODIGO')
-		->first();
+			->select('PER_CODIGO')
+			->first();
+
 		$periodoId = $periodo->PER_CODIGO;
 		foreach($laboratorios as $laboratorio) {
 			$horario = Horario::where('LAB_CODIGO', $laboratorio->LAB_CODIGO)
 				->where('PER_CODIGO','=',$periodoId)
 				->count();
+
 			// tomar el id del periodo activo
 			$laboratorio->PER_CODIGO = $periodoId;
 			if ($horario == 1) { // existe el registro
@@ -44,7 +47,7 @@ class HorarioController extends Controller {
 			}
 		}
 		
-		return view('horario.index', compact('laboratorios'));
+		return view('horario.index', compact('laboratorios','idempresa'));
 	}
 
 	/**
@@ -52,8 +55,7 @@ class HorarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($labId, $perId)
-	{
+	public function create($labId, $perId) {
 		$ids = array($labId, $perId);
 		$materias = Materia::select('MAT_CODIGO', 'MAT_ABREVIATURA')
 			->orderby('MAT_ABREVIATURA')
@@ -73,9 +75,7 @@ class HorarioController extends Controller {
 	 * @param  Request  $request
 	 * @return redirect view "horario" & title & subtitle
 	 */
-	public function store(Request $request)
-	{
-
+	public function store(Request $request) {
 		$HOR_LUNES1_OPC = 0;
 		$HOR_LUNES2_OPC = 0;
 		$HOR_LUNES3_OPC = 0;
@@ -495,8 +495,7 @@ class HorarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function edit($labId, $perId)
-	{
+	public function edit($labId, $perId) {
 		$horario = Horario::where('LAB_CODIGO', $labId)
 			->where('PER_CODIGO', $perId)
 			->first();
@@ -518,8 +517,7 @@ class HorarioController extends Controller {
 	 * @param  Request  $request
 	 * @return redirect view "horario" & title & subtitle
 	 */
-	public function update(Request $request)
-	{
+	public function update(Request $request) {
 		if($request['HOR_LUNES1_OPC'] === 'on') {
 			$request['HOR_LUNES1_OPC'] = 1;
 		} else {
@@ -860,8 +858,7 @@ class HorarioController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id) {
 		Horario::destroy($id);
 		return redirect('horario')
 			->with('title', 'Horario eliminado!')

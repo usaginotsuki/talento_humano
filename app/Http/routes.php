@@ -13,7 +13,7 @@ Route::get('/', 'WelcomeController@index');
 Route::get('/noticiadetail/{id}', 'WelcomeController@noticiadetail');
 Route::get('/objetodetail/{id}', 'WelcomeController@objetodetail');
 Route::get('guias/login', 'GuiaController@login');
-Route::get('guias/cerrarsession', 'GuiaController@cerrarsession');
+Route::get('guias/logout', 'GuiaController@logout');
 Route::post('login/validar', 'GuiaController@validar');
 
 ///////////////////////////////////////////////////////////////////
@@ -34,7 +34,6 @@ Route::get('campus/{id}/destroy', 'CampusController@destroy');
 Route::post('campus/store', 'CampusController@store');
 Route::post('campus/update', 'CampusController@update');
 ///////////////////////////////////////////////////////////////////
-
 Route::get('carrera', 'CarreraController@index');
 Route::get('carrera/create', 'CarreraController@create');
 Route::get('carrera/{id}/edit', 'CarreraController@edit');
@@ -192,22 +191,17 @@ Route::get('guia/regresarListarGuia/{id}', 'GuiaController@regresarListarGuia');
 Route::get('home', 'LoginController@index');
 Route::get('home/noticiadetail/{id}', 'LoginController@noticiadetail');
 Route::get('home/objetodetail/{id}', 'LoginController@objetodetail');
-/////////////////////////Routes Solicitud///////////////////////////////
-Route::get('solicitud/listarSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
-Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
-Route::get('solicitud/horarioFecha/{fecha}', 'SolicitudController@obtenerHorario');
-
-/////////////////////////Routes Solicitud///////////////////////////////
-Route::get('solicitud','SolicitudController@index');
-Route::get('solicitud/listarGuiasSolicitud/{id}', 'SolicitudController@listarGuiasSolicitud');
+/////////////////////////////////////////////////////////////////
+Route::get('solicitud','SolicitudController@index'); // Que hace esta ruta?
+Route::get('solicitud/{id}/index', 'SolicitudController@listRequests');
+Route::get('solicitud/create', 'SolicitudController@create');
 Route::get('solicitud/{id}/edit', 'SolicitudController@edit');
 Route::get('solicitud/{id}/destroy', 'SolicitudController@destroy');
-Route::post('solicitud/update', 'SolicitudController@update');
+Route::get('solicitud/horarioFecha/{fecha}', 'SolicitudController@obtenerHorario');
 Route::get('solicitud/crearSolicitud', 'SolicitudController@crearSolicitudIndex');
-Route::get('solicitud/controlSolicitudLaboratoriocreate', 'SolicitudController@controlSolicitudLaboratoriocreate');
-Route::post('solicitud/guardarSolicitud', 'SolicitudController@guardarSolicitud');
-
-/////////////////////////////Routes User //////////////////////////////////////
+Route::post('solicitud/update', 'SolicitudController@update');
+Route::post('solicitud/store', 'SolicitudController@store');
+/////////////////////////////////////////////////////////////////
 Route::get('user/create', 'UserController@getRegister');
 Route::post('user/postCreate', 'UserController@postRegister');
 Route::get('user', 'UserController@index');
@@ -216,7 +210,7 @@ Route::get('user/{id}/destroy', 'UserController@destroy');
 Route::post('user/update', 'UserController@update');
 Route::get('user/{id}/changePassword', 'UserController@changePassword');
 Route::post('user/updatePassword', 'UserController@updatePassword');
-/////////////////////////////Routes Role //////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 Route::get('role/create', 'RoleController@create');
 Route::post('role/postCreate', 'RoleController@store');
 Route::get('role', 'RoleController@index');
