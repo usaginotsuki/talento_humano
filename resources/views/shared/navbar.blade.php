@@ -154,6 +154,6 @@
   </ul>
   @endif
   <div class="position-absolute" style="right:0">
-    <a class="nav-link text-light" href="{{url('/guias/login')}}"><span class="oi oi-book"></span> Guías y Solicitudes</a>
+    <a class="nav-link text-light" href="{{url('/guias_y_solicitudes/login')}}"><span class="oi oi-book"></span> Guías y Solicitudes</a>
   </div>
 </nav>
