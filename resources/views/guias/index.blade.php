@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-@include('shared.title', array('titulo' => 'Guías'))
+@include('shared.title', array('titulo' => 'Guías y Solicitudes'))
 
 <div class="container">
     <p class="h3" style="color: #ED7624">
@@ -22,18 +22,17 @@
             </thead>
             <tbody >
                 @foreach ($materias as $mat)
-                    <tr>       
-                        <td scope="row">{{$mat -> carrera -> CAR_NOMBRE}}</td> 
-                        <td scope="row">{{$mat -> MAT_NOMBRE}}</td> 
+                    <tr>
+                        <td scope="row">{{$mat -> carrera -> CAR_NOMBRE}}</td>
+                        <td scope="row">{{$mat -> MAT_NOMBRE}}</td>
                         <td scope="row">{{$mat -> MAT_NRC}}</td>
-                        
                         <td>
                             <a href="{{url('guia/listarGuias/'.$mat->MAT_CODIGO)}}" class="btn btn-primary mb-2 float-cente">Guia</a>
-                            <a href="{{url('solicitud/'.$mat->MAT_CODIGO.'/index')}}" class="btn btn-primary mb-2 float-center">Solicitud</a>  &nbsp 
+                            <a href="{{url('solicitud/'.$mat->MAT_CODIGO.'/index')}}" class="btn btn-primary mb-2 float-center">Solicitud</a>  &nbsp
                         </td>
                     </tr>
                 @endforeach
-            </tbody>   
+            </tbody>
         </table>
     @endif
     <b>Las casillas sombreadas son horas ocasionales</b>
@@ -81,6 +80,6 @@
             @endfor
         </tbody>
     </table>
-</div>  
+</div>
 @endsection
 
