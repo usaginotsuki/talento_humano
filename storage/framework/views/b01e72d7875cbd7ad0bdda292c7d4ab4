@@ -1,0 +1,74 @@
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Reporte Guias Pendientes'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<div class="container-fluid">
+  <div class="card border-primary mb-3">
+    <div class="card-header text-primary">Consultar</div>
+    <div class="card-body text-primary">
+      <form action="<?php echo e(url('reporte/guia/materia')); ?>" method="post">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                <label for="PER_CODIGO">Periodo</label>
+                  <select name="PER_CODIGO" id="PER_CODIGO" >
+                    <option >Seleccione Periodo...</option>
+                      <?php foreach($periodo as $per): ?>
+                      <option value="<?php echo e($per->PER_CODIGO); ?>"><?php echo e($per->PER_NOMBRE); ?></option>
+                      <?php endforeach; ?>
+                  </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary mb-2"><span class="oi oi-magnifying-glass"></span>
+          Consultar
+        </button>
+      </form>
+    
+      <form class="form" id="form" action="<?php echo e(url('reporte/pdfguiapendiente')); ?>" method="POST">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+        <?php if(!empty($controles)): ?>
+        <input type="hidden" name="PER_CODIGO" id="PER_CODIGO"
+          value="<?php echo e($controles[0]->PER_CODIGO); ?>" />
+        <?php else: ?>
+        <input type="hidden" class="form-control" name="PER_CODIGO" id="PER_CODIGO" />
+        <?php endif; ?>
+
+        <?php if(!empty($controles)): ?>
+          <button type="submit" class="btn btn-info mb-2"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+        <?php endif; ?>    
+      </form>
+    </div>
+  </div>
+  <br>
+
+  <?php if(!empty($controles)): ?>
+  <table id="ListOC" class="table table-hover table-bordered results">
+    <thead>
+      <tr>
+        <th scope="row">MATERIA</th>
+        <th scope="row">FECHA</th>
+        <th scope="row">HORARIO</th>
+        <th scope="row">GUIA ENTREGADA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($controles as $control): ?>
+      <tr>
+        <td scope="row"><?php echo e($control -> MAT_NOMBRE); ?> -<?php echo e($control -> DOC_TITULO); ?> <?php echo e($control -> DOC_APELLIDOS); ?> <?php echo e($control -> DOC_NOMBRES); ?> </td>
+        <td scope="row"><?php echo e($control -> GUI_FECHA); ?></td>
+        <td scope="row"><?php echo e($control -> CON_HORA_ENTRADA); ?> - <?php echo e($control -> CON_HORA_SALIDA); ?></td> 
+        <td>
+            <?php if($control -> CON_REG_FIRMA_SALIDA != null or $control -> CON_REG_FIRMA_ENTRADA != null): ?>
+              <?php if($control -> CON_EXTRA == null): ?>
+                <p><span style="font-size:xx-medium";>Pendiente</span></p>
+              <?php endif; ?>
+            <?php endif; ?>
+        <td>
+      </tr>
+      <?php endforeach; ?>
+  </table>
+  <?php endif; ?>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

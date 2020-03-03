@@ -1,0 +1,113 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Jerson Morocho
+         Barrera Erick - LLamuca Andrea
+ Revisado por: Jerson Morocho
+ -->
+
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Reporte Hoja de Control de Salas'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php if(empty($controles)): ?>
+  <?php if($mensaje!=null): ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <h4 class="alert-heading"><b>ADVERTENCIA:</b>   
+          <?php echo e($mensaje); ?>
+
+          </h4>
+      </div>    
+  <?php endif; ?>
+<?php endif; ?>
+<div class="container-fluid">
+  <div class="card border-primary mb-3">
+    <div class="card-header text-primary">Consultar</div>
+    <div class="card-body text-primary">
+      <form action="<?php echo e(url('reporte/hoja/control')); ?>" method="post">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+      
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="CON_DIA">Fecha<span style="color:#FF0000";>*</span></label>
+              <?php if(!empty($controles)): ?>
+              <input type="date" class="form-control" name="CON_DIA" id="CON_DIA" value="<?php echo e($controles[0]->CON_DIA); ?>" required/>
+              <?php else: ?>
+              <input type="date" class="form-control" name="CON_DIA" id="CON_DIA" required/>
+              <?php endif; ?>
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="CAM_CODIGO">Campus<span style="color:#FF0000";>*</span></label>
+            <select name="CAM_CODIGO" id="CAM_CODIGO" class="form-control">
+              <option value="-1">Escoja un Campus...</option>
+              <?php foreach($campus as $camp): ?>
+                <?php if(!empty($controles)): ?>
+                  <?php if($controles[0]->CAM_CODIGO==$camp->CAM_CODIGO): ?>
+                    <option value="<?php echo e($camp->CAM_CODIGO); ?>" id="<?php echo e($camp->CAM_CODIGO); ?>" selected="selected" ><?php echo e($camp->CAM_NOMBRE); ?></option>
+                  <?php else: ?>
+                    <option value="<?php echo e($camp->CAM_CODIGO); ?>" id="<?php echo e($camp->CAM_CODIGO); ?>" ><?php echo e($camp->CAM_NOMBRE); ?></option>
+                  <?php endif; ?>
+                <?php else: ?>
+                  <option value="<?php echo e($camp->CAM_CODIGO); ?>" id="<?php echo e($camp->CAM_CODIGO); ?>" ><?php echo e($camp->CAM_NOMBRE); ?></option>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-primary mb-2"><span class="oi oi-magnifying-glass"></span>
+          Consultar
+        </button>
+      </form>
+    
+      <form class="form" id="form" action="<?php echo e(url('reporte/pdfcontrol')); ?>" method="POST">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+        <?php if(!empty($controles)): ?>
+        <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" value="<?php echo e($controles[0]->CON_DIA); ?>" />
+        <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO"
+          value="<?php echo e($controles[0]->CAM_CODIGO); ?>" />
+        <?php else: ?>
+        <input type="hidden" class="form-control" name="CON_DIA" id="CON_DIA" />
+        <input type="hidden" class="form-control" name="CAM_CODIGO" id="CAM_CODIGO" />
+        <?php endif; ?>
+
+        <?php if(!empty($controles)): ?>
+        <button type="submit" class="btn btn-info mb-2"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+        <?php endif; ?>    
+      </form>
+    </div>
+  </div>
+  <br>
+
+  <?php if(!empty($controles)): ?>
+  <table id="ListOC" class="table table-hover table-bordered results">
+    <thead>
+      <tr>
+        <th scope="row">ORD</th>
+        <th scope="row">MATERIA</th>
+        <th scope="row">SALA</th>
+        <th scope="row">ENTRADA</th>
+        <th scope="row">SALIDA</th>
+        <th scope="row">DOCENTE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($controles as $con): ?>
+      <tr>
+        <td scope="row"><?php echo e($con -> ORD); ?></td>
+        <td scope="row"><?php echo e($con -> MAT_ABREVIATURA); ?> - <?php echo e($con -> MAT_NRC); ?></td>
+        <td scope="row"><?php echo e($con -> LAB_NOMBRE); ?></td>
+        <td scope="row"><?php echo e($con -> CON_HORA_ENTRADA); ?></td>
+        <td scope="row"><?php echo e($con -> CON_HORA_SALIDA); ?></td>
+        <td scope="row"><?php echo e($con -> DOC_TITULO); ?> <?php echo e($con -> DOC_APELLIDOS); ?> <?php echo e($con -> DOC_NOMBRES); ?></td>
+      </tr>
+      <?php endforeach; ?>
+  </table>
+  <?php endif; ?>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

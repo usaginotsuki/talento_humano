@@ -1,0 +1,85 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por:Lorena Perez - David Esparza 
+ *
+-->
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Actualizar Docente'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<div class="container-fluid">
+    <?php if(isset($mensajes)): ?>
+        <div class="alert alert-warning">
+            <?php echo e($mensajes); ?>
+
+        </div>
+    <?php endif; ?>   
+    <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p>
+
+    <form action="<?php echo e(url('/docente/update')); ?>" method="POST">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+        <input type="hidden" name="DOC_CODIGO" value="<?php echo e($docente->DOC_CODIGO); ?>">
+
+        <div class="form-group">
+            <label for="DOC_CEDULA">Cedula <span style="color:#FF0000";>*</span></label>
+            <input type="text" class="form-control" id="DOC_CEDULA" name="DOC_CEDULA" maxlength="10" value="<?php echo e($docente->DOC_CEDULA); ?>" required pattern="[0-9]{10}">
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="DOC_MIESPE">Mi Espe <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_MIESPE" name="DOC_MIESPE" value="<?php echo e($docente->DOC_MIESPE); ?>" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                     <label for="DOC_NOMBRES">Nombres <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_NOMBRES" name="DOC_NOMBRES" value="<?php echo e($docente->DOC_NOMBRES); ?>" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                     <label for="DOC_APELLIDOS">Apellidos <span style="color:#FF0000";>*</span></label>
+                    <input type="text" class="form-control" id="DOC_APELLIDOS" name="DOC_APELLIDOS" value="<?php echo e($docente->DOC_APELLIDOS); ?>" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                      <label for="DOC_CORREO">Correo <span style="color:#FF0000";>*</span></label>
+                    <input type="email" class="form-control" id="DOC_CORREO" name="DOC_CORREO" value="<?php echo e($docente->DOC_CORREO); ?>" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+           
+            <div class="col">
+                <div class="form-group">
+                    <label for="DOC_CLAVE">Clave<span style="color:#FF0000";>*</span></label>
+                    <input type="password" class="form-control" id="DOC_CLAVE" name="DOC_CLAVE" value="<?php echo e($docente->DOC_CLAVE); ?>" required> 
+                </div>
+            </div>
+        
+
+      
+            <div class="col">
+                <div class="form-group">
+                    <label for="DOC_TITULO">Titulo</label>
+                    <input type="text" class="form-control" id="DOC_TITULO" name="DOC_TITULO" value="<?php echo e($docente->DOC_TITULO); ?>">
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mb-2" id="docenteBoton" >Actualizar</button>
+        <a href="<?php echo e(url('docente')); ?>" class="btn btn-danger mb-2">Cancelar</a>
+    </form>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

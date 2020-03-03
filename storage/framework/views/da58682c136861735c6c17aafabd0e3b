@@ -1,0 +1,149 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Antony Andrade - Jonel Lopez
+ Revisado por: Antony Andrade - Jonel Lopez
+ -->
+
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Reporte Horario por Docente'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <form action="<?php echo e(url('/reporte/horario/docente')); ?>" method="post">
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                <div class="card border-primary mb-3">
+                    <div class="card-header text-primary">Consultar</div>
+
+                    <div class="card-body text-primary">
+                        <select type="input" class="form-control" id="periodo" name="periodo" placeholder="Laboratorio"  required>
+                            <?php foreach($periodos as $periodo): ?>
+                                <option value="<?php echo e($periodo->PER_CODIGO); ?>"><?php echo e($periodo->PER_NOMBRE); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <br>
+                        <select type="input" class="form-control" id="docente" name="docente" placeholder="Laboratorio"  required>
+                            <?php foreach($docentes as $docente): ?>
+                                <option value="<?php echo e($docente->DOC_CODIGO); ?>"><?php echo e($docente->DOC_TITULO); ?> <?php echo e($docente->DOC_APELLIDOS); ?> <?php echo e($docente->DOC_NOMBRES); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <br>
+                        <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> Consultar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <div class="card border-info mb-3">
+                <div class="card-header text-info">Opciones</div>
+                <div class="card-body text-info">
+                    <form>
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                        <h5 class="card-title">Incluir Horas Ocasionales</h5>
+                        <div class="custom-control custom-radio">
+                            <?php if(isset($horario)): ?>
+                            <input type="radio" class="custom-control-input" id="colorFondo" name="opts" onChange="changeBackground()">
+                            <?php else: ?>
+                            <input disabled type="radio" class="custom-control-input" id="colorFondo" name="opts" onChange="changeBackground()">
+                            <?php endif; ?>
+                            <label class="custom-control-label" for="colorFondo">Fondo Gris</label>
+                        </div>
+                        <div class="custom-control custom-radio mb-3">
+                            <?php if(isset($horario)): ?>
+                            <input type="radio" class="custom-control-input" id="textoFondo" name="opts" onChange="changeText()">
+                            <?php else: ?>
+                            <input disabled type="radio" class="custom-control-input" id="textoFondo" name="opts" onChange="changeText()">
+                            <?php endif; ?>
+                            <label class="custom-control-label" for="textoFondo">Texto (O)</label>
+                        </div>
+                    </form>
+                    <?php if(isset($horario)): ?>
+                    <a href="<?php echo e(url('reporte/pdfhorariodocente/'.$periodox->PER_CODIGO.'/'.$Docentex->DOC_CODIGO.'')); ?>" class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a  PDF</a>
+                    <?php else: ?>
+                    <button disabled class="btn btn-info"><span class="oi oi-cloud-download"></span> Exportar a PDF</button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <!-- horario -->
+    <?php if(isset($horario) && isset($profesor)): ?>
+    <p id="sala">
+       <span class="h4">REPORTE: &emsp;
+            <span style="font-weight: 300;">HORARIO POR DOCENTE</span>
+        </span>
+        <br>
+        <span class="h6" style="margin-right:150px;">PERIODO: &emsp;
+            <span style="font-weight: 300;"><?php echo e($horario->periodo->PER_NOMBRE); ?></span>
+        </span>
+        <span class="h6">DOCENTE: &emsp;
+            <span style="font-weight: 300;"><?php echo e($profesor->DOC_TITULO); ?> <?php echo e($profesor->DOC_NOMBRES); ?> <?php echo e($profesor->DOC_APELLIDOS); ?></span>
+        </span>
+      
+    </p>
+    <table id="horarioDocenteTable" class="table table-hover table-bordered table-sm">
+        <thead>
+            <tr class="d-flex">
+                <th class="col">HORA</th>
+                <th class="col">LUNES</th>
+                <th class="col">MARTES</th>
+                <th class="col">MIERCOLES</th>
+                <th class="col">JUEVES</th>
+                <th class="col">VIERNES</th>
+            </tr>
+        </thead>
+        <tbody>
+             <?php for($x = 1; $x <= 13; $x++): ?>
+            <tr class="d-flex">
+                <td class="col"><?php echo e($horario['HOR_HORA'.$x]); ?></td>
+                <td class="col opts">
+                    <?php if($horario['HOR_LUNES'.$x] != 0 || $horario['HOR_LUNES'.$x] != NULL): ?>
+                    <?php echo e($horario['HOR_LUNES'.$x]); ?> <span class="text-<?php echo e($horario['HOR_LUNES'.$x.'_OPC']); ?>"></span>
+                    <br>
+                    <b class="small font-weight-bold"><?php echo e($horario['HOR_LUNES_DOC'.$x]); ?></b>
+                    <?php endif; ?>
+                </td>
+                <td class="col opts">
+                    <?php if($horario['HOR_MATES'.$x] != 0 || $horario['HOR_MATES'.$x] != NULL): ?>
+                    <?php echo e($horario['HOR_MATES'.$x]); ?> <span class="text-<?php echo e($horario['HOR_MARTES'.$x.'_OPC']); ?>"></span>
+                    <br>
+                    <b class="small font-weight-bold"><?php echo e($horario['HOR_MATES_DOC'.$x]); ?></b>
+                    <?php endif; ?>
+                </td>
+                <td class="col opts">
+                    <?php if($horario['HOR_MIERCOLES'.$x] != 0 || $horario['HOR_MIERCOLES'.$x] != NULL): ?>
+                    <?php echo e($horario['HOR_MIERCOLES'.$x]); ?> <span class="text-<?php echo e($horario['HOR_MIERCOLES'.$x.'_OPC']); ?>"></span>
+                    <br>
+                    <b class="small font-weight-bold"><?php echo e($horario['HOR_MIERCOLES_DOC'.$x]); ?></b>
+                    <?php endif; ?>
+                </td>
+                <td class="col opts">
+                    <?php if($horario['HOR_JUEVES'.$x] != 0 || $horario['HOR_JUEVES'.$x] != NULL): ?>
+                    <?php echo e($horario['HOR_JUEVES'.$x]); ?> <span class="text-<?php echo e($horario['HOR_JUEVES'.$x.'_OPC']); ?>"></span>
+                    <br>
+                    <b class="small font-weight-bold"><?php echo e($horario['HOR_JUEVES_DOC'.$x]); ?></b>
+                    <?php endif; ?>
+                </td>
+                <td class="col opts">
+                    <?php if($horario['HOR_VIERNES'.$x] != 0 || $horario['HOR_VIERNES'.$x] != NULL): ?>
+                    <?php echo e($horario['HOR_VIERNES'.$x]); ?> <span class="text-<?php echo e($horario['HOR_VIERNES'.$x.'_OPC']); ?>"></span>
+                    <br>
+                    <b class="small font-weight-bold"><?php echo e($horario['HOR_VIERNES_DOC'.$x]); ?></b>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+    <?php elseif(isset($count) && $count === 0): ?>
+    <div class="alert alert-warning" role="alert">
+        No existen registros de horarios para esta sala 
+    </div>
+    <?php endif; ?>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,65 @@
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Solicitudes'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+</div>
+<div class="container-fluid">
+    <a href="<?php echo e(url('solicitud/create')); ?>" class="btn btn-success mb-2">Crear Solicitud</a>
+    <a href="<?php echo e(URL::previous()); ?>" class="btn btn-danger mb-2">Regresar a Guías y Solicitudes</a>
+
+    <table id="ListTable" class="table table-hover table-bordered results">
+        <thead>
+            <tr>
+                <th scope="row"># Solicitud</th>
+                <th scope="row">Fecha de uso</th>
+                <th scope="row">Tema</th>
+                <th scope="row">Laboratorio</th>
+                <th scope="row">PDF</th>
+                <th scope="row">Estado</th>
+                <th scope="row">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if(!empty($solicitudes)): ?>
+            <?php foreach($solicitudes as $solicitud): ?>
+            <tr>
+                <td scope="row"><?php echo e($solicitud->SOL_NUMERO); ?></td>
+                <td scope="row"><?php echo e($solicitud->SOL_FECHA_USO); ?></td>
+                <td scope="row"><?php echo e($solicitud->SOL_TEMA_PRACTICA); ?></td>
+                <td scope="row"><?php echo e($solicitud->laboratorio->LAB_NOMBRE); ?></td>
+                <td class="text-center" scope="row">
+                    <a href="<?php echo e(url('reporte/pdfSolicitud/'.$solicitud->SOL_CODIGO)); ?>" class="btn btn-info mb-2"><span class="oi oi-print"></span></a>
+                </td>
+                <td class="h3 text-center" scope="row">
+                <?php if($solicitud->SOL_ESTADO == 1): ?>
+                    <span class="badge badge-success">Entregado</span>
+                    <?php else: ?>
+                    <span class="badge badge-danger">Pendiente</span>
+                <?php endif; ?>
+                </td>
+                <td></td>
+            </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        </tbody>
+    </table>
+
+    <br><hr><br>
+
+    <h2 class="pb-3">Detalle de Asignación y uso de Laboratorio</h2>
+    <table id="ListTable2" class="table table-hover table-bordered results">
+        <thead>
+            <tr>
+                <th scope="row">Fecha</th>
+                <th scope="row">Tipo</th>
+                <th scope="row">Horas Asignadas</th>
+                <th scope="row">Hora de entrada</th>
+                <th scope="row">Hora de salida</th>
+                <th scope="row">Guia entregada</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,66 @@
+<!--
+ * Sistema de Gestion de Laboratorios - ESPE
+ *
+ * Author: Barrera Erick - LLamuca Andrea
+ * Revisado por: 
+ *
+-->
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Materias'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<div class="container-fluid">
+    <?php if(session('title') && session('subtitle')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading"><?php echo e(session('title')); ?></h4>
+        <p><?php echo e(session('subtitle')); ?></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php endif; ?>
+    <?php if(isset($mensajes)): ?>
+        <div class="alert alert-warning">
+            <?php echo e($mensajes); ?>
+
+        </div>
+    <?php endif; ?>
+    <div class="row">
+        <div class="col">
+            <a href="<?php echo e(url('materia/create')); ?>" class="btn btn-success mb-2">Nuevo</a>
+        </div>       
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <table id="ListTable" class="table table-hover table-bordered results">
+        <thead>
+            <tr>
+                <th scope="row">Periodo</th>
+                <th scope="row">Docente</th>
+                <th scope="row">Carrera</th>
+                <th scope="row">NRC</th>
+                <th scope="row">Nombre</th>
+                <th scope="row">Acciones</th>
+            </tr>
+        </thead>
+        <tbody >
+            <?php foreach($materias as $mat): ?>
+            <tr>       
+                <td scope="row"><?php echo e($periodo->PER_NOMBRE); ?></td>
+                <td scope="row"><?php echo e($mat->docente->DOC_APELLIDOS.' '.$mat->docente->DOC_NOMBRES); ?></td>
+                <td scope="row"><?php echo e($mat->carrera->CAR_NOMBRE); ?></td>  
+                <td scope="row"><?php echo e($mat-> MAT_NRC); ?></td>
+                <td scope="row"><?php echo e($mat-> MAT_NOMBRE); ?></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="<?php echo e(url('materia/'.$mat->MAT_CODIGO.'/edit')); ?>" class="btn btn-primary mb-2"><span class="oi oi-pencil"></span></a>
+                        <a href="<?php echo e(url('materia/'.$mat->MAT_CODIGO.'/destroy')); ?>" class="btn btn-danger mb-2"><span class="oi oi-trash"></span></a>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>   
+    </table>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

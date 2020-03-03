@@ -1,0 +1,45 @@
+<!--
+ Sistema de Gestion de Laboratorios - ESPE
+ 
+ Author: Lorena Perez-David Esparza
+ Revisado por: Lorena Perez-David Esparza
+ -->
+
+<?php $__env->startSection('content'); ?>
+    
+<div class="container mt-5 mb-5">
+    <div align="left">
+        <?php foreach($empresas as $emp): ?>
+            <?php if($emp->EMP_CODIGO == $noticia->EMP_CODIGO): ?>
+                <h4> <?php echo e($emp->EMP_NOMBRE); ?> </h4>  
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php foreach($periodos as $per): ?>
+            <?php if($per->PER_CODIGO == $noticia->PER_CODIGO): ?>
+                <h6> <?php echo e($per->PER_NOMBRE); ?> </h6>                                 
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <div align="center">
+         <?php if(isset($noticia->NOT_IMAGEN)): ?>
+         <img src="<?php echo e($noticia -> NOT_IMAGEN); ?>" id="pic" width="200" height="200" />
+         <?php else: ?>
+         <img src="<?php echo e(URL::asset('images/icons/imgicon.png')); ?>"  id="pic" width="100" height="100" />
+         <?php endif; ?>   
+    </div>
+    <br>
+    <div>
+        <h1> <?php echo e($noticia->NOT_TITULO); ?> </h1>
+    </div>
+    <div align="right">
+        <h5> <?php echo e($noticia->NOT_FECHA_INICIO); ?> </h5>
+    </div>
+    <br>
+    <div>
+        <p align = "justify" style="font-size:160%;">  <?php echo e($noticia->NOT_DESCRIPCION); ?> </p>
+    </div>
+    <br>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

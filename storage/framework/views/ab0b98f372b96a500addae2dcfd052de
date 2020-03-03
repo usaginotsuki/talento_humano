@@ -1,0 +1,35 @@
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Consola de Control'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+
+ <body >
+        <div class="container-fluid">
+            <p><h5>Los campos con <span style="color:#FF0000";>*</span> son obligatorios</h5></p>
+             <div class="col">
+                 Docente: <?php echo e($control -> docente->DOC_APELLIDOS); ?> <?php echo e($control -> docente->DOC_NOMBRES); ?>
+
+             </div>   
+             <div class="col">
+                 Materia: <?php echo e($control -> materia->MAT_NOMBRE); ?> (<?php echo e($control -> materia->MAT_ABREVIATURA); ?> <?php echo e($control -> materia->MAT_NRC); ?>)
+             </div>
+           
+         <form  action="<?php echo e(url('control/updateNonta')); ?>"  method="post">
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                <input type="hidden" name="CON_CODIGO" value="<?php echo e($control->CON_CODIGO); ?>">
+              
+                                   
+                                        <label for="CON_NOTA">Nota</label>
+                                    
+                                        <textarea type="text" class="form-control"  name="CON_NOTA" value="<?php echo e($control->CON_NOTA); ?>"></textarea>
+    
+                  
+                <button type="submit" class="btn btn-primary mb-2">Guardar</button>
+                 <a href="<?php echo e(url('control/consola')); ?>" class="btn btn-danger mb-2">Cancelar</a> 
+             
+        </form>
+       </div> 
+</body>
+<?php $__env->stopSection(); ?>
+</html>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

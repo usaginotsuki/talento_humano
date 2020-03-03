@@ -1,0 +1,97 @@
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('shared.title', array('titulo' => 'Guías y Solicitudes'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<div class="container">
+    <p class="h3" style="color: #ED7624">
+        Materia: <span class="font-weight-normal"><?php echo e($periodo->PER_NOMBRE); ?></span>
+    </p>
+    <p class="h3" style="color: #ED7624">
+        Docente: <span class="font-weight-normal"><?php echo e($docente->DOC_TITULO); ?> <?php echo e($docente->DOC_NOMBRES); ?> <?php echo e($docente->DOC_APELLIDOS); ?></span>
+    </p>
+
+    <?php if(!empty($materias)): ?>
+        <table id="ListTable1" class="table table-hover table-bordered results">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="row">Carrera</th>
+                    <th scope="row">Nombre</th>
+                    <th scope="row">NRC</th>
+                    <th scope="row">Acciones</th>
+                </tr>
+            </thead>
+            <tbody >
+                <?php foreach($materias as $mat): ?>
+                    <tr>
+                        <td scope="row"><?php echo e($mat -> carrera -> CAR_NOMBRE); ?></td>
+                        <td scope="row"><?php echo e($mat -> MAT_NOMBRE); ?></td>
+                        <td scope="row"><?php echo e($mat -> MAT_NRC); ?></td>
+                        <td>
+                            <a href="<?php echo e(url('guia/listarGuias/'.$mat->MAT_CODIGO)); ?>" class="btn btn-primary mb-2 float-cente">Guia</a>
+                            <a href="<?php echo e(url('solicitud/'.$mat->MAT_CODIGO.'/index')); ?>" class="btn btn-primary mb-2 float-center">Solicitud</a>  &nbsp
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+    <b>Las casillas sombreadas son horas ocasionales</b>
+    <table id="horarioDocenteTable" class="table table-hover table-bordered">
+        <thead style="background-color: #9CA2A0">
+            <tr class="d-flex">
+                <th class="col">HORA</th>
+                <th class="col">LUNES</th>
+                <th class="col">MARTES</th>
+                <th class="col">MIERCOLES</th>
+                <th class="col">JUEVES</th>
+                <th class="col">VIERNES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php for($x = 1; $x <= 13; $x++): ?>
+            <tr class="d-flex">
+                <td class="col"><?php echo e($horario_docente['HOR_HORA'.$x]); ?></td>
+                <td class="col <?php if($horario_docente['HOR_LUNES'.$x.'_OPC']==1): ?> table-dark <?php endif; ?> ">
+                    <?php echo e($horario_docente['HOR_LUNES'.$x]); ?>
+
+                    <br>
+                    <?php echo e($horario_docente['LAB_LUNES'.$x]); ?>
+
+                </td>
+                <td class="col <?php if($horario_docente['HOR_MATES'.$x.'_OPC']==1): ?> table-dark <?php endif; ?> ">
+                    <?php echo e($horario_docente['HOR_MATES'.$x]); ?>
+
+                    <br>
+                    <?php echo e($horario_docente['LAB_MATES'.$x]); ?>
+
+                </td>
+                <td class="col <?php if($horario_docente['HOR_MIERCOLES'.$x.'_OPC']==1): ?> table-dark <?php endif; ?> ">
+                    <?php echo e($horario_docente['HOR_MIERCOLES'.$x]); ?>
+
+                    <br>
+                    <?php echo e($horario_docente['LAB_MIERCOLES'.$x]); ?>
+
+                </td>
+                <td class="col <?php if($horario_docente['HOR_JUEVES'.$x.'_OPC']==1): ?> table-dark <?php endif; ?> ">
+                    <?php echo e($horario_docente['HOR_JUEVES'.$x]); ?>
+
+                    <br>
+                    <?php echo e($horario_docente['LAB_JUEVES'.$x]); ?>
+
+                </td>
+                <td class="col <?php if($horario_docente['HOR_VIERNES'.$x.'_OPC']==1): ?> table-dark <?php endif; ?> ">
+                    <?php echo e($horario_docente['HOR_VIERNES'.$x]); ?>
+
+                    <br>
+                    <?php echo e($horario_docente['LAB_VIERNES'.$x]); ?>
+
+                </td>
+            </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+</div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
